@@ -21,7 +21,7 @@ module Decidim
           end
 
           can :unvote, Initiative do |initiative|
-            can_vote?(user, initiative)
+            can_vote?(initiative)
           end
 
           can :create, Initiative if creation_enabled?
@@ -30,10 +30,10 @@ module Decidim
         private
 
         def creation_enabled?
-          Decidim::Initiatives.creation_enabled
+          Decidim::Initiatives.creation_enabled && user.authorizations.any?
         end
 
-        def can_vote?(user, initiative)
+        def can_vote?(initiative)
           initiative.votes_enabled? && initiative.organization&.id == user.organization&.id && user.authorizations.any?
         end
       end

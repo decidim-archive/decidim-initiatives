@@ -55,6 +55,9 @@ es:
       initiative_votes:
         create:
           error: Ha habido errores al votar la iniciativa.
+      create_initiative:
+        select_initiative_type:
+          create_initiative: Crear iniciativa
   layouts:
     decidim:
       initiatives:

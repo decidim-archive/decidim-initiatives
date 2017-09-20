@@ -52,6 +52,9 @@ en:
       initiative_votes:
         create:
           error: There's been errors when voting the initiative.
+      create_initiative:
+        select_initiative_type:
+          create_initiative: Create initiative
   layouts:
     decidim:
       initiatives:

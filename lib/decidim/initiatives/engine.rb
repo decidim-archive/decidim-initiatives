@@ -11,7 +11,8 @@ module Decidim
       isolate_namespace Decidim::Initiatives
 
       routes do
-        resources :initiatives, only: %w(index show new create) do
+        resources :create_initiative        
+        resources :initiatives, only: %w(index show) do
           resource :initiative_vote, only: [:create, :destroy]
           resource :initiative_widget, only: :show, path: "embed"
         end

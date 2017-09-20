@@ -52,6 +52,9 @@ ca:
       initiative_votes:
         create:
           error: Hi ha hagut errors en votar l'iniciativa.
+      create_initiative:
+        select_initiative_type:
+          create_initiative: Crear iniciativa
   layouts:
     decidim:
       initiatives:
