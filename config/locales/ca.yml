@@ -1,0 +1,61 @@
+ca:
+  decidim:
+    menu:
+      initiatives: Iniciatives
+    initiatives:
+      states:
+        created: Creada
+        rejected: Rebutjada
+        accepted: Acceptada
+      index:
+        title: Iniciatives
+      initiatives:
+        count:
+          title:
+            one: "%{count} iniciativa"
+            other: "%{count} iniciatives"
+        index_header:
+          new_initiative: Nova iniciativa
+        filters_small_view:
+          filter: Filtra
+          unfold: Desplegar
+          filter_by: Filtrar per
+          close_modal: Tancar finestra
+        filters:
+          search: Cerca
+          open: Obertes
+          closed: Tancades
+          state: Estat
+          type: Tipus
+          all: Tots
+        supports_count:
+          count:
+            one: "%suport rebut"
+            other: "%suports rebuts"
+        orders:
+          label: 'Ordenar iniciatives per:'
+          random: Aleatori
+          recent: Més recent
+          most_voted: Més votat
+          most_commented: Més comentat
+        vote_button:
+          already_voted: Ja has votat
+          vote: Donar suport
+          votes_blocked: Recollida de suports desactivada
+        votes_count:
+          count:
+            one: SUPORT
+            other: SUPORTS
+        show:
+          initiative_accepted: Iniciativa acceptada
+          initiative_rejected: Iniciativa rebutjada
+      initiative_votes:
+        create:
+          error: Hi ha hagut errors en votar l'iniciativa.
+  layouts:
+    decidim:
+      initiatives:
+        initiative:
+          more_info: Més informació
+        no_initiatives_yet:
+          no_initiatives_yet: Encara no hi ha cap iniciativa!

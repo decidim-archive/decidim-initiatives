@@ -1,0 +1,16 @@
+<div class="row collapse">
+  <h2 id="initiatives-count" class="title-action__title section-heading">
+    <%= render partial: 'count' %>
+  </h2>
+  <% if creation_enabled? %>
+      <%= action_authorized_link_to :create, new_initiative_path, class: "title-action__action button small hollow" do %>
+          <%= t(".new_initiative") %>
+          <%= icon "plus" %>
+      <% end %>
+  <% else %>
+      <span class="title-action__action button small hollow disabled">
+        <%= t(".new_initiative") %>
+        <%= icon "plus" %>
+      </span>
+  <% end %>
+</div>

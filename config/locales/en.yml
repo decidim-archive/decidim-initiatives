@@ -1,0 +1,61 @@
+en:
+  decidim:
+    menu:
+      initiatives: Initiatives
+    initiatives:
+      states:
+        created: Created
+        rejected: Rejected
+        accepted: Accepted
+      index:
+        title: Initiatives
+      initiatives:
+        count:
+          title:
+            one: "%{count} initiative"
+            other: "%{count} initiatives"
+        index_header:
+          new_initiative: New initiative
+        filters_small_view:
+          filter: Filter
+          unfold: Unfold
+          filter_by: Filter by
+          close_modal: Close window
+        filters:
+          search: Search
+          open: Open
+          closed: Closed
+          state: State
+          type: Type
+          all: All
+        supports_count:
+          count:
+            one: "support"
+            other: "supports"
+        orders:
+          label: 'Sort initiatives by:'
+          random: Random
+          recent: Most recent
+          most_voted: Most voted
+          most_commented: Most commented
+        vote_button:
+          already_voted: Already voted
+          vote: Vote
+          votes_blocked: Voting disabled
+        votes_count:
+          count:
+            one: VOTE
+            other: VOTES
+        show:
+          initiative_accepted: Initiative accepted
+          initiative_rejected: Initiative rejected
+      initiative_votes:
+        create:
+          error: There's been errors when voting the initiative.
+  layouts:
+    decidim:
+      initiatives:
+        initiative:
+          more_info: More info
+        no_initiatives_yet:
+          no_initiatives_yet: No initiatives yet!

@@ -1,0 +1,8 @@
+<div id="initiative-<%= initiative.id %>-votes-count" class="card__support__data">
+  <span class="<%= votes_count_classes(from_initiatives_list)[:number] %>">
+      <%= initiative.initiative_votes_count %>
+  </span>
+  <span class="<%= votes_count_classes(from_initiatives_list)[:label]  %>">
+    <%= t('.count', count: initiative.initiative_votes_count) %>
+  </span>
+</div>

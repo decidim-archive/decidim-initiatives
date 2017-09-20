@@ -1,0 +1,17 @@
+<div class="author-data__main">
+  <div class="author author--inline">
+    <span class="author__avatar author__avatar--small">
+      <%= image_tag initiative.author_avatar_url %>
+    </span>
+    <span class="author__name">
+      <% if initiative.author.deleted? %>
+        <span class="label label--small label--basic">
+          <%= t('.deleted') %>
+        </span>
+      <% else %>
+        <%= initiative.author_name %>
+      <% end %>
+    </span>
+    <%=l initiative.created_at, format: "%d/%m/%Y" %>
+  </div>
+</div>

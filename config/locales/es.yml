@@ -1,0 +1,64 @@
+es:
+  decidim:
+    menu:
+      initiatives: Iniciativas
+    initiatives:
+      states:
+        created: Creada
+        rejected: Rechazada
+        accepted: Aceptada
+      index:
+        title: Iniciativas
+      initiatives:
+        count:
+          title:
+            one: "%{count} iniciativa"
+            other: "%{count} iniciativas"
+        index_header:
+          new_initiative: Nueva iniciativa
+        filters_small_view:
+          filter: Filtrar
+          unfold: Desplegar
+          filter_by: Filtrar por
+          close_modal: Cerrar ventana
+        filters:
+          search: Buscar
+          open: Abiertas
+          closed: Cerradas
+          state: Estado
+          type: Tipo
+          all: Todos
+        initiatives:
+          index:
+            loading: Cargando resultados...
+        supports_count:
+          count:
+            one: "apoyo recibido"
+            other: "apoyos recibidos"
+        orders:
+          label: 'Ordenar iniciativas por:'
+          random: Aleatorio
+          recent: Mas reciente
+          most_voted: Mas votado
+          most_commented: Mas comentado
+        vote_button:
+          already_voted: Ya votado
+          vote: Dar apoyo
+          votes_blocked: Votación desactivada
+        votes_count:
+          count:
+            one: APOYO
+            other: APOYOS
+        show:
+          initiative_accepted: Iniciativa aceptada
+          initiative_rejected: Iniciativa rechazada
+      initiative_votes:
+        create:
+          error: Ha habido errores al votar la iniciativa.
+  layouts:
+    decidim:
+      initiatives:
+        initiative:
+          more_info: Mas información
+        no_initiatives_yet:
+          no_initiatives_yet: ¡Todavía no hay iniciativas!

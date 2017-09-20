@@ -1,0 +1,29 @@
+<div id="initiative-<%= initiative.id %>-vote-button">
+  <% if current_user %>
+    <% if already_voted? %>
+      <%= action_authorized_button_to :vote,
+                                      t('.already_voted'),
+                                      initiative_initiative_vote_path(initiative_id: initiative, from_initiatives_list: from_initiatives_list),
+                                      method: :delete,
+                                      remote: true,
+                                      data: { disable: true },
+                                      class: "card__button button #{vote_button_classes(from_initiatives_list)} success" %>
+    <% elsif !authorized_to_vote? %>
+      <button class="card__button button <%= vote_button_classes(from_initiatives_list) %> disabled" disabled>
+        <%= t('.votes_blocked') %>
+      </button>
+    <% else %>
+      <%= action_authorized_button_to :vote,
+                                      t('.vote'),
+                                      initiative_initiative_vote_path(initiative_id: initiative, from_initiatives_list: from_initiatives_list),
+                                      remote: true,
+                                      data: { disable: true },
+                                      class: "card__button button #{vote_button_classes(from_initiatives_list)}" %>
+    <% end %>
+  <% else %>
+    <%= action_authorized_button_to :vote,
+                                    t('.vote'),
+                                    initiative_initiative_vote_path(initiative_id: initiative, from_initiatives_list: from_initiatives_list),
+                                    class: "card__button button #{vote_button_classes(from_initiatives_list)}" %>
+  <% end %>
+</div>

@@ -1,0 +1,5 @@
+var $initiativeVotesCount = $('#initiative-<%= initiative.id %>-votes-count');
+var $initiativeVoteButton = $('#initiative-<%= initiative.id %>-vote-button');
+
+morphdom($initiativeVotesCount[0], '<%= j(render partial: 'decidim/initiatives/initiatives/votes_count', locals: { initiative: initiative, from_initiatives_list: @from_initiatives_list }) %>');
+morphdom($initiativeVoteButton[0], '<%= j(render partial: 'decidim/initiatives/initiatives/vote_button', locals: { initiative: initiative, from_initiatives_list: @from_initiatives_list }) %>');

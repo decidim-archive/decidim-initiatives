@@ -1,0 +1,62 @@
+<% add_decidim_page_title(translated_attribute(@initiative.title)) %>
+
+<% add_decidim_meta_tags({
+  description: translated_attribute(@initiative.description),
+  title: translated_attribute(@initiative.title),
+  url: initiative_url(@initiative.id)
+}) %>
+
+<% provide :meta_image_url, @initiative.banner_image&.url unless @initiative.banner_image.nil? %>
+
+<div class="row column view-header">
+  <h2 class="heading2"><%= translated_attribute(@initiative.title) %></h2>
+  <div class="author-data">
+    <%= render partial: "author", locals: { initiative: @initiative } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9">
+    <% if @initiative.votes_enabled? %>
+      <div class="card extra">
+        <div class="card__content">
+          <%= render partial: "votes_count", locals: { initiative: @initiative, from_initiatives_list: false } %>
+          <%= render partial: "vote_button", locals: { initiative: @initiative, from_initiatives_list: false } %>
+        </div>
+      </div>
+    <% end %>
+    <%= render partial: "decidim/shared/share_modal" %>
+    <%= embed_modal_for initiative_initiative_widget_url(@initiative, format: :js) %>
+  </div>
+  <div class="columns mediumlarge-8 mediumlarge-pull-4">
+    <div class="section">
+      <%= render partial: "initiative_badge", locals: { initiative: @initiative } %>
+      <%= simple_format translated_attribute(@initiative.description) %>
+    </div>
+
+    <% if @initiative.answered? && translated_attribute(@initiative.answer).present? %>
+        <% if @initiative.accepted? %>
+          <div class="section">
+            <div class="callout success">
+              <h5><%= link_to t(".initiative_accepted"), @initiative.answer_url || '#' %></h5>
+              <p><%= translated_attribute @initiative.answer %></p>
+              <p></p>
+            </div>
+          </div>
+        <% else %>
+          <div class="section">
+            <div class="callout warning">
+              <h5><%= t(".initiative_rejected") %></h5>
+            </div>
+          </div>
+        <% end %>
+    <% end %>
+
+    <%# = linked_resources_for @proposal, :results, "included_proposals" %>
+  </div>
+</div>
+
+<%= comments_for @initiative %>
+
+<%= javascript_include_tag "decidim/proposals/social_share" %>
+<%= stylesheet_link_tag "decidim/proposals/social_share" %>
