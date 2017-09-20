@@ -32,7 +32,12 @@ $ bundle exec rails decidim_initiatives:install:migrations
 $ bundle exec rails db:migrate
 ```
 
-## Seeding test data
+## Seeding example data
+
+In order to populate the database with example data proceed as usual in rails:
+```bash
+$ bundle exec rails db:seed
+```
 
 ## Contributing
 See [Decidim](https://github.com/decidim/decidim).

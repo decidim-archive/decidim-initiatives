@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-initiatives (0.0.1)
+    decidim-initiatives (0.0.2)
       decidim-comments
       decidim-core (>= 0.6.0, <= 0.8.0)
       kaminari (~> 1.0.1)
@@ -573,6 +573,9 @@ DEPENDENCIES
   decidim-dev
   decidim-initiatives!
   rails (~> 5.1)
+
+RUBY VERSION
+   ruby 2.4.1p111
 
 BUNDLED WITH
    1.16.0.pre.2
