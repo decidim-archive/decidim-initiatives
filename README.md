@@ -7,7 +7,7 @@ created by any user of the platform.
 An initiative will contain attachments and comments from other users as well.
 
 Prior to be published an initiative must be technically validated. All the validation
-process and communication between the platform administrators and the sponsorship 
+process and communication between the platform administrators and the sponsorship
 committee is managed via an administration UI.
 
 ## Usage

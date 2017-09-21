@@ -1,4 +1,11 @@
 ca:
+  activemodel:
+    attributes:
+      initiative:
+        title: Títol
+        description: Descripció
+        signature_start_time: Inici del periode de recollida de suports
+        signature_end_time: Fi del periode de recollida de suports
   decidim:
     menu:
       initiatives: Iniciatives
@@ -55,6 +62,15 @@ ca:
       create_initiative:
         select_initiative_type:
           create_initiative: Crear iniciativa
+        previous_form:
+          title: Formulari previ
+          continue: Continuar
+        show_similar_initiatives:
+          title: S'hi han trobat iniciatives similars
+          continue: Continuar
+        fill_data:
+          title: Ompli els detalls de la iniciativa
+          finish: Finalitzar
   layouts:
     decidim:
       initiatives:

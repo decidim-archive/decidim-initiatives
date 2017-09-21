@@ -1,4 +1,11 @@
 es:
+  activemodel:
+    attributes:
+      initiative:
+        title: Título
+        description: Descripción
+        signature_start_time: Inicio del periodo de recogida de soportes
+        signature_end_time: Fin del periodo de recogida de soportes
   decidim:
     menu:
       initiatives: Iniciativas
@@ -58,6 +65,15 @@ es:
       create_initiative:
         select_initiative_type:
           create_initiative: Crear iniciativa
+        previous_form:
+          title: Formulario previo
+          continue: Continuar
+        show_similar_initiatives:
+          title: Se han encontrado iniciativas similares
+          continue: Continuar
+        fill_data:
+          title: Completa los detalles de la iniciativa
+          finish: Finalizar
   layouts:
     decidim:
       initiatives:

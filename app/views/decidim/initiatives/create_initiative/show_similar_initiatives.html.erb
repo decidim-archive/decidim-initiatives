@@ -1,0 +1,19 @@
+<main class="wrapper">
+  <div class="row">
+    <div class="columns medium-12 large-12 small-12">
+      <div class="card">
+        <div class="card-divider">
+          <h2 class="card-title"><%= t '.title' %></h2>
+        </div>
+
+        <%= render similar_initiatives %>
+
+        <div class="card__content">
+          <div class="section">
+            <%= link_to t('.continue'), next_wizard_path, class: 'button expanded' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

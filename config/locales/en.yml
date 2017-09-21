@@ -1,4 +1,12 @@
 en:
+  activemodel:
+    attributes:
+      initiative:
+        title: Title
+        description: Description
+        signature_start_time: Start of support collection period
+        signature_end_time: End of support collection period
+
   decidim:
     menu:
       initiatives: Initiatives
@@ -55,6 +63,15 @@ en:
       create_initiative:
         select_initiative_type:
           create_initiative: Create initiative
+        previous_form:
+          title: "Previous form"
+          continue: Continue
+        show_similar_initiatives:
+          title: Similar initiatives found
+          continue: Continue
+        fill_data:
+          title: Fill the initiative details
+          finish: Finish
   layouts:
     decidim:
       initiatives:
