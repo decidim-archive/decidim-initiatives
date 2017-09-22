@@ -7,9 +7,39 @@ es:
         signature_start_time: Inicio del periodo de recogida de soportes
         signature_end_time: Fin del periodo de recogida de soportes
   decidim:
+    admin:
+      titles:
+        initiatives_types: Tipos de iniciativa
+      menu:
+        initiatives_types: Tipos de iniciativa
+      models:
+        initiatives_types:
+          name: Tipo de iniciativa
+          fields:
+            title: Típos de iniciativa
+            created_at: Fecha de creación
     menu:
       initiatives: Iniciativas
     initiatives:
+      admin:
+        initiatives_types:
+          new:
+            title: Nuevo tipo de iniciativa
+            create: Crear
+          form:
+            title: Información general
+          edit:
+            update: Actualizar
+            destroy: Eliminar
+            confirm_destroy: ¿Estas seguro?
+          create:
+            success: Se ha creado un nuevo tipo de iniciativa.
+            error: Se ha producido un error
+          update:
+            success: Tipo de iniciativa actualizado con éxito.
+            error: Se ha producido un error.
+          destroy:
+            success: Se ha borrado el tipo de iniciativa.
       states:
         created: Creada
         rejected: Rechazada
@@ -59,6 +89,7 @@ es:
         show:
           initiative_accepted: Iniciativa aceptada
           initiative_rejected: Iniciativa rechazada
+
       initiative_votes:
         create:
           error: Ha habido errores al votar la iniciativa.

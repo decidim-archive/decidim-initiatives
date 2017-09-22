@@ -11,7 +11,12 @@ module Decidim
             super
 
             can :aprove, Initiative
-            can :manage, InitiativeType
+
+            can :manage, InitiativesType
+            cannot :destroy, InitiativesType
+            can :destroy, InitiativesType do |initiative_type|
+              initiative_type.initiatives.empty?
+            end
           end
         end
       end

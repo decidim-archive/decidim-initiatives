@@ -8,9 +8,40 @@ en:
         signature_end_time: End of support collection period
 
   decidim:
+    admin:
+      titles:
+        initiatives_types: Initiative types
+      menu:
+        initiatives_types: Initiative types
+      models:
+        initiatives_types:
+          name: Initiative type
+          fields:
+            title: Initiative types
+            created_at: Created at
     menu:
       initiatives: Initiatives
     initiatives:
+      admin:
+        initiatives_types:
+          new:
+            title: New initiative type
+            create: Create
+          form:
+            title: General information
+          edit:
+            update: Update
+            destroy: Destroy
+            confirm_destroy: Are you sure?
+          create:
+            success: A new initiative type has been successfully created
+            error: An error has occurred
+          update:
+            success: The given initiative has been successfully updated
+            error: An error has occurred
+          destroy:
+            success: The initiative type has been successfully removed.
+
       states:
         created: Created
         rejected: Rejected

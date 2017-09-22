@@ -13,7 +13,7 @@ module Decidim
       paths['db/migrate'] = nil
 
       routes do
-        resources :initiative_types, except: :show
+        resources :initiatives_types, except: :show
       end
 
       initializer 'decidim_assemblies.inject_abilities_to_user' do |_app|

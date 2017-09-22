@@ -7,9 +7,39 @@ ca:
         signature_start_time: Inici del periode de recollida de suports
         signature_end_time: Fi del periode de recollida de suports
   decidim:
+    admin:
+      titles:
+        initiatives_types: Tipus d'iniciativa
+      menu:
+        initiatives_types: Tipus d'iniciativa
+      models:
+        initiatives_types:
+          name: Tipus d'iniciativa
+          fields:
+            title: Tipus d'iniciatives
+            created_at: Data de creació
     menu:
       initiatives: Iniciatives
     initiatives:
+      admin:
+        initiatives_types:
+          new:
+            title: Nou tipus d'iniciativa
+            create: Crear
+          form:
+            title: Informació general
+          edit:
+            update: Actualitzar
+            destroy: Eliminar
+            confirm_destroy: ¿Estas segur?
+          create:
+            success: S'ha creat un nou tipus d'iniciativa
+            error: S'ha produit un error
+          update:
+            success: Les dades del tipus d'iniciativa s'han actualitzat correctament
+            error: S'ha produit un error
+          destroy:
+            success: S'ha eliminat el tipus de iniciativa.
       states:
         created: Creada
         rejected: Rebutjada
