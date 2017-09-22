@@ -7,7 +7,7 @@ module Decidim
       include TranslatableAttributes
 
       alias save valid?
-      
+
       mimic :initiative
 
       translatable_attribute :title, String

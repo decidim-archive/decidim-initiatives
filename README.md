@@ -32,6 +32,14 @@ $ bundle exec rails decidim_initiatives:install:migrations
 $ bundle exec rails db:migrate
 ```
 
+## Database
+
+The database requires the extension pg_trgm enabled. Contact your DBA to enable it.
+
+```sql
+CREATE EXTENSION pg_trgm;
+```
+
 ## Seeding example data
 
 In order to populate the database with example data proceed as usual in rails:

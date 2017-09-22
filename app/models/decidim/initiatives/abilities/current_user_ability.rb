@@ -34,7 +34,9 @@ module Decidim
         end
 
         def can_vote?(initiative)
-          initiative.votes_enabled? && initiative.organization&.id == user.organization&.id && user.authorizations.any?
+          initiative.votes_enabled? &&
+            initiative.organization&.id == user.organization&.id &&
+            user.authorizations.any?
         end
       end
     end
