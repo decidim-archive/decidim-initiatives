@@ -8,8 +8,6 @@ module Decidim
 
       mimic :initiative
 
-      alias save valid?
-
       translatable_attribute :title, String
       translatable_attribute :description, String
       attribute :type_id, Integer
@@ -17,7 +15,10 @@ module Decidim
       attribute :signature_end_time, Date
 
       validates :title, :description, translatable_presence: true
-      validates :type_id, :signature_start_time, :signature_end_time, presence: true
+      validates :type_id,
+                :signature_start_time,
+                :signature_end_time,
+                presence: true
     end
   end
 end

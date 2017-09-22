@@ -6,8 +6,6 @@ module Decidim
     class SelectInitiativeTypeForm < Form
       mimic :initiative
 
-      alias save valid?
-
       attribute :type_id, Integer
 
       validates :type_id, presence: true

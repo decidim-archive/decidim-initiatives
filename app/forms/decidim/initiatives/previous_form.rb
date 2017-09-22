@@ -6,8 +6,6 @@ module Decidim
     class PreviousForm < Form
       include TranslatableAttributes
 
-      alias save valid?
-
       mimic :initiative
 
       translatable_attribute :title, String
