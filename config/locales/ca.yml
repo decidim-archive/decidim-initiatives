@@ -6,6 +6,8 @@ ca:
         description: Descripció
         signature_start_time: Inici del periode de recollida de suports
         signature_end_time: Fi del periode de recollida de suports
+      initiatives_committee_member:
+        user: Membre del comité
   decidim:
     admin:
       titles:
@@ -65,6 +67,9 @@ ca:
           state: Estat
           type: Tipus
           all: Tots
+          any: Qualsevol
+          myself: Les mues iniciatives
+          author: Autor
         supports_count:
           count:
             one: "%suport rebut"
@@ -86,6 +91,13 @@ ca:
         show:
           initiative_accepted: Iniciativa acceptada
           initiative_rejected: Iniciativa rebutjada
+          committee_section_title: Comisió promotora
+          invite_to_committee_help: Comparteix el enllaç anterior per invitar a altres usuaris a la comisió promotora
+        committee_members:
+          title: Membres del comité
+          approve: Aprovar
+          revoke: Rebutjar
+          confirm_revoke: ¿Estas segur?
       initiative_votes:
         create:
           error: Hi ha hagut errors en votar l'iniciativa.
@@ -101,6 +113,12 @@ ca:
         fill_data:
           title: Ompli els detalls de la iniciativa
           finish: Finalitzar
+      committee_requests:
+        new:
+          help_text: Vas a sol·licitar formar part de la comisió promotora per aquesta iniciativa
+          continue: Continuar
+        spawn:
+          success: La teva petició ha estat enviada l'autor de la iniciativa
   layouts:
     decidim:
       initiatives:

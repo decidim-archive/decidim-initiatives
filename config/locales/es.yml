@@ -6,6 +6,8 @@ es:
         description: Descripción
         signature_start_time: Inicio del periodo de recogida de soportes
         signature_end_time: Fin del periodo de recogida de soportes
+      initiatives_committee_member:
+        user: Miembro del comité
   decidim:
     admin:
       titles:
@@ -65,6 +67,9 @@ es:
           state: Estado
           type: Tipo
           all: Todos
+          any: Cualquiera
+          myself: Mis iniciativas
+          author: Autor
         initiatives:
           index:
             loading: Cargando resultados...
@@ -89,7 +94,13 @@ es:
         show:
           initiative_accepted: Iniciativa aceptada
           initiative_rejected: Iniciativa rechazada
-
+          committee_section_title: Comisión promotora
+          invite_to_committee_help: Comparte el enlace anterior para invitar a otros usuarios a la comisión promotora
+        committee_members:
+          title: Miembros del comité
+          approve: Aprobar
+          revoke: Rechazar
+          confirm_revoke: ¿Estás seguro?
       initiative_votes:
         create:
           error: Ha habido errores al votar la iniciativa.
@@ -105,6 +116,12 @@ es:
         fill_data:
           title: Completa los detalles de la iniciativa
           finish: Finalizar
+      committee_requests:
+        new:
+          continue: Continuar
+          help_text: Vas a solicitar formar parte de la comisión promotora para esta iniciativa
+        spawn:
+          success: Tu petición ha sido enviada al autor de la iniciativa.
   layouts:
     decidim:
       initiatives:

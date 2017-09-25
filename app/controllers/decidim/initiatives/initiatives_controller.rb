@@ -2,8 +2,9 @@
 
 module Decidim
   module Initiatives
+    # This controller contains the logic regarding citizen initiatives
     class InitiativesController < Decidim::ApplicationController
-      layout "layouts/decidim/initiative", only: [:show]
+      layout 'layouts/decidim/initiative', only: [:show]
 
       before_action :set_initiative, only: [:show]
 
@@ -50,9 +51,10 @@ module Decidim
 
       def default_filter_params
         {
-          search_text: "",
-          state: "open",
-          type: "all"
+          search_text: '',
+          state: 'open',
+          type: 'all',
+          author: 'any'
         }
       end
 

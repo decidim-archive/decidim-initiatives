@@ -2,6 +2,7 @@
 
 module Decidim
   module Initiatives
+    # This controller provides a widget that allows embedding the initiative
     class InitiativeWidgetsController < Decidim::WidgetsController
       helper InitiativesHelper
 

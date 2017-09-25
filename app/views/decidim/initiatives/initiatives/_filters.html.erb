@@ -18,6 +18,14 @@
                                     :last,
                                     legend_title: t('.state') %>
 
+  <% if current_user %>
+    <%= form.collection_radio_buttons :author,
+                                    [['any', t('.any')], ['myself', t('.myself')]],
+                                    :first,
+                                    :last,
+                                    legend_title: t('.author') %>
+  <% end %>
+  
   <%= form.collection_radio_buttons :type,
                                     initiative_types_for_select,
                                     :first,

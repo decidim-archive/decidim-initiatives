@@ -13,22 +13,28 @@ module Decidim
       end
 
       def base_query
-        Decidim::Initiative.published.where(organization: options[:organization])
+        Decidim::Initiative
+          .where(organization: options[:organization])
       end
 
       # Handle the search_text filter
       def search_search_text
         query
           .where("title->>'#{current_locale}' ILIKE ?", "%#{search_text}%")
-          .or(query.where("description->>'#{current_locale}' ILIKE ?", "%#{search_text}%"))
+          .or(
+            query.where(
+              "description->>'#{current_locale}' ILIKE ?",
+              "%#{search_text}%"
+            )
+          )
       end
 
       # Handle the state filter
       def search_state
         case state
-        when "open"
+        when 'open'
           query.open
-        when "closed"
+        when 'closed'
           query.closed
         else # Assume 'all'
           query
@@ -36,9 +42,17 @@ module Decidim
       end
 
       def search_type
-        return query if type == "all"
+        return query if type == 'all'
 
         query.where(type_id: type)
+      end
+
+      def search_author
+        if author == 'myself' && options[:current_user]
+          query.where(decidim_author_id: options[:current_user].id)
+        else
+          query.published
+        end
       end
 
       private

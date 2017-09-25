@@ -20,26 +20,36 @@ module Decidim
       # form - Decidim::Initiatives::PreviousForm
       def initialize(organization, form)
         @organization = organization
-        @initiative = Initiative.new(title: form.title, description: form.description)
+        @initiative = Initiative.new(
+          title: form.title,
+          description: form.description
+        )
       end
 
       # Retrieves similar initiatives
       def query
         Initiative
           .where(organization: @organization)
-          .where("GREATEST(#{title_similarity}, #{description_similarity}) >= ?", Decidim::Initiatives.similarity_threshold)
+          .where(
+            "GREATEST(#{title_similarity}, #{description_similarity}) >= ?",
+            Decidim::Initiatives.similarity_threshold
+          )
           .limit(Decidim::Initiatives.similarity_limit)
       end
 
       private
 
       def title_similarity
-        title = Initiative.connection.quote(translated_attribute(@initiative.title))
+        title = Initiative.connection.quote(
+          translated_attribute(@initiative.title)
+        )
         "similarity(title->>'#{current_locale}',#{title})"
       end
 
       def description_similarity
-        description = Initiative.connection.quote(translated_attribute(@initiative.description))
+        description = Initiative.connection.quote(
+          translated_attribute(@initiative.description)
+        )
         "similarity(description->>'#{current_locale}',#{description})"
       end
 

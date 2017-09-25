@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "active_support/concern"
+require 'active_support/concern'
 
 module Decidim
   module Initiatives
@@ -13,7 +13,8 @@ module Decidim
 
         private
 
-        # Gets how the proposals should be ordered based on the choice made by the user.
+        # Gets how the proposals should be ordered based on the choice
+        # made by the user.
         def order
           @order ||= detect_order(params[:order]) || default_order
         end
@@ -25,29 +26,30 @@ module Decidim
         # Available orders based on enabled settings
         def available_orders
           @available_orders ||= begin
-            available_orders = %w(random recent most_voted most_commented)
+            available_orders = %w[random recent most_voted most_commented]
             available_orders
           end
         end
 
         def default_order
-          "random"
+          'random'
         end
 
         def reorder(proposals)
           case order
-            when "random"
-              proposals.order_randomly(random_seed)
-            when "most_voted"
-              proposals.order(created_at: :desc)
-            when "most_commented"
-              proposals.order(created_at: :desc)
-            when "recent"
-              proposals.order(created_at: :desc)
+          when 'random'
+            proposals.order_randomly(random_seed)
+          when 'most_voted'
+            proposals.order(created_at: :desc)
+          when 'most_commented'
+            proposals.order(created_at: :desc)
+          when 'recent'
+            proposals.order(created_at: :desc)
           end
         end
 
-        # Returns: A random float number between -1 and 1 to be used as a random seed at the database.
+        # Returns: A random float number between -1 and 1 to be used as a
+        # random seed at the database.
         def random_seed
           @random_seed ||= (params[:random_seed] ? params[:random_seed].to_f : (rand * 2 - 1))
         end

@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = 'decidim-initiatives'
   s.summary     = 'Citizen initiatives plugin for decidim'
   s.description = s.summary
-  s.version     = '0.0.7'
+  s.version     = '0.0.8'
   s.authors     = ['Juan Salvador Pérez García']
   s.email       = ['juan@aspgems.com']
   s.license     = 'AGPLv3'

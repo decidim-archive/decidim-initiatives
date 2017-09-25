@@ -6,7 +6,8 @@ en:
         description: Description
         signature_start_time: Start of support collection period
         signature_end_time: End of support collection period
-
+      initiatives_committee_member:
+        user: Committee member
   decidim:
     admin:
       titles:
@@ -67,6 +68,9 @@ en:
           state: State
           type: Type
           all: All
+          any: Any
+          myself: My initiatives
+          author: Author
         supports_count:
           count:
             one: "support"
@@ -88,6 +92,13 @@ en:
         show:
           initiative_accepted: Initiative accepted
           initiative_rejected: Initiative rejected
+          committee_section_title: Promoter committee
+          invite_to_committee_help: Share the previous link to invite other users to the promotion committee
+        committee_members:
+          title: Committee members
+          approve: Approve
+          revoke: Revoke
+          confirm_revoke: Are you sure?
       initiative_votes:
         create:
           error: There's been errors when voting the initiative.
@@ -103,6 +114,12 @@ en:
         fill_data:
           title: Fill the initiative details
           finish: Finish
+      committee_requests:
+        new:
+          continue: Continue
+          help_text: You are about to request being membership of the promoter committee of this initiative
+        spawn:
+          success: Your request has been sent to the initiative author.
   layouts:
     decidim:
       initiatives:

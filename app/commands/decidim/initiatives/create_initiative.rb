@@ -33,7 +33,15 @@ module Decidim
       attr_reader :form
 
       def create_initiative
-        initiative = Initiative.new(
+        initiative = build_initiative
+        return initiative unless initiative.valid?
+
+        initiative.save
+        initiative
+      end
+
+      def build_initiative
+        Initiative.new(
           organization: form.current_organization,
           author: form.current_user,
           title: form.title,
@@ -44,11 +52,6 @@ module Decidim
           signature_type: 'online',
           state: 'created'
         )
-
-        return initiative unless initiative.valid?
-
-        initiative.save
-        initiative
       end
     end
   end

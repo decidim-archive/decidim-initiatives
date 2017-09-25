@@ -17,16 +17,19 @@
 
 <div class="row">
   <div class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9">
-    <% if @initiative.votes_enabled? %>
-      <div class="card extra">
-        <div class="card__content">
-          <%= render partial: "votes_count", locals: { initiative: @initiative, from_initiatives_list: false } %>
-          <%= render partial: "vote_button", locals: { initiative: @initiative, from_initiatives_list: false } %>
+    <% if @initiative.published? %>
+      <% if @initiative.votes_enabled? %>
+        <div class="card extra">
+          <div class="card__content">
+            <%= render partial: "votes_count", locals: { initiative: @initiative, from_initiatives_list: false } %>
+            <%= render partial: "vote_button", locals: { initiative: @initiative, from_initiatives_list: false } %>
+          </div>
         </div>
-      </div>
+      <% end %>
+
+      <%= render partial: "decidim/shared/share_modal" %>
+      <%= embed_modal_for initiative_initiative_widget_url(@initiative, format: :js) %>
     <% end %>
-    <%= render partial: "decidim/shared/share_modal" %>
-    <%= embed_modal_for initiative_initiative_widget_url(@initiative, format: :js) %>
   </div>
   <div class="columns mediumlarge-8 mediumlarge-pull-4">
     <div class="section">
@@ -35,28 +38,62 @@
     </div>
 
     <% if @initiative.answered? && translated_attribute(@initiative.answer).present? %>
-        <% if @initiative.accepted? %>
-          <div class="section">
-            <div class="callout success">
-              <h5><%= link_to t(".initiative_accepted"), @initiative.answer_url || '#' %></h5>
-              <p><%= translated_attribute @initiative.answer %></p>
-              <p></p>
-            </div>
+      <% if @initiative.accepted? %>
+        <div class="section">
+          <div class="callout success">
+            <h5><%= link_to t(".initiative_accepted"), @initiative.answer_url || '#' %></h5>
+            <p><%= translated_attribute @initiative.answer %></p>
+            <p></p>
           </div>
-        <% else %>
-          <div class="section">
-            <div class="callout warning">
-              <h5><%= t(".initiative_rejected") %></h5>
-            </div>
+        </div>
+      <% else %>
+        <div class="section">
+          <div class="callout warning">
+            <h5><%= t(".initiative_rejected") %></h5>
           </div>
-        <% end %>
+        </div>
+      <% end %>
     <% end %>
-
-    <%# = linked_resources_for @proposal, :results, "included_proposals" %>
   </div>
 </div>
 
-<%= comments_for @initiative %>
+<% if @initiative.author.id == current_user&.id && !@initiative.published? %>
+  <div class="row">
+    <div class="columns large-12">
+      <div class="section committee">
+        <h4 class="section-heading"><%= t('.committee_section_title') %></h4>
+      </div>
+      <div class="card card--list">
+        <div class="card--list__item">
+          <div class="card--list__text">
+            <%= link_to new_initiative_committee_request_url(@initiative.id), class: 'card__link' do %>
+              <h6 class="card--list__heading heading6" id="committee_link" style="text-transform: none">
+                <%= new_initiative_committee_request_url(@initiative.id) %>
+              </h6>
+              <span class=text-small><%=t '.invite_to_committee_help' %></span>
+            <% end %>
+          </div>
+          <div class="card--list__data">
+            <a href=# class="card--list__data__icon" id="invite_users">
+              <i class="fa fa-clipboard" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
 
-<%= javascript_include_tag "decidim/proposals/social_share" %>
-<%= stylesheet_link_tag "decidim/proposals/social_share" %>
+      <%= render partial: 'committee_members', locals: { initiative: @initiative } %>
+    </div>
+  </div>
+<% end %>
+
+<% if @initiative.published? %>
+  <%= comments_for @initiative %>
+<% end %>
+
+<%= javascript_include_tag 'decidim/initiatives/social_share' %>
+<%= stylesheet_link_tag 'decidim/initiatives/social_share' %>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous">
+<%= javascript_include_tag 'decidim/initiatives/invite_users' %>

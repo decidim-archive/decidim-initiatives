@@ -17,7 +17,7 @@ module Decidim
           @context = context
 
           can :vote, Initiative do |initiative|
-            can_vote?(user, initiative)
+            can_vote?(initiative)
           end
 
           can :unvote, Initiative do |initiative|
@@ -25,6 +25,14 @@ module Decidim
           end
 
           can :create, Initiative if creation_enabled?
+
+          can :request_membership, Initiative do |initiative|
+            !initiative.published? && initiative.decidim_author_id != user.id
+          end
+
+          can :manage_membership, InitiativesCommitteeMember do |request|
+            request.initiative.decidim_author_id == user.id
+          end
         end
 
         private
