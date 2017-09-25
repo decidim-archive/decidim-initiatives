@@ -11,7 +11,9 @@ module Decidim
       include Decidim::Admin::IconLinkHelper
 
       def creation_enabled?
-        Decidim::Initiatives.creation_enabled
+        return Decidim::Initiatives.creation_enabled unless current_user 
+
+        Decidim::Initiatives.creation_enabled && current_user.authorizations.any?
       end
     end
   end
