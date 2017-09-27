@@ -13,6 +13,10 @@ module Decidim
       routes do
         resources :create_initiative
         resources :initiatives, only: %i[index show] do
+          member do
+            get :send_to_technical_validation
+          end
+
           resource :initiative_vote, only: %i[create destroy]
           resource :initiative_widget, only: :show, path: 'embed'
           resources :committee_requests, only: %i[new], shallow: true do

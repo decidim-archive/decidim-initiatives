@@ -11,7 +11,7 @@ Decidim.register_participatory_space(:initiatives) do |participatory_space|
       type = Decidim::InitiativesType.create!(
         title: Decidim::Faker::Localized.sentence(5),
         description: Decidim::Faker::Localized.sentence(25),
-        supports_required: (n+1)*1000,
+        supports_required: (n + 1) * 1000,
         organization: organization
       )
 
@@ -19,13 +19,13 @@ Decidim.register_participatory_space(:initiatives) do |participatory_space|
         title: Decidim::Faker::Localized.sentence(5),
         description: Decidim::Faker::Localized.sentence(25),
         type: type,
-        state: "created",
-        signature_type: "online",
+        state: 'published',
+        signature_type: 'online',
         signature_start_time: DateTime.now - 7.days,
         signature_end_time:  DateTime.now + 7.days,
         published_at: DateTime.now - 7.days,
-        scope: Faker::Boolean.boolean(0.5) ? nil : Decidim::Scope.reorder("RANDOM()").first,
-        author: Decidim::User.reorder("RANDOM()").first,
+        scope: Faker::Boolean.boolean(0.5) ? nil : Decidim::Scope.reorder('RANDOM()').first,
+        author: Decidim::User.reorder('RANDOM()').first,
         organization: organization
       )
 

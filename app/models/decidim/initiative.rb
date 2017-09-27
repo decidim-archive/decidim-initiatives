@@ -39,7 +39,9 @@ module Decidim
              as: :participatory_space
 
     enum signature_type: %i[online offline any]
-    enum state: %i[created rejected accepted]
+    enum state: %i[
+      created validating validated discarded published rejected accepted
+    ]
 
     validates :title, :description, :state, presence: true
     validates :signature_type,
@@ -49,9 +51,9 @@ module Decidim
 
     mount_uploader :banner_image, Decidim::BannerImageUploader
 
-    scope :published, -> { where('published_at <= ?', DateTime.now) }
-    scope :open, -> { where('signature_end_time >= ?', DateTime.now) }
-    scope :closed, -> { where('signature_end_time < ?', DateTime.now) }
+    scope :open, -> { where.not(state: %i[discarded rejected accepted]) }
+    scope :closed, -> { where(state: %i[discarded rejected accepted]) }
+    scope :published, -> { where.not(published_at: nil) }
 
     def self.order_randomly(seed)
       transaction do
@@ -84,6 +86,22 @@ module Decidim
     # Returns Boolean.
     def answered?
       answered_at.present?
+    end
+
+    #
+    # Public: Publishes this feature
+    #
+    # Returns true if the record was properly saved, false otherwise.
+    def publish!
+      update_attributes(published_at: Time.current, state: 'published')
+    end
+
+    #
+    # Public: Unpublishes this feature
+    #
+    # Returns true if the record was properly saved, false otherwise.
+    def unpublish!
+      update_attributes(published_at: nil, state: 'validated')
     end
   end
 end

@@ -16,22 +16,16 @@ module Decidim
           @user = user
           @context = context
 
-          can :vote, Initiative do |initiative|
-            can_vote?(initiative)
-          end
-
-          can :unvote, Initiative do |initiative|
-            can_vote?(initiative)
-          end
-
           can :create, Initiative if creation_enabled?
-
-          can :request_membership, Initiative do |initiative|
-            !initiative.published? && initiative.decidim_author_id != user.id
+          can :read, Initiative do |initiative|
+            initiative.published? || initiative.decidim_author_id == user.id
           end
 
-          can :manage_membership, InitiativesCommitteeMember do |request|
-            request.initiative.decidim_author_id == user.id
+          define_vote_abilities
+          define_membership_management_abilities
+
+          can :send_to_technical_validation, Initiative do |initiative|
+            initiative.decidim_author_id == user.id && initiative.created?
           end
         end
 
@@ -39,6 +33,26 @@ module Decidim
 
         def creation_enabled?
           Decidim::Initiatives.creation_enabled && user.authorizations.any?
+        end
+
+        def define_vote_abilities
+          can :vote, Initiative do |initiative|
+            can_vote?(initiative)
+          end
+
+          can :unvote, Initiative do |initiative|
+            can_vote?(initiative)
+          end
+        end
+
+        def define_membership_management_abilities
+          can :request_membership, Initiative do |initiative|
+            !initiative.published? && initiative.decidim_author_id != user.id
+          end
+
+          can :manage_membership, InitiativesCommitteeMember do |request|
+            request.initiative.decidim_author_id == user.id
+          end
         end
 
         def can_vote?(initiative)

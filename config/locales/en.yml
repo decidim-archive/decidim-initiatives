@@ -12,13 +12,20 @@ en:
     admin:
       titles:
         initiatives_types: Initiative types
+        initiatives: Initiatives
       menu:
         initiatives_types: Initiative types
+        initiatives: Initiatives
       models:
         initiatives_types:
           name: Initiative type
           fields:
             title: Initiative types
+            created_at: Created at
+        initiatives:
+          fields:
+            title: Initiatives
+            state: State
             created_at: Created at
     menu:
       initiatives: Initiatives
@@ -42,9 +49,21 @@ en:
             error: An error has occurred
           destroy:
             success: The initiative type has been successfully removed.
-
+        initiatives:
+          edit:
+            update: Update
+            validate: Validate the initiative
+            discard: Discard the initiative
+            request_changes: Request changes
+            confirm: Are you sure?
+          form:
+            title: Informació general
       states:
         created: Created
+        validating: Technical validation
+        validated: Validada
+        published: Publicada
+        discarded: Descartada
         rejected: Rejected
         accepted: Accepted
       index:
@@ -92,6 +111,7 @@ en:
         show:
           initiative_accepted: Initiative accepted
           initiative_rejected: Initiative rejected
+        promoter_committee:
           committee_section_title: Promoter committee
           invite_to_committee_help: Share the previous link to invite other users to the promotion committee
         committee_members:
@@ -99,6 +119,11 @@ en:
           approve: Approve
           revoke: Revoke
           confirm_revoke: Are you sure?
+          no_members_yet: There are no members in the promoter committee
+        technical_validation:
+          send_to_technical_validation: Send to technical validation
+          confirm: Are you sure?
+          success: The initiative has been sent to technical validation
       initiative_votes:
         create:
           error: There's been errors when voting the initiative.

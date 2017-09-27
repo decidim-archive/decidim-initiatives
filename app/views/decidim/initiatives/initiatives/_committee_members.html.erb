@@ -1,12 +1,12 @@
-<div class='card' id="attachments">
-  <div class="card-divider">
-    <h2 class="card-title">
-      <%= t(".title") %>
-    </h2>
-  </div>
+<% if initiative.committee_members.any? %>
+  <div class='card' id="committee_members">
+    <div class="card-divider">
+      <h2 class="card-title">
+        <%= t(".title") %>
+      </h2>
+    </div>
 
-  <div class="card-section">
-    <% if initiative.committee_members.any? %>
+    <div class="card-section">
       <div class="table-scroll">
         <table class="table-list">
           <tbody>
@@ -15,7 +15,6 @@
                 <td>
                   <%= link_to request.user.name, "mailto:#{request.user.email}" %>
                 </td>
-                <td></td>
                 <td class="table-list__actions">
                   <% if can? :manage_membership, request %>
                     <%= icon_link_to "check",
@@ -35,6 +34,8 @@
           </tbody>
         </table>
       </div>
-    <% end %>
+    </div>
   </div>
-</div>
+<% else %>
+  <%=t '.no_members_yet' %>
+<% end %>

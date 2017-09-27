@@ -1,0 +1,30 @@
+
+  <div class="row">
+    <div class="columns large-12">
+      <div class="section committee">
+        <h4 class="section-heading"><%= t('.committee_section_title') %></h4>
+      </div>
+
+      <% if @initiative.author.id == current_user&.id && @initiative.created? %>
+        <div class="card card--list">
+          <div class="card--list__item">
+            <div class="card--list__text">
+              <%= link_to new_initiative_committee_request_url(@initiative.id), class: 'card__link' do %>
+                <h6 class="card--list__heading heading6" id="committee_link" style="text-transform: none">
+                  <%= new_initiative_committee_request_url(@initiative.id) %>
+                </h6>
+                <span class=text-small><%=t '.invite_to_committee_help' %></span>
+              <% end %>
+            </div>
+            <div class="card--list__data">
+              <a href=# class="card--list__data__icon" id="invite_users">
+                <i class="fa fa-clipboard" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= render partial: 'committee_members', locals: { initiative: @initiative } %>
+    </div>
+  </div>

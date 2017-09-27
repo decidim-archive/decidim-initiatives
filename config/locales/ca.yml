@@ -12,14 +12,20 @@ ca:
     admin:
       titles:
         initiatives_types: Tipus d'iniciativa
+        initiatives: Iniciatives
       menu:
         initiatives_types: Tipus d'iniciativa
+        initiatives: Iniciatives
       models:
         initiatives_types:
           name: Tipus d'iniciativa
           fields:
             title: Tipus d'iniciatives
+            state:  Estat
             created_at: Data de creació
+        initiatives:
+          fields:
+            title: Iniciatives
     menu:
       initiatives: Iniciatives
     initiatives:
@@ -42,10 +48,24 @@ ca:
             error: S'ha produit un error
           destroy:
             success: S'ha eliminat el tipus de iniciativa.
+        initiatives:
+          edit:
+            update: Actualitzar
+            validate: Validar la iniciativa
+            discard: Descartar la iniciativa
+            request_changes: Sol·licitar canvits
+            confirm: ¿Estas segur?
+          form:
+            title: Informació general
       states:
         created: Creada
+        validating: Validació tècnica
+        validated: Validada
+        published: Publicada
+        discarded: Descartada
         rejected: Rebutjada
         accepted: Acceptada
+
       index:
         title: Iniciatives
       initiatives:
@@ -91,6 +111,7 @@ ca:
         show:
           initiative_accepted: Iniciativa acceptada
           initiative_rejected: Iniciativa rebutjada
+        promoter_committee:
           committee_section_title: Comisió promotora
           invite_to_committee_help: Comparteix el enllaç anterior per invitar a altres usuaris a la comisió promotora
         committee_members:
@@ -98,6 +119,11 @@ ca:
           approve: Aprovar
           revoke: Rebutjar
           confirm_revoke: ¿Estas segur?
+          no_members_yet: No hi ha membres al comité promotor de la iniciativa
+        technical_validation:
+          send_to_technical_validation: Enviar a validació tècnica
+          confirm: ¿Estas segur?
+          success: La iniciativa ha segut enviada a validació tècnica
       initiative_votes:
         create:
           error: Hi ha hagut errors en votar l'iniciativa.

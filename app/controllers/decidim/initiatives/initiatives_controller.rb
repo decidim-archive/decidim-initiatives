@@ -6,8 +6,6 @@ module Decidim
     class InitiativesController < Decidim::ApplicationController
       layout 'layouts/decidim/initiative', only: [:show]
 
-      before_action :set_initiative, only: [:show]
-
       helper Decidim::WidgetUrlsHelper
       helper Decidim::FiltersHelper
       helper Decidim::OrdersHelper
@@ -28,13 +26,26 @@ module Decidim
       end
 
       def show
-        authorize! :read, Initiative
+        authorize! :read, initiative
+      end
+
+      def send_to_technical_validation
+        authorize! :send_to_technical_validation, initiative
+        initiative.validating!
+        redirect_to initiative_path(initiative), flash: {
+          notice: I18n.t(
+            '.success',
+            scope: %w[
+              decidim initiatives initiatives technical_validation
+            ]
+          )
+        }
       end
 
       private
 
-      def set_initiative
-        @initiative = Initiative.find(params[:id])
+      def initiative
+        @initiative ||= Initiative.find(params[:id])
       end
 
       def initiatives

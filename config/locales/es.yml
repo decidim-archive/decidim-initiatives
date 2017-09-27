@@ -12,13 +12,20 @@ es:
     admin:
       titles:
         initiatives_types: Tipos de iniciativa
+        initiatives: Iniciativas
       menu:
         initiatives_types: Tipos de iniciativa
+        initiatives: Iniciativas
       models:
         initiatives_types:
           name: Tipo de iniciativa
           fields:
             title: Típos de iniciativa
+            created_at: Fecha de creación
+        initiatives:
+          fields:
+            title: Iniciativas
+            state:  Estado
             created_at: Fecha de creación
     menu:
       initiatives: Iniciativas
@@ -42,8 +49,21 @@ es:
             error: Se ha producido un error.
           destroy:
             success: Se ha borrado el tipo de iniciativa.
+        initiatives:
+          edit:
+            update: Actualizar
+            validate: Validar la iniciativa
+            discard: Descartar la iniciativa
+            request_changes: Solicitar cambios
+            confirm: ¿Estas seguro?
+          form:
+            title: Información general
       states:
         created: Creada
+        validating: Validación técnica
+        validated: Validada
+        published: Publicada
+        discarded: Descartada
         rejected: Rechazada
         accepted: Aceptada
       index:
@@ -94,6 +114,7 @@ es:
         show:
           initiative_accepted: Iniciativa aceptada
           initiative_rejected: Iniciativa rechazada
+        promoter_committee:
           committee_section_title: Comisión promotora
           invite_to_committee_help: Comparte el enlace anterior para invitar a otros usuarios a la comisión promotora
         committee_members:
@@ -101,6 +122,11 @@ es:
           approve: Aprobar
           revoke: Rechazar
           confirm_revoke: ¿Estás seguro?
+          no_members_yet: No hay miembros en el comité promotor de la iniciativa
+        technical_validation:
+          send_to_technical_validation: Enviar a validación técnica
+          confirm: ¿Estás seguro?
+          success: La iniciativa ha sido enviada a validación técnica
       initiative_votes:
         create:
           error: Ha habido errores al votar la iniciativa.

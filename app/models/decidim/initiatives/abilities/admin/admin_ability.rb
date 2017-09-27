@@ -10,7 +10,7 @@ module Decidim
           def define_abilities
             super
 
-            can :aprove, Initiative
+            can :manage, Initiative
 
             can :manage, InitiativesType
             cannot :destroy, InitiativesType

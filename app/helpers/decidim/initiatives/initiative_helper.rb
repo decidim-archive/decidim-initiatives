@@ -2,6 +2,7 @@
 
 module Decidim
   module Initiatives
+    # Helper method related to initiative object and its internal state.
     module InitiativeHelper
       # Public: The css class applied based on the initiative state to
       #         the initiative badge.
@@ -11,12 +12,12 @@ module Decidim
       # Returns a String.
       def state_badge_css_class(state)
         case state
-          when "accepted"
-            "success"
-          when "rejected"
-            "warning"
-          when "created"
-            "secondary"
+        when 'created', 'validated', 'publishing', 'published', 'accepted'
+          'success'
+        when 'discarded', 'rejected'
+          'warning'
+        when 'validating'
+          'secondary'
         end
       end
 
@@ -26,7 +27,7 @@ module Decidim
       #
       # Returns a String.
       def humanize_state(state)
-        I18n.t(state, scope: "decidim.initiatives.states", default: :created)
+        I18n.t(state, scope: 'decidim.initiatives.states', default: :created)
       end
     end
   end
