@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "active_support/concern"
+require 'active_support/concern'
 
 module Decidim
   module Initiatives
@@ -15,7 +15,7 @@ module Decidim
         private
 
         def initiative_types_for_select
-          types = [["all", I18n.t("initiatives.filters.all", scope: "decidim.initiatives")]]
+          types = [['all', I18n.t('initiatives.filters.all', scope: 'decidim.initiatives')]]
 
           Decidim::Initiatives::InitiativeTypes.for(current_organization).each do |type|
             types << [type.id, Truncato.truncate(translated_attribute(type.title), max_length: 25)]

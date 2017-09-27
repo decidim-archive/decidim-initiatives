@@ -10,6 +10,7 @@ module Decidim
       include Decidim::FormFactory
       include InitiativeHelper
       include TypeSelectorOptions
+      include Decidim::Initiatives::Scopeable
 
       helper_method :similar_initiatives
 
@@ -65,12 +66,12 @@ module Decidim
       def create_initiative_step(parameters)
         @form = build_form(Decidim::Initiatives::InitiativeForm, parameters)
 
-        CreateInitiative.call(@form) do
+        CreateInitiative.call(@form, current_user) do
           on(:ok) do |initiative|
             redirect_to initiative_path(initiative)
           end
 
-          on(:invalid) do
+          on(:invalid) do |initiative|
             redirect_to previous_wizard_path(validate_form: true)
           end
         end

@@ -8,17 +8,19 @@ module Decidim
 
       mimic :initiative
 
-      translatable_attribute :title, String
-      translatable_attribute :description, String
+      attribute :title, String
+      attribute :description, String
       attribute :type_id, Integer
-      attribute :signature_start_time, Date
-      attribute :signature_end_time, Date
+      attribute :scope_id, Integer
+      attribute :decidim_user_group_id, Integer
+      attribute :signature_type, String
 
-      validates :title, :description, translatable_presence: true
-      validates :type_id,
-                :signature_start_time,
-                :signature_end_time,
-                presence: true
+      validates :title, :description, presence: true, etiquette: true
+      validates :title, length: { maximum: 150 }
+      validates :description, length: { maximum: 500 }, etiquette: true
+      validates :signature_type, presence: true
+      validates :type_id, presence: true
+      validates :scope_id, presence: true, if: ->(form) { form.scope_id.present? }
     end
   end
 end

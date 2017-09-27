@@ -1,24 +1,28 @@
 <main class="wrapper">
-  <div class="row">
-    <div class="columns medium-10 large-8 small-12 medium-centered">
-      <div class="card">
-        <div class="card-divider">
-          <h2 class="card-title"><%= t '.title' %></h2>
-        </div>
+  <div class="row columns">
+    <%= link_to :back, class: "muted-link" do %>
+        <%= icon 'chevron-left', class: 'icon--small' %>
+        <%= t('.back') %>
+    <% end %>
+    <h2 class="section-heading"><%= t('.title') %></h2>
+  </div>
 
+  <div class="row">
+    <div class="columns large-6 medium-centered">
+      <div class="card">
         <div class="card__content">
-          <%= decidim_form_for(@form, url: next_wizard_path, method: :put, html: { class: "form new_initiative_previous_form" }) do |f| %>
+          <%= decidim_form_for(@form, url: next_wizard_path, method: :put, html: { class: 'form new_initiative_previous_form' }) do |f| %>
             <%= f.hidden_field :type_id %>
 
-            <div class="section">
-              <%= f.translated :text_field, :title, autofocus: true %>
+            <div class="field">
+              <%= f.text_field :title, autofocus: true, required: true %>
             </div>
 
-            <div class="section">
-              <%= f.translated :text_area, :description, rows: 8 %>
+            <div class="field">
+              <%= f.editor :description, lines: 8, toolbar: :full, required: true %>
             </div>
 
-            <div class="section">
+            <div class="actions">
               <%= f.submit t('.continue'), class: 'button expanded' %>
             </div>
           <% end %>
@@ -27,3 +31,6 @@
     </div>
   </div>
 </main>
+
+<%= stylesheet_link_tag 'decidim/initiatives/application' %>
+<%= javascript_include_tag 'decidim/initiatives/application' %>

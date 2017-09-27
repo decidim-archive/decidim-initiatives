@@ -7,8 +7,10 @@ module Decidim
       # Public: Initializes the command.
       #
       # form - A form object with the params.
-      def initialize(form)
+      # current_user - Current user.
+      def initialize(form, current_user)
         @form = form
+        @current_user = current_user
       end
 
       # Executes the command. Broadcasts these events:
@@ -30,7 +32,7 @@ module Decidim
 
       private
 
-      attr_reader :form
+      attr_reader :form, :current_user
 
       def create_initiative
         initiative = build_initiative
@@ -43,15 +45,22 @@ module Decidim
       def build_initiative
         Initiative.new(
           organization: form.current_organization,
-          author: form.current_user,
-          title: form.title,
-          description: form.description,
+          title: { current_locale => form.title },
+          description: { current_locale => form.description },
+          author: current_user,
+          decidim_user_group_id: form.decidim_user_group_id,
           type_id: form.type_id,
-          signature_start_time: form.signature_start_time,
-          signature_end_time: form.signature_end_time,
-          signature_type: 'online',
+          decidim_scope_id: form.scope_id,
+          signature_type: form.signature_type,
           state: 'created'
         )
+      end
+
+      # The current locale for the user. Available as a helper for the views.
+      #
+      # Returns a String.
+      def current_locale
+        @current_locale ||= I18n.locale.to_s
       end
     end
   end

@@ -1,10 +1,9 @@
 PATH
   remote: .
   specs:
-    decidim-initiatives (0.0.7)
+    decidim-initiatives (0.0.11)
       decidim-comments
       decidim-core (>= 0.6.0, <= 0.8.0)
-      font-awesome-rails
       kaminari (~> 1.0.1)
       rectify (~> 0.9.1)
       social-share-button (~> 0.10.0)
@@ -284,8 +283,6 @@ GEM
     file_validators (2.1.0)
       activemodel (>= 3.0)
       mime-types (>= 1.0)
-    font-awesome-rails (4.7.0.2)
-      railties (>= 3.2, < 5.2)
     foundation-rails (6.3.1.0)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)

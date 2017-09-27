@@ -8,11 +8,13 @@ module Decidim
 
       mimic :initiative
 
-      translatable_attribute :title, String
-      translatable_attribute :description, String
+      attribute :title, String
+      attribute :description, String
       attribute :type_id, Integer
 
-      validates :title, :description, translatable_presence: true
+      validates :title, :description, presence: true, etiquette: true
+      validates :title, length: { maximum: 150 }
+      validates :description, length: { maximum: 500 }, etiquette: true
       validates :type_id, presence: true
     end
   end

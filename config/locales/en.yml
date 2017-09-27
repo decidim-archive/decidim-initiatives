@@ -4,8 +4,15 @@ en:
       initiative:
         title: Title
         description: Description
-        signature_start_time: Start of support collection period
-        signature_end_time: End of support collection period
+        signature_start_time: Start of signature collection period
+        signature_end_time: End of signature collection period
+        signature_type: Signature type
+        signature_type_values:
+          online: OnLine
+          offline: Face to face
+          any: Mixed
+        scope_id: Scope
+        decidim_user_group_id: Author
       initiatives_committee_member:
         user: Committee member
   decidim:
@@ -130,15 +137,20 @@ en:
       create_initiative:
         select_initiative_type:
           create_initiative: Create initiative
+          back: Back
+          title: Select initiative type
         previous_form:
           title: "Previous form"
           continue: Continue
+          back: Back
         show_similar_initiatives:
           title: Similar initiatives found
           continue: Continue
+          back: Back
         fill_data:
           title: Fill the initiative details
           finish: Finish
+          back: Back
       committee_requests:
         new:
           continue: Continue

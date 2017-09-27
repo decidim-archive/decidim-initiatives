@@ -3,6 +3,7 @@
 module Decidim
   # The data store for a Initiative in the Decidim::Initiatives component.
   class Initiative < ApplicationRecord
+    include Decidim::Authorable
     include Decidim::Publicable
     include Decidim::Scopable
     include Decidim::Comments::Commentable
@@ -10,10 +11,6 @@ module Decidim
     belongs_to :organization,
                foreign_key: 'decidim_organization_id',
                class_name: 'Decidim::Organization'
-
-    belongs_to :author,
-               foreign_key: 'decidim_author_id',
-               class_name: 'Decidim::User'
 
     belongs_to :type,
                foreign_key: 'type_id',
@@ -44,10 +41,8 @@ module Decidim
     ]
 
     validates :title, :description, :state, presence: true
-    validates :signature_type,
-              :signature_start_time,
-              :signature_end_time, presence: true
-    validates :signature_end_time, date: { after: :signature_start_time }
+    validates :signature_type, presence: true
+    validates :signature_end_time, date: { after: :signature_start_time }, if: :signature_interval_defined?
 
     mount_uploader :banner_image, Decidim::BannerImageUploader
 
@@ -62,6 +57,14 @@ module Decidim
       end
     end
 
+    def author_name
+      user_group&.name || author.name
+    end
+
+    def author_avatar_url
+      author.avatar&.url || ActionController::Base.helpers.asset_path('decidim/default-avatar.svg')
+    end
+
     def started?
       published? && signature_start_time <= Date.today
     end
@@ -70,15 +73,6 @@ module Decidim
       published? &&
         signature_start_time <= Date.today &&
         signature_end_time >= Date.today
-    end
-
-    def author_avatar_url
-      author.avatar&.url ||
-        ActionController::Base.helpers.asset_path('decidim/default-avatar.svg')
-    end
-
-    def author_name
-      author.name
     end
 
     # Public: Checks if the organization has given an answer for the initiative.
@@ -102,6 +96,10 @@ module Decidim
     # Returns true if the record was properly saved, false otherwise.
     def unpublish!
       update_attributes(published_at: nil, state: 'validated')
+    end
+
+    def signature_interval_defined?
+      signature_end_time.present? && signature_start_time.present?
     end
   end
 end

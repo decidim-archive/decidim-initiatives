@@ -4,8 +4,15 @@ es:
       initiative:
         title: Título
         description: Descripción
-        signature_start_time: Inicio del periodo de recogida de soportes
-        signature_end_time: Fin del periodo de recogida de soportes
+        signature_start_time: Inicio del periodo de recogida de firmas
+        signature_end_time: Fin del periodo de recogida de firmas
+        signature_type: Tipo de firma
+        signature_type_values:
+          online: Telemática
+          offline: Presencial
+          any: Mixta
+        scope_id: Ámbito
+        decidim_user_group_id: Autor
       initiatives_committee_member:
         user: Miembro del comité
   decidim:
@@ -133,15 +140,20 @@ es:
       create_initiative:
         select_initiative_type:
           create_initiative: Crear iniciativa
+          back: Volver
+          title: Selecciona el tipo de iniciativa
         previous_form:
           title: Formulario previo
           continue: Continuar
+          back: Volver
         show_similar_initiatives:
           title: Se han encontrado iniciativas similares
           continue: Continuar
+          back: Volver
         fill_data:
           title: Completa los detalles de la iniciativa
           finish: Finalizar
+          back: Volver
       committee_requests:
         new:
           continue: Continuar

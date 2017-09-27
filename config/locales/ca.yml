@@ -4,8 +4,15 @@ ca:
       initiative:
         title: Títol
         description: Descripció
-        signature_start_time: Inici del periode de recollida de suports
-        signature_end_time: Fi del periode de recollida de suports
+        signature_start_time: Inici del periode de recollida de signatures
+        signature_end_time: Fi del periode de recollida de signatures
+        signature_type: Tipus de signatura
+        signature_type_values:
+          online: Telemàtica
+          offline: Presencial
+          any: Mixta
+        scope_id: Scope
+        decidim_user_group_id: Autor
       initiatives_committee_member:
         user: Membre del comité
   decidim:
@@ -130,15 +137,20 @@ ca:
       create_initiative:
         select_initiative_type:
           create_initiative: Crear iniciativa
+          back: Torna enrere
+          title: Selecciona el tipus d'iniciativa
         previous_form:
           title: Formulari previ
           continue: Continuar
+          back: Torna enrere
         show_similar_initiatives:
           title: S'hi han trobat iniciatives similars
           continue: Continuar
+          back: Torna enrere
         fill_data:
           title: Ompli els detalls de la iniciativa
           finish: Finalitzar
+          back: Torna enrere
       committee_requests:
         new:
           help_text: Vas a sol·licitar formar part de la comisió promotora per aquesta iniciativa

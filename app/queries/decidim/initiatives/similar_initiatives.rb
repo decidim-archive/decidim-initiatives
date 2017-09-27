@@ -20,15 +20,13 @@ module Decidim
       # form - Decidim::Initiatives::PreviousForm
       def initialize(organization, form)
         @organization = organization
-        @initiative = Initiative.new(
-          title: form.title,
-          description: form.description
-        )
+        @form = form
       end
 
       # Retrieves similar initiatives
       def query
         Initiative
+          .published
           .where(organization: @organization)
           .where(
             "GREATEST(#{title_similarity}, #{description_similarity}) >= ?",
@@ -39,17 +37,15 @@ module Decidim
 
       private
 
+      attr_reader :form
+
       def title_similarity
-        title = Initiative.connection.quote(
-          translated_attribute(@initiative.title)
-        )
+        title = Initiative.connection.quote(form.title)
         "similarity(title->>'#{current_locale}',#{title})"
       end
 
       def description_similarity
-        description = Initiative.connection.quote(
-          translated_attribute(@initiative.description)
-        )
+        description = Initiative.connection.quote(form.description)
         "similarity(description->>'#{current_locale}',#{description})"
       end
 
