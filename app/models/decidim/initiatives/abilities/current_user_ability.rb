@@ -32,7 +32,10 @@ module Decidim
         private
 
         def creation_enabled?
-          Decidim::Initiatives.creation_enabled && user.authorizations.any?
+
+          Decidim::Initiatives.creation_enabled && (
+            user.authorizations.any? || user.user_groups.verified.any?
+          )
         end
 
         def define_vote_abilities
@@ -57,8 +60,9 @@ module Decidim
 
         def can_vote?(initiative)
           initiative.votes_enabled? &&
-            initiative.organization&.id == user.organization&.id &&
-            user.authorizations.any?
+            initiative.organization&.id == user.organization&.id && (
+              user.authorizations.any? || user.user_groups.verified.any?
+            )
         end
       end
     end

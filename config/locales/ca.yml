@@ -11,7 +11,7 @@ ca:
           online: Telemàtica
           offline: Presencial
           any: Mixta
-        scope_id: Scope
+        scope_id: Àmbit
         decidim_user_group_id: Autor
       initiatives_committee_member:
         user: Membre del comité
@@ -97,6 +97,8 @@ ca:
           any: Qualsevol
           myself: Les mues iniciatives
           author: Autor
+          scopes: Àmbits
+          scope_prompt: Seleccioneu un àmbit
         supports_count:
           count:
             one: "%suport rebut"

@@ -10,6 +10,7 @@ module Decidim
       helper Decidim::FiltersHelper
       helper Decidim::OrdersHelper
       helper Decidim::ActionAuthorizationHelper
+      helper Decidim::PartialTranslationsHelper
 
       include Decidim::Initiatives::ActionAuthorization
       include FilterResource
@@ -17,6 +18,7 @@ module Decidim
       include Orderable
       include TypeSelectorOptions
       include Votable
+      include Decidim::Initiatives::Scopeable
 
       helper_method :collection, :initiatives, :filter
 
@@ -65,7 +67,8 @@ module Decidim
           search_text: '',
           state: 'open',
           type: 'all',
-          author: 'any'
+          author: 'any',
+          scope_id: nil
         }
       end
 

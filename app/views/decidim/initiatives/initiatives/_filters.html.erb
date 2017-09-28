@@ -13,7 +13,7 @@
   </div>
 
   <%= form.collection_radio_buttons :state,
-                                    [["open", t('.open')], ["closed", t('.closed')]],
+                                    [['open', t('.open')], ['closed', t('.closed')]],
                                     :first,
                                     :last,
                                     legend_title: t('.state') %>
@@ -25,12 +25,21 @@
                                     :last,
                                     legend_title: t('.author') %>
   <% end %>
-  
+
   <%= form.collection_radio_buttons :type,
                                     initiative_types_for_select,
                                     :first,
                                     :last,
                                     legend_title: t('.type') %>
 
-  <%= hidden_field_tag :order, order, id: nil, class: "order_filter" %>
+    <% if has_scopes? %>
+      <%= form.scopes_select :scope_id,
+                             legend_title: t('.scopes'),
+                             label: false,
+                             prompt: t('.scope_prompt'),
+                             remote_path: decidim.scopes_search_path,
+                             multiple: true %>
+    <% end %>
+
+  <%= hidden_field_tag :order, order, id: nil, class: 'order_filter' %>
 <% end %>

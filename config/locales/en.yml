@@ -97,6 +97,8 @@ en:
           any: Any
           myself: My initiatives
           author: Author
+          scopes: Scopes
+          scope_prompt: Select a scope
         supports_count:
           count:
             one: "support"

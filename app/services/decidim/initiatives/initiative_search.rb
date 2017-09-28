@@ -55,6 +55,10 @@ module Decidim
         end
       end
 
+      def search_scope_id
+        query.where(decidim_scope_id: scope_id) unless scope_id.nil?
+      end
+
       private
 
       def current_locale

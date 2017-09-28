@@ -97,6 +97,8 @@ es:
           any: Cualquiera
           myself: Mis iniciativas
           author: Autor
+          scopes: Ámbitos
+          scope_prompt: Seleccione un ámbito
         initiatives:
           index:
             loading: Cargando resultados...
