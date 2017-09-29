@@ -114,11 +114,10 @@ es:
           most_commented: Mas comentado
         vote_cabin:
           vote: Dar apoyo
+          already_voted: Ya votado
           votes_blocked: Votación desactivada
         signature_identities:
           select_identity: Selecciona identidad
-        vote_button:
-          already_voted: Ya votado
         votes_count:
           count:
             one: APOYO

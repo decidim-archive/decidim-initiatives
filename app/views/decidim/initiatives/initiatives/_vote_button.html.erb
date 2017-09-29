@@ -1,6 +1,6 @@
 <% if can? :vote, initiative %>
     <%= action_authorized_button_to :vote,
-                                    label,
+                                    vote_label,
                                     initiative_initiative_vote_path(initiative_id: initiative),
                                     remote: true,
                                     data: { disable: true },
@@ -9,7 +9,7 @@
 
 <% if can? :unvote, initiative %>
     <%= action_authorized_button_to :vote,
-                                    t('.already_voted'),
+                                    unvote_label,
                                     initiative_initiative_vote_path(initiative_id: initiative),
                                     method: :delete,
                                     remote: true,

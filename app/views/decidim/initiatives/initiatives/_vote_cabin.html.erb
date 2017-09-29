@@ -13,7 +13,8 @@
       <%= render partial: 'decidim/initiatives/initiatives/vote_button',
                  locals: {
                      initiative: initiative,
-                     label: t('.vote')
+                     vote_label: t('.vote'),
+                     unvote_label: t('.already_voted')
                  } %>
   <% end %>
 

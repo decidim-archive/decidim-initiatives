@@ -115,10 +115,9 @@ en:
         vote_cabin:
           vote: Vote
           votes_blocked: Voting disabled
+          already_voted: Already voted
         signature_identities:
           select_identity: Select user identity
-        vote_button:
-          already_voted: Already voted
         votes_count:
           count:
             one: VOTE

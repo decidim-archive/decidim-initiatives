@@ -4,7 +4,8 @@
 <%= render partial: 'decidim/initiatives/initiatives/vote_button',
            locals: {
                initiative: initiative,
-               label: current_user.name
+               vote_label: current_user.name,
+               unvote_label: current_user.name
            } %>
 
 

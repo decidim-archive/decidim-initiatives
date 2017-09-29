@@ -115,10 +115,9 @@ ca:
         vote_cabin:
           vote: Donar suport
           votes_blocked: Recollida de suports desactivada
+          already_voted: Ja has votat
         signature_identities:
           select_identity: Selecciona identitat
-        vote_button:
-          already_voted: Ja has votat
         votes_count:
           count:
             one: SUPORT
