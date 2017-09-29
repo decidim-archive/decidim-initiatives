@@ -104,8 +104,8 @@ es:
             loading: Cargando resultados...
         supports_count:
           count:
-            one: "apoyo recibido"
-            other: "apoyos recibidos"
+            one: " apoyo recibido"
+            other: " apoyos recibidos"
         orders:
           label: 'Ordenar iniciativas por:'
           random: Aleatorio
@@ -141,6 +141,8 @@ es:
           send_to_technical_validation: Enviar a validación técnica
           confirm: ¿Estás seguro?
           success: La iniciativa ha sido enviada a validación técnica
+        supports:
+          title: Esta iniciativa esta apoyada por las siguientes organizaciones
       initiative_votes:
         create:
           error: Ha habido errores al votar la iniciativa.

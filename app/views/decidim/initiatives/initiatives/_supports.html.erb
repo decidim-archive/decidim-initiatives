@@ -1,0 +1,18 @@
+<% if initiative.votes.supports.any? %>
+  <div class="row">
+    <div class="columns large-12">
+      <div class="section committee">
+        <h4 class="section-heading"><%= t('.title') %></h4>
+      </div>
+    </div>
+
+    <% initiative.votes.supports.each do |s| %>
+      <article class="card card--supporter columns small-12 medium-6" style="padding-top: 15px;">
+        <div class="card__image-top" style="background-image:url(<%= s.user_group.avatar_url %>)"></div>
+        <div class="card__content">
+          <p class="text-center"><%= s.user_group.name %></p>
+        </div>
+      </article>
+    <% end %>
+  </div>
+<% end %>

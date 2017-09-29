@@ -99,10 +99,13 @@ en:
           author: Author
           scopes: Scopes
           scope_prompt: Select a scope
+        initiatives:
+          index:
+            loading: Loading results...
         supports_count:
           count:
-            one: "support"
-            other: "supports"
+            one: " support"
+            other: " supports"
         orders:
           label: 'Sort initiatives by:'
           random: Random
@@ -138,6 +141,8 @@ en:
           send_to_technical_validation: Send to technical validation
           confirm: Are you sure?
           success: The initiative has been sent to technical validation
+        supports:
+          title: This initiative has been supported by the following organizations
       initiative_votes:
         create:
           error: There's been errors when voting the initiative.

@@ -49,13 +49,14 @@
       <%= render partial: 'tags', locals: { resource: @initiative } %>
     </div>
 
+    <%= render partial: 'supports', locals: { initiative: @initiative } %>
+
     <% if @initiative.answered? && partially_translated_attribute(@initiative.answer).present? %>
       <% if @initiative.accepted? %>
         <div class="section">
           <div class="callout success">
             <h5><%= link_to t('.initiative_accepted'), @initiative.answer_url || '#' %></h5>
             <p><%= partially_translated_attribute @initiative.answer %></p>
-            <p></p>
           </div>
         </div>
       <% else %>
