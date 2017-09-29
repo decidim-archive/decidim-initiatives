@@ -1,5 +1,5 @@
 <div id="initiative-<%= @initiative.id %>-vote-cabin">
-  <% if current_user.user_groups.verified.any? %>
+  <% if current_user && current_user.user_groups.verified.any? %>
       <button id="select-identity-button"
               class="card__button button expanded button--sc">
         <%= t('.vote') %>
