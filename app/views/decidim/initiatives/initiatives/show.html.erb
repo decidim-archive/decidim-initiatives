@@ -17,28 +17,34 @@
 
 <div class="row">
   <div class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9">
-    <div class="card extra definition-data">
-      <div class="definition-data__item start-date">
-        <span class="definition-data__title"><%=t '.start_time' %></span>
-        <%= l(@initiative.signature_start_time, format: :long) %>
-      </div>
-
-      <div class="definition-data__item end-date">
-        <span class="definition-data__title"><%=t '.end_time' %></span>
-        <%= l(@initiative.signature_end_time, format: :long) %>
-      </div>
-
-      <div class="definition-data__item vote-block">
-        <% if @initiative.votes_enabled? %>
-          <%= render partial: 'votes_count', locals: { initiative: @initiative } %>
-          <%= render partial: 'vote_cabin', locals: { initiative: @initiative } %>
+    <% if @initiative.published? %>
+      <div class="card extra definition-data">
+        <% if @initiative.signature_start_time %>
+          <div class="definition-data__item start-date">
+            <span class="definition-data__title"><%=t '.start_time' %></span>
+            <%= l(@initiative.signature_start_time, format: :long) %>
+          </div>
         <% end %>
 
-        <% if current_user %>
-          <%= render partial: 'decidim/shared/follow_button', locals: { followable: @initiative } %>
+        <% if @initiative.signature_end_time %>
+          <div class="definition-data__item end-date">
+            <span class="definition-data__title"><%=t '.end_time' %></span>
+            <%= l(@initiative.signature_end_time, format: :long) %>
+          </div>
         <% end %>
+
+        <div class="definition-data__item vote-block">
+          <% if @initiative.votes_enabled? %>
+            <%= render partial: 'votes_count', locals: { initiative: @initiative } %>
+            <%= render partial: 'vote_cabin', locals: { initiative: @initiative } %>
+          <% end %>
+
+          <% if current_user %>
+            <%= render partial: 'decidim/shared/follow_button', locals: { followable: @initiative } %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <% if @initiative.published? %>
       <%= render partial: 'decidim/shared/share_modal' %>
