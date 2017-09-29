@@ -47,6 +47,11 @@ In order to populate the database with example data proceed as usual in rails:
 $ bundle exec rails db:seed
 ```
 
+## Aditional considerations
+
+This engine makes use of cookies to store large form data. You should change the 
+default session store or you might experience problems.
+
 ## Contributing
 See [Decidim](https://github.com/decidim/decidim).
 
