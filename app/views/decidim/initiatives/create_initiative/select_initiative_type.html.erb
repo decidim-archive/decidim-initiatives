@@ -15,7 +15,7 @@
               <div class="card__header">
                 <h5 class="card__title"><%= translated_attribute type.title %></h5>
               </div>
-              <p><%= simple_format translated_attribute type.description %></p>
+              <%=raw translated_attribute type.description %>
             </div>
             <div class="card__footer">
               <div class="card__support">
