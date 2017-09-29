@@ -17,24 +17,36 @@
 
 <div class="row">
   <div class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9">
-    <% if @initiative.published? %>
+    <div class="card extra definition-data">
+      <div class="definition-data__item start-date">
+        <span class="definition-data__title"><%=t '.start_time' %></span>
+        <%= l(@initiative.signature_start_time, format: :long) %>
+      </div>
+
+      <div class="definition-data__item end-date">
+        <span class="definition-data__title"><%=t '.end_time' %></span>
+        <%= l(@initiative.signature_end_time, format: :long) %>
+      </div>
+
       <% if @initiative.votes_enabled? %>
-        <div class="card extra">
-          <div class="card__content">
-            <%= render partial: 'votes_count', locals: { initiative: @initiative, from_initiatives_list: false } %>
-            <%= render partial: 'vote_button', locals: { initiative: @initiative, from_initiatives_list: false } %>
-          </div>
+        <div class="definition-data__item vote-block">
+          <%= render partial: 'votes_count', locals: { initiative: @initiative } %>
+          <%= render partial: 'vote_cabin', locals: { initiative: @initiative } %>
         </div>
       <% end %>
+    </div>
 
+    <% if @initiative.published? %>
       <%= render partial: 'decidim/shared/share_modal' %>
       <%= embed_modal_for initiative_initiative_widget_url(@initiative, format: :js) %>
     <% end %>
   </div>
+
   <div class="columns mediumlarge-8 mediumlarge-pull-4">
     <div class="section">
       <%= render partial: 'initiative_badge', locals: { initiative: @initiative } %>
       <%= simple_format partially_translated_attribute(@initiative.description) %>
+      <%= render partial: 'tags', locals: { resource: @initiative } %>
     </div>
 
     <% if @initiative.answered? && partially_translated_attribute(@initiative.answer).present? %>
@@ -54,13 +66,14 @@
         </div>
       <% end %>
     <% end %>
+
+    <%= render partial: 'promoter_committee', locals: { initiative: @initiative } %>
+    <%= render partial: 'technical_validation', locals: { initiative: @initiative } %>
   </div>
 </div>
 
-<%= render partial: 'promoter_committee', locals: { initiative: @initiative } %>
-<%= render partial: 'technical_validation', locals: { initiative: @initiative } %>
 <%= comments_for @initiative if @initiative.published? %>
-
 <%= javascript_include_tag 'decidim/initiatives/social_share' %>
+<%= stylesheet_link_tag 'decidim/initiatives/application' %>
 <%= stylesheet_link_tag 'decidim/initiatives/social_share' %>
 <%= javascript_include_tag 'decidim/initiatives/invite_users' %>

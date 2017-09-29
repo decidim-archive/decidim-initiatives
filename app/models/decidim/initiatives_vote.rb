@@ -3,27 +3,24 @@
 module Decidim
   # Initiatives can be voted by users and supported by organizations.
   class InitiativesVote < ApplicationRecord
-    belongs_to :initiative, foreign_key: "decidim_initiative_id", class_name: "Decidim::Initiative"
-    belongs_to :author, foreign_key: "decidim_author_id", class_name: "Decidim::User"
+    belongs_to :author, foreign_key: 'decidim_author_id', class_name: 'Decidim::User'
+    belongs_to :user_group, foreign_key: 'decidim_user_group_id', class_name: 'Decidim::UserGroup', optional: true
 
-    validates :initiative, uniqueness: { scope: :author }
-    validate :author_and_initiative_same_organization
+    belongs_to :initiative, foreign_key: 'decidim_initiative_id', class_name: 'Decidim::Initiative'
 
-    enum scope: %i(votes supports)
+    validates :initiative, uniqueness: { scope: %i[author user_group] }
 
-    after_commit :update_counter_cache, on: [:create, :destroy]
+    after_commit :update_counter_cache, on: %i[create destroy]
+
+    scope :supports, -> { where.not(decidim_user_group_id: nil) }
+    scope :votes, -> { where(decidim_user_group_id: nil) }
 
     private
 
-    # Private: check if the initiative and the author have the same organization
-    def author_and_initiative_same_organization
-      return if !initiative || !author
-      errors.add(:initiative, :invalid) unless author.organization == initiative.organization
-    end
-
     def update_counter_cache
       initiative.initiative_votes_count = Decidim::InitiativesVote
-                                          .where(decidim_initiative_id: initiative.id, scope: 0)
+                                          .votes
+                                          .where(decidim_initiative_id: initiative.id)
                                           .count
 
       initiative.save

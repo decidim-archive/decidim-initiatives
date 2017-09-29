@@ -11,29 +11,23 @@ module Decidim
       helper Decidim::ActionAuthorizationHelper
       include Decidim::Initiatives::ActionAuthorization
 
-      include Votable
-
       def create
         authorize! :vote, initiative
-        @from_initiatives_list = params[:from_initiatives_list] == "true"
-
-        VoteInitiative.call(initiative, current_user) do
+        VoteInitiative.call(initiative, current_user, params[:group_id]) do
           on(:ok) do
             initiative.reload
             render :update_buttons_and_counters
           end
 
           on(:invalid) do
-            render json: { error: I18n.t("initiative_votes.create.error", scope: "decidim.initiatives") }, status: 422
+            render json: { error: I18n.t('initiative_votes.create.error', scope: 'decidim.initiatives') }, status: 422
           end
         end
       end
 
       def destroy
         authorize! :unvote, initiative
-        @from_initiatives_list = params[:from_initiatives_list] == "true"
-
-        UnvoteInitiative.call(initiative, current_user) do
+        UnvoteInitiative.call(initiative, current_user, params[:group_id]) do
           on(:ok) do
             initiative.reload
             render :update_buttons_and_counters
@@ -42,6 +36,16 @@ module Decidim
       end
 
       private
+
+      def ability_context
+        {
+          current_settings: try(:current_settings),
+          feature_settings: try(:feature_settings),
+          current_organization: try(:current_organization),
+          current_feature: try(:current_feature),
+          params: try(:params)
+        }
+      end
 
       def initiative
         @initiative ||= Initiative.find(params[:initiative_id])

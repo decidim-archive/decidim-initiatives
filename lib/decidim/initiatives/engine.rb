@@ -15,9 +15,11 @@ module Decidim
         resources :initiatives, only: %i[index show] do
           member do
             get :send_to_technical_validation
+            get :signature_identities
           end
 
           resource :initiative_vote, only: %i[create destroy]
+
           resource :initiative_widget, only: :show, path: 'embed'
           resources :committee_requests, only: %i[new], shallow: true do
             collection do
@@ -41,8 +43,10 @@ module Decidim
       initializer 'decidim_initiatives.inject_abilities_to_user' do |_app|
         Decidim.configure do |config|
           config.abilities += %w[
+            Decidim::Initiatives::Abilities::NonLoggedUserAbility
             Decidim::Initiatives::Abilities::EveryoneAbility
             Decidim::Initiatives::Abilities::CurrentUserAbility
+            Decidim::Initiatives::Abilities::VoteAbility
           ]
         end
       end

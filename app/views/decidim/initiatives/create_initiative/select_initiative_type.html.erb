@@ -15,12 +15,12 @@
               <div class="card__header">
                 <h5 class="card__title"><%= translated_attribute type.title %></h5>
               </div>
-              <p><%= translated_attribute type.description %></p>
+              <p><%= simple_format translated_attribute type.description %></p>
             </div>
             <div class="card__footer">
               <div class="card__support">
                 <div class="card__support__data"></div>
-                <%= decidim_form_for(@form, url: next_wizard_path, method: :put, html: { class: "form" }) do |f| %>
+                <%= decidim_form_for(@form, url: next_wizard_path, method: :put, html: { class: 'form' }) do |f| %>
                   <%= f.hidden_field :type_id, value: type.id %>
                   <%= f.submit t('.create_initiative'), class: 'button small secondary card__button' %>
                 <% end %>

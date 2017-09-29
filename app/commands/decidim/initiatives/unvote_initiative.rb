@@ -6,11 +6,13 @@ module Decidim
     class UnvoteInitiative < Rectify::Command
       # Public: Initializes the command.
       #
-      # initiative     - A Decidim::Initiative object.
+      # initiative   - A Decidim::Initiative object.
       # current_user - The current user.
-      def initialize(initiative, current_user)
+      # group_id     - Decidim user group id
+      def initialize(initiative, current_user, group_id)
         @initiative = initiative
         @current_user = current_user
+        @decidim_user_group_id = group_id
       end
 
       # Executes the command. Broadcasts these events:
@@ -27,7 +29,13 @@ module Decidim
       private
 
       def destroy_initiative_vote
-        @initiative.votes.where(author: @current_user).destroy_all
+        @initiative
+          .votes
+          .where(
+            author: @current_user,
+            decidim_user_group_id: @decidim_user_group_id
+          )
+          .destroy_all
       end
     end
   end

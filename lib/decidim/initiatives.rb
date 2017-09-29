@@ -26,5 +26,17 @@ module Decidim
     mattr_accessor :similarity_limit do
       5
     end
+
+    # Minimum number of committee members required to pass the initiative to
+    # technical validation phase.
+    mattr_accessor :minimum_committee_members do
+      3
+    end
+
+    # Number of days available to collect supports after an initiative has been
+    # published.
+    mattr_accessor :default_signature_time_period_length do
+      120
+    end
   end
 end

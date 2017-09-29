@@ -112,10 +112,13 @@ es:
           recent: Mas reciente
           most_voted: Mas votado
           most_commented: Mas comentado
-        vote_button:
-          already_voted: Ya votado
+        vote_cabin:
           vote: Dar apoyo
           votes_blocked: Votación desactivada
+        signature_identities:
+          select_identity: Selecciona identidad
+        vote_button:
+          already_voted: Ya votado
         votes_count:
           count:
             one: APOYO
@@ -123,6 +126,8 @@ es:
         show:
           initiative_accepted: Iniciativa aceptada
           initiative_rejected: Iniciativa rechazada
+          start_time: Fecha de inicio
+          end_time: Fecha de fin
         promoter_committee:
           committee_section_title: Comisión promotora
           invite_to_committee_help: Comparte el enlace anterior para invitar a otros usuarios a la comisión promotora

@@ -109,10 +109,13 @@ ca:
           recent: Més recent
           most_voted: Més votat
           most_commented: Més comentat
-        vote_button:
-          already_voted: Ja has votat
+        vote_cabin:
           vote: Donar suport
           votes_blocked: Recollida de suports desactivada
+        signature_identities:
+          select_identity: Selecciona identitat
+        vote_button:
+          already_voted: Ja has votat
         votes_count:
           count:
             one: SUPORT
@@ -120,6 +123,8 @@ ca:
         show:
           initiative_accepted: Iniciativa acceptada
           initiative_rejected: Iniciativa rebutjada
+          start_time: Data d'inici
+          end_time: Data de fi
         promoter_committee:
           committee_section_title: Comisió promotora
           invite_to_committee_help: Comparteix el enllaç anterior per invitar a altres usuaris a la comisió promotora

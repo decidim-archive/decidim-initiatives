@@ -11,16 +11,18 @@ module Decidim
       helper Decidim::OrdersHelper
       helper Decidim::ActionAuthorizationHelper
       helper Decidim::PartialTranslationsHelper
+      helper Decidim::ResourceHelper
 
       include Decidim::Initiatives::ActionAuthorization
       include FilterResource
       include Paginable
       include Orderable
       include TypeSelectorOptions
-      include Votable
       include Decidim::Initiatives::Scopeable
 
-      helper_method :collection, :initiatives, :filter
+      helper_method :collection, :initiatives, :filter, :initiative
+
+      skip_authorization_check only: :signature_identities
 
       # GET /initiatives
       def index
@@ -42,6 +44,14 @@ module Decidim
             ]
           )
         }
+      end
+
+      def signature_identities
+        @voted_groups = InitiativesVote
+                          .supports
+                          .where(initiative: initiative, author: current_user)
+                          .pluck(:decidim_user_group_id)
+        render layout: false
       end
 
       private

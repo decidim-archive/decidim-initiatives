@@ -1,0 +1,27 @@
+<div id="initiative-<%= @initiative.id %>-vote-cabin">
+  <% if current_user.user_groups.verified.any? %>
+      <button id="select-identity-button"
+              class="card__button button expanded button--sc">
+        <%= t('.vote') %>
+      </button>
+
+      <div class="reveal"
+           id="user-identities"
+           data-reveal data-refresh-url="<%= signature_identities_initiative_url(initiative) %>">
+      </div>
+  <% else %>
+      <%= render partial: 'decidim/initiatives/initiatives/vote_button',
+                 locals: {
+                     initiative: initiative,
+                     label: t('.vote')
+                 } %>
+  <% end %>
+
+  <% if cannot?(:vote, initiative) && cannot?(:unvote, initiative) %>
+      <button class='card__button button expanded button--sc disabled' disabled>
+        <%= t('.votes_blocked') %>
+      </button>
+  <% end %>
+</div>
+
+<%= javascript_include_tag 'decidim/initiatives/identity_selector_dialog' %>

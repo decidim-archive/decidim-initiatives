@@ -11,11 +11,12 @@
       </div>
       <%= render partial: 'decidim/initiatives/initiatives/initiative_badge', locals: { initiative: initiative } %>
       <%= simple_format Truncato.truncate(partially_translated_attribute(initiative.description), max_length: 100, separator: '...') %>
+      <%= render partial: 'decidim/initiatives/initiatives/tags', locals: { resource: initiative } %>
     </div>
 
     <div class="card__footer">
       <div class="card__support">
-        <% if initiative.started? %>
+        <% if initiative.published? %>
           <%= render partial: 'decidim/initiatives/initiatives/supports_count', locals: { initiative: initiative } %>
         <% else %>
           <div class="card__support__data"></div>

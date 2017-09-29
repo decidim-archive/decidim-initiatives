@@ -65,10 +65,6 @@ module Decidim
       author.avatar&.url || ActionController::Base.helpers.asset_path('decidim/default-avatar.svg')
     end
 
-    def started?
-      published? && signature_start_time <= Date.today
-    end
-
     def votes_enabled?
       published? &&
         signature_start_time <= Date.today &&
@@ -87,7 +83,12 @@ module Decidim
     #
     # Returns true if the record was properly saved, false otherwise.
     def publish!
-      update_attributes(published_at: Time.current, state: 'published')
+      update_attributes(
+        published_at: Time.current,
+        state: 'published',
+        signature_start_time: DateTime.now,
+        signature_end_time: DateTime.now + Decidim::Initiatives.default_signature_time_period_length
+      )
     end
 
     #

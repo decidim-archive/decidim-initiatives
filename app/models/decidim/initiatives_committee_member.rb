@@ -15,5 +15,7 @@ module Decidim
 
     validates :state, presence: true
     validates :user, uniqueness: { scope: :initiative }
+
+    scope :approved, -> { where(state: :accepted) }
   end
 end

@@ -109,10 +109,13 @@ en:
           recent: Most recent
           most_voted: Most voted
           most_commented: Most commented
-        vote_button:
-          already_voted: Already voted
+        vote_cabin:
           vote: Vote
           votes_blocked: Voting disabled
+        signature_identities:
+          select_identity: Select user identity
+        vote_button:
+          already_voted: Already voted
         votes_count:
           count:
             one: VOTE
@@ -120,6 +123,8 @@ en:
         show:
           initiative_accepted: Initiative accepted
           initiative_rejected: Initiative rejected
+          start_time: Start time
+          end_time: End time
         promoter_committee:
           committee_section_title: Promoter committee
           invite_to_committee_help: Share the previous link to invite other users to the promotion committee
