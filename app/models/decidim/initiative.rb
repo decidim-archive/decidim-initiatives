@@ -7,6 +7,7 @@ module Decidim
     include Decidim::Publicable
     include Decidim::Scopable
     include Decidim::Comments::Commentable
+    include Decidim::Followable
 
     belongs_to :organization,
                foreign_key: 'decidim_organization_id',

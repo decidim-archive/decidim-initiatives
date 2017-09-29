@@ -28,12 +28,16 @@
         <%= l(@initiative.signature_end_time, format: :long) %>
       </div>
 
-      <% if @initiative.votes_enabled? %>
-        <div class="definition-data__item vote-block">
+      <div class="definition-data__item vote-block">
+        <% if @initiative.votes_enabled? %>
           <%= render partial: 'votes_count', locals: { initiative: @initiative } %>
           <%= render partial: 'vote_cabin', locals: { initiative: @initiative } %>
-        </div>
-      <% end %>
+        <% end %>
+
+        <% if current_user %>
+          <%= render partial: 'decidim/shared/follow_button', locals: { followable: @initiative } %>
+        <% end %>
+      </div>
     </div>
 
     <% if @initiative.published? %>
