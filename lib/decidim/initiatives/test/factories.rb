@@ -1,101 +1,37 @@
 # frozen_string_literal: true
 
+require 'decidim/faker/localized'
+require 'decidim/dev'
+
 FactoryGirl.define do
-  # factory :proposal_feature, parent: :feature do
-  #   name { Decidim::Features::Namer.new(participatory_space.organization.available_locales, :proposals).i18n_name }
-  #   manifest_name :proposals
-  #   participatory_space { create(:participatory_process, :with_steps, organization: organization) }
-  #
-  #   trait :with_votes_enabled do
-  #     step_settings do
-  #       {
-  #         participatory_space.active_step.id => { votes_enabled: true }
-  #       }
-  #     end
-  #   end
-  #
-  #   trait :with_votes_disabled do
-  #     step_settings do
-  #       {
-  #         participatory_space.active_step.id => { votes_enabled: false }
-  #       }
-  #     end
-  #   end
-  #
-  #   trait :with_vote_limit do
-  #     transient do
-  #       vote_limit 10
-  #     end
-  #
-  #     settings do
-  #       {
-  #         vote_limit: vote_limit
-  #       }
-  #     end
-  #   end
-  #
-  #   trait :with_votes_blocked do
-  #     step_settings do
-  #       {
-  #         participatory_space.active_step.id => {
-  #           votes_enabled: true,
-  #           votes_blocked: true
-  #         }
-  #       }
-  #     end
-  #   end
-  #
-  #   trait :with_creation_enabled do
-  #     step_settings do
-  #       {
-  #         participatory_space.active_step.id => { creation_enabled: true }
-  #       }
-  #     end
-  #   end
-  #
-  #   trait :with_geocoding_enabled do
-  #     settings do
-  #       {
-  #         geocoding_enabled: true
-  #       }
-  #     end
-  #   end
-  #
-  #   trait :with_attachments_allowed do
-  #     settings do
-  #       {
-  #         attachments_allowed: true
-  #       }
-  #     end
-  #   end
-  # end
-  #
-  # factory :proposal, class: Decidim::Proposals::Proposal do
-  #   title { Faker::Lorem.sentence }
-  #   body { Faker::Lorem.sentences(3).join("\n") }
-  #   feature { create(:proposal_feature) }
-  #   author do
-  #     create(:user, organization: feature.organization) if feature
-  #   end
-  #
-  #   trait :official do
-  #     author nil
-  #   end
-  #
-  #   trait :accepted do
-  #     state "accepted"
-  #     answered_at { Time.current }
-  #   end
-  #
-  #   trait :rejected do
-  #     state "rejected"
-  #     answer { Decidim::Faker::Localized.sentence }
-  #     answered_at { Time.current }
-  #   end
-  # end
-  #
-  # factory :proposal_vote, class: Decidim::Proposals::ProposalVote do
-  #   proposal { build(:proposal) }
-  #   author { build(:user, organization: proposal.organization) }
-  # end
+  factory :initiatives_type, class: Decidim::InitiativesType do
+    title { Decidim::Faker::Localized.sentence(3) }
+    description { Decidim::Faker::Localized.wrapped('<p>', '</p>') { Decidim::Faker::Localized.sentence(4) } }
+    supports_required 1000
+    organization
+  end
+
+  factory :initiative, class: Decidim::Initiative do
+    title { Decidim::Faker::Localized.sentence(3) }
+    description { Decidim::Faker::Localized.wrapped('<p>', '</p>') { Decidim::Faker::Localized.sentence(4) } }
+    organization
+    author { create(:user, organization: organization) }
+    published_at { Time.current }
+    type { create(:initiatives_type, organization: organization) }
+    state 'published'
+    signature_type 'online'
+    signature_start_time { Time.current }
+    signature_end_time { Time.current + 120.days}
+  end
+
+  factory :initiative_user_vote, class: Decidim::InitiativesVote do
+    initiative { create(:initiative) }
+    author { create(:user, organization: initiative.organization) }
+  end
+
+  factory :initiatives_committee_member, class: Decidim::InitiativesCommitteeMember do
+    initiative { create(:initiative) }
+    user { create(:user, organization: initiative.organization) }
+    state 'accepted'
+  end
 end

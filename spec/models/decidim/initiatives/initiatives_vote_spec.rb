@@ -1,7 +1,15 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-module Decidim::Initiatives
-  RSpec.describe InitiativesVote, type: :model do
-    pending "add some examples to (or delete) #{__FILE__}"
+module Decidim
+  module Initiatives
+    describe InitiativesVote do
+      let(:vote) { build(:initiative_user_vote) }
+
+      it 'is valid' do
+        expect(vote).to be_valid
+      end
+    end
   end
 end

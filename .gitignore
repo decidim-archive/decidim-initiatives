@@ -44,3 +44,5 @@ bower.json
 .byebug_history
 
 .idea
+.rbenv-gemsets
+**/spec/*_dummy_app

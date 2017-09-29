@@ -43,7 +43,7 @@ module Decidim
 
     validates :title, :description, :state, presence: true
     validates :signature_type, presence: true
-    validates :signature_end_time, date: { after: :signature_start_time }, if: :signature_interval_defined?
+    validates :signature_end_time, date: { after: :signature_start_time }, if: :has_signature_interval_defined?
 
     mount_uploader :banner_image, Decidim::BannerImageUploader
 
@@ -84,6 +84,7 @@ module Decidim
     #
     # Returns true if the record was properly saved, false otherwise.
     def publish!
+      return false if published?
       update_attributes(
         published_at: Time.current,
         state: 'published',
@@ -97,10 +98,11 @@ module Decidim
     #
     # Returns true if the record was properly saved, false otherwise.
     def unpublish!
+      return false unless published?
       update_attributes(published_at: nil, state: 'validated')
     end
 
-    def signature_interval_defined?
+    def has_signature_interval_defined?
       signature_end_time.present? && signature_start_time.present?
     end
   end
