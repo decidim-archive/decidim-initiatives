@@ -573,6 +573,7 @@ DEPENDENCIES
   decidim-dev
   decidim-initiatives!
   rails (~> 5.1)
+  ruby-progressbar (~> 1.7)
 
 RUBY VERSION
    ruby 2.4.1p111
