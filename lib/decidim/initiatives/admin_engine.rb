@@ -33,13 +33,6 @@ module Decidim
 
       initializer 'decidim_assemblies.admin_menu' do
         Decidim.menu :admin_menu do |menu|
-          menu.item I18n.t('menu.initiatives_types', scope: 'decidim.admin'),
-                    decidim_admin_initiatives.initiatives_types_path,
-                    icon_name: 'dial',
-                    position: 3.6,
-                    active: :inclusive,
-                    if: can?(:manage, Decidim::InitiativesType)
-
           menu.item I18n.t('menu.initiatives', scope: 'decidim.admin'),
                     decidim_admin_initiatives.initiatives_path,
                     icon_name: 'dashboard',
