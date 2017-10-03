@@ -172,6 +172,6 @@ ca:
     decidim:
       initiatives:
         initiative:
-          more_info: Més informació
+          check_and_support: Vore i firmar
         no_initiatives_yet:
           no_initiatives_yet: Encara no hi ha cap iniciativa!
