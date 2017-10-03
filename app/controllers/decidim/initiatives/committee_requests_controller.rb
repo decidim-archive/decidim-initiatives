@@ -37,13 +37,14 @@ module Decidim
       def approve
         authorize! :manage_membership, initiatives_committee_member
         initiatives_committee_member.accepted!
-        redirect_to request.referer
+
+        redirect_to initiative_path(initiatives_committee_member.initiative.to_param)
       end
 
       def revoke
         authorize! :manage_membership, initiatives_committee_member
         initiatives_committee_member.rejected!
-        redirect_to request.referer
+        redirect_to initiative_path(initiatives_committee_member.initiative.to_param)
       end
 
       private

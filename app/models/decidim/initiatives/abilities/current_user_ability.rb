@@ -40,7 +40,9 @@ module Decidim
 
         def define_membership_management_abilities
           can :request_membership, Initiative do |initiative|
-            !initiative.published? && initiative.decidim_author_id != user.id
+            !initiative.published? &&
+              initiative.decidim_author_id != user.id &&
+              (user.authorizations.any? || user.user_groups.verified.any?)
           end
 
           can :manage_membership, InitiativesCommitteeMember do |request|

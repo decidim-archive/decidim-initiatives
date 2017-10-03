@@ -10,9 +10,6 @@ module Decidim
           super(user, context)
 
           can :read, Initiative, &:published?
-          can :request_membership, Initiative do |initiative|
-            !initiative.published?
-          end
         end
       end
     end
