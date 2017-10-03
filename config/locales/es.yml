@@ -66,13 +66,8 @@ es:
           form:
             title: Información general
       states:
-        created: Creada
-        validating: Validación técnica
-        validated: Validada
-        published: Publicada
-        discarded: Descartada
-        rejected: Rechazada
-        accepted: Aceptada
+        open: Abierta
+        closed: Cerrada
       index:
         title: Iniciativas
       initiatives:
@@ -99,6 +94,7 @@ es:
           author: Autor
           scopes: Ámbitos
           scope_prompt: Seleccione un ámbito
+          type_prompt: Seleccione un tipo
         initiatives:
           index:
             loading: Cargando resultados...

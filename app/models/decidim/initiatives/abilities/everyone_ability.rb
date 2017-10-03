@@ -10,6 +10,7 @@ module Decidim
           super(user, context)
 
           can :read, Initiative, &:published?
+          can :search, InitiativesType
         end
       end
     end

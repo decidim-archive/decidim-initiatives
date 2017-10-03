@@ -66,13 +66,8 @@ en:
           form:
             title: Informació general
       states:
-        created: Created
-        validating: Technical validation
-        validated: Validada
-        published: Publicada
-        discarded: Descartada
-        rejected: Rejected
-        accepted: Accepted
+        open: Open
+        closed: Closed
       index:
         title: Initiatives
       initiatives:
@@ -99,6 +94,7 @@ en:
           author: Author
           scopes: Scopes
           scope_prompt: Select a scope
+          type_prompt: Select a type
         initiatives:
           index:
             loading: Loading results...

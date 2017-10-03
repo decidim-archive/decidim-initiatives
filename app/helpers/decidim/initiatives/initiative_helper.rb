@@ -7,18 +7,12 @@ module Decidim
       # Public: The css class applied based on the initiative state to
       #         the initiative badge.
       #
-      # state - The String state of the proposal.
+      # initiative - Decidim::Initiative
       #
       # Returns a String.
-      def state_badge_css_class(state)
-        case state
-        when 'created', 'validated', 'publishing', 'published', 'accepted'
-          'success'
-        when 'discarded', 'rejected'
-          'warning'
-        when 'validating'
-          'secondary'
-        end
+      def state_badge_css_class(initiative)
+        return 'warning' if initiative.closed?
+        'success'
       end
 
       # Public: The state of a initiative in a way a human can understand.
@@ -26,8 +20,8 @@ module Decidim
       # state - The String state of the initiative.
       #
       # Returns a String.
-      def humanize_state(state)
-        I18n.t(state, scope: 'decidim.initiatives.states', default: :created)
+      def humanize_state(initiative)
+        I18n.t(initiative.closed? ? 'closed': 'open', scope: 'decidim.initiatives.states', default: :open)
       end
     end
   end

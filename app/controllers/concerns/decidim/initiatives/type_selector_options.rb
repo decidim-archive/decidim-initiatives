@@ -10,14 +10,18 @@ module Decidim
       include Decidim::TranslationsHelper
 
       included do
-        helper_method :initiative_types_for_select, :initiative_types_each
+        helper_method :available_initiative_types, :initiative_types_for_select, :initiative_types_each
 
         private
+
+        def available_initiative_types
+          Decidim::Initiatives::InitiativeTypes.for(current_organization)
+        end
 
         def initiative_types_for_select
           types = [['all', I18n.t('initiatives.filters.all', scope: 'decidim.initiatives')]]
 
-          Decidim::Initiatives::InitiativeTypes.for(current_organization).each do |type|
+          available_initiative_types.each do |type|
             types << [type.id, Truncato.truncate(translated_attribute(type.title), max_length: 25)]
           end
 
@@ -25,7 +29,7 @@ module Decidim
         end
 
         def initiative_types_each
-          Decidim::Initiatives::InitiativeTypes.for(current_organization).each do |type|
+          available_initiative_types.each do |type|
             yield(type)
           end
         end

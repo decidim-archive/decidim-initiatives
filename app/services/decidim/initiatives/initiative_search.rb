@@ -37,7 +37,7 @@ module Decidim
         when 'closed'
           query.closed
         else # Assume 'all'
-          query
+          query.published
         end
       end
 
@@ -51,7 +51,7 @@ module Decidim
         if author == 'myself' && options[:current_user]
           query.where(decidim_author_id: options[:current_user].id)
         else
-          query.published
+          query
         end
       end
 

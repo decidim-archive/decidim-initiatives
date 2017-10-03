@@ -11,6 +11,8 @@ module Decidim
       isolate_namespace Decidim::Initiatives
 
       routes do
+        get '/initiative_types/search', to: 'initiative_types#search', as: :initiative_types_search
+
         resources :create_initiative
         resources :initiatives, only: %i[index show] do
           member do

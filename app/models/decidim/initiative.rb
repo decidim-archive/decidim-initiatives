@@ -47,8 +47,16 @@ module Decidim
 
     mount_uploader :banner_image, Decidim::BannerImageUploader
 
-    scope :open, -> { where.not(state: %i[discarded rejected accepted]) }
-    scope :closed, -> { where(state: %i[discarded rejected accepted]) }
+    scope :open, -> {
+      published
+        .where.not(state: %i[discarded rejected accepted])
+        .where('signature_start_time <= ?', DateTime.now)
+        .where('signature_end_time >= ?', DateTime.now)
+    }
+    scope :closed, -> {
+      published
+        .where(state: %i[discarded rejected accepted])
+    }
     scope :published, -> { where.not(published_at: nil) }
 
     def self.order_randomly(seed)
@@ -56,6 +64,14 @@ module Decidim
         connection.execute("SELECT setseed(#{connection.quote(seed)})")
         order('RANDOM()').load
       end
+    end
+
+    def open?
+      !closed?
+    end
+
+    def closed?
+      discarded? || rejected? || accepted? || !votes_enabled?
     end
 
     def author_name

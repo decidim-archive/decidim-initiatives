@@ -61,7 +61,7 @@ module Decidim
       end
 
       def initiatives
-        @initiatives = search.results.includes(:author)
+        @initiatives = search.results.includes(:author, :type)
         @initiatives = paginate(@initiatives)
         @initiatives = reorder(@initiatives)
       end

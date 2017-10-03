@@ -66,13 +66,8 @@ ca:
           form:
             title: Informació general
       states:
-        created: Creada
-        validating: Validació tècnica
-        validated: Validada
-        published: Publicada
-        discarded: Descartada
-        rejected: Rebutjada
-        accepted: Acceptada
+        open: Oberta
+        closed: Tancada
       index:
         title: Iniciatives
       initiatives:
@@ -99,6 +94,7 @@ ca:
           author: Autor
           scopes: Àmbits
           scope_prompt: Seleccioneu un àmbit
+          type_prompt: Seleccioneu un tipus
         initiatives:
           index:
             loading: Carregant els resultats
