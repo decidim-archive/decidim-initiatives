@@ -7,13 +7,20 @@ module Decidim
     module Admin
       # Controller used to manage the initiatives
       class InitiativesController < ApplicationController
-        helper_method :current_initiative
+        helper_method :current_initiative, :initiative_type_options
+
+        include Decidim::Initiatives::Scopeable
 
         helper Decidim::Initiatives::InitiativeHelper
+        helper Decidim::Initiatives::CreateInitiativeHelper
+        helper Decidim::PartialTranslationsHelper
 
         def index
           authorize! :index, Decidim::Initiative
-          @initiatives = ActionPendingInitiatives.for(current_organization)
+          @initiatives = ActionPendingInitiatives
+                           .for(current_organization, current_user)
+                           .page(params[:page])
+                           .per(15)
         end
 
         def edit
@@ -24,6 +31,17 @@ module Decidim
 
         def update
           authorize! :update, current_initiative
+
+          @form = form(Decidim::Initiatives::Admin::InitiativeForm).from_params(params)
+          UpdateInitiative.call(current_initiative, @form) do
+            on(:ok) do |initiative|
+              render :edit
+            end
+
+            on(:invalid) do |initiative|
+              render :edit
+            end
+          end
         end
 
         def validate
@@ -48,6 +66,12 @@ module Decidim
 
         def current_initiative
           @initiative ||= Initiative.find(params[:id])
+        end
+
+        def initiative_type_options
+          InitiativesType.where(organization: current_organization).map do |type|
+            [type.title[I18n.locale.to_s], type.id]
+          end
         end
       end
     end

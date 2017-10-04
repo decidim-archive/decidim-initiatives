@@ -68,7 +68,7 @@ module Decidim
 
         CreateInitiative.call(@form, current_user) do
           on(:ok) do |initiative|
-            redirect_to initiative_path(initiative)
+            redirect_to decidim_admin_initiatives.edit_initiative_path(initiative)
           end
 
           on(:invalid) do |initiative|

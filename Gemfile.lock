@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     decidim-initiatives (0.0.17)
+      decidim-admin
       decidim-comments
       decidim-core (>= 0.6.0, <= 0.8.0)
       kaminari (~> 1.0.1)
@@ -571,7 +572,6 @@ PLATFORMS
 DEPENDENCIES
   byebug
   decidim (>= 0.6.0, <= 0.8.0)
-  decidim-admin
   decidim-dev
   decidim-initiatives!
   rails (~> 5.1)

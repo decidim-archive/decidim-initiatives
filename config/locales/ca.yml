@@ -57,6 +57,8 @@ ca:
           destroy:
             success: S'ha eliminat el tipus de iniciativa.
         initiatives:
+          index:
+            actions_title: Acció
           edit:
             update: Actualitzar
             validate: Validar la iniciativa
@@ -68,6 +70,14 @@ ca:
       states:
         open: Oberta
         closed: Tancada
+      admin_states:
+        created: Creada
+        validating: En validació tècnica
+        validated: Validada
+        discarded: Descartada
+        published: Publicada
+        rejected: Rebutjada
+        accepted: Acceptada
       index:
         title: Iniciatives
       initiatives:

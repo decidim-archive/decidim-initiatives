@@ -11,8 +11,14 @@ module Decidim
 
         translatable_attribute :title, String
         translatable_attribute :description, String
+        attribute :type_id, Integer
+        attribute :decidim_scope_id, Integer
+        attribute :signature_type, String
 
-        validates :title, :description, translatable_presence: true
+        validates :title, :description, presence: true
+        validates :signature_type, presence: true
+        validates :type_id, presence: true
+        validates :decidim_scope_id, presence: true, if: ->(form) { form.decidim_scope_id.present? }
       end
     end
   end

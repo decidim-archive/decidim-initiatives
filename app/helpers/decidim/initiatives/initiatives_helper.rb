@@ -49,7 +49,8 @@ module Decidim
       def creation_enabled?
         return Decidim::Initiatives.creation_enabled unless current_user
 
-        Decidim::Initiatives.creation_enabled && current_user.authorizations.any?
+        Decidim::Initiatives.creation_enabled &&
+          (current_user.authorizations.any? || current_user.user_groups.verified.any?)
       end
 
       def initiatives_filter_form_for(filter)

@@ -15,13 +15,23 @@ module Decidim
         'success'
       end
 
-      # Public: The state of a initiative in a way a human can understand.
+      # Public: The state of an initiative in a way a human can understand.
       #
-      # state - The String state of the initiative.
+      # initiative - Decidim::Initiative.
       #
       # Returns a String.
       def humanize_state(initiative)
         I18n.t(initiative.closed? ? 'closed': 'open', scope: 'decidim.initiatives.states', default: :open)
+      end
+
+      # Public: The state of an initiative from an administration perspective in
+      # a way that a human can understand.
+      #
+      # state - String
+      #
+      # Returns a String
+      def humanize_admin_state(state)
+        I18n.t(state, scope: 'decidim.initiatives.admin_states', default: :created)
       end
     end
   end

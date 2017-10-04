@@ -26,7 +26,7 @@ module Decidim
       initializer 'decidim_assemblies.inject_abilities_to_user' do |_app|
         Decidim.configure do |config|
           config.admin_abilities += %w[
-            Decidim::Initiatives::Abilities::Admin::AdminAbility
+            Decidim::Initiatives::Abilities::Admin::InitiativeAdminAbility
           ]
         end
       end
@@ -38,7 +38,7 @@ module Decidim
                     icon_name: 'dashboard',
                     position: 3.7,
                     active: :inclusive,
-                    if: can?(:manage, Decidim::Initiative)
+                    if: can?(:index, Decidim::Initiative)
         end
       end
     end

@@ -21,6 +21,10 @@ module Decidim
             initiative.published? || initiative.decidim_author_id == user.id
           end
 
+          can :read, :admin_dashboard do
+            Initiative.where(author: user).any?
+          end
+
           define_membership_management_abilities
 
           can :send_to_technical_validation, Initiative do |initiative|

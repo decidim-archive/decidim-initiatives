@@ -12,6 +12,7 @@
             <th><%= t('models.initiatives.fields.title', scope: 'decidim.admin') %></th>
             <th><%= t('models.initiatives.fields.state', scope: 'decidim.admin') %></th>
             <th><%= t('models.initiatives.fields.created_at', scope: 'decidim.admin') %></th>
+            <th class="actions"><%=t '.actions_title' %></th>
           </tr>
         </thead>
         <tbody>
@@ -19,17 +20,26 @@
           <tr>
             <td>
               <% if can? :edit, initiative %>
-                <%= link_to translated_attribute(initiative.title),
-                            decidim_admin_initiatives.edit_initiative_path(initiative) %>
+                <%= link_to partially_translated_attribute(initiative.title),
+                            decidim_admin_initiatives.edit_initiative_path(initiative.to_param) %>
               <% else %>
-                <%= translated_attribute(initiative.title) %>
+                <%= partially_translated_attribute(initiative.title) %>
               <% end %>
             </td>
-            <td><%= humanize_state initiative.state %></td>
+            <td><%= humanize_admin_state initiative.state %></td>
             <td><%=l initiative.created_at, format: :short %></td>
+            <td class="table-list__actions">
+              <% if can? :edit, initiative %>
+                <%= icon_link_to 'pencil',
+                                 decidim_admin_initiatives.edit_initiative_path(initiative.to_param),
+                                 t('actions.configure', scope: 'decidim.admin'),
+                                 class: 'action-icon--new' %>
+              <% end %>
+            </td>
           <% end %>
         </tbody>
       </table>
+      <%= paginate @initiatives, theme: 'decidim' %>
     </div>
   </div>
 </div>

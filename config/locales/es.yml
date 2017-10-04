@@ -57,6 +57,8 @@ es:
           destroy:
             success: Se ha borrado el tipo de iniciativa.
         initiatives:
+          index:
+            actions_title: Acción
           edit:
             update: Actualizar
             validate: Validar la iniciativa
@@ -68,6 +70,14 @@ es:
       states:
         open: Abierta
         closed: Cerrada
+      admin_states:
+        created: Creada
+        validating: En validación técnica
+        validated: Validada
+        discarded: Descartada
+        published: Publicada
+        rejected: Rechazada
+        accepted: Aceptada
       index:
         title: Iniciativas
       initiatives:

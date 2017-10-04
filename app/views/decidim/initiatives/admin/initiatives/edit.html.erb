@@ -1,27 +1,6 @@
 <%= decidim_form_for @form, html: { class: 'form edit_initiative' } do |f| %>
   <%= render partial: 'form', object: f %>
   <div class="button--double form-general-submit">
-    <%= f.submit t('.update'), class: "button"  %>
-
-    <% if can? :technically_validate, current_initiative %>
-      <%= link_to t('.validate'),
-                  decidim_admin_initiatives.validate_initiative_path(current_initiative),
-                  class: 'alert button',
-                  data: { confirm: t('.confirm') } %>
-
-      <%= link_to t('.discard'),
-                  decidim_admin_initiatives.discard_initiative_path(current_initiative),
-                  class: 'alert button',
-                  data: { confirm: t('.confirm') } %>
-
-      <%= link_to t('.request_changes'),
-                  decidim_admin_initiatives.request_changes_initiative_path(current_initiative),
-                  class: 'alert button',
-                  data: { confirm: t('.confirm') } %>
-    <% end %>
-
-    <%# if can? :destroy, current_initiative %>
-      <%# = link_to t('.destroy'), current_initiative_type, method: :delete, class: "alert button", data: { confirm: t('.confirm_destroy') } %>
-    <%# end %>
+    <%= f.submit t('.update'), class: 'button' if can? :update, current_initiative %>
   </div>
 <% end %>

@@ -9,7 +9,23 @@
     </div>
 
     <div class="row column">
-      <%= form.translated :text_area, :description, rows: 8 %>
+      <%= form.translated :editor, :description, toolbar: :full, lines: 8 %>
     </div>
+
+    <div class="row column">
+      <%= form.select :type_id, initiative_type_options %>
+    </div>
+
+    <div class="row column">
+      <%= form.select :signature_type, signature_type_options %>
+    </div>
+
+    <% if has_scopes? %>
+      <div class="row column">
+        <%= form.select :decidim_scope_id,
+                     scopes.map { |s| [translated_attribute(s.name),s.id]},
+                     prompt: t('decidim.scopes.global') %>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -57,6 +57,8 @@ en:
           destroy:
             success: The initiative type has been successfully removed.
         initiatives:
+          index:
+            actions_title: Action
           edit:
             update: Update
             validate: Validate the initiative
@@ -68,6 +70,14 @@ en:
       states:
         open: Open
         closed: Closed
+      admin_states:
+        created: Created
+        validating: Technical validation
+        validated: Validated
+        discarded: Discarded
+        published: Published
+        rejected: Rejected
+        accepted: Accepted
       index:
         title: Initiatives
       initiatives:

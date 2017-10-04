@@ -5,25 +5,31 @@ module Decidim
     module Admin
       # Class uses to initiatives waiting for administrator action
       class ActionPendingInitiatives < Rectify::Query
+        attr_reader :organization, :user
+
         # Syntactic sugar to initialize the class and return the queried objects
         #
         # organization - Decidim::Organization
-        def self.for(organization)
-          new(organization).query
+        # user         - Decidim::User
+        def self.for(organization, user)
+          new(organization, user).query
         end
 
         # Initializes the class.
         #
         # organization - Decidim::Organization
-        def initialize(organization)
+        def initialize(organization, user)
           @organization = organization
+          @user = user
         end
 
-        # Retrieves similar initiatives
+        # Retrieves all initiatives / Initiatives created by the user.
         def query
-          Initiative
-            .where(organization: @organization)
-            .where(state: %i[validating accepted])
+          if user.admin?
+            Initiative.where(organization: organization)
+          else
+            Initiative.where(author: user)
+          end
         end
       end
     end
