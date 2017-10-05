@@ -34,19 +34,6 @@ module Decidim
         end
       end
 
-      def approve
-        authorize! :manage_membership, initiatives_committee_member
-        initiatives_committee_member.accepted!
-
-        redirect_to initiative_path(initiatives_committee_member.initiative.to_param)
-      end
-
-      def revoke
-        authorize! :manage_membership, initiatives_committee_member
-        initiatives_committee_member.rejected!
-        redirect_to initiative_path(initiatives_committee_member.initiative.to_param)
-      end
-
       private
 
       def initiatives_committee_member

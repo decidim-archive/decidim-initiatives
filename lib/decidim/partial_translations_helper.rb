@@ -10,8 +10,15 @@ module Decidim
     # Returns a String with the translation.
     def partially_translated_attribute(attribute)
       return '' if attribute.blank?
-      first_available_locale = attribute.keys.first
-      attribute.try(:[], I18n.locale.to_s) || attribute.try(:[], first_available_locale)
+
+      value = attribute.try(:[], I18n.locale.to_s)
+      return value unless value.blank?
+
+      attribute.each do |_, value|
+        return value unless value.blank?
+      end
+
+      ''
     end
   end
 end

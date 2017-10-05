@@ -38,5 +38,10 @@ module Decidim
     mattr_accessor :default_signature_time_period_length do
       120
     end
+
+    # Features enabled for a new initiative
+    mattr_accessor :default_features do
+      %i[pages results meetings surveys]
+    end
   end
 end

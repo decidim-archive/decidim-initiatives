@@ -27,10 +27,15 @@ module Decidim
             collection do
               get :spawn
             end
+          end
+        end
 
-            member do
-              get :approve
-              delete :revoke
+        scope '/initiatives/:initiative_id/f/:feature_id' do
+          Decidim.feature_manifests.each do |manifest|
+            next unless manifest.engine
+
+            constraints CurrentFeature.new(manifest) do
+              mount manifest.engine, at: '/', as: "decidim_initiative_#{manifest.name}"
             end
           end
         end

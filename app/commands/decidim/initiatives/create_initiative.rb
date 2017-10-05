@@ -38,7 +38,19 @@ module Decidim
         initiative = build_initiative
         return initiative unless initiative.valid?
 
-        initiative.save
+        initiative.transaction do
+          initiative.save!
+
+          Decidim::Initiatives.default_features.each do |feature|
+            Decidim::Feature.create!(
+              name: Decidim::Features::Namer.new(initiative.organization.available_locales, feature).i18n_name,
+              manifest_name: feature,
+              published_at: Time.current,
+              participatory_space: initiative
+            )
+          end
+        end
+
         initiative
       end
 

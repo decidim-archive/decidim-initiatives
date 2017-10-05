@@ -4,10 +4,12 @@ module Decidim
   # The data store for a Initiative in the Decidim::Initiatives component.
   class Initiative < ApplicationRecord
     include Decidim::Authorable
+    include Decidim::Participable
     include Decidim::Publicable
     include Decidim::Scopable
     include Decidim::Comments::Commentable
     include Decidim::Followable
+    include Decidim::HasAttachments
 
     belongs_to :organization,
                foreign_key: 'decidim_organization_id',
@@ -30,6 +32,10 @@ module Decidim
              foreign_key: 'decidim_initiatives_id',
              class_name: 'Decidim::InitiativesCommitteeMember'
 
+    has_many :features, as: :participatory_space
+
+    # This relationship exists only by compatibility reasons.
+    # Initiatives are not intended to have categories.
     has_many :categories,
              foreign_key: 'decidim_participatory_space_id',
              foreign_type: 'decidim_participatory_space_type',
@@ -93,6 +99,13 @@ module Decidim
     # Returns Boolean.
     def answered?
       answered_at.present?
+    end
+
+    # Public: Overrides scopes enabled flag available in other models like
+    # participatory space or assemblies. For initatives it won't be directly
+    # managed by the user and it will be enabled by default.
+    def scopes_enabled
+      true
     end
 
     #

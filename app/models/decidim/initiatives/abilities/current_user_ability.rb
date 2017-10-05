@@ -48,10 +48,6 @@ module Decidim
               initiative.decidim_author_id != user.id &&
               (user.authorizations.any? || user.user_groups.verified.any?)
           end
-
-          can :manage_membership, InitiativesCommitteeMember do |request|
-            request.initiative.decidim_author_id == user.id
-          end
         end
       end
     end

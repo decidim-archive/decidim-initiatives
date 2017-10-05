@@ -67,6 +67,14 @@ ca:
             confirm: ¿Estas segur?
           form:
             title: Informació general
+        committee_requests:
+          index:
+            title: Membres del comité
+            invite_to_committee_help: Comparteix aquest enllaç per invitar a altres usuaris a la comisió promotora
+            approve: Aprovar
+            revoke: Rebutjar
+            confirm_revoke: ¿Estas segur?
+            no_members_yet: No hi ha membres al comité promotor de la iniciativa
       states:
         open: Oberta
         closed: Tancada
@@ -135,13 +143,8 @@ ca:
           end_time: Data de fi
         promoter_committee:
           committee_section_title: Comisió promotora
-          invite_to_committee_help: Comparteix el enllaç anterior per invitar a altres usuaris a la comisió promotora
         committee_members:
           title: Membres del comité
-          approve: Aprovar
-          revoke: Rebutjar
-          confirm_revoke: ¿Estas segur?
-          no_members_yet: No hi ha membres al comité promotor de la iniciativa
         technical_validation:
           send_to_technical_validation: Enviar a validació tècnica
           confirm: ¿Estas segur?
@@ -181,3 +184,9 @@ ca:
           check_and_support: Vore i firmar
         no_initiatives_yet:
           no_initiatives_yet: Encara no hi ha cap iniciativa!
+      admin:
+        initiative:
+          information: Informació
+          features: Funcionalitats
+          attachments: Adjunts
+          committee_members: Membres del comité

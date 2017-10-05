@@ -66,7 +66,15 @@ en:
             request_changes: Request changes
             confirm: Are you sure?
           form:
-            title: Informació general
+            title: General information
+        committee_requests:
+          index:
+            title: Committee members
+            invite_to_committee_help: Share this link to invite other users to the promotion committee
+            approve: Approve
+            revoke: Revoke
+            confirm_revoke: Are you sure?
+            no_members_yet: There are no members in the promoter committee
       states:
         open: Open
         closed: Closed
@@ -135,13 +143,8 @@ en:
           end_time: End time
         promoter_committee:
           committee_section_title: Promoter committee
-          invite_to_committee_help: Share the previous link to invite other users to the promotion committee
         committee_members:
           title: Committee members
-          approve: Approve
-          revoke: Revoke
-          confirm_revoke: Are you sure?
-          no_members_yet: There are no members in the promoter committee
         technical_validation:
           send_to_technical_validation: Send to technical validation
           confirm: Are you sure?
@@ -181,3 +184,9 @@ en:
           check_and_support: Check it out and vote
         no_initiatives_yet:
           no_initiatives_yet: No initiatives yet!
+      admin:
+        initiative:
+          information: Information
+          features: Features
+          attachments: Attachments
+          committee_members: Committee members

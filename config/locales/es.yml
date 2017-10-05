@@ -67,6 +67,14 @@ es:
             confirm: ¿Estas seguro?
           form:
             title: Información general
+        committee_requests:
+          index:
+            title: Miembros del comité
+            invite_to_committee_help: Comparte este enlace para invitar a otros usuarios a la comisión promotora
+            approve: Aprobar
+            revoke: Rechazar
+            confirm_revoke: ¿Estás seguro?
+            no_members_yet: No hay miembros en el comité promotor de la iniciativa
       states:
         open: Abierta
         closed: Cerrada
@@ -135,13 +143,9 @@ es:
           end_time: Fecha de fin
         promoter_committee:
           committee_section_title: Comisión promotora
-          invite_to_committee_help: Comparte el enlace anterior para invitar a otros usuarios a la comisión promotora
         committee_members:
           title: Miembros del comité
-          approve: Aprobar
-          revoke: Rechazar
-          confirm_revoke: ¿Estás seguro?
-          no_members_yet: No hay miembros en el comité promotor de la iniciativa
+
         technical_validation:
           send_to_technical_validation: Enviar a validación técnica
           confirm: ¿Estás seguro?
@@ -181,3 +185,9 @@ es:
           check_and_support: Ver y votar
         no_initiatives_yet:
           no_initiatives_yet: ¡Todavía no hay iniciativas!
+      admin:
+        initiative:
+          information: Información
+          features: Funcionalidades
+          attachments: Archivos adjuntos
+          committee_members: Miembros del comité
