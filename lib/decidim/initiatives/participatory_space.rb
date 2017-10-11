@@ -5,6 +5,7 @@ Decidim.register_participatory_space(:initiatives) do |participatory_space|
   participatory_space.admin_engine = Decidim::Initiatives::AdminEngine
 
   participatory_space.seeds do
+    seeds_root = File.join(__dir__, '..', '..', '..', 'db', 'seeds')
     organization = Decidim::Organization.first
 
     7.times do |n|
@@ -12,7 +13,8 @@ Decidim.register_participatory_space(:initiatives) do |participatory_space|
         title: Decidim::Faker::Localized.sentence(5),
         description: Decidim::Faker::Localized.sentence(25),
         supports_required: (n + 1) * 1000,
-        organization: organization
+        organization: organization,
+        banner_image: File.new(File.join(seeds_root, 'city2.jpeg'))
       )
 
       initiative = Decidim::Initiative.create!(
@@ -30,6 +32,21 @@ Decidim.register_participatory_space(:initiatives) do |participatory_space|
       )
 
       Decidim::Comments::Seed.comments_for(initiative)
+
+      Decidim::Initiatives.default_features.each do |feature_name|
+        feature = Decidim::Feature.create!(
+          name: Decidim::Features::Namer.new(initiative.organization.available_locales, feature_name).i18n_name,
+          manifest_name: feature_name,
+          published_at: Time.current,
+          participatory_space: initiative
+        )
+
+        if feature_name == :pages
+          Decidim::Pages::CreatePage.call(feature) do
+            on(:invalid) { raise "Can't create page" }
+          end
+        end
+      end
     end
   end
 end

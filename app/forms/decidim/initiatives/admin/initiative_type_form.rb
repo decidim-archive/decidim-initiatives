@@ -12,6 +12,7 @@ module Decidim
         translatable_attribute :title, String
         translatable_attribute :description, String
         attribute :supports_required, Integer
+        attribute :banner_image, String
 
         validates :title, :description, translatable_presence: true
         validates :supports_required, presence: true,
@@ -19,6 +20,7 @@ module Decidim
                                         only_integer: true,
                                         greater_than: 0
                                       }
+        validates :banner_image, presence: true
       end
     end
   end

@@ -9,6 +9,8 @@ module Decidim
       greater_than: 0
     }
 
+    mount_uploader :banner_image, Decidim::BannerImageUploader
+
     belongs_to :organization,
                foreign_key: 'decidim_organization_id',
                class_name: 'Decidim::Organization'

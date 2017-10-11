@@ -39,5 +39,15 @@
                      prompt: t('decidim.scopes.global') %>
       </div>
     <% end %>
+
+    <% if current_initiative.accepted? %>
+      <div class="row column">
+        <%= form.translated :editor, :answer %>
+      </div>
+
+      <div class="row column">
+        <%= form.text_field :answer_url %>
+      </div>
+    <% end %>
   </div>
 </div>

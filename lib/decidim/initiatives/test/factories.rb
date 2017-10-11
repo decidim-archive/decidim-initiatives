@@ -8,6 +8,7 @@ FactoryGirl.define do
     title { Decidim::Faker::Localized.sentence(3) }
     description { Decidim::Faker::Localized.wrapped('<p>', '</p>') { Decidim::Faker::Localized.sentence(4) } }
     supports_required 1000
+    banner_image { Decidim::Dev.test_file('city2.jpeg', 'image/jpeg') }
     organization
   end
 

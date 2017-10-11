@@ -31,7 +31,7 @@ module Decidim
     # technical validation phase. Only applies to initiatives created by
     # individuals.
     mattr_accessor :minimum_committee_members do
-      3
+      2
     end
 
     # Number of days available to collect supports after an initiative has been

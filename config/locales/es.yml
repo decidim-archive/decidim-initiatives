@@ -13,6 +13,11 @@ es:
           any: Mixta
         scope_id: Ámbito
         decidim_user_group_id: Autor
+      initiatives_type:
+        title: Título
+        description: Descripción
+        supports_required: Soportes requeridos
+        banner_image: Imagen de banner
       initiatives_committee_member:
         user: Miembro del comité
   decidim:

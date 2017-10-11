@@ -43,7 +43,9 @@ module Decidim
             description: form.description,
             type_id: form.type_id,
             decidim_scope_id: form.decidim_scope_id,
-            signature_type: form.signature_type
+            signature_type: form.signature_type,
+            answer: form.answer,
+            answer_url: form.answer_url
           }
 
           if current_user.admin?

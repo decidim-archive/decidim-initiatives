@@ -3,7 +3,7 @@
 module Decidim
   module Initiatives
     module Admin
-      # A form object used to show the initative data for technical validation.
+      # A form object used to show the initiative data for technical validation.
       class InitiativeForm < Form
         include TranslatableAttributes
 
@@ -17,6 +17,9 @@ module Decidim
         attribute :signature_start_time, Date
         attribute :signature_end_time, Date
 
+        translatable_attribute :answer, String
+        attribute :answer_url, String
+
         validates :title, :description, presence: true
         validates :signature_type, presence: true
         validates :type_id, presence: true
@@ -26,6 +29,9 @@ module Decidim
         validates :signature_end_time, date: { after: :signature_start_time }, if: ->(form) {
           form.signature_start_time.present? && form.signature_end_time.present?
         }
+
+        validates :answer, translatable_presence: true, if: ->(form) { form.context.initiative.accepted? }
+        validates :answer_url, presence: true, if: ->(form) { form.context.initiative.accepted? }
       end
     end
   end

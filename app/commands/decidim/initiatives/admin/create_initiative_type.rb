@@ -25,6 +25,10 @@ module Decidim
           if initiative_type.persisted?
             broadcast(:ok, initiative_type)
           else
+            if initiative_type.errors.include? :banner_image
+              form.errors.add(:banner_image, initiative_type.errors[:banner_image])
+            end
+
             broadcast(:invalid)
           end
         end
@@ -38,7 +42,8 @@ module Decidim
             organization: form.current_organization,
             title: form.title,
             description: form.description,
-            supports_required: form.supports_required
+            supports_required: form.supports_required,
+            banner_image: form.banner_image
           )
 
           return initiative_type unless initiative_type.valid?
