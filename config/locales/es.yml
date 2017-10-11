@@ -59,12 +59,14 @@ es:
         initiatives:
           index:
             actions_title: Acción
+            preview: Previsualizar
           edit:
             update: Actualizar
             validate: Validar la iniciativa
             discard: Descartar la iniciativa
-            request_changes: Solicitar cambios
             confirm: ¿Estas seguro?
+            send_to_technical_validation: Enviar a validación técnica
+            success: La iniciativa ha sido enviada a validación técnica
           form:
             title: Información general
         committee_requests:
@@ -81,7 +83,6 @@ es:
       admin_states:
         created: Creada
         validating: En validación técnica
-        validated: Validada
         discarded: Descartada
         published: Publicada
         rejected: Rechazada
@@ -145,11 +146,6 @@ es:
           committee_section_title: Comisión promotora
         committee_members:
           title: Miembros del comité
-
-        technical_validation:
-          send_to_technical_validation: Enviar a validación técnica
-          confirm: ¿Estás seguro?
-          success: La iniciativa ha sido enviada a validación técnica
         supports:
           title: Esta iniciativa esta apoyada por las siguientes organizaciones
       initiative_votes:

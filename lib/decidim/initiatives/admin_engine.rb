@@ -16,9 +16,10 @@ module Decidim
         resources :initiatives_types, except: :show
         resources :initiatives, only: %i[index edit update] do
           member do
-            get :validate
+            get :send_to_technical_validation
+            post :publish
+            delete :unpublish
             delete :discard
-            get :request_changes
           end
 
           resources :attachments, controller: 'initiative_attachments'

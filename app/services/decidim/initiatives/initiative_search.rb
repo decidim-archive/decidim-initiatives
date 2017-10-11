@@ -32,12 +32,10 @@ module Decidim
       # Handle the state filter
       def search_state
         case state
-        when 'open'
-          query.open
         when 'closed'
           query.closed
-        else # Assume 'all'
-          query.published
+        else # Assume open
+          query.open
         end
       end
 

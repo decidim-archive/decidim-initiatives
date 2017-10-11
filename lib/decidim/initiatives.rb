@@ -28,7 +28,8 @@ module Decidim
     end
 
     # Minimum number of committee members required to pass the initiative to
-    # technical validation phase.
+    # technical validation phase. Only applies to initiatives created by
+    # individuals.
     mattr_accessor :minimum_committee_members do
       3
     end
@@ -41,7 +42,7 @@ module Decidim
 
     # Features enabled for a new initiative
     mattr_accessor :default_features do
-      %i[pages results meetings surveys]
+      %i[pages results meetings]
     end
   end
 end

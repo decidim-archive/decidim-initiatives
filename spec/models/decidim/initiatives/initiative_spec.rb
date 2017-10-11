@@ -15,7 +15,7 @@ module Decidim
         it 'unpublish!' do
           published_initiative.unpublish!
 
-          expect(published_initiative).to be_validated
+          expect(published_initiative).to be_discarded
           expect(published_initiative.published_at).to be_nil
         end
 
@@ -24,23 +24,23 @@ module Decidim
         end
       end
 
-      context 'validated initiative' do
-        let(:validated_initiative) {
+      context 'validating initiative' do
+        let(:validating_initiative) {
           build(:initiative,
-                state: 'validated',
+                state: 'validating',
                 published_at: nil,
                 signature_start_time: nil,
                 signature_end_time: nil)
         }
 
         it 'is valid' do
-          expect(validated_initiative).to be_valid
+          expect(validating_initiative).to be_valid
         end
 
         it 'publish!' do
-          validated_initiative.publish!
-          expect(validated_initiative).to have_signature_interval_defined
-          expect(validated_initiative.published_at).not_to be_nil
+          validating_initiative.publish!
+          expect(validating_initiative).to have_signature_interval_defined
+          expect(validating_initiative.published_at).not_to be_nil
         end
       end
     end

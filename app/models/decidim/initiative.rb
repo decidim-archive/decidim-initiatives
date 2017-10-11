@@ -44,7 +44,7 @@ module Decidim
 
     enum signature_type: %i[online offline any]
     enum state: %i[
-      created validating validated discarded published rejected accepted
+      created validating discarded published rejected accepted
     ]
 
     validates :title, :description, :state, presence: true
@@ -62,6 +62,8 @@ module Decidim
     scope :closed, -> {
       published
         .where(state: %i[discarded rejected accepted])
+        .or(where('signature_start_time > ?', DateTime.now))
+        .or(where('signature_end_time < ?', DateTime.now))
     }
     scope :published, -> { where.not(published_at: nil) }
 
@@ -128,7 +130,7 @@ module Decidim
     # Returns true if the record was properly saved, false otherwise.
     def unpublish!
       return false unless published?
-      update_attributes(published_at: nil, state: 'validated')
+      update_attributes(published_at: nil, state: 'discarded')
     end
 
     def has_signature_interval_defined?

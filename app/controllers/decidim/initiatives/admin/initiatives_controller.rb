@@ -46,22 +46,35 @@ module Decidim
           end
         end
 
-        def validate
-          authorize! :technically_validate, current_initiative
-          current_initiative.validated!
+        def publish
+          authorize! :publish, current_initiative
+          current_initiative.publish!
+          redirect_to decidim_admin_initiatives.initiatives_path
+        end
+
+        def unpublish
+          authorize! :unpublish, current_initiative
+          current_initiative.unpublish!
           redirect_to decidim_admin_initiatives.initiatives_path
         end
 
         def discard
-          authorize! :technically_validate, current_initiative
+          authorize! :discard, current_initiative
           current_initiative.discarded!
           redirect_to decidim_admin_initiatives.initiatives_path
         end
 
-        def request_changes
-          authorize! :technically_validate, current_initiative
-          current_initiative.created!
-          redirect_to decidim_admin_initiatives.initiatives_path
+        def send_to_technical_validation
+          authorize! :send_to_technical_validation, current_initiative
+          current_initiative.validating!
+          redirect_to edit_initiative_path(current_initiative), flash: {
+            notice: I18n.t(
+              '.success',
+              scope: %w[
+                decidim initiatives admin initiatives edit
+              ]
+            )
+          }
         end
 
         private

@@ -59,12 +59,14 @@ en:
         initiatives:
           index:
             actions_title: Action
+            preview: Preview
           edit:
             update: Update
             validate: Validate the initiative
             discard: Discard the initiative
-            request_changes: Request changes
             confirm: Are you sure?
+            send_to_technical_validation: Send to technical validation
+            success: The initiative has been sent to technical validation
           form:
             title: General information
         committee_requests:
@@ -81,7 +83,6 @@ en:
       admin_states:
         created: Created
         validating: Technical validation
-        validated: Validated
         discarded: Discarded
         published: Published
         rejected: Rejected
@@ -145,10 +146,6 @@ en:
           committee_section_title: Promoter committee
         committee_members:
           title: Committee members
-        technical_validation:
-          send_to_technical_validation: Send to technical validation
-          confirm: Are you sure?
-          success: The initiative has been sent to technical validation
         supports:
           title: This initiative has been supported by the following organizations
       initiative_votes:

@@ -29,6 +29,10 @@
             <td><%= humanize_admin_state initiative.state %></td>
             <td><%=l initiative.created_at, format: :short %></td>
             <td class="table-list__actions">
+              <% if can? :preview, initiative %>
+                <%= icon_link_to 'eye', decidim_initiatives.initiative_path(initiative.to_param), t('.preview'), class: 'action-icon--preview', target: '_blank' %>
+              <% end %>
+
               <% if can? :edit, initiative %>
                 <%= icon_link_to 'pencil',
                                  decidim_admin_initiatives.edit_initiative_path(initiative.to_param),

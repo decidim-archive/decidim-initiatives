@@ -41,13 +41,19 @@ module Decidim
         initiative.transaction do
           initiative.save!
 
-          Decidim::Initiatives.default_features.each do |feature|
-            Decidim::Feature.create!(
-              name: Decidim::Features::Namer.new(initiative.organization.available_locales, feature).i18n_name,
-              manifest_name: feature,
+          Decidim::Initiatives.default_features.each do |feature_name|
+            feature = Decidim::Feature.create!(
+              name: Decidim::Features::Namer.new(initiative.organization.available_locales, feature_name).i18n_name,
+              manifest_name: feature_name,
               published_at: Time.current,
               participatory_space: initiative
             )
+
+            if feature_name == :pages
+              Decidim::Pages::CreatePage.call(feature) do
+                on(:invalid) { raise "Can't create page" }
+              end
+            end
           end
         end
 

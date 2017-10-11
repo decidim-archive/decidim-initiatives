@@ -17,6 +17,8 @@ module Decidim
             @user = user
             @context = context
 
+            can :preview, Initiative
+
             define_user_abilities
             define_admin_abilities
           end
@@ -25,6 +27,17 @@ module Decidim
             return unless admin?
 
             can :manage, Initiative
+            cannot :send_to_technical_validation, Initiative
+
+            cannot :publish, Initiative
+            can :publish, Initiative, &:validating?
+
+            cannot :unpublish, Initiative
+            can :unpublish, Initiative, &:published?
+
+            cannot :discard, Initiative
+            can :discard, Initiative, &:validating?
+
             can :manage, InitiativesType
             cannot :destroy, InitiativesType
             can :destroy, InitiativesType do |initiative_type|
@@ -50,6 +63,14 @@ module Decidim
               has_initiatives?(user)
             end
 
+            can :manage, Decidim::Feature do
+              has_initiatives?(user)
+            end
+
+            can %i[edit update], Decidim::Surveys::Survey do
+              has_initiatives?(user)
+            end
+
             can :index, Decidim::Initiative do
               has_initiatives?(user)
             end
@@ -70,8 +91,18 @@ module Decidim
             can :approve, InitiativesCommitteeMember do |request|
               request.initiative.author.id == user.id && !request.initiative.published? && !request.accepted?
             end
+
             can :revoke, InitiativesCommitteeMember do |request|
               request.initiative.author.id == user.id && !request.initiative.published? && !request.rejected?
+            end
+
+            can :send_to_technical_validation, Initiative do |initiative|
+              initiative.decidim_author_id == user.id &&
+                initiative.created? &&
+                (
+                !initiative.decidim_user_group_id.nil? ||
+                  initiative.committee_members.approved.count >= Decidim::Initiatives.minimum_committee_members
+                )
             end
           end
 

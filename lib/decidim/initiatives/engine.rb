@@ -16,7 +16,6 @@ module Decidim
         resources :create_initiative
         resources :initiatives, only: %i[index show] do
           member do
-            get :send_to_technical_validation
             get :signature_identities
           end
 

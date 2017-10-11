@@ -33,19 +33,6 @@ module Decidim
         authorize! :read, initiative
       end
 
-      def send_to_technical_validation
-        authorize! :send_to_technical_validation, initiative
-        initiative.validating!
-        redirect_to initiative_path(initiative), flash: {
-          notice: I18n.t(
-            '.success',
-            scope: %w[
-              decidim initiatives initiatives technical_validation
-            ]
-          )
-        }
-      end
-
       def signature_identities
         @voted_groups = InitiativesVote
                           .supports

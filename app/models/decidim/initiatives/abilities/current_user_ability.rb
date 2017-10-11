@@ -18,7 +18,7 @@ module Decidim
 
           can :create, Initiative if creation_enabled?
           can :read, Initiative do |initiative|
-            initiative.published? || initiative.decidim_author_id == user.id
+            initiative.published? || initiative.decidim_author_id == user.id || admin?
           end
 
           can :read, :admin_dashboard do
@@ -26,12 +26,6 @@ module Decidim
           end
 
           define_membership_management_abilities
-
-          can :send_to_technical_validation, Initiative do |initiative|
-            initiative.decidim_author_id == user.id &&
-              initiative.created? &&
-              initiative.committee_members.approved.count >= Decidim::Initiatives.minimum_committee_members
-          end
         end
 
         private
@@ -49,6 +43,10 @@ module Decidim
               (user.authorizations.any? || user.user_groups.verified.any?)
           end
         end
+
+          def admin?
+            user&.admin?
+          end
       end
     end
   end
