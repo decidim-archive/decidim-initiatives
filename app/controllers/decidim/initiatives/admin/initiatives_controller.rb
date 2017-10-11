@@ -27,6 +27,7 @@ module Decidim
           authorize! :edit, current_initiative
           @form = form(Decidim::Initiatives::Admin::InitiativeForm)
                   .from_model(current_initiative)
+                  .with_context(initiative: current_initiative)
 
           render layout: 'decidim/admin/initiative'
         end
@@ -34,13 +35,15 @@ module Decidim
         def update
           authorize! :update, current_initiative
 
-          @form = form(Decidim::Initiatives::Admin::InitiativeForm).from_params(params)
-          UpdateInitiative.call(current_initiative, @form) do
-            on(:ok) do |initiative|
+          @form = form(Decidim::Initiatives::Admin::InitiativeForm)
+                    .from_params(params)
+                    .with_context(initiative: current_initiative)
+          UpdateInitiative.call(current_initiative, @form, current_user) do
+            on(:ok) do |_initiative|
               render :edit, layout: 'decidim/admin/initiative'
             end
 
-            on(:invalid) do |initiative|
+            on(:invalid) do |_initiative|
               render :edit, layout: 'decidim/admin/initiative'
             end
           end

@@ -10,9 +10,10 @@ module Decidim
         #
         # initiative - Decidim::Initiative
         # form       - A form object with the params.
-        def initialize(initiative, form)
+        def initialize(initiative, form, current_user)
           @form = form
           @initiative = initiative
+          @current_user = current_user
         end
 
         # Executes the command. Broadcasts these events:
@@ -34,16 +35,23 @@ module Decidim
 
         private
 
-        attr_reader :form, :initiative
+        attr_reader :form, :initiative, :current_user
 
         def attributes
-          {
+          attrs = {
             title: form.title,
             description: form.description,
             type_id: form.type_id,
             decidim_scope_id: form.decidim_scope_id,
             signature_type: form.signature_type
           }
+
+          if current_user.admin?
+            attrs[:signature_start_time] = form.signature_start_time
+            attrs[:signature_end_time] = form.signature_end_time
+          end
+
+          attrs
         end
       end
     end

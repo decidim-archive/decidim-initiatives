@@ -49,7 +49,6 @@ module Decidim
 
     validates :title, :description, :state, presence: true
     validates :signature_type, presence: true
-    validates :signature_end_time, date: { after: :signature_start_time }, if: :has_signature_interval_defined?
 
     mount_uploader :banner_image, Decidim::BannerImageUploader
 

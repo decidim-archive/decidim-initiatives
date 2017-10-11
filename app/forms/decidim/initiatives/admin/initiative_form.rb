@@ -14,11 +14,18 @@ module Decidim
         attribute :type_id, Integer
         attribute :decidim_scope_id, Integer
         attribute :signature_type, String
+        attribute :signature_start_time, Date
+        attribute :signature_end_time, Date
 
         validates :title, :description, presence: true
         validates :signature_type, presence: true
         validates :type_id, presence: true
         validates :decidim_scope_id, presence: true, if: ->(form) { form.decidim_scope_id.present? }
+        validates :signature_start_time, presence: true, if: ->(form) { form.context.initiative.published? }
+        validates :signature_end_time, presence: true, if: ->(form) { form.context.initiative.published? }
+        validates :signature_end_time, date: { after: :signature_start_time }, if: ->(form) {
+          form.signature_start_time.present? && form.signature_end_time.present?
+        }
       end
     end
   end

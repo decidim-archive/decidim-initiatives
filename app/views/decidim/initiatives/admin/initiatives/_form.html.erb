@@ -16,6 +16,18 @@
       <%= form.select :type_id, initiative_type_options %>
     </div>
 
+    <% if current_initiative.published? && current_user.admin? %>
+      <div class="row">
+        <div class="columns xlarge-6">
+          <%= form.date_field :signature_start_time %>
+        </div>
+
+        <div class="columns xlarge-6">
+          <%= form.date_field :signature_end_time %>
+        </div>
+      </div>
+    <% end %>
+
     <div class="row column">
       <%= form.select :signature_type, signature_type_options %>
     </div>
