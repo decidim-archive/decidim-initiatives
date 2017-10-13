@@ -17,7 +17,7 @@ module Decidim
 
         def index
           authorize! :index, Decidim::Initiative
-          @initiatives = ActionPendingInitiatives
+          @initiatives = ManageableInitiatives
                            .for(current_organization, current_user)
                            .page(params[:page])
                            .per(15)
@@ -49,24 +49,32 @@ module Decidim
           end
         end
 
+        # POST /admin/initiatives/:id/publish
+        # Publishes an initiative.
         def publish
           authorize! :publish, current_initiative
           current_initiative.publish!
           redirect_to decidim_admin_initiatives.initiatives_path
         end
 
+        # DELETE /admin/initiatives/:id/unpublish
+        # Unpublishes an initiative.
         def unpublish
           authorize! :unpublish, current_initiative
           current_initiative.unpublish!
           redirect_to decidim_admin_initiatives.initiatives_path
         end
 
+        # DELETE /admin/initiatives/:id/discard
+        # Discards an initiative
         def discard
           authorize! :discard, current_initiative
           current_initiative.discarded!
           redirect_to decidim_admin_initiatives.initiatives_path
         end
 
+        # GET /admin/initiatives/:id/send_to_technical_validation
+        # Sends a new initiative to the technical validation process.
         def send_to_technical_validation
           authorize! :send_to_technical_validation, current_initiative
           current_initiative.validating!

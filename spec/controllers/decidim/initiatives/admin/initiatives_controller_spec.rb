@@ -10,7 +10,7 @@ module Decidim
 
         let(:organization) { create(:organization) }
         let!(:initiative) { create(:initiative, organization: organization) }
-        let!(:created_initiative) { create(:created_initiative, organization: organization) }
+        let!(:created_initiative) { create(:initiative, :created, organization: organization) }
 
         before do
           @request.env['decidim.current_organization'] = organization
@@ -54,6 +54,106 @@ module Decidim
 
               created_initiative.reload
               expect(created_initiative).to be_validating
+            end
+          end
+        end
+
+        context 'POST publish' do
+          let!(:initiative) { create(:initiative, :validating, organization: organization) }
+
+          context 'Initiative owner' do
+            before do
+              sign_in initiative.author
+            end
+
+            it 'Raises an error' do
+              post :publish, params: { id: initiative.to_param }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          context 'Administrator' do
+            let!(:admin) { create(:user, :confirmed, :admin) }
+
+            before do
+              sign_in admin
+            end
+
+            it 'initiative gets published' do
+              post :publish, params: { id: initiative.to_param }
+              expect(response).to have_http_status(302)
+
+              initiative.reload
+              expect(initiative.published?).to be_truthy
+              expect(initiative.published_at).not_to be_nil
+              expect(initiative.signature_start_time).not_to be_nil
+              expect(initiative.signature_end_time).not_to be_nil
+            end
+          end
+        end
+
+        context 'DELETE unpublish' do
+          context 'Initiative owner' do
+            before do
+              sign_in initiative.author
+            end
+
+            it 'Raises an error' do
+              post :publish, params: { id: initiative.to_param }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          context 'Administrator' do
+            let!(:admin) { create(:user, :confirmed, :admin) }
+
+            before do
+              sign_in admin
+            end
+
+            it 'initiative gets unpublished' do
+              delete :unpublish, params: { id: initiative.to_param }
+              expect(response).to have_http_status(302)
+
+              initiative.reload
+              expect(initiative.published?).to be_falsey
+              expect(initiative.discarded?).to be_truthy
+              expect(initiative.published_at).to be_nil
+            end
+          end
+        end
+
+        context 'DELETE discard' do
+          let!(:initiative) { create(:initiative, :validating, organization: organization) }
+
+          context 'Initiative owner' do
+            before do
+              sign_in initiative.author
+            end
+
+            it 'Raises an error' do
+              post :publish, params: { id: initiative.to_param }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          context 'Administrator' do
+            let!(:admin) { create(:user, :confirmed, :admin) }
+
+            before do
+              sign_in admin
+            end
+
+            it 'initiative gets discarded' do
+              delete :discard, params: { id: initiative.to_param }
+              expect(response).to have_http_status(302)
+
+              initiative.reload
+              expect(initiative.discarded?).to be_truthy
+              expect(initiative.published_at).to be_nil
             end
           end
         end

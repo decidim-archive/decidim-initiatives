@@ -5,7 +5,7 @@ require 'spec_helper'
 module Decidim
   module Initiatives
     describe SpawnCommitteeRequest do
-      let(:initiative) { create(:created_initiative) }
+      let(:initiative) { create(:initiative, :created) }
       let(:current_user) { create(:user, organization: initiative.organization) }
       let(:command) { described_class.new(initiative, current_user) }
 

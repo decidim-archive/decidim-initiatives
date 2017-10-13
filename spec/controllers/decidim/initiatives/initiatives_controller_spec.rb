@@ -9,7 +9,7 @@ module Decidim
 
       let(:organization) { create(:organization) }
       let!(:initiative) { create(:initiative, organization: organization) }
-      let!(:created_initiative) { create(:created_initiative, organization: organization) }
+      let!(:created_initiative) { create(:initiative, :created, organization: organization) }
 
       before do
         @request.env['decidim.current_organization'] = organization

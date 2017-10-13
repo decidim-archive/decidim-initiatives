@@ -8,7 +8,7 @@ module Decidim
       routes { Decidim::Initiatives::Engine.routes }
 
       let(:organization) { create(:organization) }
-      let(:initiative) { create(:created_initiative, organization: organization) }
+      let(:initiative) { create(:initiative, :created, organization: organization) }
 
       before do
         @request.env['decidim.current_organization'] = organization

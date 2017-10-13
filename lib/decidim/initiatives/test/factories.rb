@@ -25,31 +25,27 @@ FactoryGirl.define do
     signature_end_time { Time.current + 120.days}
 
     after(:create) do |initiative|
-      create(:authorization, user: initiative.author)
+      unless initiative.author.authorizations.any?
+        create(:authorization, user: initiative.author)
+      end
 
       3.times do
         create(:initiatives_committee_member, initiative: initiative)
       end
     end
-  end
 
-  factory :created_initiative, class: Decidim::Initiative do
-    title { Decidim::Faker::Localized.sentence(3) }
-    description { Decidim::Faker::Localized.wrapped('<p>', '</p>') { Decidim::Faker::Localized.sentence(4) } }
-    organization
-    author { create(:user, :confirmed, organization: organization) }
-    published_at nil
-    type { create(:initiatives_type, organization: organization) }
-    state 'created'
-    signature_type 'online'
-    signature_start_time nil
-    signature_end_time nil
-    after(:create) do |initiative|
-      create(:authorization, user: initiative.author)
+    trait :created do
+      state 'created'
+      published_at nil
+      signature_start_time nil
+      signature_end_time nil
+    end
 
-      3.times do
-        create(:initiatives_committee_member, initiative: initiative)
-      end
+    trait :validating do
+      state 'validating'
+      published_at nil
+      signature_start_time nil
+      signature_end_time nil
     end
   end
 

@@ -3,8 +3,10 @@
 module Decidim
   module Initiatives
     module Admin
-      # Class uses to initiatives waiting for administrator action
-      class ActionPendingInitiatives < Rectify::Query
+      # Class that retrieves manageable initiatives for the given user.
+      # Regular users will get only their initiatives. Administrators will
+      # retrieve all initiatives.
+      class ManageableInitiatives < Rectify::Query
         attr_reader :organization, :user
 
         # Syntactic sugar to initialize the class and return the queried objects
