@@ -27,7 +27,7 @@ module Decidim
         context 'Any user' do
           it 'Shows published initiatives' do
             get :show, params: { id: initiative.to_param }
-            expect(subject.helpers.initiative).to eq(initiative)
+            expect(subject.helpers.current_initiative).to eq(initiative)
           end
 
           it 'Throws exception on non published initiatives' do
@@ -44,7 +44,7 @@ module Decidim
 
           it 'Unpublished initiatives are shown too' do
             get :show, params: { id: created_initiative.id }
-            expect(subject.helpers.initiative).to eq(created_initiative)
+            expect(subject.helpers.current_initiative).to eq(created_initiative)
           end
         end
       end
