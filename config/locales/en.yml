@@ -136,6 +136,7 @@ en:
           vote: Vote
           votes_blocked: Voting disabled
           already_voted: Already voted
+          supports_required: "%{total_supports} votes required"
         signature_identities:
           select_identity: Select user identity
         votes_count:
@@ -152,7 +153,12 @@ en:
         committee_members:
           title: Committee members
         supports:
-          title: This initiative has been supported by the following organizations
+          title: Listing of adhesions
+        statistics:
+          supports_count_title: Adhesions
+          comments_count_title: Comments
+          meetings_count_title: Meetings
+          assistants_count_title: Assistants
       initiative_votes:
         create:
           error: There's been errors when voting the initiative.
@@ -186,6 +192,9 @@ en:
           check_and_support: Check it out and vote
         no_initiatives_yet:
           no_initiatives_yet: No initiatives yet!
+      initiative_header:
+        initiative_menu_item: Initiative
+        unfold: Unfold
       admin:
         initiative:
           information: Information

@@ -1,72 +1,62 @@
-<% add_decidim_page_title(translated_attribute(@initiative.title)) %>
-
 <% add_decidim_meta_tags({
-  description: translated_attribute(@initiative.description),
-  title: translated_attribute(@initiative.title),
-  url: initiative_url(@initiative.id)
+  image_url: current_initiative.type.banner_image.url,
+  description: partially_translated_attribute(current_initiative.description),
+  title: partially_translated_attribute(current_initiative.title),
+  url: initiative_url(current_initiative.id),
+  twitter_handler: current_organization.twitter_handler
 }) %>
 
-<% provide :meta_image_url, @initiative.banner_image&.url unless @initiative.banner_image.nil? %>
+<% add_decidim_page_title(partially_translated_attribute(current_initiative.title)) %>
+<% provide :meta_image_url, current_initiative.type.banner_image.url %>
 
-<div class="row column view-header">
-  <h2 class="heading2"><%= partially_translated_attribute(@initiative.title) %></h2>
-  <div class="author-data">
-    <%= render partial: 'author', locals: { initiative: @initiative } %>
-  </div>
-</div>
 
 <div class="row">
   <div class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9">
-    <% if @initiative.published? %>
-      <div class="card extra definition-data">
-        <% if @initiative.signature_start_time %>
-          <div class="definition-data__item start-date">
-            <span class="definition-data__title"><%=t '.start_time' %></span>
-            <%= l(@initiative.signature_start_time, format: :long) %>
-          </div>
+    <div class="card extra definition-data">
+      <div class="definition-data__item vote-block">
+        <% if current_initiative.votes_enabled? %>
+          <%= render partial: 'votes_count', locals: { initiative: current_initiative } %>
+          <%= render partial: 'vote_cabin', locals: { initiative: current_initiative } %>
         <% end %>
 
-        <% if @initiative.signature_end_time %>
-          <div class="definition-data__item end-date">
-            <span class="definition-data__title"><%=t '.end_time' %></span>
-            <%= l(@initiative.signature_end_time, format: :long) %>
-          </div>
+        <% if current_user %>
+          <%= render partial: 'decidim/shared/follow_button', locals: { followable: current_initiative } %>
         <% end %>
-
-        <div class="definition-data__item vote-block">
-          <% if @initiative.votes_enabled? %>
-            <%= render partial: 'votes_count', locals: { initiative: @initiative } %>
-            <%= render partial: 'vote_cabin', locals: { initiative: @initiative } %>
-          <% end %>
-
-          <% if current_user %>
-            <%= render partial: 'decidim/shared/follow_button', locals: { followable: @initiative } %>
-          <% end %>
-        </div>
       </div>
-    <% end %>
+    </div>
 
-    <% if @initiative.published? %>
-      <%= render partial: 'decidim/shared/share_modal' %>
-      <%= embed_modal_for initiative_initiative_widget_url(@initiative, format: :js) %>
-    <% end %>
+    <%= render partial: 'decidim/shared/share_modal' %>
+    <%= embed_modal_for initiative_initiative_widget_url(current_initiative, format: :js) %>
+
+    <%= render partial: 'statistics' %>
   </div>
 
   <div class="columns mediumlarge-8 mediumlarge-pull-4">
     <div class="section">
-      <%= render partial: 'initiative_badge', locals: { initiative: @initiative } %>
-      <%= simple_format partially_translated_attribute(@initiative.description) %>
-      <%= render partial: 'tags', locals: { resource: @initiative } %>
+      <div class="lead">
+        <%= partially_translated_attribute(current_initiative.title) %>
+      </div>
+      <div class="author-data">
+        <%= render partial: 'author', locals: { initiative: current_initiative } %>
+      </div>
     </div>
 
-    <%= render partial: 'supports', locals: { initiative: @initiative } %>
+    <div class="section">
+      <%= render partial: 'initiative_badge', locals: { initiative: current_initiative } %>
+      <%= simple_format partially_translated_attribute(current_initiative.description) %>
+      <%= render partial: 'tags', locals: { resource: current_initiative } %>
+    </div>
 
-    <% if @initiative.answered? && partially_translated_attribute(@initiative.answer).present? %>
-      <% if @initiative.accepted? %>
+    <%= attachments_for current_initiative %>
+
+    <%= render partial: 'supports', locals: { initiative: current_initiative } %>
+
+    <% if current_initiative.answered? && partially_translated_attribute(current_initiative.answer).present? %>
+      <% if current_initiative.accepted? %>
         <div class="section">
           <div class="callout success">
-            <h5><%= link_to t('.initiative_accepted'), @initiative.answer_url || '#' %></h5>
-            <p><%= partially_translated_attribute @initiative.answer %></p>
+            <h5><%= link_to t('.initiative_accepted'), current_initiative.answer_url || '#' %></h5>
+            <p><%= partially_translated_attribute current_initiative.answer %></p>
           </div>
         </div>
       <% else %>
@@ -80,7 +70,7 @@
   </div>
 </div>
 
-<%= comments_for @initiative if @initiative.published? %>
+<%= comments_for current_initiative if current_initiative.published? %>
 <%= javascript_include_tag 'decidim/initiatives/social_share' %>
 <%= stylesheet_link_tag 'decidim/initiatives/application' %>
 <%= stylesheet_link_tag 'decidim/initiatives/social_share' %>

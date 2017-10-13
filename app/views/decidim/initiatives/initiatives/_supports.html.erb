@@ -6,13 +6,17 @@
       </div>
     </div>
 
-    <% initiative.votes.supports.each do |s| %>
-      <article class="card card--supporter columns small-12 medium-6" style="padding-top: 15px;">
-        <div class="card__image-top" style="background-image:url(<%= s.user_group.avatar_url %>)"></div>
-        <div class="card__content">
-          <p class="text-center"><%= s.user_group.name %></p>
+    <div class="columns large-12 supports-list">
+      <% initiative.votes.supports.each do |s| %>
+        <div class="author author--inline">
+          <span class="author__avatar author__avatar--small">
+            <%= image_tag s.user_group.avatar_url %>
+          </span>
+          <span class="author__name">
+            <%= s.user_group.name %>
+          </span>
         </div>
-      </article>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 <% end %>

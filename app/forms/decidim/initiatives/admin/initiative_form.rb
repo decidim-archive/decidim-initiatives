@@ -16,6 +16,7 @@ module Decidim
         attribute :signature_type, String
         attribute :signature_start_time, Date
         attribute :signature_end_time, Date
+        attribute :hashtag, String
 
         translatable_attribute :answer, String
         attribute :answer_url, String

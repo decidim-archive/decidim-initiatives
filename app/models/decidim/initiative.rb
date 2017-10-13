@@ -49,6 +49,7 @@ module Decidim
 
     validates :title, :description, :state, presence: true
     validates :signature_type, presence: true
+    validates :hashtag, uniqueness: true
 
     mount_uploader :banner_image, Decidim::BannerImageUploader
 
@@ -132,8 +133,19 @@ module Decidim
       update_attributes(published_at: nil, state: 'discarded')
     end
 
+    # Public: Returns wether the signature interval is already defined or not.
     def has_signature_interval_defined?
       signature_end_time.present? && signature_start_time.present?
+    end
+
+    # Public: Returns the hashtag for the initiative.
+    def hashtag
+      attributes['hashtag'].to_s.delete('#')
+    end
+
+    # Public: Returns the percentage of required supports reached
+    def percentage
+      initiative_votes_count * 100 / type.supports_required
     end
   end
 end

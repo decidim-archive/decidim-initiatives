@@ -9,6 +9,7 @@ module Decidim
       before_action :authenticate_user!
 
       helper Decidim::ActionAuthorizationHelper
+      helper InitiativeHelper
       include Decidim::Initiatives::ActionAuthorization
 
       def create

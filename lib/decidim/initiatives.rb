@@ -42,7 +42,24 @@ module Decidim
 
     # Features enabled for a new initiative
     mattr_accessor :default_features do
-      %i[pages results meetings]
+      %i[pages meetings]
+    end
+
+    # Notifies when the given percentage of supports is reached for an
+    # initiative.
+    mattr_accessor :first_notification_percentage do
+      33
+    end
+
+    # Notifies when the given percentage of supports is reached for an
+    # initiative.
+    mattr_accessor :second_notification_percentage do
+      66
+    end
+
+    # Sets the expiration time for the statistic data.
+    mattr_accessor :stats_cache_expiration_time do
+      5.minutes
     end
   end
 end

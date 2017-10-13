@@ -16,7 +16,7 @@ es:
       initiatives_type:
         title: Título
         description: Descripción
-        supports_required: Soportes requeridos
+        supports_required: Firmas requeridas
         banner_image: Imagen de banner
       initiatives_committee_member:
         user: Miembro del comité
@@ -124,8 +124,8 @@ es:
             loading: Cargando resultados...
         supports_count:
           count:
-            one: " apoyo recibido"
-            other: " apoyos recibidos"
+            one: " firma"
+            other: " firmas"
         orders:
           label: 'Ordenar iniciativas por:'
           random: Aleatorio
@@ -133,15 +133,16 @@ es:
           most_voted: Mas votado
           most_commented: Mas comentado
         vote_cabin:
-          vote: Dar apoyo
-          already_voted: Ya votado
-          votes_blocked: Votación desactivada
+          vote: Firmar
+          already_voted: Ya firmado
+          votes_blocked: Recogida de firmas desactivada
+          supports_required: "%{total_supports} firmas requeridas"
         signature_identities:
           select_identity: Selecciona identidad
         votes_count:
           count:
-            one: APOYO
-            other: APOYOS
+            one: FIRMA
+            other: FIRMAS
         show:
           initiative_accepted: Iniciativa aceptada
           initiative_rejected: Iniciativa rechazada
@@ -152,7 +153,12 @@ es:
         committee_members:
           title: Miembros del comité
         supports:
-          title: Esta iniciativa esta apoyada por las siguientes organizaciones
+          title: Listado de adhesiones
+        statistics:
+          supports_count_title: Adhesiones
+          comments_count_title: Comentarios
+          meetings_count_title: Encuentros
+          assistants_count_title: Asistentes
       initiative_votes:
         create:
           error: Ha habido errores al votar la iniciativa.
@@ -186,6 +192,9 @@ es:
           check_and_support: Ver y votar
         no_initiatives_yet:
           no_initiatives_yet: ¡Todavía no hay iniciativas!
+      initiative_header:
+        initiative_menu_item: Iniciativa
+        unfold: Desplegar
       admin:
         initiative:
           information: Información

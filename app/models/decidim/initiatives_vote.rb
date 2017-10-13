@@ -23,6 +23,11 @@ module Decidim
                                           .where(decidim_initiative_id: initiative.id)
                                           .count
 
+      initiative.initiative_supports_count = Decidim::InitiativesVote
+                                             .supports
+                                             .where(decidim_initiative_id: initiative.id)
+                                             .count
+
       initiative.save
     end
   end

@@ -16,7 +16,7 @@ ca:
       initiatives_type:
         title: Titol
         description: Descripció
-        supports_required: Suports necessaris
+        supports_required: Signatures necessaries
         banner_image: Imatge de bàner
       initiatives_committee_member:
         user: Membre del comité
@@ -124,8 +124,8 @@ ca:
             loading: Carregant els resultats
         supports_count:
           count:
-            one: " suport rebut"
-            other: " suports rebuts"
+            one: " signatura"
+            other: " signatures"
         orders:
           label: 'Ordenar iniciatives per:'
           random: Aleatori
@@ -133,15 +133,16 @@ ca:
           most_voted: Més votat
           most_commented: Més comentat
         vote_cabin:
-          vote: Donar suport
-          votes_blocked: Recollida de suports desactivada
-          already_voted: Ja has votat
+          vote: Signar
+          votes_blocked: Recollida de signatures desactivada
+          already_voted: Ja has signat
+          supports_required: "%{total_supports} signatures requerides"
         signature_identities:
           select_identity: Selecciona identitat
         votes_count:
           count:
-            one: SUPORT
-            other: SUPORTS
+            one: SIGNATURA
+            other: SIGNATURES
         show:
           initiative_accepted: Iniciativa acceptada
           initiative_rejected: Iniciativa rebutjada
@@ -152,7 +153,12 @@ ca:
         committee_members:
           title: Membres del comité
         supports:
-          title: Esta iniciativa ha esta soportada per les següents organitzacions
+          title: Llistat d'adhesions
+        statistics:
+          supports_count_title: Adhesions
+          comments_count_title: Comentaris
+          meetings_count_title: Encontres
+          assistants_count_title: Assistents
       initiative_votes:
         create:
           error: Hi ha hagut errors en votar l'iniciativa.
@@ -186,6 +192,9 @@ ca:
           check_and_support: Vore i firmar
         no_initiatives_yet:
           no_initiatives_yet: Encara no hi ha cap iniciativa!
+      initiative_header:
+        initiative_menu_item: Iniciativa
+        unfold: Desplega
       admin:
         initiative:
           information: Informació

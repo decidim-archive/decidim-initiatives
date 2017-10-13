@@ -3,7 +3,7 @@
 </div>
 <%= render partial: 'decidim/initiatives/initiatives/vote_button',
            locals: {
-               initiative: initiative,
+               initiative: current_initiative,
                vote_label: current_user.name,
                unvote_label: current_user.name
            } %>
@@ -14,7 +14,7 @@
   <% if @voted_groups.include? g.id %>
       <%= action_authorized_button_to :vote,
                                       g.name,
-                                      initiative_initiative_vote_path(initiative_id: initiative, group_id: g.id),
+                                      initiative_initiative_vote_path(initiative_id: current_initiative.id, group_id: g.id),
                                       method: :delete,
                                       remote: true,
                                       data: { disable: true },
@@ -22,7 +22,7 @@
   <% else %>
     <%= action_authorized_button_to :vote,
                                     g.name,
-                                    initiative_initiative_vote_path(initiative_id: initiative, group_id: g.id),
+                                    initiative_initiative_vote_path(initiative_id: current_initiative.id, group_id: g.id),
                                     remote: true,
                                     data: { disable: true },
                                     class: 'card__button button expanded button--sc' %>

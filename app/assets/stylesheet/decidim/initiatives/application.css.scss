@@ -1,4 +1,6 @@
 @import "decidim/editor";
+@import "popularity_item";
+@import "statistics";
 
 .ql-formats {
   .ql-video {
@@ -9,4 +11,14 @@
 .initiative-status {
   float: left;
   margin-right: .5rem;
+}
+
+.supports-list {
+  .author {
+    margin-right: 15px;
+
+    .author__name {
+      color: #599aa6;
+    }
+  }
 }
