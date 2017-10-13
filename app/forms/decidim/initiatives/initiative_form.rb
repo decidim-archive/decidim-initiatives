@@ -17,7 +17,6 @@ module Decidim
 
       validates :title, :description, presence: true, etiquette: true
       validates :title, length: { maximum: 150 }
-      validates :description, length: { maximum: 500 }, etiquette: true
       validates :signature_type, presence: true
       validates :type_id, presence: true
       validates :scope_id, presence: true, if: ->(form) { form.scope_id.present? }

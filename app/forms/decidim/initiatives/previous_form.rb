@@ -14,7 +14,6 @@ module Decidim
 
       validates :title, :description, presence: true, etiquette: true
       validates :title, length: { maximum: 150 }
-      validates :description, length: { maximum: 500 }, etiquette: true
       validates :type_id, presence: true
     end
   end

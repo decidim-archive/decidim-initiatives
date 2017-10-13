@@ -12,6 +12,7 @@ module Decidim
       include TypeSelectorOptions
       include Decidim::Initiatives::Scopeable
 
+      helper Decidim::PartialTranslationsHelper
       helper_method :similar_initiatives
 
       steps :select_initiative_type,
