@@ -73,6 +73,7 @@ module Decidim
           end
 
           on(:invalid) do |initiative|
+            logger.fatal "Failed to create initiative: #{initiative.errors.full_messages.join(', ')}" if initiative
             redirect_to previous_wizard_path(validate_form: true)
           end
         end

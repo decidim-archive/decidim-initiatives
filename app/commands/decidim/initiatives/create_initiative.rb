@@ -26,7 +26,7 @@ module Decidim
         if initiative.persisted?
           broadcast(:ok, initiative)
         else
-          broadcast(:invalid)
+          broadcast(:invalid, initiative)
         end
       end
 
