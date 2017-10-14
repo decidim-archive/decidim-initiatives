@@ -49,7 +49,7 @@ module Decidim
 
     validates :title, :description, :state, presence: true
     validates :signature_type, presence: true
-    validates :hashtag, uniqueness: true
+    validates :hashtag, uniqueness: true, allow_blank: true, case_sensitive: false
 
     mount_uploader :banner_image, Decidim::BannerImageUploader
 
