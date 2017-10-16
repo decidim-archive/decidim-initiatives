@@ -108,7 +108,7 @@ module Decidim
     # Public: Overrides scopes enabled flag available in other models like
     # participatory space or assemblies. For initatives it won't be directly
     # managed by the user and it will be enabled by default.
-    def scopes_enabled
+    def scopes_enabled?
       true
     end
 
