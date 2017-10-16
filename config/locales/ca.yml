@@ -199,7 +199,8 @@ ca:
     decidim:
       initiatives:
         initiative:
-          check_and_support: Vore i firmar
+          check_and_support: Vore i signar
+          check: Vore
         no_initiatives_yet:
           no_initiatives_yet: Encara no hi ha cap iniciativa!
       initiative_header:

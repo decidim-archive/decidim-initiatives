@@ -22,9 +22,15 @@
           <div class="card__support__data"></div>
         <% end %>
 
-        <%= link_to t('initiatives.initiative.check_and_support', scope: 'layouts.decidim'),
-                    initiative,
-                    class: 'card__button button small secondary' %>
+        <% if initiative.closed? %>
+          <%= link_to t('initiatives.initiative.check', scope: 'layouts.decidim'),
+                      initiative,
+                      class: 'card__button button small secondary' %>
+        <% else %>
+          <%= link_to t('initiatives.initiative.check_and_support', scope: 'layouts.decidim'),
+                      initiative,
+                      class: 'card__button button small secondary' %>
+        <% end %>
       </div>
     </div>
   </article>

@@ -199,7 +199,8 @@ es:
     decidim:
       initiatives:
         initiative:
-          check_and_support: Ver y votar
+          check_and_support: Ver y firmar
+          check: Ver
         no_initiatives_yet:
           no_initiatives_yet: ¡Todavía no hay iniciativas!
       initiative_header:
