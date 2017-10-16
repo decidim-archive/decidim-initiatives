@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-initiatives (0.0.24)
+    decidim-initiatives (0.0.25)
       decidim-admin
       decidim-comments
       decidim-core (>= 0.6.0, <= 0.8.0)
@@ -58,7 +58,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
     ast (2.3.0)
-    autoprefixer-rails (7.1.4.1)
+    autoprefixer-rails (7.1.5)
       execjs
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -270,7 +270,7 @@ GEM
       thread
       thread_safe
     equalizer (0.0.11)
-    erubi (1.6.1)
+    erubi (1.7.0)
     execjs (2.7.0)
     factory_girl (4.8.1)
       activesupport (>= 3.0.0)
@@ -308,7 +308,8 @@ GEM
     htmlentities (4.3.4)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
-    i18n (0.8.6)
+    i18n (0.9.0)
+      concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.18)
       activesupport (>= 4.0.2)
       ast (>= 2.1.0)
