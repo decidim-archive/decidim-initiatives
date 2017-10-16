@@ -52,6 +52,7 @@
     <%= attachments_for current_initiative %>
 
     <%= render partial: 'supports', locals: { initiative: current_initiative } %>
+    <%= render partial: 'committee_members', locals: { initiative: current_initiative } %>
 
     <% if current_initiative.answered? && partially_translated_attribute(current_initiative.answer).present? %>
       <% if current_initiative.accepted? %>

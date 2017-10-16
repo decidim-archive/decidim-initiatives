@@ -1,0 +1,22 @@
+<% if initiative.committee_members.approved.any? %>
+    <div class="row">
+      <div class="columns large-12">
+        <div class="section committee">
+          <h4 class="section-heading"><%= t('.title') %></h4>
+        </div>
+      </div>
+
+      <div class="columns large-12 supports-list">
+        <% initiative.committee_members.approved.each do |m| %>
+          <div class="author author--inline">
+            <span class="author__avatar author__avatar--small">
+              <%= image_tag m.user.avatar_url %>
+            </span>
+            <span class="author__name">
+              <%= m.user.name %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+<% end %>

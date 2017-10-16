@@ -5,6 +5,7 @@ module Decidim
     # Controller in charge of managing committee membership
     class CommitteeRequestsController < Decidim::ApplicationController
       helper Decidim::ActionAuthorizationHelper
+      helper Decidim::PartialTranslationsHelper
       helper_method :initiatives_committee_member, :current_initiative
 
       include Decidim::Initiatives::ActionAuthorization
