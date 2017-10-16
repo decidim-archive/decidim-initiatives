@@ -93,8 +93,8 @@ ca:
             confirm_revoke: ¿Estas segur?
             no_members_yet: No hi ha membres al comité promotor de la iniciativa
       states:
-        open: Oberta
-        closed: Tancada
+        accepted: Acceptada
+        expired: Expirada
       admin_states:
         created: Creada
         validating: En validació tècnica

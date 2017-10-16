@@ -11,8 +11,8 @@ module Decidim
       #
       # Returns a String.
       def state_badge_css_class(initiative)
-        return 'warning' if initiative.closed?
-        'success'
+        return 'success' if initiative.accepted?
+        'warning'
       end
 
       # Public: The state of an initiative in a way a human can understand.
@@ -21,7 +21,7 @@ module Decidim
       #
       # Returns a String.
       def humanize_state(initiative)
-        I18n.t(initiative.closed? ? 'closed': 'open', scope: 'decidim.initiatives.states', default: :open)
+        I18n.t(initiative.accepted? ? 'accepted': 'expired', scope: 'decidim.initiatives.states', default: :expired)
       end
 
       # Public: The state of an initiative from an administration perspective in
