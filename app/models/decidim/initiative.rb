@@ -112,6 +112,10 @@ module Decidim
       true
     end
 
+    def scopes_enabled
+      true
+    end
+
     #
     # Public: Publishes this feature
     #

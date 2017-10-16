@@ -13,7 +13,7 @@ module Decidim
         let!(:admin_initiatives) { create_list(:initiative, 3, organization: organization, author: admin) }
 
         context 'Regular users' do
-          subject { described_class.new(organization, user) }
+          subject { described_class.new(organization, user, nil, nil) }
 
           it 'includes only user initiatives' do
             expect(subject).not_to include(*admin_initiatives)
@@ -21,7 +21,7 @@ module Decidim
         end
 
         context 'Administrator users' do
-          subject { described_class.new(organization, admin) }
+          subject { described_class.new(organization, admin, nil, nil) }
 
           it 'includes all initiatives' do
             expect(subject).to include(*user_initiatives)
