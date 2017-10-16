@@ -69,7 +69,7 @@ ca:
             filter_by: Filtrar per
             filter:
               all: Tots
-              created: Esborrany
+              created: Creada
               validating: Validació tècnica
               discarded: Descartada
               published: Publicada

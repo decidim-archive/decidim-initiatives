@@ -69,7 +69,7 @@ es:
             filter_by: Filtrar por
             filter:
               all: Todos
-              created: Borrador
+              created: Creada
               validating: Validación técnica
               discarded: Descartada
               published: Publicada

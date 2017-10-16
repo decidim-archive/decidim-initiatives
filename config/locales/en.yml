@@ -69,7 +69,7 @@ en:
             filter_by: Filter by
             filter:
               all: All
-              created: Draft
+              created: Created
               validating: Technical validation
               discarded: Discarded
               published: Published
