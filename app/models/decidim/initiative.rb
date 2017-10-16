@@ -67,6 +67,8 @@ module Decidim
     }
     scope :published, -> { where.not(published_at: nil) }
 
+    scope :with_state, ->(state) { where(state: state) unless state.blank? }
+
     def self.order_randomly(seed)
       transaction do
         connection.execute("SELECT setseed(#{connection.quote(seed)})")

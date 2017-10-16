@@ -65,6 +65,16 @@ ca:
           index:
             actions_title: Acció
             preview: Previsualitzar
+            search: Cerca
+            filter_by: Filtrar per
+            filter:
+              all: Tots
+              created: Esborrany
+              validating: Validació tècnica
+              discarded: Descartada
+              published: Publicada
+              rejected: Rebutjada
+              accepted: Acceptada
           edit:
             update: Actualitzar
             validate: Validar la iniciativa

@@ -65,6 +65,16 @@ es:
           index:
             actions_title: Acción
             preview: Previsualizar
+            search: Busca
+            filter_by: Filtrar por
+            filter:
+              all: Todos
+              created: Borrador
+              validating: Validación técnica
+              discarded: Descartada
+              published: Publicada
+              rejected: Rechazada
+              accepted: Aceptada
           edit:
             update: Actualizar
             validate: Validar la iniciativa

@@ -65,6 +65,16 @@ en:
           index:
             actions_title: Action
             preview: Preview
+            search: Busca
+            filter_by: Filter by
+            filter:
+              all: All
+              created: Draft
+              validating: Technical validation
+              discarded: Discarded
+              published: Published
+              rejected: Rejected
+              accepted: Accepted
           edit:
             update: Update
             validate: Validate the initiative

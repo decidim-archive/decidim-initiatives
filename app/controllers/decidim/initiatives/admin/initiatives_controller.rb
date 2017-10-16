@@ -17,8 +17,11 @@ module Decidim
 
         def index
           authorize! :index, Decidim::Initiative
+
+          @query = params[:q]
+          @state = params[:state]
           @initiatives = ManageableInitiatives
-                           .for(current_organization, current_user)
+                           .for(current_organization, current_user, @query, @state)
                            .page(params[:page])
                            .per(15)
         end
