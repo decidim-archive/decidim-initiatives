@@ -49,6 +49,8 @@ module Decidim
             answer_url: form.answer_url
           }
 
+          attr[:answered_at] = DateTime.now unless form.answer.blank?
+
           if current_user.admin?
             attrs[:signature_start_time] = form.signature_start_time
             attrs[:signature_end_time] = form.signature_end_time

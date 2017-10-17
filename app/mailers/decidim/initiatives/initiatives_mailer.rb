@@ -1,29 +1,70 @@
+# frozen_string_literal: true
+
 module Decidim
   module Initiatives
-    class InitiativesMailer < ApplicationMailer
-      after_action :prevent_delivery_to_users_without_email
-
+    # Mailer for initiatives engine.
+    class InitiativesMailer < Decidim::ApplicationMailer
       # Notify progress to all initiative subscribers.
       def notify_progress(initiative)
-        #TODO
+        initiative.followers.each do |follower|
+          with_user(follower) do
+            # TODO Define body, subject and view for this mailer
+            @subject = ''
+            @body = ''
+
+            mail(to: "#{user.name} <#{user.email}>", subject: @subject)
+          end
+        end
       end
 
       # Notify changes in state. Depending on the state the target
       # group may change.
       def notify_state_change(initiative)
-        #TODO
+        validating_initiative(initiative)if initiative.validating?
+
+        if initiative.published? || initiative.discarded?
+          validating_result(initiative)
+        end
+
+        if initiative.rejected? || initiative.accepted?
+          voting_result(initiative)
+        end
       end
 
       private
 
-      def with_user(user, &block)
-        I18n.with_locale(user.locale) do
-          yield
+      def validating_initiative(initiative)
+        initiative.organization.admins.each do |user|
+          with_user(user) do
+            # TODO Define body, subject and view for this mailer
+            @subject = ''
+            @body = ''
+
+            mail(to: "#{user.name} <#{user.email}>", subject: @subject)
+          end
         end
       end
 
-      def prevent_delivery_to_users_without_email
-        mail.perform_deliveries = !@email_to.blank?
+      def validating_result(initiative)
+        with_user(initiative.author) do
+          # TODO Define body, subject and view for this mailer
+          @subject = ''
+          @body = ''
+
+          mail(to: "#{initiative.author.name} <#{initiative.author.email}>", subject: @subject)
+        end
+      end
+
+      def voting_result(initiative)
+        initiative.followers.each do |follower|
+          with_user(follower) do
+            # TODO Define body, subject and view for this mailer
+            @subject = ''
+            @body = ''
+
+            mail(to: "#{user.name} <#{user.email}>", subject: @subject)
+          end
+        end
       end
     end
   end
