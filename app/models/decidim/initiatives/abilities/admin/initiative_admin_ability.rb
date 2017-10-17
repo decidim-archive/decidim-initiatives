@@ -63,14 +63,6 @@ module Decidim
               has_initiatives?(user)
             end
 
-            can :manage, Decidim::Feature do
-              has_initiatives?(user)
-            end
-
-            can %i[edit update], Decidim::Surveys::Survey do
-              has_initiatives?(user)
-            end
-
             can :index, Decidim::Initiative do
               has_initiatives?(user)
             end

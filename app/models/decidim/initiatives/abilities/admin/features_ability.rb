@@ -26,13 +26,24 @@ module Decidim
           def define_abilities
             return if admin?
 
-            can :read, Decidim::Feature do
-              has_initiatives?(user)
-            end
+            # TODO This block should be rewritten once the core allows to
+            # configure fine grained permissions for each feature
 
-            can :update, Decidim::Feature do |feature|
-              feature.participatory_space.author.id == user.id
-            end
+            # can :read, Decidim::Feature do
+            #   has_initiatives?(user)
+            # end
+            #
+            # can :update, Decidim::Feature do |feature|
+            #   feature.participatory_space.author.id == user.id
+            # end
+
+            # can :manage, Decidim::Feature do
+            #   has_initiatives?(user)
+            # end
+            #
+            # can %i[edit update], Decidim::Surveys::Survey do
+            #   has_initiatives?(user)
+            # end
           end
 
           def has_initiatives?(user)
