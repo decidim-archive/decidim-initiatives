@@ -154,8 +154,6 @@ es:
             one: FIRMA
             other: FIRMAS
         show:
-          initiative_accepted: Iniciativa aceptada
-          initiative_rejected: Iniciativa rechazada
           start_time: Fecha de inicio
           end_time: Fecha de fin
         promoter_committee:
@@ -169,6 +167,8 @@ es:
           comments_count_title: Comentarios
           meetings_count_title: Encuentros
           assistants_count_title: Asistentes
+        result:
+          initiative_accepted_reason: Esta iniciativa ha sido aceptada porque
       initiative_votes:
         create:
           error: Ha habido errores al votar la iniciativa.

@@ -1,0 +1,16 @@
+<% if initiative.accepted? && initiative.answered? && translated_attribute(initiative.answer).present? %>
+  <div class="section">
+    <div class="callout success">
+      <h5><%= t('.initiative_accepted_reason') %>:</h5>
+      <p>
+        <% if initiative.answer_url %>
+          <a href="<%= initiative.answer_url %>" target="_blank">
+            <%= sanitize translated_attribute initiative.answer %>
+          </a>
+        <% else %>
+          <%= sanitize translated_attribute initiative.answer %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+<% end %>

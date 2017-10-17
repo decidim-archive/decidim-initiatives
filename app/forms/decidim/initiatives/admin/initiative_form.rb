@@ -33,6 +33,10 @@ module Decidim
 
         validates :answer, translatable_presence: true, if: ->(form) { form.context.initiative.accepted? }
         validates :answer_url, presence: true, if: ->(form) { form.context.initiative.accepted? }
+
+        def available_locales
+          Decidim.available_locales
+        end
       end
     end
   end

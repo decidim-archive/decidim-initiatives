@@ -49,27 +49,12 @@
       <%= render partial: 'tags', locals: { resource: current_initiative } %>
     </div>
 
+    <%= render partial: 'result', locals: { initiative: current_initiative } %>
+
     <%= attachments_for current_initiative %>
 
     <%= render partial: 'supports', locals: { initiative: current_initiative } %>
     <%= render partial: 'committee_members', locals: { initiative: current_initiative } %>
-
-    <% if current_initiative.answered? && partially_translated_attribute(current_initiative.answer).present? %>
-      <% if current_initiative.accepted? %>
-        <div class="section">
-          <div class="callout success">
-            <h5><%= link_to t('.initiative_accepted'), current_initiative.answer_url || '#' %></h5>
-            <p><%= partially_translated_attribute current_initiative.answer %></p>
-          </div>
-        </div>
-      <% else %>
-        <div class="section">
-          <div class="callout warning">
-            <h5><%= t('.initiative_rejected') %></h5>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
   </div>
 </div>
 

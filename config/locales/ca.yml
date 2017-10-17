@@ -154,8 +154,6 @@ ca:
             one: SIGNATURA
             other: SIGNATURES
         show:
-          initiative_accepted: Iniciativa acceptada
-          initiative_rejected: Iniciativa rebutjada
           start_time: Data d'inici
           end_time: Data de fi
         promoter_committee:
@@ -169,6 +167,8 @@ ca:
           comments_count_title: Comentaris
           meetings_count_title: Encontres
           assistants_count_title: Assistents
+        result:
+          initiative_accepted_reason: Aquesta proposta ha estat acceptada perquè
       initiative_votes:
         create:
           error: Hi ha hagut errors en votar l'iniciativa.
