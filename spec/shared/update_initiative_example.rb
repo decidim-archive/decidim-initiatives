@@ -15,15 +15,15 @@ shared_examples 'update an initiative' do
   end
 
   describe 'call' do
-    let(:initiative_type) { create(:initiatives_type, organization: organization) }
     let(:form_params) do
       {
         title: { en: 'A reasonable initiative title' },
         description: { en: 'A reasonable initiative description' },
         signature_start_time: Date.today + 10.days,
         signature_end_time: Date.today + 130.days,
-        type_id: initiative_type.id,
         signature_type: 'any',
+        type_id: initiative.type.id,
+        decidim_scope_id: initiative.scope.id,
         answer: { en: 'Measured answer' },
         answer_url: 'http://decidim.org',
         hashtag: 'update_initiative_example'

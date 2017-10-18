@@ -20,7 +20,6 @@ module Decidim
       include Paginable
       include Orderable
       include TypeSelectorOptions
-      include Decidim::Initiatives::Scopeable
       include NeedsInitiative
 
       helper_method :collection, :initiatives, :filter, :stats
@@ -47,7 +46,7 @@ module Decidim
       private
 
       def initiatives
-        @initiatives = search.results.includes(:author, :type)
+        @initiatives = search.results.includes(:author, :scoped_type)
         @initiatives = paginate(@initiatives)
         @initiatives = reorder(@initiatives)
       end

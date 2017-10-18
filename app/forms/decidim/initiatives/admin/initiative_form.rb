@@ -23,8 +23,6 @@ module Decidim
 
         validates :title, :description, presence: true
         validates :signature_type, presence: true
-        validates :type_id, presence: true
-        validates :decidim_scope_id, presence: true, if: ->(form) { form.decidim_scope_id.present? }
         validates :signature_start_time, presence: true, if: ->(form) { form.context.initiative.published? }
         validates :signature_end_time, presence: true, if: ->(form) { form.context.initiative.published? }
         validates :signature_end_time, date: { after: :signature_start_time }, if: ->(form) {
@@ -33,6 +31,11 @@ module Decidim
 
         validates :answer, translatable_presence: true, if: ->(form) { form.context.initiative.accepted? }
         validates :answer_url, presence: true, if: ->(form) { form.context.initiative.accepted? }
+
+        def map_model(model)
+          self.type_id = model.type.id
+          self.decidim_scope_id = model.scope.id
+        end
 
         def available_locales
           Decidim.available_locales

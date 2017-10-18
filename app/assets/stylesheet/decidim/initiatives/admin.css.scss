@@ -7,3 +7,15 @@
 .invite-users-link {
   padding-left: 5px;
 }
+
+#initiatives_type_remove_banner_image {
+  display: none;
+}
+
+#initiatives_type_remove_banner_image + label {
+  display: none;
+}
+
+.text-right {
+  text-align: right !important;
+}

@@ -10,10 +10,10 @@ module Decidim
       include Decidim::FormFactory
       include InitiativeHelper
       include TypeSelectorOptions
-      include Decidim::Initiatives::Scopeable
 
       helper Decidim::PartialTranslationsHelper
       helper_method :similar_initiatives
+      helper_method :scopes
 
       steps :select_initiative_type,
             :previous_form,
@@ -92,6 +92,10 @@ module Decidim
         @form.valid? if params[:validate_form]
 
         @form
+      end
+
+      def scopes
+        InitiativesType.find(@form.type_id).scopes.includes(:scope)
       end
     end
   end

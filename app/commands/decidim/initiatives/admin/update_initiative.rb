@@ -41,15 +41,13 @@ module Decidim
           attrs = {
             title: form.title,
             description: form.description,
-            type_id: form.type_id,
-            decidim_scope_id: form.decidim_scope_id,
             signature_type: form.signature_type,
             hashtag: form.hashtag,
             answer: form.answer,
             answer_url: form.answer_url
           }
 
-          attr[:answered_at] = DateTime.now unless form.answer.blank?
+          attrs[:answered_at] = DateTime.now unless form.answer.blank?
 
           if current_user.admin?
             attrs[:signature_start_time] = form.signature_start_time

@@ -61,14 +61,18 @@ module Decidim
       end
 
       def build_initiative
+        scoped_type = InitiativesTypeScope.find_by(
+          decidim_initiatives_types_id: form.type_id,
+          decidim_scopes_id: form.scope_id
+        )
+
         Initiative.new(
           organization: form.current_organization,
           title: { current_locale => form.title },
           description: { current_locale => form.description },
           author: current_user,
           decidim_user_group_id: form.decidim_user_group_id,
-          type_id: form.type_id,
-          decidim_scope_id: form.scope_id,
+          scoped_type: scoped_type,
           signature_type: form.signature_type,
           state: 'created'
         )

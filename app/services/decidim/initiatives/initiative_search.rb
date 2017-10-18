@@ -14,6 +14,7 @@ module Decidim
 
       def base_query
         Decidim::Initiative
+          .includes(:author, scoped_type: [ :scope ])
           .where(organization: options[:organization])
       end
 
@@ -42,7 +43,9 @@ module Decidim
       def search_type
         return query if type == 'all'
 
-        query.where(type_id: type)
+        query
+          .joins(:scoped_type)
+          .where('decidim_initiatives_type_scopes.decidim_initiatives_types_id = ?', type)
       end
 
       def search_author
@@ -54,7 +57,9 @@ module Decidim
       end
 
       def search_scope_id
-        query.where(decidim_scope_id: scope_id) unless scope_id.nil?
+        query
+          .joins(:scoped_type)
+          .where('decidim_initiatives_type_scopes.decidim_scopes_id = ?', scope_id) unless scope_id.nil?
       end
 
       private

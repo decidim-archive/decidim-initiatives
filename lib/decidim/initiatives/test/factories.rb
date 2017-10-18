@@ -7,9 +7,14 @@ FactoryGirl.define do
   factory :initiatives_type, class: Decidim::InitiativesType do
     title { Decidim::Faker::Localized.sentence(3) }
     description { Decidim::Faker::Localized.wrapped('<p>', '</p>') { Decidim::Faker::Localized.sentence(4) } }
-    supports_required 1000
     banner_image { Decidim::Dev.test_file('city2.jpeg', 'image/jpeg') }
     organization
+  end
+
+  factory :initiatives_type_scope, class: Decidim::InitiativesTypeScope do
+    type { create(:initiatives_type) }
+    scope { create(:scope, organization: type.organization) }
+    supports_required 1000
   end
 
   factory :initiative, class: Decidim::Initiative do
@@ -18,11 +23,21 @@ FactoryGirl.define do
     organization
     author { create(:user, :confirmed, organization: organization) }
     published_at { Time.current }
-    type { create(:initiatives_type, organization: organization) }
     state 'published'
     signature_type 'online'
     signature_start_time { Time.current }
     signature_end_time { Time.current + 120.days}
+
+    after(:build) do |object|
+      initiative_type = create(:initiatives_type, organization: object.organization)
+      scope = create(:scope, organization: object.organization)
+
+      object.scoped_type = Decidim::InitiativesTypeScope.create(
+        type: initiative_type,
+        scope: scope,
+        supports_required: 1000
+      )
+    end
 
     after(:create) do |initiative|
       unless initiative.author.authorizations.any?

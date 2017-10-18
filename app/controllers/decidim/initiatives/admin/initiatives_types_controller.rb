@@ -26,9 +26,9 @@ module Decidim
           @form = initiative_type_form.from_params(params)
 
           CreateInitiativeType.call(@form) do
-            on(:ok) do
+            on(:ok) do |initiative_type|
               flash[:notice] = I18n.t('decidim.initiatives.admin.initiatives_types.create.success')
-              redirect_to initiatives_types_path
+              redirect_to edit_initiatives_type_path(initiative_type)
             end
 
             on(:invalid) do
@@ -40,24 +40,28 @@ module Decidim
 
         def edit
           authorize! :edit, current_initiative_type
-          @form = initiative_type_form.from_model(current_initiative_type)
+          @form = initiative_type_form
+                    .from_model(current_initiative_type)
+                    .with_context(initiative_type: current_initiative_type)
         end
 
         def update
           authorize! :update, current_initiative_type
-          @form = initiative_type_form.from_params(params)
+          @form = initiative_type_form
+                    .from_params(params)
+                    .with_context(initiative_type: current_initiative_type)
 
           UpdateInitiativeType.call(current_initiative_type, @form) do
             on(:ok) do
               flash[:notice] = I18n.t('decidim.initiatives.admin.initiatives_types.update.success')
-              redirect_to initiatives_types_path
             end
 
             on(:invalid) do
               flash.now[:alert] = I18n.t('decidim.initiatives.admin.initiatives_types.update.error')
-              render :edit
             end
           end
+
+          render :edit
         end
 
         def destroy

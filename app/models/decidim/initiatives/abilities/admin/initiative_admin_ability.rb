@@ -41,7 +41,19 @@ module Decidim
             can :manage, InitiativesType
             cannot :destroy, InitiativesType
             can :destroy, InitiativesType do |initiative_type|
-              initiative_type.initiatives.empty?
+              result = true
+
+              initiative_type.scopes.each do |s|
+                result &&= s.initiatives.empty?
+              end
+
+              result
+            end
+
+            can :manage, Decidim::InitiativesTypeScope
+            cannot :destroy, Decidim::InitiativesTypeScope
+            can :destroy, Decidim::InitiativesTypeScope do |scope|
+              scope.initiatives.empty?
             end
 
             can :manage_membership, Decidim::Initiative

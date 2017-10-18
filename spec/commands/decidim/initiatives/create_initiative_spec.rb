@@ -7,7 +7,7 @@ module Decidim
     describe CreateInitiative do
       let(:form_klass) { InitiativeForm }
 
-      it_behaves_like 'create an initiative', true
+      it_behaves_like 'create an initiative'
     end
   end
 end

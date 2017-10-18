@@ -63,7 +63,7 @@ module Decidim
           end
 
           concat(content_tag(:span, class: 'popularity__desc') do
-            I18n.t('decidim.initiatives.initiatives.vote_cabin.supports_required', total_supports: initiative.type.supports_required)
+            I18n.t('decidim.initiatives.initiatives.vote_cabin.supports_required', total_supports: initiative.scoped_type.supports_required)
           end)
         end
       end

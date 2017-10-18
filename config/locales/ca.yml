@@ -39,6 +39,11 @@ ca:
             title: Iniciatives
             state:  Estat
             created_at: Data de creació
+        initiatives_type_scope:
+          name: Àmbit per al tipus d'iniciativa
+          fields:
+            scope: Àmbit
+            supports_required: Suports necessaris
     menu:
       initiatives: Iniciatives
     initiatives:
@@ -61,6 +66,27 @@ ca:
             error: S'ha produit un error
           destroy:
             success: S'ha eliminat el tipus de iniciativa.
+          initiative_type_scopes:
+            title: Àmbits per al tipus d'iniciativa
+        initiatives_type_scopes:
+          destroy:
+            success: S'ha eliminat l'àmbit
+          create:
+            success: S'ha creat un nou àmbit per aquest tipus d'iniciativa
+            error: S'ha produit un error
+          update:
+            success: L'àmbit ha estat correctament actualitzat
+            error: S'ha produit un error
+          edit:
+            title: Editar l'àmbit d'un tipus d'iniciativa
+            update: Actualitzar
+            back: Torna enrere
+            destroy: Esborrar
+            confirm_destroy: ¿Estas segur?
+          new:
+            title: Nou ambit de tipus d'iniciativa
+            create: Crear
+            back: Torna enrere
         initiatives:
           index:
             actions_title: Acció
@@ -189,6 +215,7 @@ ca:
           title: Ompli els detalls de la iniciativa
           finish: Finalitzar
           back: Torna enrere
+          select_scope: Sel·lecciona un àmbit
       committee_requests:
         new:
           help_text: Vas a sol·licitar formar part de la comisió promotora per aquesta iniciativa

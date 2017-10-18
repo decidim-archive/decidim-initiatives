@@ -11,16 +11,14 @@ module Decidim
 
         translatable_attribute :title, String
         translatable_attribute :description, String
-        attribute :supports_required, Integer
         attribute :banner_image, String
 
         validates :title, :description, translatable_presence: true
-        validates :supports_required, presence: true,
-                                      numericality: {
-                                        only_integer: true,
-                                        greater_than: 0
-                                      }
-        validates :banner_image, presence: true
+        validates :banner_image, presence: true, if: ->(form) { form.context.initiative_type.nil? }
+
+        def available_locales
+          Decidim.available_locales
+        end
       end
     end
   end

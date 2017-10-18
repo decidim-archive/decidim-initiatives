@@ -38,14 +38,12 @@
     </fieldset>
   </div>
 
-  <% if has_scopes? %>
-    <%= form.scopes_select :scope_id,
-                           legend_title: t('.scopes'),
-                           label: false,
-                           prompt: t('.scope_prompt'),
-                           remote_path: decidim.scopes_search_path,
-                           multiple: true %>
-  <% end %>
+  <%= form.scopes_select :scope_id,
+                         legend_title: t('.scopes'),
+                         label: false,
+                         prompt: t('.scope_prompt'),
+                         remote_path: decidim.scopes_search_path,
+                         multiple: true %>
 
   <%= hidden_field_tag :order, order, id: nil, class: 'order_filter' %>
 <% end %>

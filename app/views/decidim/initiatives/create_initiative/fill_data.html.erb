@@ -26,13 +26,11 @@
                 <%= f.select :signature_type, signature_type_options %>
               </div>
 
-              <% if has_scopes? %>
-                <div class="field">
-                  <%= f.select :scope_id,
-                               scopes.map { |s| [translated_attribute(s.name),s.id]},
-                               prompt: t('decidim.scopes.global') %>
-                </div>
-              <% end %>
+              <div class="field">
+                <%= f.select :scope_id,
+                             scopes.map { |scoped_type| [translated_attribute(scoped_type.scope.name), scoped_type.scope.id]},
+                             prompt: t('.select_scope') %>
+              </div>
 
               <% if current_user.user_groups.verified.any? %>
                 <div class="field">

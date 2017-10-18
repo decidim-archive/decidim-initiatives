@@ -9,8 +9,6 @@ module Decidim
       class InitiativesController < ApplicationController
         helper_method :current_initiative, :initiative_type_options
 
-        include Decidim::Initiatives::Scopeable
-
         helper Decidim::Initiatives::InitiativeHelper
         helper Decidim::Initiatives::CreateInitiativeHelper
         helper Decidim::PartialTranslationsHelper

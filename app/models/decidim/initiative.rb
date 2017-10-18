@@ -15,14 +15,12 @@ module Decidim
                foreign_key: 'decidim_organization_id',
                class_name: 'Decidim::Organization'
 
-    belongs_to :type,
-               foreign_key: 'type_id',
-               class_name: 'Decidim::InitiativesType'
+    belongs_to :scoped_type,
+               foreign_key: 'scoped_type_id',
+               class_name: 'Decidim::InitiativesTypeScope'
 
-    belongs_to :scope,
-               foreign_key: 'decidim_scope_id',
-               class_name: 'Decidim::Scope',
-               optional: true
+    delegate :type, to: :scoped_type, allow_nil: true
+    delegate :scope, to: :scoped_type, allow_nil: true
 
     has_many :votes,
              foreign_key: 'decidim_initiative_id',
@@ -51,8 +49,6 @@ module Decidim
     validates :signature_type, presence: true
     validates :hashtag, uniqueness: true, allow_blank: true, case_sensitive: false
 
-    mount_uploader :banner_image, Decidim::BannerImageUploader
-
     scope :open, -> {
       published
         .where.not(state: %i[discarded rejected accepted])
@@ -65,14 +61,14 @@ module Decidim
         .or(where('signature_start_time > ?', DateTime.now))
         .or(where('signature_end_time < ?', DateTime.now))
     }
-    scope :published, -> { where.not(published_at: nil) }
+    scope :published, -> {where.not(published_at: nil)}
 
-    scope :with_state, ->(state) { where(state: state) unless state.blank? }
+    scope :with_state, ->(state) {where(state: state) unless state.blank?}
 
     def self.order_randomly(seed)
       transaction do
         connection.execute("SELECT setseed(#{connection.quote(seed)})")
-        order('RANDOM()').load
+        select('"decidim_initiatives".*, RANDOM()').order('RANDOM()').load
       end
     end
 
@@ -151,7 +147,7 @@ module Decidim
 
     # Public: Returns the percentage of required supports reached
     def percentage
-      initiative_votes_count * 100 / type.supports_required
+      initiative_votes_count * 100 / scoped_type.supports_required
     end
   end
 end

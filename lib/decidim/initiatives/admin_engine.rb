@@ -13,7 +13,9 @@ module Decidim
       paths['db/migrate'] = nil
 
       routes do
-        resources :initiatives_types, except: :show
+        resources :initiatives_types, except: :show do
+          resources :initiatives_type_scopes, except: %i[index show]
+        end
         resources :initiatives, only: %i[index edit update] do
           member do
             get :send_to_technical_validation

@@ -11,6 +11,7 @@ module Decidim
 
           can :read, Initiative, &:published?
           can :search, InitiativesType
+          can :search, InitiativesTypeScope
         end
       end
     end

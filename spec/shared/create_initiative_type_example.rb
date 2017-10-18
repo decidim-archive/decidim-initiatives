@@ -17,7 +17,6 @@ shared_examples 'create an initiative type' do
       {
         title: Decidim::Faker::Localized.sentence(5),
         description: Decidim::Faker::Localized.sentence(25),
-        supports_required: 1000,
         banner_image: Decidim::Dev.test_file('city2.jpeg', 'image/jpeg')
       }
     end

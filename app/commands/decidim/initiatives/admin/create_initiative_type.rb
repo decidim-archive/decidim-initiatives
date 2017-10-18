@@ -42,7 +42,6 @@ module Decidim
             organization: form.current_organization,
             title: form.title,
             description: form.description,
-            supports_required: form.supports_required,
             banner_image: form.banner_image
           )
 

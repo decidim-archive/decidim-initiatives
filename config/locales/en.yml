@@ -39,6 +39,11 @@ en:
             title: Initiatives
             state: State
             created_at: Created at
+        initiatives_type_scope:
+          name: Initiative type scope
+          fields:
+            scope: Scope
+            supports_required: Supports required
     menu:
       initiatives: Initiatives
     initiatives:
@@ -60,7 +65,28 @@ en:
             success: The given initiative has been successfully updated
             error: An error has occurred
           destroy:
-            success: The initiative type has been successfully removed.
+            success: The initiative type has been successfully removed
+          initiative_type_scopes:
+            title: Scopes for the initiative type
+        initiatives_type_scopes:
+          destroy:
+            success: The scope has been successfully removed
+          create:
+            success: A new scope for the given initiative type has been created
+            error: An error has occurred
+          update:
+            success: The scope has been successfully updated
+            error: An error has occurred
+          edit:
+            title: Edit initiative type scope
+            update: Update
+            back: Back
+            destroy: Destroy
+            confirm_destroy: Are you sure?
+          new:
+            title: Create initiative type scope
+            create: Create
+            back: Back
         initiatives:
           index:
             actions_title: Action
@@ -189,6 +215,7 @@ en:
           title: Fill the initiative details
           finish: Finish
           back: Back
+          select_scope: Selecct a scope
       committee_requests:
         new:
           continue: Continue

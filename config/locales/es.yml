@@ -39,6 +39,11 @@ es:
             title: Iniciativas
             state:  Estado
             created_at: Fecha de creación
+        initiatives_type_scope:
+          name: Ámbito para tipo de iniciativa
+          fields:
+            scope: Ámbito
+            supports_required: Soportes requeridos
     menu:
       initiatives: Iniciativas
     initiatives:
@@ -54,13 +59,34 @@ es:
             destroy: Eliminar
             confirm_destroy: ¿Estas seguro?
           create:
-            success: Se ha creado un nuevo tipo de iniciativa.
+            success: Se ha creado un nuevo tipo de iniciativa
             error: Se ha producido un error
           update:
-            success: Tipo de iniciativa actualizado con éxito.
-            error: Se ha producido un error.
+            success: Tipo de iniciativa actualizado con éxito
+            error: Se ha producido un error
           destroy:
-            success: Se ha borrado el tipo de iniciativa.
+            success: Se ha borrado el tipo de iniciativa
+          initiative_type_scopes:
+            title: Ámbitos para el tipo de iniciativa
+        initiatives_type_scopes:
+          destroy:
+            success: Se ha borrado el ámbito.
+          create:
+            success: Se ha creado el ámbito para el tipo de iniciativa
+            error: Se ha producido un error
+          update:
+            success: El ámbito para el tipo de iniciativa se ha actualizado con éxito
+            error: Se ha producido un error
+          edit:
+            title: Editar ámbito de tipo de iniciativa
+            update: Actualizar
+            back: Volver
+            destroy: Borrar
+            confirm_destroy: ¿Estas seguro?
+          new:
+            title: Nuevo ámbito de tipo de iniciativa
+            create: Crear
+            back: Volver
         initiatives:
           index:
             actions_title: Acción
@@ -189,6 +215,7 @@ es:
           title: Completa los detalles de la iniciativa
           finish: Finalizar
           back: Volver
+          select_scope: Selecciona un ámbito
       committee_requests:
         new:
           continue: Continuar

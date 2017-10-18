@@ -1,36 +1,24 @@
 # frozen_string_literal: true
 
-shared_examples 'create an initiative' do |with_author|
-  let(:initiative_type) { create(:initiatives_type) }
-  let(:author) { create(:user, organization: initiative_type.organization) } if with_author
-
-  let(:form) do
-    form_klass.from_params(
-      form_params
-    ).with_context(
-      current_organization: initiative_type.organization,
-      current_feature: nil
-    )
-  end
+shared_examples 'create an initiative' do
+  let(:scoped_type) { create(:initiatives_type_scope) }
+  let(:author) { create(:user, organization: scoped_type.type.organization) }
+  let(:form) { form_klass.from_params(form_params).with_context(current_organization: scoped_type.type.organization) }
 
   describe 'call' do
     let(:form_params) do
       {
         title: 'A reasonable initiative title',
         description: 'A reasonable initiative description',
-        type_id: initiative_type.id,
+        type_id: scoped_type.type.id,
         signature_type: 'online',
-        decidim_scope_id: nil,
+        scope_id: scoped_type.scope.id,
         decidim_user_group_id: nil
       }
     end
 
     let(:command) do
-      if with_author
-        described_class.new(form, author)
-      else
-        described_class.new(form)
-      end
+      described_class.new(form, author)
     end
 
     describe 'when the form is not valid' do
@@ -60,35 +48,33 @@ shared_examples 'create an initiative' do |with_author|
         end.to change { Decidim::Initiative.count }.by(1)
       end
 
-      if with_author
-        it 'sets the author' do
-          command.call
-          proposal = Decidim::Initiative.last
+      it 'sets the author' do
+        command.call
+        initiative = Decidim::Initiative.last
 
-          expect(proposal.author).to eq(author)
-        end
+        expect(initiative.author).to eq(author)
       end
 
       it 'Default state is created' do
         command.call
-        proposal = Decidim::Initiative.last
+        initiative = Decidim::Initiative.last
 
-        expect(proposal.created?).to be_truthy
+        expect(initiative.created?).to be_truthy
       end
 
       it 'Title and description are stored with its locale' do
         command.call
-        proposal = Decidim::Initiative.last
+        initiative = Decidim::Initiative.last
 
-        expect(proposal.title.keys).not_to be_empty
-        expect(proposal.description.keys).not_to be_empty
+        expect(initiative.title.keys).not_to be_empty
+        expect(initiative.description.keys).not_to be_empty
       end
 
       it 'Voting interval is not set yet' do
         command.call
-        proposal = Decidim::Initiative.last
+        initiative = Decidim::Initiative.last
 
-        expect(proposal).not_to have_signature_interval_defined
+        expect(initiative).not_to have_signature_interval_defined
       end
     end
   end
