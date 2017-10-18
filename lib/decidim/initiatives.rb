@@ -61,5 +61,12 @@ module Decidim
     mattr_accessor :stats_cache_expiration_time do
       5.minutes
     end
+
+    # Maximum amount of time in validating state.
+    # After this time the initiative will be moved to
+    # discarded state.
+    mattr_accessor :max_time_in_validating_state do
+      60.days
+    end
   end
 end

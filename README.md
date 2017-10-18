@@ -40,6 +40,25 @@ The database requires the extension pg_trgm enabled. Contact your DBA to enable 
 CREATE EXTENSION pg_trgm;
 ```
 
+## Rake tasks
+
+This engine comes with two rake tasks:
+
+### decidim_initiatives:check_validating
+
+This task move all initiatives in validation phase without changes for the amount of 
+time defined in __Decidim::Initiatives::max_time_in_validating_state__. These initiatives
+will be moved to __discarded__ state.
+
+### decidim_initiatives:check_published
+
+This task retrieves all published initiatives whose support method is online and the support
+period has expired. Initiatives that have reached the minimum supports required will pass
+to state __accepted__. The initiatives without enough supports will pass to __rejected__ state.
+
+Initiatives with offline support method enabled (pure offline or mixed) will get its status updated
+after the presential supports have been registered into the system.
+
 ## Seeding example data
 
 In order to populate the database with example data proceed as usual in rails:

@@ -62,6 +62,26 @@ FactoryGirl.define do
       signature_start_time nil
       signature_end_time nil
     end
+
+    trait :acceptable do
+      signature_start_time { DateTime.now - 3.months }
+      signature_end_time { DateTime.now - 2.months }
+      signature_type 'online'
+
+      after(:build) do |initiative|
+        initiative.initiative_votes_count = initiative.scoped_type.supports_required + 1
+      end
+    end
+
+    trait :rejectable do
+      signature_start_time { DateTime.now - 3.months }
+      signature_end_time { DateTime.now - 2.months }
+      signature_type 'online'
+
+      after(:build) do |initiative|
+        initiative.initiative_votes_count = initiative.scoped_type.supports_required - 1
+      end
+    end
   end
 
   factory :initiative_user_vote, class: Decidim::InitiativesVote do
