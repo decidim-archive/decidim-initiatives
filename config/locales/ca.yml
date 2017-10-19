@@ -212,6 +212,7 @@ ca:
           title: S'hi han trobat iniciatives similars
           continue: Continuar
           back: Torna enrere
+          action_text: Cap dels anteriors iniciatives s'hi ajusta a la meva proposta
         fill_data:
           title: Ompli els detalls de la iniciativa
           finish: Finalitzar

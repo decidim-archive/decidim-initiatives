@@ -212,6 +212,7 @@ es:
           title: Se han encontrado iniciativas similares
           continue: Continuar
           back: Volver
+          action_text: Ninguna de las anteriores iniciativas se ajusta a mi propuesta
         fill_data:
           title: Completa los detalles de la iniciativa
           finish: Finalizar

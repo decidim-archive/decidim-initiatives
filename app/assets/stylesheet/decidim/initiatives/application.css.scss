@@ -44,3 +44,17 @@
     margin-left: 25px;
   }
 }
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.action-text {
+  padding: 0.85em 0;
+  display: inline-block;
+  vertical-align: middle;
+}

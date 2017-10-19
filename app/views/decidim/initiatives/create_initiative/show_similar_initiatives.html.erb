@@ -1,21 +1,26 @@
 <main class="wrapper">
-  <div class="row columns">
-    <%= link_to :back, class: "muted-link" do %>
+  <div class="row" columns>
+
+      <%= link_to :back, class: 'muted-link' do %>
         <%= icon 'chevron-left', class: 'icon--small' %>
         <%= t('.back') %>
-    <% end %>
-    <h2 class="section-heading"><%= t('.title') %></h2>
+      <% end %>
+
   </div>
 
   <div class="row">
-    <div class="columns large-6 medium-centered">
+    <div class="columns large-8 medium-centered">
       <div class="card">
         <div class="card__content">
+          <div class="card__header">
+            <h5 class="card__title text-center"><%= t('.title') %></h5>
+          </div>
           <%= render similar_initiatives %>
 
           <div class="column">
             <div class="actions">
-              <%= link_to t('.continue'), next_wizard_path, class: 'button expanded' %>
+              <div class="pull-left action-text"><%= t('.action_text') %></div>
+              <%= link_to t('.continue'), next_wizard_path, class: 'pull-right button' %>
             </div>
           </div>
         </div>
@@ -23,3 +28,5 @@
     </div>
   </div>
 </main>
+
+<%= stylesheet_link_tag 'decidim/initiatives/application' %>

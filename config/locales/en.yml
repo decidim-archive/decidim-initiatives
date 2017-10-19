@@ -212,6 +212,7 @@ en:
           title: Similar initiatives found
           continue: Continue
           back: Back
+          action_text: None of the previous initiatives fits in my proposal
         fill_data:
           title: Fill the initiative details
           finish: Finish
