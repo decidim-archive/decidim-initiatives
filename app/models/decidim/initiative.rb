@@ -3,6 +3,7 @@
 module Decidim
   # The data store for a Initiative in the Decidim::Initiatives component.
   class Initiative < ApplicationRecord
+    include ActiveModel::Dirty
     include Decidim::Authorable
     include Decidim::Participable
     include Decidim::Publicable
@@ -62,8 +63,9 @@ module Decidim
         .or(where('signature_end_time < ?', DateTime.now))
     }
     scope :published, -> {where.not(published_at: nil)}
-
     scope :with_state, ->(state) {where(state: state) unless state.blank?}
+
+    after_save :notify_state_change
 
     def self.order_randomly(seed)
       transaction do
@@ -148,6 +150,15 @@ module Decidim
     # Public: Returns the percentage of required supports reached
     def percentage
       initiative_votes_count * 100 / scoped_type.supports_required
+    end
+
+    private
+
+    def notify_state_change
+      if self.saved_change_to_state? && !self.created? && !state_before_last_save.nil?
+        notifier = InitiativeStatusChangeNotifier.new(initiative: self)
+        notifier.notify
+      end
     end
   end
 end

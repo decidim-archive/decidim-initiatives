@@ -222,6 +222,16 @@ en:
           help_text: You are about to request being membership of the promoter committee of this initiative
         spawn:
           success: Your request has been sent to the initiative author.
+      initiatives_mailer:
+        progress_report_for: "Resume about the initiative: %{title}"
+        progress_report_body_for: "The initiative %{title} has reached the %{percentage}% of required supports."
+        technical_validation_for: "The initiative %{title} has requested its technical validation."
+        technical_validation_body_for: "The initiative %{title} has requested its technical validation."
+        status_change_for: "The initiative %{title} has changed its state"
+        status_change_body_for: "The initiative %{title} has changed its state to: %{state}"
+        initiative_link:
+          check_initiative_details: You can see the initiative details
+          here: here
   layouts:
     decidim:
       initiatives:

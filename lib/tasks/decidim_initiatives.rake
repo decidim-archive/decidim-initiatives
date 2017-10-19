@@ -18,4 +18,36 @@ namespace :decidim_initiatives do
       end
     end
   end
+
+  desc 'Notify progress on published initiatives'
+  task notify_progress: :environment do
+    Decidim::Initiative
+      .published
+      .where.not(first_progress_notification_at: nil)
+      .where(second_progress_notification_at: nil).find_each do |initiative|
+
+      if initiative.percentage >= Decidim::Initiatives.second_notification_percentage
+        notifier = Decidim::InitiativeProgressNotifier.new(initiative: initiative)
+        notifier.notify
+
+        initiative.second_progress_notification_at = DateTime.now
+        initiative.save
+      end
+    end
+
+    Decidim::Initiative
+      .published
+      .where(first_progress_notification_at: nil).find_each do |initiative|
+
+      if initiative.percentage >= Decidim::Initiatives.first_notification_percentage
+        notifier = Decidim::InitiativeProgressNotifier.new(initiative: initiative)
+        notifier.notify
+
+        initiative.first_progress_notification_at = DateTime.now
+        initiative.save
+      end
+    end
+
+
+  end
 end

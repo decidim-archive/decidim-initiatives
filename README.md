@@ -59,6 +59,13 @@ to state __accepted__. The initiatives without enough supports will pass to __re
 Initiatives with offline support method enabled (pure offline or mixed) will get its status updated
 after the presential supports have been registered into the system.
 
+### decidim_initiatives:notify_progress
+
+This task sends notification mails when initiatives reaches the support percentages defined in
+__Decidim::Initiatives.first_notification_percentage__ and __Decidim::Initiatives.second_notification_percentage__.
+
+Author, members of the promoter committee and followers will receive it.
+
 ## Seeding example data
 
 In order to populate the database with example data proceed as usual in rails:

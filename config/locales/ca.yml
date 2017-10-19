@@ -222,6 +222,16 @@ ca:
           continue: Continuar
         spawn:
           success: La teva petició ha estat enviada l'autor de la iniciativa
+      initiatives_mailer:
+        progress_report_for: "Actualització sobre l'estat de la iniciativa: %{title}"
+        progress_report_body_for: "La iniciativa %{title} ha alcançat el %{percentage}% de soports."
+        technical_validation_for: "La iniciativa %{title} ha sol·licitat validació tècnica."
+        technical_validation_body_for: "La iniciativa %{title} ha sol·licitat validació tècnica."
+        status_change_for: "La iniciativa %{title} ha canviat de estat"
+        status_change_body_for: "La iniciativa %{title} ha canviat de estat a: %{state}"
+        initiative_link:
+          check_initiative_details: Pots consultar la iniciativa
+          here: ací
   layouts:
     decidim:
       initiatives:

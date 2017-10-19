@@ -222,6 +222,16 @@ es:
           help_text: Vas a solicitar formar parte de la comisión promotora para esta iniciativa
         spawn:
           success: Tu petición ha sido enviada al autor de la iniciativa.
+      initiatives_mailer:
+        progress_report_for: "Actualización de estado para la iniciativa: %{title}"
+        progress_report_body_for: "La iniciativa %{title} ha alcanzado el %{percentage}% de soportes."
+        technical_validation_for: "La iniciativa %{title} ha solicitado validación técnica."
+        technical_validation_body_for: "La iniciativa %{title} ha solicitado validación técnica."
+        status_change_for: "La iniciativa %{title} ha cambiado su estado"
+        status_change_body_for: "La iniciativa %{title} ha cambiado su estado a: %{state}"
+        initiative_link:
+          check_initiative_details: Puedes consultar la iniciativa
+          here: aquí
   layouts:
     decidim:
       initiatives:
