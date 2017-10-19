@@ -1,5 +1,6 @@
 <% if initiative.accepted? && initiative.answered? && translated_attribute(initiative.answer).present? %>
-  <div class="section">
+  <br>
+  <div class="row column">
     <div class="callout success">
       <h5><%= t('.initiative_accepted_reason') %>:</h5>
       <p>
@@ -11,6 +12,15 @@
           <%= sanitize translated_attribute initiative.answer %>
         <% end %>
       </p>
+    </div>
+  </div>
+<% end %>
+
+<% if initiative.rejected? %>
+  <br>
+  <div class="row column">
+    <div class="callout warning">
+      <h5><%= t('.initiative_rejected_reason') %></h5>
     </div>
   </div>
 <% end %>

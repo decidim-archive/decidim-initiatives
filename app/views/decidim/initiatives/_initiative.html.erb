@@ -5,9 +5,7 @@
         <%= link_to initiative do%>
             <h5 class="card__title"><%= partially_translated_attribute initiative.title %></h5>
         <% end %>
-        <div class="card__author author-data author-data--small">
-          <%= render partial: 'decidim/initiatives/initiatives/author', locals: { initiative: initiative } %>
-        </div>
+        <%= render partial: 'decidim/initiatives/initiatives/author', locals: { initiative: initiative } %>
       </div>
       <%= render partial: 'decidim/initiatives/initiatives/initiative_badge', locals: { initiative: initiative } %>
       <%= simple_format Truncato.truncate(partially_translated_attribute(initiative.description), max_length: 100, separator: '...') %>

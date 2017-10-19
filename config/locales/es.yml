@@ -195,6 +195,7 @@ es:
           assistants_count_title: Asistentes
         result:
           initiative_accepted_reason: Esta iniciativa ha sido aceptada porque
+          initiative_rejected_reason: Esta iniciativa ha sido rechazada por no contar con los apoyos necesarios
       initiative_votes:
         create:
           error: Ha habido errores al votar la iniciativa.

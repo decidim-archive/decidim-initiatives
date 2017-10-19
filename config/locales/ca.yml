@@ -194,7 +194,8 @@ ca:
           meetings_count_title: Encontres
           assistants_count_title: Assistents
         result:
-          initiative_accepted_reason: Aquesta proposta ha estat acceptada perquè
+          initiative_accepted_reason: Aquesta iniciativa ha estat acceptada perquè
+          initiative_rejected_reason: Aquesta iniciativa ha estat rebutjada a causa de la manca de support.
       initiative_votes:
         create:
           error: Hi ha hagut errors en votar l'iniciativa.

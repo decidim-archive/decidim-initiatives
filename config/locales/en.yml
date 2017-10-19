@@ -194,7 +194,8 @@ en:
           meetings_count_title: Meetings
           assistants_count_title: Assistants
         result:
-          initiative_accepted_reason: This proposal has been accepted because
+          initiative_accepted_reason: This initiative has been accepted because
+          initiative_rejected_reason: This initiative has been rejected due to its lack of supports.
       initiative_votes:
         create:
           error: There's been errors when voting the initiative.

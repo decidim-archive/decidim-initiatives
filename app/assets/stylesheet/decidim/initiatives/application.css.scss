@@ -23,3 +23,24 @@
     }
   }
 }
+
+.initiative-authors {
+  padding-left: 0 !important;
+
+  .publish-date {
+    display: inline-block;
+    margin-left: -10px;
+  }
+
+  .author {
+    margin-right: 15px;
+  }
+
+  .author__avatar--small {
+    margin-left: 0 !important;
+  }
+
+  .author__name {
+    margin-left: 25px;
+  }
+}

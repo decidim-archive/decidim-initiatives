@@ -12,11 +12,11 @@
 
 <div class="row">
   <div class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9">
-    <% if current_initiative.votes_enabled? || current_user %>
+    <% if current_user %>
       <div class="card extra definition-data">
         <div class="definition-data__item vote-block">
+          <%= render partial: 'votes_count', locals: { initiative: current_initiative } %>
           <% if current_initiative.votes_enabled? %>
-            <%= render partial: 'votes_count', locals: { initiative: current_initiative } %>
             <%= render partial: 'vote_cabin', locals: { initiative: current_initiative } %>
           <% end %>
 
@@ -35,27 +35,25 @@
 
   <div class="columns mediumlarge-8 mediumlarge-pull-4">
     <div class="section">
-      <div class="lead">
-        <%= partially_translated_attribute(current_initiative.title) %>
-      </div>
-      <div class="author-data">
+      <div class="row column">
+        <h2 class="heading2">
+          <%= partially_translated_attribute(current_initiative.title) %>
+        </h2>
         <%= render partial: 'author', locals: { initiative: current_initiative } %>
       </div>
-    </div>
+      <br>
+      <div class="row column">
+        <%= render partial: 'initiative_badge', locals: { initiative: current_initiative } %>
+        <%= sanitize partially_translated_attribute(current_initiative.description) %>
+        <%= render partial: 'tags', locals: { resource: current_initiative } %>
+      </div>
 
-    <div class="section">
-      <%= render partial: 'initiative_badge', locals: { initiative: current_initiative } %>
-      <%= simple_format partially_translated_attribute(current_initiative.description) %>
-      <%= render partial: 'tags', locals: { resource: current_initiative } %>
+      <%= render partial: 'result', locals: { initiative: current_initiative } %>
     </div>
-
-    <%= render partial: 'result', locals: { initiative: current_initiative } %>
 
     <%= attachments_for current_initiative %>
 
     <%= render partial: 'supports', locals: { initiative: current_initiative } %>
-    <br>
-    <%= render partial: 'committee_members', locals: { initiative: current_initiative } %>
   </div>
 </div>
 

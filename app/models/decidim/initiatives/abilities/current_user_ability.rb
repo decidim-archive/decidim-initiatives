@@ -44,9 +44,9 @@ module Decidim
           end
         end
 
-          def admin?
-            user&.admin?
-          end
+        def admin?
+          user&.admin?
+        end
       end
     end
   end
