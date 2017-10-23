@@ -20,6 +20,18 @@ en:
         banner_image: Banner image
       initiatives_committee_member:
         user: Committee member
+      initiative_author:
+        name: Name and Surname
+        id_document: DNI/NIE
+        address: Address
+        city: City
+        province: Province
+        post_code: Post code
+        phone_number: Phone number
+      organization_data:
+        name: Complete name
+        id_document: CIF
+        address: Address
   decidim:
     admin:
       titles:
@@ -201,23 +213,38 @@ en:
           error: There's been errors when voting the initiative.
       create_initiative:
         select_initiative_type:
-          create_initiative: Create initiative
+          select_initiative_type_help: Select the initiative type
+          select: Select
           back: Back
-          title: Select initiative type
         previous_form:
-          title: "Previous form"
+          help: Write a title for your initiative. We advice you that it should be short and concise. The description should focus in the solution that you want to propose.
           continue: Continue
           back: Back
         show_similar_initiatives:
-          title: Similar initiatives found
+          continue: My initiative is different
+          back: Back
+        fill_data:
           continue: Continue
           back: Back
-          action_text: None of the previous initiatives fits in my proposal
-        fill_data:
-          title: Fill the initiative details
-          finish: Finish
-          back: Back
           select_scope: Selecct a scope
+        validate:
+          help: Fill the following fields to validate the initiative
+          continue: Continue
+        promotal_committee:
+          back: Back
+          continue: Continue
+          individual_help_text: Share the following link with all people that is going to help you to promote this initiative. When your contacts have received it they have to follow the instructions.
+          organization_help_text: Fill the following data about your organization to complete the information of the promotal committee.
+        share_committee_link:
+          invite_to_committee_help: Link to invite people that will be part of the promotal committee
+          continue: Continue
+        organization_data:
+          continue: Continue
+        finish:
+          back: Back
+          callout_text: Contratulations! Your initiative has been successfully created.
+          go_to_my_initiatives: Go to my initiatives
+          back_to_initiatives: Back to initiatives
       committee_requests:
         new:
           continue: Continue
@@ -236,6 +263,14 @@ en:
           here: here
   layouts:
     decidim:
+      initiative_creation_header:
+        select_initiative_type: Start
+        previous_form: Description
+        show_similar_initiatives: Compare
+        fill_data: Create
+        validate: Validation
+        promotal_committee: Promotal committee
+        finish: Finish
       initiatives:
         initiative:
           check_and_support: Check it out and sign

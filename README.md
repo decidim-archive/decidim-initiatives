@@ -75,8 +75,15 @@ $ bundle exec rails db:seed
 
 ## Aditional considerations
 
+### Cookies
 This engine makes use of cookies to store large form data. You should change the 
 default session store or you might experience problems.
+
+### Translations
+There are some legal texts that are adapted for Barcelona's city council. You should
+adapt them for your decidim instance. The files that you need to check are:
+
+* app/views/decidim/initiatives/_legal_text.*.html.erb
 
 ## Contributing
 See [Decidim](https://github.com/decidim/decidim).

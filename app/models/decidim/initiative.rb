@@ -25,11 +25,15 @@ module Decidim
 
     has_many :votes,
              foreign_key: 'decidim_initiative_id',
-             class_name: 'Decidim::InitiativesVote'
+             class_name: 'Decidim::InitiativesVote', dependent: :destroy
+
+    has_many :extra_data,
+             foreign_key: 'decidim_initiative_id',
+             class_name: 'Decidim::InitiativesExtraData', dependent: :destroy
 
     has_many :committee_members,
              foreign_key: 'decidim_initiatives_id',
-             class_name: 'Decidim::InitiativesCommitteeMember'
+             class_name: 'Decidim::InitiativesCommitteeMember', dependent: :destroy
 
     has_many :features, as: :participatory_space
 
@@ -72,6 +76,12 @@ module Decidim
         connection.execute("SELECT setseed(#{connection.quote(seed)})")
         select('"decidim_initiatives".*, RANDOM()').order('RANDOM()').load
       end
+    end
+
+    # Returns true when an initiative has been created by an individual person.
+    # False in case it has been created by an authorized organization.
+    def created_by_individual?
+      decidim_user_group_id.nil?
     end
 
     def open?

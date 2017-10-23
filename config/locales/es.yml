@@ -20,6 +20,18 @@ es:
         banner_image: Imagen de banner
       initiatives_committee_member:
         user: Miembro del comité
+      initiative_author:
+        name: Nombre y Apellidos
+        id_document: DNI/NIE
+        address: Domicilio (Calle, Nº, Piso, Puerta)
+        city: Población
+        province: Provincia
+        post_code: Código postal
+        phone_number: Teléfono
+      organization_data:
+        name: Nombre completo de la organización
+        id_document: CIF
+        address: Dirección
   decidim:
     admin:
       titles:
@@ -201,23 +213,38 @@ es:
           error: Ha habido errores al votar la iniciativa.
       create_initiative:
         select_initiative_type:
-          create_initiative: Crear iniciativa
+          select_initiative_type_help: Selecciona el tipo de inicativa
+          select: Seleccionar
           back: Volver
-          title: Selecciona el tipo de iniciativa
         previous_form:
-          title: Formulario previo
           continue: Continuar
           back: Volver
+          help: Escribe el título de tu iniciativa. Te recomendamos que el título sea corto y conciso y la descripción centrada en la solución que quieres proponer
         show_similar_initiatives:
-          title: Se han encontrado iniciativas similares
-          continue: Continuar
+          continue: Mi iniciativa es diferente
           back: Volver
-          action_text: Ninguna de las anteriores iniciativas se ajusta a mi propuesta
         fill_data:
-          title: Completa los detalles de la iniciativa
-          finish: Finalizar
+          continue: Continuar
           back: Volver
           select_scope: Selecciona un ámbito
+        validate:
+          help: Rellena los siguientes campos para validar la iniciativa
+          continue: Continuar
+        promotal_committee:
+          back: Volver
+          continue: Continuar
+          individual_help_text: Comparte el siguiente enlace con el resto de personas que van a promover esta iniciativa. Cuando tus contactos reciban el enlace deberán seguir los pasos indicados.
+          organization_help_text: Rellena los siguientes campos de tu organización para complementar la información del comité promotor.
+        share_committee_link:
+          invite_to_committee_help: Enlace para invitar a las personas que formarán parte de la comisión promotora
+          continue: Continuar
+        organization_data:
+          continue: Continuar
+        finish:
+          back: Volver
+          callout_text: Enhorabuena! Tu iniciativa ha sido creada con éxito.
+          go_to_my_initiatives: Ir a mis iniciativas
+          back_to_initiatives: Volver a iniciativas
       committee_requests:
         new:
           continue: Continuar
@@ -236,6 +263,14 @@ es:
           here: aquí
   layouts:
     decidim:
+      initiative_creation_header:
+        select_initiative_type: Inicio
+        previous_form: Descripción
+        show_similar_initiatives: Compara
+        fill_data: Crea
+        validate: Valida
+        promotal_committee: Comisión promotora
+        finish: Finaliza
       initiatives:
         initiative:
           check_and_support: Ver y firmar

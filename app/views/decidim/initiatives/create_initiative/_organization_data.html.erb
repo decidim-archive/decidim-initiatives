@@ -1,0 +1,19 @@
+<div class="card__content">
+  <%= decidim_form_for(organization_form, url: next_wizard_path, method: :put, html: { class: 'form new_initiative_organization_form' }) do |f| %>
+    <div class="field">
+      <%= f.text_field :name, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.text_field :id_document %>
+    </div>
+
+    <div class="field">
+      <%= f.text_field :address %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit t('.continue'), class: 'button expanded' %>
+    </div>
+  <% end %>
+</div>

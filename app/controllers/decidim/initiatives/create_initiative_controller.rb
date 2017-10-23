@@ -6,20 +6,27 @@ module Decidim
 
     # Controller in charge of managing the create initiative wizard.
     class CreateInitiativeController < Decidim::ApplicationController
+      layout 'layouts/decidim/initiative_creation'
+
       include Wicked::Wizard
       include Decidim::FormFactory
       include InitiativeHelper
       include TypeSelectorOptions
 
       helper Decidim::PartialTranslationsHelper
+      helper Decidim::Admin::IconLinkHelper
       helper_method :similar_initiatives
       helper_method :scopes
+      helper_method :current_initiative
+      helper_method :organization_form
 
       steps :select_initiative_type,
             :previous_form,
             :show_similar_initiatives,
             :fill_data,
-            :create_initiative
+            :validate,
+            :promotal_committee,
+            :finish
 
       def show
         authorize! :create, Initiative
@@ -64,16 +71,62 @@ module Decidim
         render_wizard
       end
 
-      def create_initiative_step(parameters)
-        @form = build_form(Decidim::Initiatives::InitiativeForm, parameters)
+      def validate_step(parameters)
+        @validate_form = ValidateInitiativeForm.new
 
-        CreateInitiative.call(@form, current_user) do
-          on(:ok) do |initiative|
-            redirect_to decidim_admin_initiatives.edit_initiative_path(initiative)
+        if session[:initiative].key?(:id)
+          render_wizard
+        else
+          @form = build_form(Decidim::Initiatives::InitiativeForm, parameters)
+
+          CreateInitiative.call(@form, current_user) do
+            on(:ok) do |initiative|
+              session[:initiative][:id] = initiative.id
+              render_wizard
+            end
+
+            on(:invalid) do |initiative|
+              if initiative
+                logger.fatal "Failed creating initiative: #{initiative.errors.full_messages.join(', ')}"
+              end
+
+              redirect_to previous_wizard_path(validate_form: true)
+            end
+          end
+        end
+      end
+
+      def promotal_committee_step(parameters)
+        @validate_form = ValidateInitiativeForm
+                           .from_params(parameters)
+                           .with_context(
+                             initiative: current_initiative,
+                             data_type: 'author'
+                           )
+
+        CreateInitiativeExtraData.call(@validate_form) do
+          on(:ok) do
+            render_wizard
           end
 
-          on(:invalid) do |initiative|
-            logger.fatal "Failed to create initiative: #{initiative.errors.full_messages.join(', ')}" if initiative
+          on(:invalid) do
+            redirect_to previous_wizard_path(validate_form: true)
+          end
+        end
+      end
+
+      def finish_step(parameters)
+        if current_initiative.created_by_individual?
+          render_wizard
+          return
+        end
+
+        CreateInitiativeExtraData.call(organization_form) do
+          on(:ok) do
+            render_wizard
+          end
+
+          on(:invalid) do
             redirect_to previous_wizard_path(validate_form: true)
           end
         end
@@ -96,6 +149,19 @@ module Decidim
 
       def scopes
         InitiativesType.find(@form.type_id).scopes.includes(:scope)
+      end
+
+      def current_initiative
+        Initiative.find(session[:initiative][:id]) if session[:initiative].key?(:id)
+      end
+
+      def organization_form
+        @organization_form ||= OrganizationForm
+                               .from_params(params)
+                               .with_context(
+                                 initiative: current_initiative,
+                                 data_type: 'organization'
+                               )
       end
     end
   end

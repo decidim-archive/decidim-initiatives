@@ -20,6 +20,18 @@ ca:
         banner_image: Imatge de bàner
       initiatives_committee_member:
         user: Membre del comité
+      initiative_author:
+        name: Nom i cognoms
+        id_document: DNI/NIE
+        address: Domicili (Carrer, Nombre, Pis, Porta)
+        city: Població
+        province: Provincia
+        post_code: Codi postal
+        phone_number: Telèfon
+      organization_data:
+        name: Nom complet
+        id_document: CIF
+        address: Adreça
   decidim:
     admin:
       titles:
@@ -65,7 +77,7 @@ ca:
             success: Les dades del tipus d'iniciativa s'han actualitzat correctament
             error: S'ha produit un error
           destroy:
-            success: S'ha eliminat el tipus de iniciativa.
+            success: S'ha eliminat el tipus d'iniciativa.
           initiative_type_scopes:
             title: Àmbits per al tipus d'iniciativa
         initiatives_type_scopes:
@@ -201,23 +213,38 @@ ca:
           error: Hi ha hagut errors en votar l'iniciativa.
       create_initiative:
         select_initiative_type:
-          create_initiative: Crear iniciativa
+          select_initiative_type_help: Sel·lecciona el tipus d'inicativa
+          select: Sel·lecciona
           back: Torna enrere
-          title: Selecciona el tipus d'iniciativa
         previous_form:
-          title: Formulari previ
           continue: Continuar
           back: Torna enrere
+          help: Escriu el títol de la teva iniciativa. Et recomanem que el títol siga curt i concis i la descripció centrada en la solució que vols proposar
         show_similar_initiatives:
-          title: S'hi han trobat iniciatives similars
-          continue: Continuar
+          continue: La meua iniciativa es diferent
           back: Torna enrere
-          action_text: Cap dels anteriors iniciatives s'hi ajusta a la meva proposta
         fill_data:
-          title: Ompli els detalls de la iniciativa
-          finish: Finalitzar
+          continue: Continuar
           back: Torna enrere
           select_scope: Sel·lecciona un àmbit
+        validate:
+          help: Ompli els següents camps per validar la iniciativa. Rellena los siguientes campos para validar la iniciativa
+          continue: Continuar
+        promotal_committee:
+          back: Torna enrere
+          continue: Continuar
+          individual_help_text: Comparteix el sigüent enllaḉ amb la resta de persones que van a promoure aquesta iniciativa. Quan els teus contactes reben el enllaç deuràn seguir els passos indicats.
+          organization_help_text: Ompli els següents camps de la teua organització per completar la informació del comité promotor.
+        share_committee_link:
+          invite_to_committee_help: Enllaç per invitar a les persones que formaran part de la comisió promotora
+          continue: Continuar
+        organization_data:
+          continue: Continuar
+        finish:
+          back: Torna enrere
+          callout_text: Enhorabona! La teua iniciativa s'ha creat amb èxit.
+          go_to_my_initiatives: Ves a les meues iniciatives
+          back_to_initiatives: Tornar a iniciatives
       committee_requests:
         new:
           help_text: Vas a sol·licitar formar part de la comisió promotora per aquesta iniciativa
@@ -236,6 +263,14 @@ ca:
           here: ací
   layouts:
     decidim:
+      initiative_creation_header:
+        select_initiative_type: Inicia
+        previous_form: Descripció
+        show_similar_initiatives: Compara
+        fill_data: Crea
+        validate: Valida
+        promotal_committee: Comisió promotora
+        finish: Finalitza
       initiatives:
         initiative:
           check_and_support: Vore i signar

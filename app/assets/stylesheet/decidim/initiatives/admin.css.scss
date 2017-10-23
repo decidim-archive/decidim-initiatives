@@ -1,11 +1,13 @@
-#committee_link {
+.committee_link {
   border: 1px solid lightgray;
-  padding-left: 5px;
+
   float: left;
+  padding: 0.85em 1em;
+  width: auto;
 }
 
 .invite-users-link {
-  padding-left: 5px;
+  padding: 0.85em 1em;
 }
 
 #initiatives_type_remove_banner_image {
@@ -18,4 +20,15 @@
 
 .text-right {
   text-align: right !important;
+}
+
+.white-button {
+  color: #599aa6;
+  background: white;
+}
+
+.white-button:hover {
+  color: #599aa6;
+  background: white;
+  font-weight: bold;
 }

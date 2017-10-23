@@ -1,32 +1,22 @@
-<main class="wrapper">
-  <div class="row" columns>
-
-      <%= link_to :back, class: 'muted-link' do %>
-        <%= icon 'chevron-left', class: 'icon--small' %>
-        <%= t('.back') %>
-      <% end %>
-
+<% content_for :back_link do %>
+  <%= link_to :back, class: 'muted-link' do %>
+    <%= icon 'chevron-left', class: 'icon--small' %>
+    <%= t('.back') %>
+  <% end %>
+<% end %>
+<div class="row column">
+  <div class="callout secondary">
+    <%= render partial: 'compare_help' %>
   </div>
+</div>
+<br>
 
-  <div class="row">
-    <div class="columns large-8 medium-centered">
-      <div class="card">
-        <div class="card__content">
-          <div class="card__header">
-            <h5 class="card__title text-center"><%= t('.title') %></h5>
-          </div>
-          <%= render similar_initiatives %>
+<div class="row small-up-1 medium-up-2 card-grid">
+  <%= render similar_initiatives %>
+</div>
 
-          <div class="column">
-            <div class="actions">
-              <div class="pull-left action-text"><%= t('.action_text') %></div>
-              <%= link_to t('.continue'), next_wizard_path, class: 'pull-right button' %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="row">
+  <div class="columns mediumlarge-4 small-12 mediumlarge-push-4">
+    <%= link_to t('.continue'), next_wizard_path, class: 'button expanded' %>
   </div>
-</main>
-
-<%= stylesheet_link_tag 'decidim/initiatives/application' %>
+</div>

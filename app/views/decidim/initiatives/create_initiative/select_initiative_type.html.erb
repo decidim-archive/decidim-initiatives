@@ -1,33 +1,37 @@
-<main class="wrapper">
-  <div class="row columns">
-    <%= link_to :back, class: "muted-link" do %>
-        <%= icon 'chevron-left', class: 'icon--small' %>
-        <%= t('.back') %>
-    <% end %>
-    <h2 class="section-heading"><%= t('.title') %></h2>
-  </div>
+<% content_for :back_link do %>
+  <%= link_to initiatives_path, class: 'muted-link' do %>
+    <%= icon 'chevron-left', class: 'icon--small' %>
+    <%= t('.back') %>
+  <% end %>
+<% end %>
 
-  <div class="row">
-    <% initiative_types_each do |type| %>
-      <div class="columns small-12 medium-6">
-          <article class="card card--initiative-type">
-            <div class="card__content">
-              <div class="card__header">
-                <h5 class="card__title"><%= translated_attribute type.title %></h5>
-              </div>
-              <%=raw translated_attribute type.description %>
-            </div>
-            <div class="card__footer">
-              <div class="card__support">
-                <div class="card__support__data"></div>
-                <%= decidim_form_for(@form, url: next_wizard_path, method: :put, html: { class: 'form' }) do |f| %>
-                  <%= f.hidden_field :type_id, value: type.id %>
-                  <%= f.submit t('.create_initiative'), class: 'button small secondary card__button' %>
-                <% end %>
-              </div>
-            </div>
-          </article>
-      </div>
-    <% end %>
+<div class="row column">
+  <div class="callout secondary">
+    <%=t '.select_initiative_type_help' %>
   </div>
-</main>
+</div>
+<br>
+<div class="row">
+  <% initiative_types_each do |type| %>
+    <div class="columns small-12 medium-6">
+        <article class="card card--initiative-type">
+          <div class="card__content">
+            <div class="card__header">
+              <h5 class="card__title"><%= translated_attribute type.title %></h5>
+            </div>
+            <%=raw translated_attribute type.description %>
+          </div>
+          <div class="card__footer">
+            <div class="card__support">
+              <div class="card__support__data"></div>
+              <%= decidim_form_for(@form, url: next_wizard_path, method: :put, html: { class: 'form' }) do |f| %>
+                <%= f.hidden_field :type_id, value: type.id %>
+                <%= f.submit t('.select'), class: 'button small secondary card__button' %>
+              <% end %>
+            </div>
+          </div>
+        </article>
+    </div>
+  <% end %>
+</div>
+
