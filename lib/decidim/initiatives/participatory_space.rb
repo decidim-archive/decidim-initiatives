@@ -12,9 +12,9 @@ Decidim.register_participatory_space(:initiatives) do |participatory_space|
       type = Decidim::InitiativesType.create!(
         title: Decidim::Faker::Localized.sentence(5),
         description: Decidim::Faker::Localized.sentence(25),
-
         organization: organization,
-        banner_image: File.new(File.join(seeds_root, 'city2.jpeg'))
+        banner_image: File.new(File.join(seeds_root, 'city2.jpeg')),
+        requires_validation: true
       )
 
       organization.top_scopes.each do |scope|

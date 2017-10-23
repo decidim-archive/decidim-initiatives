@@ -16,8 +16,8 @@ en:
       initiatives_type:
         title: Title
         description: Description
-        supports_required: Supports required
         banner_image: Banner image
+        requires_validation: Requires validation
       initiatives_committee_member:
         user: Committee member
       initiative_author:

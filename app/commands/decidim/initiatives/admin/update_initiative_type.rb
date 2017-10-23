@@ -40,7 +40,8 @@ module Decidim
           {
             title: form.title,
             description: form.description,
-            banner_image: form.banner_image
+            banner_image: form.banner_image,
+            requires_validation: form.requires_validation
           }
         end
       end

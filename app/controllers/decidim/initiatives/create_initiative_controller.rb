@@ -82,7 +82,12 @@ module Decidim
           CreateInitiative.call(@form, current_user) do
             on(:ok) do |initiative|
               session[:initiative][:id] = initiative.id
-              render_wizard
+
+              if initiative.type.requires_validation
+                render_wizard
+              else
+                redirect_to wizard_path(:promotal_committee)
+              end
             end
 
             on(:invalid) do |initiative|
@@ -97,6 +102,11 @@ module Decidim
       end
 
       def promotal_committee_step(parameters)
+        unless current_initiative.type.requires_validation
+          render_wizard
+          return
+        end
+
         @validate_form = ValidateInitiativeForm
                            .from_params(parameters)
                            .with_context(

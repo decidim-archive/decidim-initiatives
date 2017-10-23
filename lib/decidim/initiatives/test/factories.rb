@@ -9,6 +9,7 @@ FactoryGirl.define do
     description { Decidim::Faker::Localized.wrapped('<p>', '</p>') { Decidim::Faker::Localized.sentence(4) } }
     banner_image { Decidim::Dev.test_file('city2.jpeg', 'image/jpeg') }
     organization
+    requires_validation true
   end
 
   factory :initiatives_type_scope, class: Decidim::InitiativesTypeScope do

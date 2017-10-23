@@ -16,8 +16,8 @@ es:
       initiatives_type:
         title: Título
         description: Descripción
-        supports_required: Firmas requeridas
         banner_image: Imagen de banner
+        requires_validation: Requiere validación
       initiatives_committee_member:
         user: Miembro del comité
       initiative_author:

@@ -17,7 +17,8 @@ shared_examples 'update an initiative type' do
       {
         title: Decidim::Faker::Localized.sentence(5),
         description: Decidim::Faker::Localized.sentence(25),
-        banner_image: Decidim::Dev.test_file('city2.jpeg', 'image/jpeg')
+        banner_image: Decidim::Dev.test_file('city2.jpeg', 'image/jpeg'),
+        requires_validation: false
       }
     end
 

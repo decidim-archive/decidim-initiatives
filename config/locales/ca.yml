@@ -16,8 +16,8 @@ ca:
       initiatives_type:
         title: Titol
         description: Descripció
-        supports_required: Signatures necessaries
         banner_image: Imatge de bàner
+        requires_validation: Requirieix validació
       initiatives_committee_member:
         user: Membre del comité
       initiative_author:
