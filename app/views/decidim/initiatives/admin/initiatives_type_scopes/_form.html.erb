@@ -1,10 +1,9 @@
 <div class="row column">
   <%= form.scopes_select :decidim_scopes_id,
                          prompt: t('decidim.scopes.global'),
-                         remote_path: decidim.scopes_search_path %>
-  <div class="row">
-    <div class="columns xlarge-2">
-      <%= form.number_field :supports_required, min: 1, step: 1 %>
-    </div>
-  </div>
+                         remote_path: decidim.scopes_search_path(term: '%') %>
+</div>
+
+<div class="row column">
+  <%= form.number_field :supports_required, min: 1, step: 1 %>
 </div>

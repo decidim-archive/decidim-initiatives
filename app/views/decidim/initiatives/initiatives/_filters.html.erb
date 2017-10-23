@@ -42,7 +42,7 @@
                          legend_title: t('.scopes'),
                          label: false,
                          prompt: t('.scope_prompt'),
-                         remote_path: decidim.scopes_search_path,
+                         remote_path: decidim.scopes_search_path(term: '%'),
                          multiple: true %>
 
   <%= hidden_field_tag :order, order, id: nil, class: 'order_filter' %>
