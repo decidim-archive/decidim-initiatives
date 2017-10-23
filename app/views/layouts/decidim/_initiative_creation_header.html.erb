@@ -13,7 +13,7 @@
           <div class="process-header__progress show-for-medium">
             <ol>
               <% wizard_steps.each do |wizard_step| %>
-                <% if past_step? wizard_step %>
+                <% unless future_step? wizard_step %>
                   <li class="phase-item--past">
                     <span></span>
                     <div class="caption"><%=t ".#{wizard_step}" %></div>

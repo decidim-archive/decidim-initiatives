@@ -9,5 +9,6 @@ module Decidim
 
     validates :data_type, presence: true
     validates :data, presence: true
+    validates :data_type, uniqueness: { scope: :decidim_initiative_id }
   end
 end

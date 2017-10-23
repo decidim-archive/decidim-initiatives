@@ -115,7 +115,7 @@ module Decidim
         end
       end
 
-      def finish_step(parameters)
+      def finish_step(_parameters)
         if current_initiative.created_by_individual?
           render_wizard
           return

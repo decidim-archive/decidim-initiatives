@@ -264,8 +264,8 @@ en:
   layouts:
     decidim:
       initiative_creation_header:
-        select_initiative_type: Start
-        previous_form: Description
+        select_initiative_type: Choose
+        previous_form: Start
         show_similar_initiatives: Compare
         fill_data: Create
         validate: Validation

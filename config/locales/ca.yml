@@ -264,8 +264,8 @@ ca:
   layouts:
     decidim:
       initiative_creation_header:
-        select_initiative_type: Inicia
-        previous_form: Descripció
+        select_initiative_type: Tria
+        previous_form: Inicia
         show_similar_initiatives: Compara
         fill_data: Crea
         validate: Valida

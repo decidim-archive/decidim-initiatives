@@ -84,6 +84,20 @@ FactoryGirl.define do
     end
   end
 
+  factory :initiatives_extra_data, class: Decidim::InitiativesExtraData do
+    initiative { create(:initiative) }
+
+    trait :author do
+      data_type 'author'
+      data { { name: 'name', document_id: 'document id', address: 'Address' } }
+    end
+
+    trait :organization do
+      data_type 'organization'
+      data { { name: 'name', document_id: 'document id', address: 'Address' } }
+    end
+  end
+
   factory :initiative_user_vote, class: Decidim::InitiativesVote do
     initiative { create(:initiative) }
     author { create(:user, :confirmed, organization: initiative.organization) }
