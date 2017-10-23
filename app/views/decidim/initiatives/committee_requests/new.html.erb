@@ -1,24 +1,24 @@
-<% add_decidim_page_title(partially_translated_attribute(current_initiative.title)) %>
-
 <% add_decidim_meta_tags({
-  description: partially_translated_attribute(current_initiative.description),
-  title: partially_translated_attribute(current_initiative.title),
-  url: initiative_url(current_initiative.id)
-}) %>
+                             image_url: current_initiative.type.banner_image.url,
+                             description: partially_translated_attribute(current_initiative.description),
+                             title: partially_translated_attribute(current_initiative.title),
+                             url: initiative_url(current_initiative.id),
+                             twitter_handler: current_organization.twitter_handler
+                         }) %>
 
-<% provide :meta_image_url, current_initiative.type.banner_image&.url unless current_initiative.type.banner_image.nil? %>
+<% add_decidim_page_title(partially_translated_attribute(current_initiative.title)) %>
+<% provide :meta_image_url, current_initiative.type.banner_image.url %>
 
-<div class="row column view-header">
+<br><br>
+<div class="row column">
   <h2 class="heading2"><%= partially_translated_attribute(current_initiative.title) %></h2>
-  <div class="author-data">
-    <%= render partial: 'decidim/initiatives/initiatives/author', locals: { initiative: current_initiative } %>
-  </div>
+  <%= render partial: 'decidim/initiatives/initiatives/author', locals: { initiative: current_initiative } %>
 </div>
 
 <div class="row">
   <div class="columns large-12">
     <div class="section">
-      <%= simple_format partially_translated_attribute(current_initiative.description) %>
+      <%= sanitize partially_translated_attribute(current_initiative.description) %>
     </div>
 
     <div class="section">
