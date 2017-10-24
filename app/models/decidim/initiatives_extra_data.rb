@@ -10,5 +10,8 @@ module Decidim
     validates :data_type, presence: true
     validates :data, presence: true
     validates :data_type, uniqueness: { scope: :decidim_initiative_id }
+
+    scope :author, ->() { where(data_type: 'author') }
+    scope :organization, ->() { where(data_type: 'organization') }
   end
 end

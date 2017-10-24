@@ -28,6 +28,10 @@ module Decidim
 
             can :manage, Initiative
             cannot :send_to_technical_validation, Initiative
+            cannot :show, Initiative
+            can :show, Initiative do |_initiative|
+              Decidim::Initiatives.print_enabled
+            end
 
             cannot :publish, Initiative
             can :publish, Initiative, &:validating?
@@ -77,6 +81,10 @@ module Decidim
 
             can :index, Decidim::Initiative do
               has_initiatives?(user)
+            end
+
+            can :show, Initiative do |_initiative|
+              Decidim::Initiatives.print_enabled
             end
 
             can :edit, Decidim::Initiative do |initiative|

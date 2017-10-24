@@ -105,6 +105,7 @@ ca:
             preview: Previsualitzar
             search: Cerca
             filter_by: Filtrar per
+            print: Imprimir
             filter:
               all: Tots
               created: Creada
@@ -113,6 +114,8 @@ ca:
               published: Publicada
               rejected: Rebutjada
               accepted: Acceptada
+          show:
+            print: Imprimir
           edit:
             update: Actualitzar
             validate: Validar la iniciativa

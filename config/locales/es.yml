@@ -105,6 +105,7 @@ es:
             preview: Previsualizar
             search: Busca
             filter_by: Filtrar por
+            print: Imprimir
             filter:
               all: Todos
               created: Creada
@@ -113,6 +114,8 @@ es:
               published: Publicada
               rejected: Rechazada
               accepted: Aceptada
+          show:
+            print: Imprimir
           edit:
             update: Actualizar
             validate: Validar la iniciativa

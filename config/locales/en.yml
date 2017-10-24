@@ -105,6 +105,7 @@ en:
             preview: Preview
             search: Busca
             filter_by: Filter by
+            print: Print
             filter:
               all: All
               created: Created
@@ -113,6 +114,8 @@ en:
               published: Published
               rejected: Rejected
               accepted: Accepted
+          show:
+            print: Print
           edit:
             update: Update
             validate: Validate the initiative

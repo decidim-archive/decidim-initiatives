@@ -68,5 +68,12 @@ module Decidim
     mattr_accessor :max_time_in_validating_state do
       60.days
     end
+
+    # Print functionality enabled. Allows the user to get
+    # a printed version of the initiative from the administration
+    # panel.
+    mattr_accessor :print_enabled do
+      true
+    end
   end
 end

@@ -24,6 +24,10 @@ module Decidim
                            .per(15)
         end
 
+        def show
+          authorize! :show, current_initiative
+        end
+
         def edit
           authorize! :edit, current_initiative
           @form = form(Decidim::Initiatives::Admin::InitiativeForm)
