@@ -32,7 +32,7 @@ module Decidim
           expires_in: Decidim::Initiatives.stats_cache_expiration_time) do
           result = 0
           Decidim::Meetings::Meeting.where(feature: meetings_feature).each do |meeting|
-            result += meeting.registrations.count
+            result += meeting.attendees_count
           end
 
           result
