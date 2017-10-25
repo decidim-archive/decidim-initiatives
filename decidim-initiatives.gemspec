@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = 'decidim-initiatives'
   s.summary     = 'Citizen initiatives plugin for decidim'
   s.description = s.summary
-  s.version     = '0.0.36'
+  s.version     = '0.0.37'
   s.authors     = ['Juan Salvador Pérez García']
   s.email       = ['jsperezg@gmail.com']
   s.license     = 'AGPLv3'
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'truncato'
   s.add_dependency 'social-share-button', '~> 0.10.0'
   s.add_dependency 'wicked'
+  s.add_dependency 'whenever'
 
   s.add_development_dependency 'decidim-dev'
 end
