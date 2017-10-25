@@ -88,28 +88,28 @@ module Decidim
             end
 
             can :edit, Decidim::Initiative do |initiative|
-              initiative.author.id == user.id
+              initiative.has_authorship?(user)
             end
 
-            can :update, Decidim::Initiative  do |initiative|
-              initiative.author.id == user.id && !initiative.published?
+            can :update, Decidim::Initiative do |initiative|
+              initiative.has_authorship?(user) && initiative.created?
             end
 
             can :manage_membership, Decidim::Initiative do |initiative|
-              initiative.author.id == user.id
+              initiative.has_authorship?(user)
             end
 
             can :index, InitiativesCommitteeMember
             can :approve, InitiativesCommitteeMember do |request|
-              request.initiative.author.id == user.id && !request.initiative.published? && !request.accepted?
+              request.initiative.has_authorship?(user) && !request.initiative.published? && !request.accepted?
             end
 
             can :revoke, InitiativesCommitteeMember do |request|
-              request.initiative.author.id == user.id && !request.initiative.published? && !request.rejected?
+              request.initiative.has_authorship?(user) && !request.initiative.published? && !request.rejected?
             end
 
             can :send_to_technical_validation, Initiative do |initiative|
-              initiative.decidim_author_id == user.id &&
+              initiative.has_authorship?(user) &&
                 initiative.created? &&
                 (
                 !initiative.decidim_user_group_id.nil? ||
@@ -121,7 +121,8 @@ module Decidim
           private
 
           def has_initiatives?(user)
-            Initiative.where(author: user).any?
+            initiatives = InitiativesCreated.by(user) | InitiativesPromoted.by(user)
+            initiatives.any?
           end
 
           def admin?

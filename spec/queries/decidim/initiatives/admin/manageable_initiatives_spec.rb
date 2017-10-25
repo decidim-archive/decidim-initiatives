@@ -12,10 +12,28 @@ module Decidim
         let!(:user_initiatives) { create_list(:initiative, 3, organization: organization, author: user) }
         let!(:admin_initiatives) { create_list(:initiative, 3, organization: organization, author: admin) }
 
-        context 'Regular users' do
+        context 'Initiative authors' do
           subject { described_class.new(organization, user, nil, nil) }
 
           it 'includes only user initiatives' do
+            expect(subject).not_to include(*admin_initiatives)
+          end
+        end
+
+        context 'Initiative promoters' do
+          let(:promoter) { create(:user, organization:  organization) }
+          subject { described_class.new(organization, promoter, nil, nil) }
+
+          before(:each) do
+            @promoter_initiatives = create_list(:initiative, 3, organization: organization)
+            @promoter_initiatives.each do |initiative|
+              create(:initiatives_committee_member, initiative: initiative, user: promoter)
+            end
+          end
+
+          it 'includes only promoter initiatives' do
+            expect(subject).to  include(*@promoter_initiatives)
+            expect(subject).not_to include(*user_initiatives)
             expect(subject).not_to include(*admin_initiatives)
           end
         end

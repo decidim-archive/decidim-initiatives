@@ -162,6 +162,11 @@ module Decidim
       initiative_votes_count * 100 / scoped_type.supports_required
     end
 
+    def has_authorship?(user)
+      return true if author.id == user.id
+      committee_members.approved.where(decidim_users_id: user.id).any?
+    end
+
     private
 
     def notify_state_change

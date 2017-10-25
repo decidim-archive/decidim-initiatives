@@ -39,9 +39,9 @@ module Decidim
                      .where(organization: organization)
                      .with_state(state)
           else
-            base = Initiative
-                     .where(author: user)
-                     .with_state(state)
+            ids = InitiativesCreated.by(user).with_state(state).pluck(:id)
+            ids += InitiativesPromoted.by(user).with_state(state).pluck(:id)
+            base = Initiative.where(id: ids)
           end
 
           return base if q.blank?

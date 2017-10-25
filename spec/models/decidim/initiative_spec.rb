@@ -102,5 +102,31 @@ module Decidim
         end
       end
     end
+
+    context 'has_authorship?' do
+      let(:initiative) { create(:initiative) }
+      let(:user) { create(:user) }
+      let(:pending_committee_member) { create(:initiatives_committee_member, :requested, initiative: initiative) }
+      let(:rejected_committee_member) { create(:initiatives_committee_member, :rejected, initiative: initiative) }
+
+      it 'returns true for the initiative author' do
+        expect(initiative.has_authorship?(initiative.author)).to be_truthy
+      end
+
+      it 'returns true for aproved promotal committee members' do
+        expect(initiative.has_authorship?(pending_committee_member.user)).to be_falsey
+        expect(initiative.has_authorship?(rejected_committee_member.user)).to be_falsey
+
+        expect(initiative.committee_members.approved.any?).to be_truthy
+
+        initiative.committee_members.approved.each do |m|
+          expect(initiative.has_authorship?(m.user)).to be_truthy
+        end
+      end
+
+      it 'returns false for any other user' do
+        expect(initiative.has_authorship?(user)).to be_falsey
+      end
+    end
   end
 end

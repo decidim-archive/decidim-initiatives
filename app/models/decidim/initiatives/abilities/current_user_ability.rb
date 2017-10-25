@@ -22,7 +22,8 @@ module Decidim
           end
 
           can :read, :admin_dashboard do
-            Initiative.where(author: user).any?
+            initiatives = InitiativesCreated.by(user) | InitiativesPromoted.by(user)
+            initiatives.any?
           end
 
           define_membership_management_abilities

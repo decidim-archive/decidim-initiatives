@@ -117,5 +117,13 @@ FactoryGirl.define do
     initiative { create(:initiative) }
     user { create(:user, organization: initiative.organization) }
     state 'accepted'
+
+    trait :requested do
+      state 'requested'
+    end
+
+    trait :rejected do
+      state 'rejected'
+    end
   end
 end
