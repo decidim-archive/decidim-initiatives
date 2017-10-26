@@ -30,6 +30,8 @@ module Decidim
           .where(organization: @organization)
           .where(
             "GREATEST(#{title_similarity}, #{description_similarity}) >= ?",
+            form.title,
+            form.description,
             Decidim::Initiatives.similarity_threshold
           )
           .limit(Decidim::Initiatives.similarity_limit)
@@ -40,13 +42,11 @@ module Decidim
       attr_reader :form
 
       def title_similarity
-        title = Initiative.connection.quote(form.title)
-        "similarity(title->>'#{current_locale}',#{title})"
+        "similarity(title->>'#{current_locale}', ?)"
       end
 
       def description_similarity
-        description = Initiative.connection.quote(form.description)
-        "similarity(description->>'#{current_locale}',#{description})"
+        "similarity(description->>'#{current_locale}', ?)"
       end
 
       def current_locale
