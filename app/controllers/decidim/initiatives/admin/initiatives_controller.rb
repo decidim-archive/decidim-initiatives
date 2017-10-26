@@ -43,6 +43,7 @@ module Decidim
           @form = form(Decidim::Initiatives::Admin::InitiativeForm)
                     .from_params(params)
                     .with_context(initiative: current_initiative)
+
           UpdateInitiative.call(current_initiative, @form, current_user) do
             on(:ok) do |_initiative|
               render :edit, layout: 'decidim/admin/initiative'
