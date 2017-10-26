@@ -16,6 +16,20 @@ module Decidim
           @request.env['decidim.current_organization'] = organization
         end
 
+        describe 'Users without initiatives' do
+          let!(:user) { create(:user, organization: organization) }
+
+          before do
+            sign_in user
+          end
+
+          it 'initiative list is not allowed' do
+            get :index
+            expect(flash[:alert]).not_to be_empty
+            expect(response).to have_http_status(302)
+          end
+        end
+
         describe 'GET send_to_technical_validation' do
           context 'Initiative not in created state' do
             before do
