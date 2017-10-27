@@ -15,7 +15,10 @@ module Decidim
         private
 
         def available_initiative_types
-          Decidim::Initiatives::InitiativeTypes.for(current_organization)
+          Decidim::Initiatives::InitiativeTypes
+            .for(current_organization)
+            .joins(:scopes)
+            .distinct
         end
 
         def initiative_types_for_select
