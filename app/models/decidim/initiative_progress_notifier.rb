@@ -8,6 +8,10 @@ module Decidim
       @initiative = args.fetch(:initiative)
     end
 
+    # PUBLIC: Notifies the support progress of the initiative.
+    #
+    # Notifies to Initiative's authors and followers about the
+    # number of supports received by the initiative.
     def notify
       initiative.followers.each do |follower|
         Decidim::Initiatives::InitiativesMailer

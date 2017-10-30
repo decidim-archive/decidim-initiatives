@@ -8,6 +8,17 @@ module Decidim
       @initiative = args.fetch(:initiative)
     end
 
+    # PUBLIC
+    # Notifies when an initiative has changed its status.
+    #
+    # * validating: Administrators will be notified about the initiative that
+    #   requests technical validation.
+    #
+    # * published, discarded: Initiative authors will be notified about the
+    #   result of the technical validation process.
+    #
+    # * rejected, accepted: Initiative's followers and authors will be
+    #   notified about the result of the initiative.
     def notify
       notify_validating_initiative if initiative.validating?
 

@@ -78,30 +78,64 @@ module Decidim
       end
     end
 
+    # PUBLIC
+    #
     # Returns true when an initiative has been created by an individual person.
     # False in case it has been created by an authorized organization.
+    #
+    # RETURN boolean
     def created_by_individual?
       decidim_user_group_id.nil?
     end
 
+    # PUBLIC
+    #
+    # RETURN boolean TRUE when the initiative is open, false in case its not closed.
     def open?
       !closed?
     end
 
+    # PUBLIC
+    #
+    # Returns when an initiative is closed. An initiative is closed when
+    # at least one of the following conditions is true:
+    #
+    # * It has been discarded.
+    # * It has been rejected.
+    # * It has been accepted.
+    # * Signature collection period has finished.
+    #
+    # RETURNS BOOLEAN
     def closed?
       discarded? || rejected? || accepted? || !votes_enabled?
     end
 
+    # PUBLIC
+    #
+    # Returns the author name. If it has been created by an organization it will
+    # return the organization's name. Otherwise it will return the author's name.
+    #
+    # RETURN string
     def author_name
       user_group&.name || author.name
     end
 
+    # PUBLIC author_avatar_url
+    #
+    # Returns the author's avatar URL. In case it is not defined the method falls back to
+    # decidim/default-avatar.svg
+    #
+    # RETURNS STRING
     def author_avatar_url
       author.avatar&.url || ActionController::Base.helpers.asset_path('decidim/default-avatar.svg')
     end
 
-    # PUBLIC banner image for the initiative.
-    # It returns the banner image defined for the initiative's type.
+    # PUBLIC banner image
+    #
+    # Overrides participatory space's banner image with the banner image defined
+    # for the initiative type.
+    #
+    # RETURNS string
     def banner_image
       type.banner_image
     end
@@ -120,17 +154,19 @@ module Decidim
     end
 
     # Public: Overrides scopes enabled flag available in other models like
-    # participatory space or assemblies. For initatives it won't be directly
+    # participatory space or assemblies. For initiatives it won't be directly
     # managed by the user and it will be enabled by default.
     def scopes_enabled?
       true
     end
 
+    # Public: Overrides scopes enabled attribute value.
+    # For initiatives it won't be directly
+    # managed by the user and it will be enabled by default.
     def scopes_enabled
       true
     end
 
-    #
     # Public: Publishes this feature
     #
     # Returns true if the record was properly saved, false otherwise.
@@ -168,6 +204,12 @@ module Decidim
       initiative_votes_count * 100 / scoped_type.supports_required
     end
 
+    # PUBLIC
+    #
+    # Checks if user is the author or is part of the promotal committee
+    # of the initiative.
+    #
+    # RETURNS boolean
     def has_authorship?(user)
       return true if author.id == user.id
       committee_members.approved.where(decidim_users_id: user.id).any?
