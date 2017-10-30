@@ -21,7 +21,9 @@ module Decidim
       #
       # Returns a String.
       def humanize_state(initiative)
-        I18n.t(initiative.accepted? ? 'accepted': 'expired', scope: 'decidim.initiatives.states', default: :expired)
+        I18n.t(initiative.accepted? ? 'accepted': 'expired',
+               scope: 'decidim.initiatives.states',
+               default: :expired)
       end
 
       # Public: The state of an initiative from an administration perspective in
@@ -37,7 +39,7 @@ module Decidim
       def popularity_tag(initiative)
         popularity_class = ''
 
-        if initiative.percentage > 0 && initiative.percentage < 40
+        if initiative.percentage.positive? && initiative.percentage < 40
           popularity_class = 'popularity--level1'
         end
 
@@ -63,7 +65,8 @@ module Decidim
           end
 
           concat(content_tag(:span, class: 'popularity__desc') do
-            I18n.t('decidim.initiatives.initiatives.vote_cabin.supports_required', total_supports: initiative.scoped_type.supports_required)
+            I18n.t('decidim.initiatives.initiatives.vote_cabin.supports_required',
+                   total_supports: initiative.scoped_type.supports_required)
           end)
         end
       end

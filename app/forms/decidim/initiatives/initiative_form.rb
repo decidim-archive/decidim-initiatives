@@ -2,7 +2,7 @@
 
 module Decidim
   module Initiatives
-    # A form object used to collect the title and description for an initiative.
+    # A form object used to collect the data for a new initiative.
     class InitiativeForm < Form
       include TranslatableAttributes
 

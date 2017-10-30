@@ -4,6 +4,8 @@ module Decidim
   module Initiatives
     # A command with all the business logic that creates a new initiative.
     class CreateInitiative < Rectify::Command
+      include CurrentLocale
+
       # Public: Initializes the command.
       #
       # form - A form object with the params.
@@ -34,38 +36,20 @@ module Decidim
 
       attr_reader :form, :current_user
 
+      # Creates the initiative and all default features
       def create_initiative
         initiative = build_initiative
         return initiative unless initiative.valid?
 
         initiative.transaction do
           initiative.save!
-
-          Decidim::Initiatives.default_features.each do |feature_name|
-            feature = Decidim::Feature.create!(
-              name: Decidim::Features::Namer.new(initiative.organization.available_locales, feature_name).i18n_name,
-              manifest_name: feature_name,
-              published_at: Time.current,
-              participatory_space: initiative
-            )
-
-            if feature_name == :pages
-              Decidim::Pages::CreatePage.call(feature) do
-                on(:invalid) { raise "Can't create page" }
-              end
-            end
-          end
+          create_features_for(initiative)
         end
 
         initiative
       end
 
       def build_initiative
-        scoped_type = InitiativesTypeScope.find_by(
-          decidim_initiatives_types_id: form.type_id,
-          decidim_scopes_id: form.scope_id
-        )
-
         Initiative.new(
           organization: form.current_organization,
           title: { current_locale => form.title },
@@ -78,11 +62,32 @@ module Decidim
         )
       end
 
-      # The current locale for the user. Available as a helper for the views.
-      #
-      # Returns a String.
-      def current_locale
-        @current_locale ||= I18n.locale.to_s
+      def scoped_type
+        InitiativesTypeScope.find_by(
+          decidim_initiatives_types_id: form.type_id,
+          decidim_scopes_id: form.scope_id
+        )
+      end
+
+      def create_features_for(initiative)
+        Decidim::Initiatives.default_features.each do |feature_name|
+          feature = Decidim::Feature.create!(
+            name: Decidim::Features::Namer.new(
+              initiative.organization.available_locales,
+              feature_name).i18n_name,
+            manifest_name: feature_name,
+            published_at: Time.current,
+            participatory_space: initiative
+          )
+
+          initialize_pages(feature) if feature_name == :pages
+        end
+      end
+
+      def initialize_pages(feature)
+        Decidim::Pages::CreatePage.call(feature) do
+          on(:invalid) { raise "Can't create page" }
+        end
       end
     end
   end

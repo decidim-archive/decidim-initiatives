@@ -50,10 +50,10 @@ Decidim.register_participatory_space(:initiatives) do |participatory_space|
           participatory_space: initiative
         )
 
-        if feature_name == :pages
-          Decidim::Pages::CreatePage.call(feature) do
-            on(:invalid) { raise "Can't create page" }
-          end
+        next unless feature_name == :pages
+
+        Decidim::Pages::CreatePage.call(feature) do
+          on(:invalid) { raise "Can't create page" }
         end
       end
     end

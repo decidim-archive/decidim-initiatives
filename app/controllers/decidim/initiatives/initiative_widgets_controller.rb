@@ -5,6 +5,10 @@ module Decidim
     # This controller provides a widget that allows embedding the initiative
     class InitiativeWidgetsController < Decidim::WidgetsController
       helper InitiativesHelper
+      helper PaginateHelper
+      helper InitiativeHelper
+      helper Decidim::Comments::CommentsHelper
+      helper Decidim::Admin::IconLinkHelper
 
       private
 

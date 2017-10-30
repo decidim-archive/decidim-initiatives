@@ -3,7 +3,8 @@
 module Decidim
   module Initiatives
     module Admin
-      # A form object used to show the initiative data for technical validation.
+      # A form object used to show the initiative data in the administration
+      # panel.
       class InitiativeForm < Form
         include TranslatableAttributes
 
@@ -35,10 +36,6 @@ module Decidim
         def map_model(model)
           self.type_id = model.type.id
           self.decidim_scope_id = model.scope.id
-        end
-
-        def available_locales
-          Decidim.available_locales
         end
       end
     end

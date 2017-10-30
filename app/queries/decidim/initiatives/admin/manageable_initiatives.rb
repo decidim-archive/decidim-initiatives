@@ -36,8 +36,8 @@ module Decidim
         def query
           if user.admin?
             base = Initiative
-                     .where(organization: organization)
-                     .with_state(state)
+                   .where(organization: organization)
+                   .with_state(state)
           else
             ids = InitiativesCreated.by(user).with_state(state).pluck(:id)
             ids += InitiativesPromoted.by(user).with_state(state).pluck(:id)
@@ -46,24 +46,18 @@ module Decidim
 
           return base if q.blank?
 
-          I18n.available_locales.each_with_index do |loc, index|
+          organization.available_locales.each_with_index do |loc, index|
             if index.zero?
               base = base.where('title->>? ilike ?', loc, "#{q}%")
-                       .or(Initiative.where('description->>? ilike ?', loc, "#{q}%"))
+                         .or(Initiative.where('description->>? ilike ?', loc, "#{q}%"))
             else
               base = base
-                       .or(Initiative.where('title->>? ilike ?', loc, "#{q}%"))
-                       .or(Initiative.where('description->>? ilike ?', loc, "#{q}%"))
+                     .or(Initiative.where('title->>? ilike ?', loc, "#{q}%"))
+                     .or(Initiative.where('description->>? ilike ?', loc, "#{q}%"))
             end
           end
 
           base
-        end
-
-        private
-
-        def current_locale
-          I18n.locale.to_s
         end
       end
     end

@@ -14,6 +14,10 @@ module Decidim
       helper Decidim::PartialTranslationsHelper
       helper Decidim::ResourceHelper
       helper Decidim::IconHelper
+      helper Decidim::Comments::CommentsHelper
+      helper Decidim::Admin::IconLinkHelper
+      helper PaginateHelper
+      helper InitiativeHelper
 
       include Decidim::Initiatives::ActionAuthorization
       include FilterResource
@@ -31,15 +35,17 @@ module Decidim
         authorize! :read, Initiative
       end
 
+      # GET /initiatives/:id
       def show
         authorize! :read, current_initiative
       end
 
+      # GET /initiatives/:id/signature_identities
       def signature_identities
         @voted_groups = InitiativesVote
-                          .supports
-                          .where(initiative: current_initiative, author: current_user)
-                          .pluck(:decidim_user_group_id)
+                        .supports
+                        .where(initiative: current_initiative, author: current_user)
+                        .pluck(:decidim_user_group_id)
         render layout: false
       end
 

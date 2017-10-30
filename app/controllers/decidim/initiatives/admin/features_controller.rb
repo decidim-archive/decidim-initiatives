@@ -5,7 +5,6 @@ module Decidim
     module Admin
       # Controller that allows managing the Initiative's Features in the
       # admin panel.
-      #
       class FeaturesController < Decidim::Admin::FeaturesController
         layout 'decidim/admin/initiative'
 

@@ -100,6 +100,12 @@ module Decidim
       author.avatar&.url || ActionController::Base.helpers.asset_path('decidim/default-avatar.svg')
     end
 
+    # PUBLIC banner image for the initiative.
+    # It returns the banner image defined for the initiative's type.
+    def banner_image
+      type.banner_image
+    end
+
     def votes_enabled?
       published? &&
         signature_start_time <= Date.today &&

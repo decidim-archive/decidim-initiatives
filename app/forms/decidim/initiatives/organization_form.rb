@@ -2,7 +2,8 @@
 
 module Decidim
   module Initiatives
-    # A form object used to collect additional data from the initiative author
+    # A form object used to collect additional data for the
+    # organization that creates an initiative.
     class OrganizationForm < Form
       mimic :organization_data
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Decidim
   # Helper that provides convenient methods to deal with translated attributes.
   module PartialTranslationsHelper
@@ -14,8 +16,8 @@ module Decidim
       value = attribute.try(:[], I18n.locale.to_s)
       return value unless value.blank?
 
-      attribute.each do |_, value|
-        return value unless value.blank?
+      attribute.each do |_, attr_value|
+        return attr_value unless attr_value.blank?
       end
 
       ''

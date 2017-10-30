@@ -4,6 +4,8 @@ module Decidim
   module Initiatives
     # Service that encapsulates all logic related to filtering initiatives.
     class InitiativeSearch < Searchlight::Search
+      include CurrentLocale
+
       # Public: Initializes the service.
       # feature     - nil
       # page        - The page number to paginate the results.
@@ -14,7 +16,7 @@ module Decidim
 
       def base_query
         Decidim::Initiative
-          .includes(:author, scoped_type: [ :scope ])
+          .includes(:author, scoped_type: [:scope])
           .where(organization: options[:organization])
       end
 
@@ -45,7 +47,10 @@ module Decidim
 
         query
           .joins(:scoped_type)
-          .where('decidim_initiatives_type_scopes.decidim_initiatives_types_id = ?', type)
+          .where(
+            'decidim_initiatives_type_scopes.decidim_initiatives_types_id = ?',
+            type
+          )
       end
 
       def search_author
@@ -57,15 +62,13 @@ module Decidim
       end
 
       def search_scope_id
+        return if scope_id.nil?
         query
           .joins(:scoped_type)
-          .where('decidim_initiatives_type_scopes.decidim_scopes_id = ?', scope_id) unless scope_id.nil?
-      end
-
-      private
-
-      def current_locale
-        I18n.locale.to_s
+          .where(
+            'decidim_initiatives_type_scopes.decidim_scopes_id = ?',
+            scope_id
+          )
       end
     end
   end

@@ -37,12 +37,17 @@ module Decidim
         attr_reader :form, :initiative_type
 
         def attributes
-          {
+          result = {
             title: form.title,
             description: form.description,
-            banner_image: form.banner_image,
-            requires_validation: form.requires_validation
+            requires_validation: form.requires_validation,
           }
+
+          unless form.banner_image.nil?
+            result[:banner_image] = form.banner_image
+          end
+
+          result
         end
       end
     end

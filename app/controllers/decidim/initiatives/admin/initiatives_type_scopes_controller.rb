@@ -9,16 +9,17 @@ module Decidim
       class InitiativesTypeScopesController < ApplicationController
         helper_method :current_initiative_type_scope
 
+        # GET /admin/initiatives_types/:initiatives_type_id/initiatives_type_scopes/new
         def new
           authorize! :new, Decidim::InitiativesTypeScope
           @form = initiative_type_scope_form.instance
         end
 
+        # POST /admin/initiatives_types/:initiatives_type_id/initiatives_type_scopes
         def create
           authorize! :create, Decidim::InitiativesTypeScope
           @form = initiative_type_scope_form
-                    .from_params(params)
-                    .with_context(type_id: params[:initiatives_type_id])
+                  .from_params(params, type_id: params[:initiatives_type_id])
 
           CreateInitiativeTypeScope.call(@form) do
             on(:ok) do |initiative_type_scope|
@@ -33,11 +34,13 @@ module Decidim
           end
         end
 
+        # GET /admin/initiatives_types/:initiatives_type_id/initiatives_type_scopes/:id/edit
         def edit
           authorize! :edit, current_initiative_type_scope
           @form = initiative_type_scope_form.from_model(current_initiative_type_scope)
         end
 
+        # PUT /admin/initiatives_types/:initiatives_type_id/initiatives_type_scopes/:id
         def update
           authorize! :update, current_initiative_type_scope
           @form = initiative_type_scope_form.from_params(params)
@@ -55,6 +58,7 @@ module Decidim
           end
         end
 
+        # DELETE /admin/initiatives_types/:initiatives_type_id/initiatives_type_scopes/:id
         def destroy
           authorize! :destroy, current_initiative_type_scope
           current_initiative_type_scope.destroy!

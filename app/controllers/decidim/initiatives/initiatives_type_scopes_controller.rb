@@ -8,6 +8,7 @@ module Decidim
 
       helper_method :scoped_types
 
+      # GET /initiative_type_scopes/search
       def search
         authorize! :search, InitiativesTypeScope
         render layout: false

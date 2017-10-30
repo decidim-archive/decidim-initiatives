@@ -7,56 +7,59 @@ module Decidim
     module Admin
       # Controller used to manage the initiatives
       class InitiativesController < ApplicationController
-        helper_method :current_initiative, :initiative_type_options
+        include Decidim::Initiatives::NeedsInitiative
+        include Decidim::Initiatives::TypeSelectorOptions
 
         helper Decidim::Initiatives::InitiativeHelper
         helper Decidim::Initiatives::CreateInitiativeHelper
         helper Decidim::PartialTranslationsHelper
 
+        # GET /admin/initiatives
         def index
           authorize! :index, Decidim::Initiative
 
           @query = params[:q]
           @state = params[:state]
           @initiatives = ManageableInitiatives
-                           .for(current_organization, current_user, @query, @state)
-                           .page(params[:page])
-                           .per(15)
+                         .for(
+                           current_organization,
+                           current_user,
+                           @query,
+                           @state
+                         )
+                         .page(params[:page])
+                         .per(15)
         end
 
+        # GET /admin/initiatives/:id
         def show
           authorize! :show, current_initiative
         end
 
+        # GET /admin/initiatives/:id/edit
         def edit
           authorize! :edit, current_initiative
           @form = form(Decidim::Initiatives::Admin::InitiativeForm)
-                  .from_model(current_initiative)
-                  .with_context(initiative: current_initiative)
+                  .from_model(
+                    current_initiative,
+                    initiative: current_initiative
+                  )
 
           render layout: 'decidim/admin/initiative'
         end
 
+        # PUT /admin/initiatives/:id
         def update
           authorize! :update, current_initiative
 
           @form = form(Decidim::Initiatives::Admin::InitiativeForm)
-                    .from_params(params)
-                    .with_context(initiative: current_initiative)
+                  .from_params(params, initiative: current_initiative)
 
-          UpdateInitiative.call(current_initiative, @form, current_user) do
-            on(:ok) do |_initiative|
-              render :edit, layout: 'decidim/admin/initiative'
-            end
-
-            on(:invalid) do |_initiative|
-              render :edit, layout: 'decidim/admin/initiative'
-            end
-          end
+          UpdateInitiative.call(current_initiative, @form, current_user)
+          render :edit, layout: 'decidim/admin/initiative'
         end
 
         # POST /admin/initiatives/:id/publish
-        # Publishes an initiative.
         def publish
           authorize! :publish, current_initiative
           current_initiative.publish!
@@ -64,7 +67,6 @@ module Decidim
         end
 
         # DELETE /admin/initiatives/:id/unpublish
-        # Unpublishes an initiative.
         def unpublish
           authorize! :unpublish, current_initiative
           current_initiative.unpublish!
@@ -72,7 +74,6 @@ module Decidim
         end
 
         # DELETE /admin/initiatives/:id/discard
-        # Discards an initiative
         def discard
           authorize! :discard, current_initiative
           current_initiative.discarded!
@@ -80,30 +81,15 @@ module Decidim
         end
 
         # GET /admin/initiatives/:id/send_to_technical_validation
-        # Sends a new initiative to the technical validation process.
         def send_to_technical_validation
           authorize! :send_to_technical_validation, current_initiative
           current_initiative.validating!
           redirect_to edit_initiative_path(current_initiative), flash: {
             notice: I18n.t(
               '.success',
-              scope: %w[
-                decidim initiatives admin initiatives edit
-              ]
+              scope: %w[decidim initiatives admin initiatives edit]
             )
           }
-        end
-
-        private
-
-        def current_initiative
-          @initiative ||= Initiative.find(params[:id])
-        end
-
-        def initiative_type_options
-          InitiativesType.where(organization: current_organization).map do |type|
-            [type.title[I18n.locale.to_s], type.id]
-          end
         end
       end
     end

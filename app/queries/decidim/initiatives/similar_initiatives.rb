@@ -5,6 +5,7 @@ module Decidim
     # Class uses to retrieve similar initiatives types.
     class SimilarInitiatives < Rectify::Query
       include Decidim::TranslationsHelper
+      include CurrentLocale
 
       # Syntactic sugar to initialize the class and return the queried objects.
       #
@@ -47,10 +48,6 @@ module Decidim
 
       def description_similarity
         "similarity(description->>'#{current_locale}', ?)"
-      end
-
-      def current_locale
-        I18n.locale.to_s
       end
     end
   end

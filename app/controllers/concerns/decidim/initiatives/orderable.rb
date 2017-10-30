@@ -37,14 +37,14 @@ module Decidim
 
         def reorder(proposals)
           case order
-          when 'random'
-            proposals.order_randomly(random_seed)
           when 'most_voted'
             proposals.order(created_at: :desc)
           when 'most_commented'
             proposals.order(created_at: :desc)
           when 'recent'
             proposals.order(created_at: :desc)
+          else
+            proposals.order_randomly(random_seed)
           end
         end
 

@@ -4,16 +4,21 @@ module Decidim
   module Initiatives
     # Controller in charge of managing committee membership
     class CommitteeRequestsController < Decidim::ApplicationController
+      include Decidim::Initiatives::NeedsInitiative
+
       helper Decidim::ActionAuthorizationHelper
       helper Decidim::PartialTranslationsHelper
-      helper_method :initiatives_committee_member, :current_initiative
+      helper InitiativeHelper
+      helper_method :initiatives_committee_member
 
       include Decidim::Initiatives::ActionAuthorization
 
+      # GET /initiatives/:initiative_id/committee_requests/new
       def new
         authorize! :request_membership, current_initiative
       end
 
+      # GET /initiatives/:initiative_id/committee_requests/spawn
       def spawn
         authorize! :request_membership, current_initiative
 
@@ -40,10 +45,6 @@ module Decidim
       def initiatives_committee_member
         @initiatives_committee_member ||= InitiativesCommitteeMember
                                           .find(params[:id])
-      end
-
-      def current_initiative
-        @current_initiative ||= Decidim::Initiative.find(params[:initiative_id])
       end
     end
   end

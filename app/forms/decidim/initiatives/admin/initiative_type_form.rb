@@ -4,7 +4,7 @@ module Decidim
   module Initiatives
     module Admin
       # A form object used to collect the all the initiative type attributes.
-      class InitiativeTypeForm < Form
+      class InitiativeTypeForm < Decidim::Form
         include TranslatableAttributes
 
         mimic :initiatives_type
@@ -15,11 +15,9 @@ module Decidim
         attribute :requires_validation, Boolean
 
         validates :title, :description, translatable_presence: true
-        validates :banner_image, presence: true, if: ->(form) { form.context.initiative_type.nil? }
-
-        def available_locales
-          Decidim.available_locales
-        end
+        validates :banner_image, presence: true, if: lambda { |form|
+          form.context.initiative_type.nil?
+        }
       end
     end
   end

@@ -15,6 +15,7 @@ module Decidim
 
       helper Decidim::PartialTranslationsHelper
       helper Decidim::Admin::IconLinkHelper
+      helper InitiativeHelper
       helper_method :similar_initiatives
       helper_method :scopes
       helper_method :current_initiative

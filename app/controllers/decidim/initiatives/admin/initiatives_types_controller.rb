@@ -10,17 +10,20 @@ module Decidim
       class InitiativesTypesController < ApplicationController
         helper_method :current_initiative_type
 
+        # GET /admin/initiatives_types
         def index
           authorize! :index, Decidim::InitiativesType
 
           @initiatives_types = InitiativeTypes.for(current_organization)
         end
 
+        # GET /admin/initiatives_types/new
         def new
           authorize! :new, Decidim::InitiativesType
           @form = initiative_type_form.instance
         end
 
+        # POST /admin/initiatives_types
         def create
           authorize! :create, Decidim::InitiativesType
           @form = initiative_type_form.from_params(params)
@@ -38,32 +41,35 @@ module Decidim
           end
         end
 
+        # GET /admin/initiatives_types/:id/edit
         def edit
           authorize! :edit, current_initiative_type
           @form = initiative_type_form
-                    .from_model(current_initiative_type)
-                    .with_context(initiative_type: current_initiative_type)
+                  .from_model(current_initiative_type,
+                              initiative_type: current_initiative_type)
         end
 
+        # PUT /admin/initiatives_types/:id
         def update
           authorize! :update, current_initiative_type
+
           @form = initiative_type_form
-                    .from_params(params)
-                    .with_context(initiative_type: current_initiative_type)
+                  .from_params(params, initiative_type: current_initiative_type)
 
           UpdateInitiativeType.call(current_initiative_type, @form) do
             on(:ok) do
               flash[:notice] = I18n.t('decidim.initiatives.admin.initiatives_types.update.success')
+              redirect_to edit_initiatives_type_path(current_initiative_type)
             end
 
             on(:invalid) do
               flash.now[:alert] = I18n.t('decidim.initiatives.admin.initiatives_types.update.error')
+              render :edit
             end
           end
-
-          render :edit
         end
 
+        # DELETE /admin/initiatives_types/:id
         def destroy
           authorize! :destroy, current_initiative_type
           current_initiative_type.destroy!

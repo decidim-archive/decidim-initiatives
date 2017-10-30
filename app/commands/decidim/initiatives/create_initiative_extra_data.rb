@@ -33,23 +33,25 @@ module Decidim
       attr_reader :form
 
       def create_initiative_data
-
-        record = InitiativesExtraData.find_by(
-          initiative: form.context.initiative,
-          data_type: form.context.data_type
-        )
-
-        if record.nil?
-          record = InitiativesExtraData.new(
-            initiative: form.context.initiative,
-            data_type: form.context.data_type
-          )
-        end
+        record = find_or_create_record
 
         record.data = author_data if record.author?
         record.data = organization_data if record.organization?
         record.save
         record
+      end
+
+      def find_or_create_record
+        record = InitiativesExtraData.find_by(
+          initiative: form.context.initiative,
+          data_type: form.context.data_type
+        )
+        return record unless record.nil?
+
+        InitiativesExtraData.new(
+          initiative: form.context.initiative,
+          data_type: form.context.data_type
+        )
       end
 
       def author_data
