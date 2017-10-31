@@ -123,6 +123,7 @@ en:
             confirm: Are you sure?
             send_to_technical_validation: Send to technical validation
             success: The initiative has been sent to technical validation
+            export_votes: Export supports
           form:
             title: General information
         committee_requests:

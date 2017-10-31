@@ -9,7 +9,7 @@
                   class: 'button muted',
                   data: { confirm: t('.confirm') } %>
     <% else %>
-      <%= link_to t('.send_to_technical_validation'), '#', class: 'button muted disabled' %>
+      <%= link_to t('.send_to_technical_validation'), '#', class: 'button muted disabled' if current_initiative.created? %>
     <% end %>
 
     <% if can? :publish, current_initiative %>
@@ -29,11 +29,18 @@
     <% end %>
 
     <% if can? :discard, current_initiative %>
-        <%= link_to t('.discard'),
-                    discard_initiative_path(current_initiative),
-                    method: :delete,
-                    class: 'button alert',
-                    data: { confirm: t('.confirm') }%>
+      <%= link_to t('.discard'),
+                  discard_initiative_path(current_initiative),
+                  method: :delete,
+                  class: 'button alert',
+                  data: { confirm: t('.confirm') }%>
+    <% end %>
+
+    <% if can? :export_votes, current_initiative %>
+      <%= link_to t('.export_votes'),
+                  export_votes_initiative_path(current_initiative, format: :csv),
+                  class: 'button alert',
+                  data: { confirm: t('.confirm') }%>
     <% end %>
   </div>
 <% end %>

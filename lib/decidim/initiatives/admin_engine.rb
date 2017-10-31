@@ -23,6 +23,7 @@ module Decidim
             post :publish
             delete :unpublish
             delete :discard
+            get :export_votes
           end
 
           resources :attachments, controller: 'initiative_attachments'

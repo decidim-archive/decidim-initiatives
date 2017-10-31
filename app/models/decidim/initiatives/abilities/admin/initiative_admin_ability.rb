@@ -42,6 +42,11 @@ module Decidim
             cannot :discard, Initiative
             can :discard, Initiative, &:validating?
 
+            cannot :export_votes, Initiative
+            can :export_votes, Initiative do |initiative|
+              initiative.offline? || initiative.any?
+            end
+
             can :manage, InitiativesType
             cannot :destroy, InitiativesType
             can :destroy, InitiativesType do |initiative_type|

@@ -2,9 +2,12 @@
 
 require_dependency 'decidim/initiatives/admin/application_controller'
 
+
 module Decidim
   module Initiatives
     module Admin
+      require 'csv'
+
       # Controller used to manage the initiatives
       class InitiativesController < ApplicationController
         include Decidim::Initiatives::NeedsInitiative
@@ -90,6 +93,22 @@ module Decidim
               scope: %w[decidim initiatives admin initiatives edit]
             )
           }
+        end
+
+        # GET /admin/initiatives/:id/export_votes
+        def export_votes
+          authorize! :export_votes, current_initiative
+
+          votes = current_initiative.votes.votes.map(&:sha1)
+          csv_data = CSV.generate(headers: false) do |csv|
+            votes.each do |sha1|
+              csv << [sha1]
+            end
+          end
+
+          respond_to do |format|
+            format.csv { send_data csv_data, file_name: 'votes.csv' }
+          end
         end
       end
     end
