@@ -53,7 +53,10 @@ module Decidim
 
     validates :title, :description, :state, presence: true
     validates :signature_type, presence: true
-    validates :hashtag, uniqueness: true, allow_blank: true, case_sensitive: false
+    validates :hashtag,
+              uniqueness: true,
+              allow_blank: true,
+              case_sensitive: false
 
     scope :open, -> {
       published
@@ -67,8 +70,8 @@ module Decidim
         .or(where('signature_start_time > ?', DateTime.now))
         .or(where('signature_end_time < ?', DateTime.now))
     }
-    scope :published, -> {where.not(published_at: nil)}
-    scope :with_state, ->(state) {where(state: state) unless state.blank?}
+    scope :published, -> { where.not(published_at: nil) }
+    scope :with_state, ->(state) { where(state: state) unless state.blank? }
 
     after_save :notify_state_change
 
@@ -91,7 +94,8 @@ module Decidim
 
     # PUBLIC
     #
-    # RETURN boolean TRUE when the initiative is open, false in case its not closed.
+    # RETURN boolean TRUE when the initiative is open, false in case its
+    # not closed.
     def open?
       !closed?
     end
@@ -114,7 +118,7 @@ module Decidim
     # PUBLIC
     #
     # Returns the author name. If it has been created by an organization it will
-    # return the organization's name. Otherwise it will return the author's name.
+    # return the organization's name. Otherwise it will return author's name.
     #
     # RETURN string
     def author_name
@@ -123,12 +127,13 @@ module Decidim
 
     # PUBLIC author_avatar_url
     #
-    # Returns the author's avatar URL. In case it is not defined the method falls back to
-    # decidim/default-avatar.svg
+    # Returns the author's avatar URL. In case it is not defined the method
+    # falls back to decidim/default-avatar.svg
     #
     # RETURNS STRING
     def author_avatar_url
-      author.avatar&.url || ActionController::Base.helpers.asset_path('decidim/default-avatar.svg')
+      author.avatar&.url ||
+        ActionController::Base.helpers.asset_path('decidim/default-avatar.svg')
     end
 
     # PUBLIC banner image
@@ -212,6 +217,17 @@ module Decidim
 
     def to_param
       slug
+    end
+
+    # Public: Overrides the `comments_have_alignment?`
+    # Commentable concern method.
+    def comments_have_alignment?
+      true
+    end
+
+    # Public: Overrides the `comments_have_votes?` Commentable concern method.
+    def comments_have_votes?
+      true
     end
 
     # PUBLIC

@@ -12,20 +12,18 @@
 
 <div class="row">
   <div class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9">
-    <% if current_user %>
-      <div class="card extra definition-data">
-        <div class="definition-data__item vote-block">
-          <%= render partial: 'votes_count', locals: { initiative: current_initiative } %>
-          <% if current_initiative.votes_enabled? %>
-            <%= render partial: 'vote_cabin', locals: { initiative: current_initiative } %>
-          <% end %>
+    <div class="card extra definition-data">
+      <div class="definition-data__item vote-block">
+        <%= render partial: 'votes_count', locals: { initiative: current_initiative } %>
+        <% if current_initiative.votes_enabled? %>
+          <%= render partial: 'vote_cabin', locals: { initiative: current_initiative } %>
+        <% end %>
 
-          <% if current_user %>
-            <%= render partial: 'decidim/shared/follow_button', locals: { followable: current_initiative } %>
-          <% end %>
-        </div>
+        <% if current_user %>
+          <%= render partial: 'decidim/shared/follow_button', locals: { followable: current_initiative } %>
+        <% end %>
       </div>
-    <% end %>
+    </div>
 
     <%= render partial: 'decidim/shared/share_modal' %>
     <%= embed_modal_for initiative_initiative_widget_url(current_initiative, format: :js) %>
