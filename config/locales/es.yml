@@ -8,7 +8,7 @@ es:
         signature_end_time: Fin del periodo de recogida de firmas
         signature_type: Tipo de firma
         signature_type_values:
-          online: Telemática
+          online: Digital
           offline: Presencial
           any: Mixta
         scope_id: Ámbito

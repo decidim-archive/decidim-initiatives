@@ -8,7 +8,7 @@ ca:
         signature_end_time: Fi del periode de recollida de signatures
         signature_type: Tipus de signatura
         signature_type_values:
-          online: Telemàtica
+          online: Digital
           offline: Presencial
           any: Mixta
         scope_id: Àmbit
