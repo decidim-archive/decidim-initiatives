@@ -88,14 +88,6 @@
     <div class="print-table-cell w33">Domicili</div>
   </div>
 
-  <% current_initiative.committee_members.approved.each do |member| %>
-    <div class="print-table-row">
-      <div class="print-table-cell w33"><%= member.user.name %></div>
-      <div class="print-table-cell w33"></div>
-      <div class="print-table-cell w33"></div>
-    </div>
-  <% end %>
-
   <% if current_initiative.extra_data.organization.any? %>
     <div class="print-table-row">
       <div class="print-table-cell w33">
