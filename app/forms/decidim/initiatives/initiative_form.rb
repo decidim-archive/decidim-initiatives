@@ -15,7 +15,7 @@ module Decidim
       attribute :decidim_user_group_id, Integer
       attribute :signature_type, String
 
-      validates :title, :description, presence: true, etiquette: true
+      validates :title, :description, presence: true
       validates :title, length: { maximum: 150 }
       validates :signature_type, presence: true
       validates :type_id, presence: true
