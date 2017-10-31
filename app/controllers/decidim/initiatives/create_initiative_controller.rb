@@ -109,11 +109,11 @@ module Decidim
         end
 
         @validate_form = ValidateInitiativeForm
-                           .from_params(parameters)
-                           .with_context(
-                             initiative: current_initiative,
-                             data_type: 'author'
-                           )
+                         .from_params(parameters)
+                         .with_context(
+                           initiative: current_initiative,
+                           data_type: 'author'
+                         )
 
         CreateInitiativeExtraData.call(@validate_form) do
           on(:ok) do
