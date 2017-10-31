@@ -23,7 +23,7 @@ module Decidim
 
           it 'Authorized users can vote' do
             expect do
-              post :create, params: { initiative_id: initiative.to_param, format: :js }
+              post :create, params: { initiative_slug: initiative.slug, format: :js }
             end.to change { InitiativesVote.count }.by(1)
           end
         end
@@ -37,27 +37,27 @@ module Decidim
           end
 
           it 'raise an exception' do
-            post :create, params: { initiative_id: initiative.to_param, format: :js }
+            post :create, params: { initiative_slug: initiative.slug, format: :js }
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(302)
           end
 
           it 'do not register the vote' do
             expect do
-              post :create, params: { initiative_id: initiative.to_param, format: :js }
+              post :create, params: { initiative_slug: initiative.slug, format: :js }
             end.not_to change { InitiativesVote.count }
           end
         end
 
         context 'Guest users' do
           it 'receives unauthorized response' do
-            post :create, params: { initiative_id: initiative.to_param, format: :js }
+            post :create, params: { initiative_slug: initiative.slug, format: :js }
             expect(response).to have_http_status(401)
           end
 
           it 'do not register the vote' do
             expect do
-              post :create, params: { initiative_id: initiative.to_param, format: :js }
+              post :create, params: { initiative_slug: initiative.slug, format: :js }
             end.not_to change { InitiativesVote.count }
           end
         end
@@ -76,7 +76,7 @@ module Decidim
             expect(vote).not_to be_nil
 
             expect do
-              delete :destroy, params: { initiative_id: initiative.to_param, format: :js }
+              delete :destroy, params: { initiative_slug: initiative.slug, format: :js }
             end.to change { InitiativesVote.count }.by(-1)
           end
         end

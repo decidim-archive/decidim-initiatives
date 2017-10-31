@@ -24,6 +24,8 @@ module Decidim
       end
 
       module InstanceMethods
+        include InitiativeSlug
+
         # Public: Finds the current Initiative given this controller's
         # context.
         #
@@ -42,7 +44,11 @@ module Decidim
 
         def detect_initiative
           request.env['current_initiative'] ||
-            Initiative.find_by(id: params[:initiative_id] || params[:id])
+            Initiative.find_by(id: id_from_slug(params[:slug]) ||
+              id_from_slug(params[:initiative_slug]) ||
+              params[:initiative_id] ||
+              params[:id]
+            )
         end
       end
     end

@@ -37,7 +37,7 @@ module Decidim
             end
 
             it 'Raises an error' do
-              get :send_to_technical_validation, params: { id: initiative.to_param }
+              get :send_to_technical_validation, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
@@ -51,7 +51,7 @@ module Decidim
             end
 
             it 'Raises an error' do
-              get :send_to_technical_validation, params: { id: created_initiative.to_param }
+              get :send_to_technical_validation, params: { slug: created_initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
@@ -64,7 +64,7 @@ module Decidim
             end
 
             it 'Passes to technical validation phase' do
-              get :send_to_technical_validation, params: { id: created_initiative.to_param }
+              get :send_to_technical_validation, params: { slug: created_initiative.to_param }
 
               created_initiative.reload
               expect(created_initiative).to be_validating
@@ -81,7 +81,7 @@ module Decidim
             end
 
             it 'Raises an error' do
-              post :publish, params: { id: initiative.to_param }
+              post :publish, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
@@ -95,7 +95,7 @@ module Decidim
             end
 
             it 'initiative gets published' do
-              post :publish, params: { id: initiative.to_param }
+              post :publish, params: { slug: initiative.to_param }
               expect(response).to have_http_status(302)
 
               initiative.reload
@@ -114,7 +114,7 @@ module Decidim
             end
 
             it 'Raises an error' do
-              post :publish, params: { id: initiative.to_param }
+              post :publish, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
@@ -128,7 +128,7 @@ module Decidim
             end
 
             it 'initiative gets unpublished' do
-              delete :unpublish, params: { id: initiative.to_param }
+              delete :unpublish, params: { slug: initiative.to_param }
               expect(response).to have_http_status(302)
 
               initiative.reload
@@ -148,7 +148,7 @@ module Decidim
             end
 
             it 'Raises an error' do
-              post :publish, params: { id: initiative.to_param }
+              post :publish, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
@@ -162,7 +162,7 @@ module Decidim
             end
 
             it 'initiative gets discarded' do
-              delete :discard, params: { id: initiative.to_param }
+              delete :discard, params: { slug: initiative.to_param }
               expect(response).to have_http_status(302)
 
               initiative.reload

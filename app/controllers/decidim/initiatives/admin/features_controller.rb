@@ -9,15 +9,7 @@ module Decidim
         layout 'decidim/admin/initiative'
 
         helper Decidim::PartialTranslationsHelper
-        helper_method :current_initiative
-
-        private
-
-        def current_initiative
-          @initiative ||= Initiative.find(params[:initiative_id])
-        end
-
-        alias_method :current_participatory_space, :current_initiative
+        include NeedsInitiative
       end
     end
   end

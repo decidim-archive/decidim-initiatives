@@ -15,13 +15,23 @@ module Decidim
         get '/initiative_type_scopes/search', to: 'initiatives_type_scopes#search', as: :initiative_type_scopes_search
 
         resources :create_initiative
-        resources :initiatives, only: %i[index show] do
+
+        get 'initiatives/:initiative_id', to: redirect { |params, _request|
+          initiative = Decidim::Initiative.find(params[:initiative_id])
+          initiative ? "/initiatives/#{initiative.slug}" : '/404'
+        }, constraints: { initiative_id: /[0-9]+/ }
+
+        get '/initiatives/:initiative_id/f/:feature_id', to: redirect { |params, _request|
+          initiative = Decidim::Initiative.find(params[:initiative_id])
+          initiative ? "/initiatives/#{initiative.slug}/f/#{params[:feature_id]}" : '/404'
+        }, constraints: { initiative_id: /[0-9]+/ }
+
+        resources :initiatives, param: :slug, only: %i[index show], path: 'initiatives' do
           member do
             get :signature_identities
           end
 
           resource :initiative_vote, only: %i[create destroy]
-
           resource :initiative_widget, only: :show, path: 'embed'
           resources :committee_requests, only: %i[new], shallow: true do
             collection do
@@ -30,7 +40,7 @@ module Decidim
           end
         end
 
-        scope '/initiatives/:initiative_id/f/:feature_id' do
+        scope '/initiatives/:initiative_slug/f/:feature_id' do
           Decidim.feature_manifests.each do |manifest|
             next unless manifest.engine
 

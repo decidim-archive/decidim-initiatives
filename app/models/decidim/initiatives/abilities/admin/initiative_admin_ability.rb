@@ -83,8 +83,8 @@ module Decidim
               has_initiatives?(user)
             end
 
-            can :show, Initiative do |_initiative|
-              Decidim::Initiatives.print_enabled
+            can :show, Initiative do |initiative|
+              initiative.has_authorship?(user) && Decidim::Initiatives.print_enabled
             end
 
             can :edit, Decidim::Initiative do |initiative|

@@ -6,6 +6,8 @@ module Decidim
     # looking at the request parameters and the organization in the request
     # environment, and injects it into the environment.
     class CurrentInitiative
+      include InitiativeSlug
+
       # Public: Matches the request against an initative and injects it
       #         into the environment.
       #
@@ -25,7 +27,7 @@ module Decidim
       private
 
       def current_initiative(env, params)
-        env['decidim.current_participatory_space'] ||= Initiative.find_by(id: params['initiative_id'])
+        env['decidim.current_participatory_space'] ||= Initiative.find_by(id: id_from_slug(params[:initiative_slug]))
       end
     end
   end

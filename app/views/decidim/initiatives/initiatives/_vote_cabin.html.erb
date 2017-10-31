@@ -7,7 +7,7 @@
 
       <div class="reveal"
            id="user-identities"
-           data-reveal data-refresh-url="<%= signature_identities_initiative_url(initiative) %>">
+           data-reveal data-refresh-url="<%= signature_identities_initiative_url(slug: initiative.slug) %>">
       </div>
   <% else %>
       <%= render partial: 'decidim/initiatives/initiatives/vote_button',

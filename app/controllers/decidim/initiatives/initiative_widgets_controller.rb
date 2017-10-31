@@ -10,10 +10,12 @@ module Decidim
       helper Decidim::Comments::CommentsHelper
       helper Decidim::Admin::IconLinkHelper
 
+      include NeedsInitiative
+
       private
 
       def model
-        @model ||= Initiative.find(params[:initiative_id])
+        @model ||= current_initiative
       end
 
       def current_participatory_space

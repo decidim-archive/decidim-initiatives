@@ -26,12 +26,12 @@ module Decidim
       describe 'GET show' do
         context 'Any user' do
           it 'Shows published initiatives' do
-            get :show, params: { id: initiative.to_param }
+            get :show, params: { slug: initiative.slug }
             expect(subject.helpers.current_initiative).to eq(initiative)
           end
 
           it 'Throws exception on non published initiatives' do
-            get :show, params: { id: created_initiative.to_param }
+            get :show, params: { slug: created_initiative.slug }
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(302)
           end
@@ -43,7 +43,7 @@ module Decidim
           end
 
           it 'Unpublished initiatives are shown too' do
-            get :show, params: { id: created_initiative.id }
+            get :show, params: { slug: created_initiative.slug }
             expect(subject.helpers.current_initiative).to eq(created_initiative)
           end
         end
@@ -58,7 +58,7 @@ module Decidim
         end
 
         it 'voted_groups is a list of groups represented by the user that supported the initiative' do
-          get :signature_identities, params: { id: initiative.to_param }
+          get :signature_identities, params: { slug: initiative.slug }
 
           expect(assigns[:voted_groups]).to include(group_vote.id)
         end

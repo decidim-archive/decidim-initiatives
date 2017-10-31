@@ -11,6 +11,7 @@ module Decidim
     include Decidim::Comments::Commentable
     include Decidim::Followable
     include Decidim::HasAttachments
+    include Decidim::Initiatives::InitiativeSlug
 
     belongs_to :organization,
                foreign_key: 'decidim_organization_id',
@@ -202,6 +203,15 @@ module Decidim
     # Public: Returns the percentage of required supports reached
     def percentage
       initiative_votes_count * 100 / scoped_type.supports_required
+    end
+
+    # Public: Overrides slug attribute from participatory processes.
+    def slug
+      slug_from_id(id)
+    end
+
+    def to_param
+      slug
     end
 
     # PUBLIC

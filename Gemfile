@@ -18,5 +18,9 @@ gemspec
 # your gem to rubygems.org.
 
 # To use a debugger
-gem 'byebug', group: %i[development test]
 gem 'rails', '~> 5.1'
+
+group :test, :development do
+  gem 'byebug'
+  gem 'faker'
+end

@@ -4,8 +4,6 @@ module Decidim
   module Initiatives
     # Exposes the initiative type text search so users can choose a type writing its name.
     class InitiativeTypesController < Decidim::ApplicationController
-      skip_before_action :store_current_location
-
       # GET /initiative_types/search
       def search
         authorize! :search, InitiativesType

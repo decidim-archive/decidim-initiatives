@@ -41,9 +41,8 @@
             <ul>
               <li class="<%= 'is-active' if is_active_link?(decidim_initiatives.initiative_path(current_initiative), :exclusive) %>">
                 <%= active_link_to decidim_initiatives.initiative_path(current_initiative), active: :exclusive, class: 'process-nav__link', class_active: 'is-active' do %>
-                    <%# = external_icon "decidim/participatory_processes/process.svg" %>
                     <%= icon 'chat' %>
-                    <%= t ".initiative_menu_item" %>
+                    <%= t '.initiative_menu_item' %>
                 <% end %>
               </li>
 

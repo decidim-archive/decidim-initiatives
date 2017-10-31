@@ -16,7 +16,8 @@ module Decidim
         resources :initiatives_types, except: :show do
           resources :initiatives_type_scopes, except: %i[index show]
         end
-        resources :initiatives, only: %i[index show edit update] do
+
+        resources :initiatives, only: %i[index show edit update], param: :slug do
           member do
             get :send_to_technical_validation
             post :publish
@@ -34,7 +35,7 @@ module Decidim
           end
         end
 
-        scope '/initiatives/:initiative_id' do
+        scope '/initiatives/:initiative_slug' do
           resources :features do
             resource :permissions, controller: 'feature_permissions'
             member do
@@ -45,7 +46,7 @@ module Decidim
           end
         end
 
-        scope '/initiatives/:initiative_id/features/:feature_id/manage' do
+        scope '/initiatives/:initiative_slug/features/:feature_id/manage' do
           Decidim.feature_manifests.each do |manifest|
             next unless manifest.admin_engine
 

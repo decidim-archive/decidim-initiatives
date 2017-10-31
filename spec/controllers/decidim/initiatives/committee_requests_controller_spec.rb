@@ -21,7 +21,7 @@ module Decidim
           end
 
           it 'Owner is not allowed to request membership' do
-            get :new, params: { initiative_id: initiative.to_param }
+            get :new, params: { initiative_slug: initiative.slug }
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(302)
           end
@@ -37,7 +37,7 @@ module Decidim
           end
 
           it 'Authorized users are allowed to request membership' do
-            get :new, params: { initiative_id: initiative.to_param }
+            get :new, params: { initiative_slug: initiative.slug }
             expect(flash[:alert]).to be_blank
             expect(response).to have_http_status(200)
           end
@@ -51,7 +51,7 @@ module Decidim
           end
 
           it 'are not allowed to request membership' do
-            get :new, params: { initiative_id: initiative.to_param }
+            get :new, params: { initiative_slug: initiative.slug }
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(302)
           end
@@ -68,7 +68,7 @@ module Decidim
 
         it 'Membership request is created' do
           expect do
-            get :new, params: { initiative_id: initiative.to_param }
+            get :new, params: { initiative_slug: initiative.slug }
           end.to change { InitiativesCommitteeMember.count }
         end
       end

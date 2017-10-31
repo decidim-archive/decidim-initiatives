@@ -3,6 +3,7 @@
 Decidim.register_participatory_space(:initiatives) do |participatory_space|
   participatory_space.engine = Decidim::Initiatives::Engine
   participatory_space.admin_engine = Decidim::Initiatives::AdminEngine
+  participatory_space.model_class_name = 'Decidim::Initiative'
 
   participatory_space.seeds do
     seeds_root = File.join(__dir__, '..', '..', '..', 'db', 'seeds')
