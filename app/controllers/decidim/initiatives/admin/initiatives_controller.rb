@@ -85,14 +85,14 @@ module Decidim
 
         # POST /admin/initiatives/:id/accept
         def accept
-          authorize :accept, current_initiative
+          authorize! :accept, current_initiative
           current_initiative.accepted!
           redirect_to decidim_admin_initiatives.initiatives_path
         end
 
         # DELETE /admin/initiatives/:id/reject
         def reject
-          authorize :reject, current_initiative
+          authorize! :reject, current_initiative
           current_initiative.rejected!
           redirect_to decidim_admin_initiatives.initiatives_path
         end

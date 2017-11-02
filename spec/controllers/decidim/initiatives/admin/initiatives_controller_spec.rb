@@ -114,7 +114,7 @@ module Decidim
             end
 
             it 'Raises an error' do
-              post :publish, params: { slug: initiative.to_param }
+              delete :unpublish, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
@@ -168,6 +168,71 @@ module Decidim
               initiative.reload
               expect(initiative.discarded?).to be_truthy
               expect(initiative.published_at).to be_nil
+            end
+          end
+        end
+
+        context 'POST accept' do
+          let!(:initiative) { create(:initiative, :acceptable, signature_type: 'any', organization: organization) }
+
+          context 'Initiative owner' do
+            before do
+              sign_in initiative.author
+            end
+
+            it 'Raises an error' do
+              post :accept, params: { slug: initiative.to_param }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          context 'Administrator' do
+            let!(:admin) { create(:user, :confirmed, :admin) }
+
+            before do
+              sign_in admin
+            end
+
+            it 'initiative gets published' do
+              post :accept, params: { slug: initiative.to_param }
+              expect(response).to have_http_status(302)
+
+              initiative.reload
+              expect(initiative.accepted?).to be_truthy
+            end
+          end
+        end
+
+        context 'DELETE reject' do
+          let!(:initiative) { create(:initiative, :rejectable, signature_type: 'any', organization: organization) }
+
+          context 'Initiative owner' do
+            before do
+              sign_in initiative.author
+            end
+
+            it 'Raises an error' do
+              delete :reject, params: { slug: initiative.to_param }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          context 'Administrator' do
+            let!(:admin) { create(:user, :confirmed, :admin) }
+
+            before do
+              sign_in admin
+            end
+
+            it 'initiative gets rejected' do
+              delete :reject, params: { slug: initiative.to_param }
+              expect(response).to have_http_status(302)
+              expect(flash[:alert]).to be_nil
+
+              initiative.reload
+              expect(initiative.rejected?).to be_truthy
             end
           end
         end

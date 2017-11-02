@@ -26,7 +26,8 @@ shared_examples 'update an initiative' do
         decidim_scope_id: initiative.scope.id,
         answer: { en: 'Measured answer' },
         answer_url: 'http://decidim.org',
-        hashtag: 'update_initiative_example'
+        hashtag: 'update_initiative_example',
+        offline_votes: 1
       }
     end
 
@@ -57,7 +58,6 @@ shared_examples 'update an initiative' do
         expect { command.call }.to broadcast(:ok)
       end
 
-
       it 'updates the initiative' do
         command.call
         initiative.reload
@@ -80,6 +80,12 @@ shared_examples 'update an initiative' do
         end
       end
 
+      it 'offline votes remain unchanged' do
+        command.call
+        initiative.reload
+        expect(initiative.offline_votes).not_to eq(form_params[:offline_votes])
+      end
+
       context 'Administrator user' do
         let(:administrator) { create(:user, :admin, organization: organization)}
 
@@ -94,6 +100,12 @@ shared_examples 'update an initiative' do
           %i[signature_start_time signature_end_time].each do |key|
             expect(initiative[key]).to eq(form_params[key])
           end
+        end
+
+        it 'offline votes gets updated' do
+          command.call
+          initiative.reload
+          expect(initiative.offline_votes).to eq(form_params[:offline_votes])
         end
       end
     end

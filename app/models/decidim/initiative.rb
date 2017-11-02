@@ -207,8 +207,10 @@ module Decidim
 
     # Public: Returns the percentage of required supports reached
     def percentage
-      face_to_face_votes = offline_votes.nil? ? 0 : offline_votes
-      (initiative_votes_count + face_to_face_votes) * 100 / scoped_type.supports_required
+      face_to_face_votes = offline_votes.nil? || online? ? 0 : offline_votes
+      percentage = (initiative_votes_count + face_to_face_votes) * 100 / scoped_type.supports_required
+      percentage = 100 if percentage > 100
+      percentage
     end
 
     # Public: Overrides slug attribute from participatory processes.

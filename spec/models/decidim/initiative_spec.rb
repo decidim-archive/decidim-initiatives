@@ -128,5 +128,39 @@ module Decidim
         expect(initiative.has_authorship?(user)).to be_falsey
       end
     end
+
+    context 'percentage' do
+      context 'online initiatives' do
+        let!(:initiative) { create(:initiative) }
+
+        it 'ignores any value in offline_votes attribute' do
+          initiative.update(offline_votes: 1000, initiative_votes_count: initiative.scoped_type.supports_required / 2)
+          expect(initiative.percentage).to eq(50)
+        end
+
+        it "can't be greater than 100" do
+          initiative.update(initiative_votes_count: initiative.scoped_type.supports_required * 2)
+          expect(initiative.percentage).to eq(100)
+        end
+      end
+
+      context 'face-to-face support' do
+        let!(:initiative) { create(:initiative, signature_type: 'any') }
+
+        it 'returns the percentage of votes reached' do
+          online_votes =  initiative.scoped_type.supports_required / 4
+          offline_votes =  initiative.scoped_type.supports_required / 4
+          initiative.update(offline_votes: offline_votes, initiative_votes_count: online_votes)
+          expect(initiative.percentage).to eq(50)
+        end
+
+        it "can't be greater than 100" do
+          online_votes =  initiative.scoped_type.supports_required * 4
+          offline_votes =  initiative.scoped_type.supports_required * 4
+          initiative.update(offline_votes: offline_votes, initiative_votes_count: online_votes)
+          expect(initiative.percentage).to eq(100)
+        end
+      end
+    end
   end
 end
