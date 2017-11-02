@@ -9,7 +9,10 @@ module Decidim
         def initialize(user, context)
           super(user, context)
 
-          can :read, Initiative, &:published?
+          can :read, Initiative do |initiative|
+            initiative.published? || initiative.rejected? || initiative.accepted?
+          end
+
           can :search, InitiativesType
           can :search, InitiativesTypeScope
         end
