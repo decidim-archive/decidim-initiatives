@@ -163,7 +163,8 @@ module Decidim
       end
 
       def current_initiative
-        Initiative.find(session[:initiative][:id]) if session[:initiative].key?(:id)
+        initiative = session[:initiative].with_indifferent_access
+        Initiative.find(initiative[:id]) if initiative.key?(:id)
       end
 
       def organization_form
