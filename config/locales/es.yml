@@ -7,6 +7,7 @@ es:
         signature_start_time: Inicio del periodo de recogida de firmas
         signature_end_time: Fin del periodo de recogida de firmas
         signature_type: Tipo de firma
+        offline_votes: Firmas presenciales
         signature_type_values:
           online: Digital
           offline: Presencial
@@ -124,6 +125,8 @@ es:
             send_to_technical_validation: Enviar a validación técnica
             success: La iniciativa ha sido enviada a validación técnica
             export_votes: Exportar soportes
+            accept: Aceptar iniciativa
+            reject: Rechazar iniciativa
           form:
             title: Información general
         committee_requests:

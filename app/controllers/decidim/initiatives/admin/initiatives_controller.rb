@@ -83,6 +83,20 @@ module Decidim
           redirect_to decidim_admin_initiatives.initiatives_path
         end
 
+        # POST /admin/initiatives/:id/accept
+        def accept
+          authorize :accept, current_initiative
+          current_initiative.accepted!
+          redirect_to decidim_admin_initiatives.initiatives_path
+        end
+
+        # DELETE /admin/initiatives/:id/reject
+        def reject
+          authorize :reject, current_initiative
+          current_initiative.rejected!
+          redirect_to decidim_admin_initiatives.initiatives_path
+        end
+
         # GET /admin/initiatives/:id/send_to_technical_validation
         def send_to_technical_validation
           authorize! :send_to_technical_validation, current_initiative

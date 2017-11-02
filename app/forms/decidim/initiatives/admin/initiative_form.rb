@@ -18,6 +18,7 @@ module Decidim
         attribute :signature_start_time, Date
         attribute :signature_end_time, Date
         attribute :hashtag, String
+        attribute :offline_votes, Integer
 
         translatable_attribute :answer, String
         attribute :answer_url, String
@@ -32,6 +33,12 @@ module Decidim
 
         validates :answer, translatable_presence: true, if: ->(form) { form.context.initiative.accepted? }
         validates :answer_url, presence: true, if: ->(form) { form.context.initiative.accepted? }
+
+        validates :offline_votes,
+                  numericality: {
+                    only_integer: true,
+                    greater_than: 0
+                  }, allow_nil: true
 
         def map_model(model)
           self.type_id = model.type.id

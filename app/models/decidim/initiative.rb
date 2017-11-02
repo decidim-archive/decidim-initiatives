@@ -207,7 +207,8 @@ module Decidim
 
     # Public: Returns the percentage of required supports reached
     def percentage
-      initiative_votes_count * 100 / scoped_type.supports_required
+      face_to_face_votes = offline_votes.nil? ? 0 : offline_votes
+      (initiative_votes_count + face_to_face_votes) * 100 / scoped_type.supports_required
     end
 
     # Public: Overrides slug attribute from participatory processes.
@@ -239,6 +240,10 @@ module Decidim
     def has_authorship?(user)
       return true if author.id == user.id
       committee_members.approved.where(decidim_users_id: user.id).any?
+    end
+
+    def accepts_offline_votes?
+      (offline? || any?) && published?
     end
 
     private

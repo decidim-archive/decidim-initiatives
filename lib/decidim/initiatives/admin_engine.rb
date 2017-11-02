@@ -24,6 +24,8 @@ module Decidim
             delete :unpublish
             delete :discard
             get :export_votes
+            post :accept
+            delete :reject
           end
 
           resources :attachments, controller: 'initiative_attachments'
@@ -67,7 +69,11 @@ module Decidim
       initializer 'decidim_assemblies.inject_abilities_to_user' do |_app|
         Decidim.configure do |config|
           config.admin_abilities += %w[
+            Decidim::Initiatives::Abilities::Admin::CommitteeUserAbility
+            Decidim::Initiatives::Abilities::Admin::InitiativeUserAbility
+            Decidim::Initiatives::Abilities::Admin::CommitteeAdminAbility
             Decidim::Initiatives::Abilities::Admin::InitiativeAdminAbility
+            Decidim::Initiatives::Abilities::Admin::InitiativeTypeAbility
             Decidim::Initiatives::Abilities::Admin::AttachmentsAbility
             Decidim::Initiatives::Abilities::Admin::FeaturesAbility
           ]

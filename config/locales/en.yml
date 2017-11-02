@@ -6,6 +6,7 @@ en:
         description: Description
         signature_start_time: Start of signature collection period
         signature_end_time: End of signature collection period
+        offline_votes: Face-to-face supports
         signature_type: Signature type
         signature_type_values:
           online: OnLine
@@ -124,6 +125,8 @@ en:
             send_to_technical_validation: Send to technical validation
             success: The initiative has been sent to technical validation
             export_votes: Export supports
+            accept: Accept initiative
+            reject: Reject initiative
           form:
             title: General information
         committee_requests:

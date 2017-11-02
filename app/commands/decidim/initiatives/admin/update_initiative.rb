@@ -52,6 +52,7 @@ module Decidim
           if current_user.admin?
             attrs[:signature_start_time] = form.signature_start_time
             attrs[:signature_end_time] = form.signature_end_time
+            attrs[:offline_votes] = form.offline_votes
           end
 
           attrs

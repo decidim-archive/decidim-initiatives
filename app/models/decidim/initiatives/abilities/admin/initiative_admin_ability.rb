@@ -13,18 +13,18 @@ module Decidim
 
           def initialize(user, context)
             return unless user
+            return unless user.admin?
 
             @user = user
             @context = context
 
-            can :preview, Initiative
-
-            define_user_abilities
             define_admin_abilities
           end
 
+          private
+
           def define_admin_abilities
-            return unless admin?
+            can :preview, Initiative
 
             can :manage, Initiative
             cannot :send_to_technical_validation, Initiative
@@ -42,96 +42,24 @@ module Decidim
             cannot :discard, Initiative
             can :discard, Initiative, &:validating?
 
+            cannot :accept, Initiative
+            can :accept, Initiative do |initiative|
+              initiative.published? &&
+                initiative.signature_end_time < Date.today &&
+                initiative.percentage >= 100
+            end
+
+            cannot :reject, Initiative
+            can :reject, Initiative do |initiative|
+              initiative.published? &&
+                initiative.signature_end_time < Date.today &&
+                initiative.percentage < 100
+            end
+
             cannot :export_votes, Initiative
             can :export_votes, Initiative do |initiative|
               initiative.offline? || initiative.any?
             end
-
-            can :manage, InitiativesType
-            cannot :destroy, InitiativesType
-            can :destroy, InitiativesType do |initiative_type|
-              result = true
-
-              initiative_type.scopes.each do |s|
-                result &&= s.initiatives.empty?
-              end
-
-              result
-            end
-
-            can :manage, Decidim::InitiativesTypeScope
-            cannot :destroy, Decidim::InitiativesTypeScope
-            can :destroy, Decidim::InitiativesTypeScope do |scope|
-              scope.initiatives.empty?
-            end
-
-            can :manage_membership, Decidim::Initiative
-            can :index, InitiativesCommitteeMember
-
-            can :approve, InitiativesCommitteeMember do |request|
-              !request.accepted?
-            end
-
-            can :revoke, InitiativesCommitteeMember do |request|
-              !request.rejected?
-            end
-          end
-
-          def define_user_abilities
-            return if admin?
-
-            can :read, :admin_dashboard do
-              has_initiatives?(user)
-            end
-
-            can :index, Decidim::Initiative do
-              has_initiatives?(user)
-            end
-
-            can :show, Initiative do |initiative|
-              initiative.has_authorship?(user) && Decidim::Initiatives.print_enabled
-            end
-
-            can :edit, Decidim::Initiative do |initiative|
-              initiative.has_authorship?(user)
-            end
-
-            can :update, Decidim::Initiative do |initiative|
-              initiative.has_authorship?(user) && initiative.created?
-            end
-
-            can :manage_membership, Decidim::Initiative do |initiative|
-              initiative.has_authorship?(user)
-            end
-
-            can :index, InitiativesCommitteeMember
-            can :approve, InitiativesCommitteeMember do |request|
-              request.initiative.has_authorship?(user) && !request.initiative.published? && !request.accepted?
-            end
-
-            can :revoke, InitiativesCommitteeMember do |request|
-              request.initiative.has_authorship?(user) && !request.initiative.published? && !request.rejected?
-            end
-
-            can :send_to_technical_validation, Initiative do |initiative|
-              initiative.has_authorship?(user) &&
-                initiative.created? &&
-                (
-                !initiative.decidim_user_group_id.nil? ||
-                  initiative.committee_members.approved.count >= Decidim::Initiatives.minimum_committee_members
-                )
-            end
-          end
-
-          private
-
-          def has_initiatives?(user)
-            initiatives = InitiativesCreated.by(user) | InitiativesPromoted.by(user)
-            initiatives.any?
-          end
-
-          def admin?
-            user&.admin?
           end
         end
       end

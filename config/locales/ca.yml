@@ -7,6 +7,7 @@ ca:
         signature_start_time: Inici del periode de recollida de signatures
         signature_end_time: Fi del periode de recollida de signatures
         signature_type: Tipus de signatura
+        offline_votes: Signatures pesencials
         signature_type_values:
           online: Digital
           offline: Presencial
@@ -124,6 +125,8 @@ ca:
             send_to_technical_validation: Enviar a validació tècnica
             success: La iniciativa ha segut enviada a validació tècnica
             export_votes: Exportar suports
+            accept: Acceptar iniciativa
+            reject: Rebutjar iniciativa
           form:
             title: Informació general
         committee_requests:

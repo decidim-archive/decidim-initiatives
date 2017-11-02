@@ -28,6 +28,22 @@
                   data: { confirm: t('.confirm') }%>
     <% end %>
 
+    <% if can? :accept, current_initiative %>
+        <%= link_to t('.accept'),
+                    accept_initiative_path(current_initiative),
+                    method: :post,
+                    class: 'button hollow',
+                    data: { confirm: t('.confirm') } %>
+    <% end %>
+
+    <% if can? :reject, current_initiative %>
+        <%= link_to t('.reject'),
+                    reject_initiative_path(current_initiative),
+                    method: :delete,
+                    class: 'button alert',
+                    data: { confirm: t('.confirm') }%>
+    <% end %>
+
     <% if can? :discard, current_initiative %>
       <%= link_to t('.discard'),
                   discard_initiative_path(current_initiative),
