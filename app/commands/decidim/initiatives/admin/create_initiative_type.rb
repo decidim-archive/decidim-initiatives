@@ -42,7 +42,8 @@ module Decidim
             organization: form.current_organization,
             title: form.title,
             description: form.description,
-            banner_image: form.banner_image
+            banner_image: form.banner_image,
+            requires_validation: form.requires_validation
           )
 
           return initiative_type unless initiative_type.valid?
