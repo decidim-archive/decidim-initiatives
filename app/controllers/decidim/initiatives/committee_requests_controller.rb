@@ -9,7 +9,6 @@ module Decidim
       helper Decidim::ActionAuthorizationHelper
       helper Decidim::PartialTranslationsHelper
       helper InitiativeHelper
-      helper_method :initiatives_committee_member
 
       include Decidim::Initiatives::ActionAuthorization
 
@@ -38,13 +37,6 @@ module Decidim
             }
           end
         end
-      end
-
-      private
-
-      def initiatives_committee_member
-        @initiatives_committee_member ||= InitiativesCommitteeMember
-                                          .find(params[:id])
       end
     end
   end

@@ -7,6 +7,50 @@ module Decidim
     describe CreateInitiativeExtraData do
       let(:initiative) { create(:initiative, :created) }
 
+      describe 'Empty data' do
+        let(:form) {
+          ValidateInitiativeForm.from_params(initiative_author: {})
+            .with_context(
+              initiative: initiative,
+              data_type: 'author'
+            )
+        }
+
+        let(:command) { described_class.new(form) }
+
+        it 'broadcasts invalid' do
+          expect { command.call }.to broadcast :invalid
+        end
+      end
+
+      describe 'Database failure' do
+        let(:form) {
+          ValidateInitiativeForm.from_params(initiative_author:
+            {
+              name: 'name',
+              id_document: '00000000L',
+              address: 'address',
+              city: 'city',
+              province: 'province',
+              post_code: '00000',
+              phone_number: '600000000'
+            }
+          ).with_context(
+            initiative: initiative,
+            data_type: 'author'
+          )
+        }
+
+        let(:command) { described_class.new(form) }
+
+        it 'broadcasts invalid' do
+          expect_any_instance_of(InitiativesExtraData).to receive(:persisted?)
+                                                            .at_least(:once)
+                                                            .and_return(false)
+          expect { command.call }.to broadcast :invalid
+        end
+      end
+
       describe 'Author data' do
         let(:form) {
           ValidateInitiativeForm.from_params(initiative_author:

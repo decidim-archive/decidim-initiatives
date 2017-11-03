@@ -23,17 +23,9 @@ module Decidim
         # Returns nothing.
         def call
           return broadcast(:invalid) if form.invalid?
+
           initiative_type_scope.update(attributes)
-
-          if initiative_type_scope.valid?
-            broadcast(:ok, initiative_type_scope)
-          else
-            initiative_type_scope.errors.each do |attribute, error|
-              form.errors.add(attribute, error)
-            end
-
-            broadcast(:invalid, initiative_type_scope)
-          end
+          broadcast(:ok, initiative_type_scope)
         end
 
         private

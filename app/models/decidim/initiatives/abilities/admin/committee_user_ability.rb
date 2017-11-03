@@ -19,7 +19,7 @@ module Decidim
             @user = user
             @context = context
 
-            can :index, InitiativesCommitteeMember
+            can :index, InitiativesCommitteeMember if has_initiatives?(user)
             can :approve, InitiativesCommitteeMember do |request|
               request.initiative.has_authorship?(user) &&
                 !request.initiative.published? &&
@@ -31,6 +31,13 @@ module Decidim
                 !request.initiative.published? &&
                 !request.rejected?
             end
+          end
+
+          private
+
+          def has_initiatives?(user)
+            initiatives = InitiativesCreated.by(user) | InitiativesPromoted.by(user)
+            initiatives.any?
           end
         end
       end

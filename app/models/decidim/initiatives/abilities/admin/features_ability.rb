@@ -13,45 +13,10 @@ module Decidim
           attr_reader :user, :context
 
           def initialize(user, context)
-            return unless user
+            return if user&.admin?
 
             @user = user
             @context = context
-
-            define_abilities
-          end
-
-          private
-
-          def define_abilities
-            return if admin?
-
-            # TODO This block should be rewritten once the core allows to
-            # configure fine grained permissions for each feature
-
-            # can :read, Decidim::Feature do
-            #   has_initiatives?(user)
-            # end
-            #
-            # can :update, Decidim::Feature do |feature|
-            #   feature.participatory_space.author.id == user.id
-            # end
-
-            # can :manage, Decidim::Feature do
-            #   has_initiatives?(user)
-            # end
-            #
-            # can %i[edit update], Decidim::Surveys::Survey do
-            #   has_initiatives?(user)
-            # end
-          end
-
-          def has_initiatives?(user)
-            Initiative.where(author: user).any?
-          end
-
-          def admin?
-            user&.admin?
           end
         end
       end

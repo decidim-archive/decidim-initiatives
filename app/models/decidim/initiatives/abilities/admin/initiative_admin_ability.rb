@@ -12,8 +12,7 @@ module Decidim
           attr_reader :user, :context
 
           def initialize(user, context)
-            return unless user
-            return unless user.admin?
+            return unless user&.admin?
 
             @user = user
             @context = context
@@ -29,9 +28,7 @@ module Decidim
             can :manage, Initiative
             cannot :send_to_technical_validation, Initiative
             cannot :show, Initiative
-            can :show, Initiative do |_initiative|
-              Decidim::Initiatives.print_enabled
-            end
+            can :show, Initiative if Decidim::Initiatives.print_enabled
 
             cannot :publish, Initiative
             can :publish, Initiative, &:validating?

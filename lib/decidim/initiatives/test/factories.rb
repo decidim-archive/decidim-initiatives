@@ -29,15 +29,8 @@ FactoryGirl.define do
     signature_start_time { Time.current }
     signature_end_time { Time.current + 120.days}
 
-    after(:build) do |object|
-      initiative_type = create(:initiatives_type, organization: object.organization)
-      scope = create(:scope, organization: object.organization)
-
-      object.scoped_type = Decidim::InitiativesTypeScope.create(
-        type: initiative_type,
-        scope: scope,
-        supports_required: 1000
-      )
+    scoped_type do
+      create(:initiatives_type_scope, type: create(:initiatives_type, organization: organization))
     end
 
     after(:create) do |initiative|
@@ -115,7 +108,7 @@ FactoryGirl.define do
 
   factory :initiatives_committee_member, class: Decidim::InitiativesCommitteeMember do
     initiative { create(:initiative) }
-    user { create(:user, organization: initiative.organization) }
+    user { create(:user, :confirmed, organization: initiative.organization) }
     state 'accepted'
 
     trait :requested do

@@ -20,6 +20,11 @@ module Decidim
       validates :signature_type, presence: true
       validates :type_id, presence: true
       validates :scope_id, presence: true
+
+      def map_model(model)
+        self.type_id = model.type.id
+        self.scope_id = model.scope.id
+      end
     end
   end
 end

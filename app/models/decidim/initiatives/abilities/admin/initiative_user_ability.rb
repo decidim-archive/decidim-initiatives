@@ -27,15 +27,11 @@ module Decidim
           private
 
           def grant_dashboard_access
-            can :read, :admin_dashboard do
-              has_initiatives?(user)
-            end
+            can :read, :admin_dashboard if has_initiatives?(user)
           end
 
           def grant_initiative_permissions
-            can :index, Decidim::Initiative do
-              has_initiatives?(user)
-            end
+            can :index, Decidim::Initiative if
 
             can :show, Initiative do |initiative|
               initiative.has_authorship?(user) &&

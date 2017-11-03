@@ -18,13 +18,10 @@ module Decidim
 
           can :create, Initiative if creation_enabled?
           can :read, Initiative do |initiative|
-            initiative.published? || initiative.decidim_author_id == user.id || admin?
+            initiative.published? || initiative.has_authorship?(user) || user&.admin?
           end
 
-          can :read, :admin_dashboard do
-            initiatives = InitiativesCreated.by(user) | InitiativesPromoted.by(user)
-            initiatives.any?
-          end
+          can :read, :admin_dashboard if has_initiatives?
 
           define_membership_management_abilities
         end
@@ -40,13 +37,14 @@ module Decidim
         def define_membership_management_abilities
           can :request_membership, Initiative do |initiative|
             !initiative.published? &&
-              initiative.decidim_author_id != user.id &&
+              !initiative.has_authorship?(user) &&
               (user.authorizations.any? || user.user_groups.verified.any?)
           end
         end
 
-        def admin?
-          user&.admin?
+        def has_initiatives?
+          initiatives = InitiativesCreated.by(user) | InitiativesPromoted.by(user)
+          initiatives.any?
         end
       end
     end

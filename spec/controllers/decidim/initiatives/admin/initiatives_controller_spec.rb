@@ -8,6 +8,8 @@ module Decidim
       describe InitiativesController, type: :controller do
         routes { Decidim::Initiatives::AdminEngine.routes }
 
+        let(:user) { create(:user, :confirmed, organization: organization) }
+        let(:admin_user) { create(:user, :admin, :confirmed, organization: organization) }
         let(:organization) { create(:organization) }
         let!(:initiative) { create(:initiative, organization: organization) }
         let!(:created_initiative) { create(:initiative, :created, organization: organization) }
@@ -16,21 +18,301 @@ module Decidim
           @request.env['decidim.current_organization'] = organization
         end
 
-        describe 'Users without initiatives' do
-          let!(:user) { create(:user, organization: organization) }
+        context 'index' do
+          describe 'Users without initiatives' do
+            before do
+              sign_in user
+            end
 
-          before do
-            sign_in user
+            it 'initiative list is not allowed' do
+              get :index
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
           end
 
-          it 'initiative list is not allowed' do
-            get :index
-            expect(flash[:alert]).not_to be_empty
-            expect(response).to have_http_status(302)
+          describe 'anonymous users do' do
+            it 'initiative list is not allowed' do
+              get :index
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          describe 'admin users' do
+            before do
+              sign_in admin_user
+            end
+
+            it 'initiative list is allowed' do
+              get :index
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+
+          describe 'initiative author' do
+            before do
+              sign_in initiative.author
+            end
+
+            it 'initiative list is allowed' do
+              get :index
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+
+          describe 'promotal committee members' do
+            before do
+              sign_in initiative.committee_members.approved.first.user
+            end
+
+            it 'initiative list is allowed' do
+              get :index
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
           end
         end
 
-        describe 'GET send_to_technical_validation' do
+        context 'show' do
+          describe 'Users without initiatives' do
+            before do
+              sign_in user
+            end
+
+            it 'are not not allowed' do
+              get :show, params: { slug: initiative.to_param }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          describe 'anonymous users do' do
+            it 'are not allowed' do
+              get :show, params: { slug: initiative.to_param }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          describe 'admin users' do
+            before do
+              sign_in admin_user
+            end
+
+            it 'are allowed' do
+              get :show, params: { slug: initiative.to_param }
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+
+          describe 'initiative author' do
+            before do
+              sign_in initiative.author
+            end
+
+            it 'are allowed' do
+              get :show, params: { slug: initiative.to_param }
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+
+          describe 'promotal committee members' do
+            before do
+              sign_in initiative.committee_members.approved.first.user
+            end
+
+            it 'initiative list is allowed' do
+              get :show, params: { slug: initiative.to_param }
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+        end
+
+        context 'edit' do
+          describe 'Users without initiatives' do
+            before do
+              sign_in user
+            end
+
+            it 'are not allowed' do
+              get :edit, params: { slug: initiative.to_param }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          describe 'anonymous users do' do
+            it 'are not allowed' do
+              get :edit, params: { slug: initiative.to_param }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          describe 'admin users' do
+            before do
+              sign_in admin_user
+            end
+
+            it 'are allowed' do
+              get :edit, params: { slug: initiative.to_param }
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+
+          describe 'initiative author' do
+            before do
+              sign_in initiative.author
+            end
+
+            it 'are allowed' do
+              get :edit, params: { slug: initiative.to_param }
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+
+          describe 'promotal committee members' do
+            before do
+              sign_in initiative.committee_members.approved.first.user
+            end
+
+            it 'are allowed' do
+              get :edit, params: { slug: initiative.to_param }
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+        end
+
+        context 'update' do
+          let(:valid_attributes) { attributes_for(:initiative, organization: organization) }
+
+          describe 'Users without initiatives' do
+            before do
+              sign_in user
+            end
+
+            it 'are not allowed' do
+              put :update,
+                  params: {
+                    slug: initiative.to_param,
+                    initiative: valid_attributes
+                  }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          describe 'anonymous users do' do
+            it 'are not allowed' do
+              put :update,
+                  params: {
+                    slug: initiative.to_param,
+                    initiative: valid_attributes
+                  }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          describe 'admin users' do
+            before do
+              sign_in admin_user
+            end
+
+            it 'are allowed' do
+              put :update,
+                  params: {
+                    slug: initiative.to_param,
+                    initiative: valid_attributes
+                  }
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+
+          context 'initiative author' do
+            context 'initiative published' do
+              before do
+                sign_in initiative.author
+              end
+
+              it 'are not allowed' do
+                put :update,
+                    params: {
+                      slug: initiative.to_param,
+                      initiative: valid_attributes
+                    }
+                expect(flash[:alert]).not_to be_nil
+                expect(response).to have_http_status(302)
+              end
+            end
+
+            context 'initiative created' do
+              let(:initiative) { create(:initiative, :created) }
+
+              before do
+                sign_in initiative.author
+              end
+
+              it 'are allowed' do
+                put :update,
+                    params: {
+                      slug: initiative.to_param,
+                      initiative: valid_attributes
+                    }
+                expect(flash[:alert]).to be_nil
+                expect(response).to have_http_status(200)
+              end
+            end
+          end
+
+          context 'promotal committee members' do
+            context 'initiative published' do
+              before do
+                sign_in initiative.committee_members.approved.first.user
+              end
+
+              it 'are not allowed' do
+                put :update,
+                    params: {
+                      slug: initiative.to_param,
+                      initiative: valid_attributes
+                    }
+                expect(flash[:alert]).not_to be_nil
+                expect(response).to have_http_status(302)
+              end
+            end
+
+            context 'initiative created' do
+              let(:initiative) { create(:initiative, :created) }
+
+              before do
+                sign_in initiative.committee_members.approved.first.user
+              end
+
+              it 'are allowed' do
+                put :update,
+                    params: {
+                      slug: initiative.to_param,
+                      initiative: valid_attributes
+                    }
+                expect(flash[:alert]).to be_nil
+                expect(response).to have_http_status(200)
+              end
+            end
+          end
+        end
+
+        context 'GET send_to_technical_validation' do
           context 'Initiative not in created state' do
             before do
               sign_in initiative.author
@@ -148,7 +430,7 @@ module Decidim
             end
 
             it 'Raises an error' do
-              post :publish, params: { slug: initiative.to_param }
+              delete :discard, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
@@ -233,6 +515,48 @@ module Decidim
 
               initiative.reload
               expect(initiative.rejected?).to be_truthy
+            end
+          end
+        end
+
+        context 'GET export_votes' do
+          let(:initiative) { create(:initiative, organization: organization, signature_type: 'any') }
+
+          context 'author' do
+            before do
+              sign_in initiative.author
+            end
+
+            it 'is not allowed' do
+              get :export_votes, params: { slug: initiative.to_param, format: :csv }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          context 'promotal committee' do
+            before do
+              sign_in initiative.committee_members.approved.first.user
+            end
+
+            it 'is not allowed' do
+              get :export_votes, params: { slug: initiative.to_param, format: :csv }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          context 'admin user' do
+            let!(:vote) { create(:initiative_user_vote, initiative: initiative) }
+
+            before do
+              sign_in admin_user
+            end
+
+            it 'is allowed' do
+              get :export_votes, params: { slug: initiative.to_param, format: :csv }
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
             end
           end
         end

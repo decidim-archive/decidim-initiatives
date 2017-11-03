@@ -8,7 +8,7 @@ module Decidim
       routes { Decidim::Initiatives::Engine.routes }
 
       let(:organization) { create(:organization) }
-      let(:initiative) { create(:initiative, :created, organization: organization) }
+      let!(:initiative) { create(:initiative, :created, organization: organization) }
 
       before do
         @request.env['decidim.current_organization'] = organization
@@ -66,10 +66,32 @@ module Decidim
           sign_in user
         end
 
-        it 'Membership request is created' do
-          expect do
-            get :new, params: { initiative_slug: initiative.slug }
-          end.to change { InitiativesCommitteeMember.count }
+        context 'created initiative' do
+          it 'Membership request is created' do
+            expect do
+              get :spawn, params: { initiative_slug: initiative.slug }
+            end.to change { InitiativesCommitteeMember.count }.by(1)
+          end
+
+          it 'Duplicated requests finish with an error' do
+            expect do
+              get :spawn, params: { initiative_slug: initiative.slug }
+            end.to change { InitiativesCommitteeMember.count }.by(1)
+
+            expect do
+              get :spawn, params: { initiative_slug: initiative.slug }
+            end.to change { InitiativesCommitteeMember.count }.by(0)
+          end
+        end
+
+        context 'published initiative' do
+          let!(:published_initiative) { create(:initiative) }
+
+          it 'Membership request is not created' do
+            expect do
+              get :spawn, params: { initiative_slug: published_initiative.slug }
+            end.to change { InitiativesCommitteeMember.count }.by(0)
+          end
         end
       end
     end
