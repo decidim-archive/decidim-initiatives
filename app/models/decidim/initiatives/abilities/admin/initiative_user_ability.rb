@@ -18,8 +18,6 @@ module Decidim
             @user = user
             @context = context
 
-            can :preview, Initiative
-
             grant_dashboard_access
             grant_initiative_permissions
           end
@@ -32,6 +30,10 @@ module Decidim
 
           def grant_initiative_permissions
             can :index, Decidim::Initiative if has_initiatives?(user)
+
+            can :preview, Initiative do |initiative|
+              initiative.has_authorship? user
+            end
 
             can :show, Initiative do |initiative|
               initiative.has_authorship?(user) &&
