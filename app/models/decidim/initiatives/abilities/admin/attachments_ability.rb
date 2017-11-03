@@ -28,18 +28,18 @@ module Decidim
 
             can :read, Decidim::Attachment do |attachment|
               attachment.attached_to.is_a?(Decidim::Initiative) &&
-                attachmend.attached_to.has_authorship?(user)
+                attachment.attached_to.has_authorship?(user)
             end
 
             can :create, Decidim::Attachment if has_initiatives?(user)
             can :update, Decidim::Attachment do |attachment|
               attachment.attached_to.is_a?(Decidim::Initiative) &&
-                attachmend.attached_to.has_authorship?(user)
+                attachment.attached_to.has_authorship?(user)
             end
 
             can :destroy, Decidim::Attachment do |attachment|
               attachment.attached_to.is_a?(Decidim::Initiative) &&
-                attachmend.attached_to.has_authorship?(user)
+                attachment.attached_to.has_authorship?(user)
             end
           end
 

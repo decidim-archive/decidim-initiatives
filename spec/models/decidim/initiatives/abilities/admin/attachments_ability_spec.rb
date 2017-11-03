@@ -8,9 +8,9 @@ describe Decidim::Initiatives::Abilities::Admin::AttachmentsAbility do
 
   let(:organization) { create(:organization)}
   let(:initiative) { create(:initiative, organization: organization) }
-  let(:attachment) { create(:attachment, attached_to: initiative) }
+  let(:attachment) { build(:attachment, :with_pdf, attached_to: initiative) }
   let(:other_initiative) { create(:initiative, organization: organization) }
-  let(:other_attachment) { create(:attachment, attached_to: other_initiative) }
+  let(:other_attachment) { build(:attachment, :with_pdf, attached_to: other_initiative) }
 
   context 'read, update and destroy attachment' do
     context 'initiative author' do

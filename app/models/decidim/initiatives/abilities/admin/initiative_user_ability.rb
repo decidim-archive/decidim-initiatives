@@ -31,7 +31,7 @@ module Decidim
           end
 
           def grant_initiative_permissions
-            can :index, Decidim::Initiative if
+            can :index, Decidim::Initiative if has_initiatives?(user)
 
             can :show, Initiative do |initiative|
               initiative.has_authorship?(user) &&
