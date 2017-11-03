@@ -34,7 +34,7 @@ describe 'Initiative', type: :feature do
       context 'Select initiative type' do
         it 'Offers contextual help' do
           within '.callout.secondary' do
-            expect(page).to have_content('Select the initiative type')
+            expect(page).to have_content('Citizen initiatives are a means by which the citizenship can intervene so that the City Council can undertake actions in defence of the general interest that are within fields of municipal jurisdiction. Which initiative do you want to launch?')
           end
         end
 
@@ -55,7 +55,7 @@ describe 'Initiative', type: :feature do
 
       context 'Fill basic data' do
         before do
-          find_button('Select').click
+          find_button('Choose').click
         end
 
         it 'Has a hidden field with the selected initiative type' do
@@ -70,7 +70,7 @@ describe 'Initiative', type: :feature do
 
         it 'Offers contextual help' do
           within '.callout.secondary' do
-            expect(page).to have_content('Write a title for your initiative. We advice you that it should be short and concise. The description should focus in the solution that you want to propose.')
+            expect(page).to have_content('What does the initiative consist of? Write down the title and description. We recommend a short and concise title and a description focused on the proposed solution.')
           end
         end
       end
@@ -79,7 +79,7 @@ describe 'Initiative', type: :feature do
         let!(:initiative) { create(:initiative, organization: organization) }
 
         before do
-          find_button('Select').click
+          find_button('Choose').click
           fill_in 'Title', with: translated(initiative.title, locale: :en)
           find(:xpath, "//input[@id='initiative_description']", visible: false).set translated(initiative.description, locale: :en)
           find_button('Continue').click
@@ -108,7 +108,7 @@ describe 'Initiative', type: :feature do
         let(:initiative) { build(:initiative) }
 
         before do
-          find_button('Select').click
+          find_button('Choose').click
           fill_in 'Title', with: translated(initiative.title, locale: :en)
           find(:xpath, "//input[@id='initiative_description']", visible: false).set translated(initiative.description, locale: :en)
           find_button('Continue').click
@@ -120,9 +120,9 @@ describe 'Initiative', type: :feature do
 
         it 'Offers contextual help' do
           within '.callout.secondary' do
-            expect(page).to have_content('Check the content of your initiative')
-            expect(page).to have_content('Remember that the signature type must be on-line, face-to-face or mixed')
-            expect(page).to have_content('You must select the scope of the initiative: city, district, neighborhood, etc...')
+            expect(page).to have_content('Revise the content of your initiative. Is your title easy to understand? Is the objective of your initiative clear?')
+            expect(page).to have_content('You have to choose the type of signature. In-person, online or a combination of both')
+            expect(page).to have_content('Which is the geographic scope of the initiative? City, district?')
           end
         end
 
@@ -137,7 +137,7 @@ describe 'Initiative', type: :feature do
         let(:initiative) { build(:initiative) }
 
         before do
-          find_button('Select').click
+          find_button('Choose').click
 
           fill_in 'Title', with: translated(initiative.title, locale: :en)
           find(:xpath, "//input[@id='initiative_description']", visible: false).set translated(initiative.description, locale: :en)
@@ -154,7 +154,7 @@ describe 'Initiative', type: :feature do
 
         it 'Offers contextual help' do
           within '.callout.secondary' do
-            expect(page).to have_content('Share the following link with all people that is going to help you to promote this initiative. When your contacts have received it they have to follow the instructions.')
+            expect(page).to have_content('Citizen initiatives require a Promoting Commission consisting of at least three people (attestors). You must share the following link with the other people that are part of this initiative. When your contacts receive this link they will have to follow the indicated steps.')
           end
         end
 
@@ -171,7 +171,7 @@ describe 'Initiative', type: :feature do
         let(:initiative) { build(:initiative) }
 
         before do
-          find_button('Select').click
+          find_button('Choose').click
 
           fill_in 'Title', with: translated(initiative.title, locale: :en)
           find(:xpath, "//input[@id='initiative_description']", visible: false).set translated(initiative.description, locale: :en)
@@ -190,7 +190,7 @@ describe 'Initiative', type: :feature do
 
         it 'Offers contextual help' do
           within '.callout.secondary' do
-            expect(page).to have_content('Contratulations! Your initiative has been successfully created.')
+            expect(page).to have_content('Congratulations! Your citizen initiative has been created successfully.')
           end
         end
       end

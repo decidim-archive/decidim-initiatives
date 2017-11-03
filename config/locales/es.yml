@@ -220,13 +220,13 @@ es:
           error: Ha habido errores al votar la iniciativa.
       create_initiative:
         select_initiative_type:
-          select_initiative_type_help: Selecciona el tipo de inicativa
-          select: Seleccionar
+          select_initiative_type_help: Las iniciativas ciudadanas son un medio con el que la ciudadanía interviene a fin de que el Ayuntamiento lleve a cabo una determinada actuación de interés general y competencia municipal. ¿Qué iniciativa quieres impulsar?
+          select: Escoje
           back: Volver
         previous_form:
           continue: Continuar
           back: Volver
-          help: Escribe el título de tu iniciativa. Te recomendamos que el título sea corto y conciso y la descripción centrada en la solución que quieres proponer
+          help: En qué consiste la iniciativa? Escribe el título y la descripción. Te recomendamos que el título sea corto y conciso, y la descripción esté centrada en la solución que se propone.
         show_similar_initiatives:
           continue: Mi iniciativa es diferente
           back: Volver
@@ -235,12 +235,12 @@ es:
           back: Volver
           select_scope: Selecciona un ámbito
         validate:
-          help: Rellena los siguientes campos para validar la iniciativa
+          help: Rellena los siguientes campos para validar la iniciativa ciduadana
           continue: Continuar
         promotal_committee:
           back: Volver
           continue: Continuar
-          individual_help_text: Comparte el siguiente enlace con el resto de personas que van a promover esta iniciativa. Cuando tus contactos reciban el enlace deberán seguir los pasos indicados.
+          individual_help_text: Las iniciativas ciudadanas requieren una Comisión promotora formada por, al menos, tres personas (fedatarias). Es necesario que compartas el siguiente enlace con el resto de personas que promuevan esta iniciativa. Cuando tus contactos reciban el enlace, deberán seguir los pasos indicados.
           organization_help_text: Rellena los siguientes campos de tu organización para complementar la información del comité promotor.
         share_committee_link:
           invite_to_committee_help: Enlace para invitar a las personas que formarán parte de la comisión promotora
@@ -249,7 +249,7 @@ es:
           continue: Continuar
         finish:
           back: Volver
-          callout_text: Enhorabuena! Tu iniciativa ha sido creada con éxito.
+          callout_text: ¡Enhorabuena! Tu iniciativa ciudadana se ha creado con éxito.
           go_to_my_initiatives: Ir a mis iniciativas
           back_to_initiatives: Volver a iniciativas
       committee_requests:

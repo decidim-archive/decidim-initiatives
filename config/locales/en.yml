@@ -220,11 +220,11 @@ en:
           error: There's been errors when voting the initiative.
       create_initiative:
         select_initiative_type:
-          select_initiative_type_help: Select the initiative type
-          select: Select
+          select_initiative_type_help: Citizen initiatives are a means by which the citizenship can intervene so that the City Council can undertake actions in defence of the general interest that are within fields of municipal jurisdiction. Which initiative do you want to launch?
+          select: Choose
           back: Back
         previous_form:
-          help: Write a title for your initiative. We advice you that it should be short and concise. The description should focus in the solution that you want to propose.
+          help: What does the initiative consist of? Write down the title and description. We recommend a short and concise title and a description focused on the proposed solution.
           continue: Continue
           back: Back
         show_similar_initiatives:
@@ -235,12 +235,12 @@ en:
           back: Back
           select_scope: Selecct a scope
         validate:
-          help: Fill the following fields to validate the initiative
+          help: Fill in the following fields in order to validate the citizen initiative
           continue: Continue
         promotal_committee:
           back: Back
           continue: Continue
-          individual_help_text: Share the following link with all people that is going to help you to promote this initiative. When your contacts have received it they have to follow the instructions.
+          individual_help_text: Citizen initiatives require a Promoting Commission consisting of at least three people (attestors). You must share the following link with the other people that are part of this initiative. When your contacts receive this link they will have to follow the indicated steps.
           organization_help_text: Fill the following data about your organization to complete the information of the promotal committee.
         share_committee_link:
           invite_to_committee_help: Link to invite people that will be part of the promotal committee
@@ -249,7 +249,7 @@ en:
           continue: Continue
         finish:
           back: Back
-          callout_text: Contratulations! Your initiative has been successfully created.
+          callout_text: Congratulations! Your citizen initiative has been created successfully.
           go_to_my_initiatives: Go to my initiatives
           back_to_initiatives: Back to initiatives
       committee_requests:

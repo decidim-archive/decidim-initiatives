@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-initiatives (0.0.43)
+    decidim-initiatives (0.0.44)
       decidim-admin
       decidim-comments
       decidim-core (>= 0.7.0, <= 0.8.0)

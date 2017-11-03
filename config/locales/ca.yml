@@ -220,13 +220,13 @@ ca:
           error: Hi ha hagut errors en votar l'iniciativa.
       create_initiative:
         select_initiative_type:
-          select_initiative_type_help: Sel·lecciona el tipus d'inicativa
-          select: Sel·lecciona
+          select_initiative_type_help: Les iniciatives ciutadanes són un mitjà amb el qual la ciutadania intervé a fi que l’Ajuntament dugui a terme una determinada actuació d’interès general i competència municipal. Quina iniciativa vols impulsar?
+          select: Tria
           back: Torna enrere
         previous_form:
           continue: Continuar
           back: Torna enrere
-          help: Escriu el títol de la teva iniciativa. Et recomanem que el títol siga curt i concis i la descripció centrada en la solució que vols proposar
+          help:  En què consisteix la iniciativa? Escriu el títol i la descripció. Et recomanem que el títol sigui curt i concís, i la descripció estigui centrada en la solució que es proposa.
         show_similar_initiatives:
           continue: La meua iniciativa es diferent
           back: Torna enrere
@@ -235,12 +235,12 @@ ca:
           back: Torna enrere
           select_scope: Sel·lecciona un àmbit
         validate:
-          help: Ompli els següents camps per validar la iniciativa. Rellena los siguientes campos para validar la iniciativa
+          help: Omple els següents camps per validar la iniciativa ciutadana
           continue: Continuar
         promotal_committee:
           back: Torna enrere
           continue: Continuar
-          individual_help_text: Comparteix el sigüent enllaḉ amb la resta de persones que van a promoure aquesta iniciativa. Quan els teus contactes reben el enllaç deuràn seguir els passos indicats.
+          individual_help_text: Les iniciatives ciutadanes requereixen una Comissió promotora formada per, com a mínim, tres persones (fedatàries). Cal que comparteixis el següent enllaç amb la resta de persones que promoguin aquesta iniciativa. Quan els teus contactes rebin l’enllaç, hauran de seguir els passos indicats.
           organization_help_text: Ompli els següents camps de la teua organització per completar la informació del comité promotor.
         share_committee_link:
           invite_to_committee_help: Enllaç per invitar a les persones que formaran part de la comisió promotora
@@ -249,7 +249,7 @@ ca:
           continue: Continuar
         finish:
           back: Torna enrere
-          callout_text: Enhorabona! La teua iniciativa s'ha creat amb èxit.
+          callout_text: Enhorabona! La teva iniciativa ciutadana s’ha creat amb èxit.
           go_to_my_initiatives: Ves a les meues iniciatives
           back_to_initiatives: Tornar a iniciatives
       committee_requests:
