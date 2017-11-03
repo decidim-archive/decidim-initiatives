@@ -46,10 +46,6 @@ module Decidim
               initiative.has_authorship?(user) && initiative.created?
             end
 
-            can :manage_membership, Decidim::Initiative do |initiative|
-              initiative.has_authorship?(user)
-            end
-
             can :send_to_technical_validation, Initiative do |initiative|
               initiative.has_authorship?(user) &&
                 initiative.created? && (

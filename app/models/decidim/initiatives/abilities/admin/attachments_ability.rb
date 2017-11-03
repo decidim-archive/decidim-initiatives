@@ -24,20 +24,30 @@ module Decidim
           private
 
           def define_abilities
-            return if admin?
+            return if user.admin?
 
-            can :read, Decidim::Attachment
-            can :create, Decidim::Attachment
-            can :update, Decidim::Attachment do |attachment|
-              attachment.attached_to.author.id == user.id
+            can :read, Decidim::Attachment do |attachment|
+              attachment.attached_to.is_a?(Decidim::Initiative) &&
+                attachmend.attached_to.has_authorship?(user)
             end
+
+            can :create, Decidim::Attachment if has_initiatives?(user)
+            can :update, Decidim::Attachment do |attachment|
+              attachment.attached_to.is_a?(Decidim::Initiative) &&
+                attachmend.attached_to.has_authorship?(user)
+            end
+
             can :destroy, Decidim::Attachment do |attachment|
-              attachment.attached_to.author.id == user.id
+              attachment.attached_to.is_a?(Decidim::Initiative) &&
+                attachmend.attached_to.has_authorship?(user)
             end
           end
 
-          def admin?
-            user&.admin?
+          private
+
+          def has_initiatives?(user)
+            initiatives = InitiativesCreated.by(user) | InitiativesPromoted.by(user)
+            initiatives.any?
           end
         end
       end

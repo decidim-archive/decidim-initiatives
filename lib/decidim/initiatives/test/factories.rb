@@ -57,6 +57,18 @@ FactoryGirl.define do
       signature_end_time nil
     end
 
+    trait :accepted do
+      state 'accepted'
+    end
+
+    trait :discarded do
+      state 'discarded'
+    end
+
+    trait :rejected do
+      state 'rejected'
+    end
+
     trait :acceptable do
       signature_start_time { DateTime.now - 3.months }
       signature_end_time { DateTime.now - 2.months }

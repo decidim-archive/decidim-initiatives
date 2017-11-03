@@ -19,6 +19,10 @@ module Decidim
             @user = user
             @context = context
 
+            can :manage_membership, Decidim::Initiative do |initiative|
+              initiative.has_authorship?(user)
+            end
+
             can :index, InitiativesCommitteeMember if has_initiatives?(user)
             can :approve, InitiativesCommitteeMember do |request|
               request.initiative.has_authorship?(user) &&

@@ -16,7 +16,6 @@ module Decidim
           @context = context
 
           can :vote, Initiative
-
           can :request_membership, Initiative do |initiative|
             !initiative.published?
           end
