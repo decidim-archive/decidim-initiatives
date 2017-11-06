@@ -129,6 +129,9 @@ ca:
             reject: Rebutjar iniciativa
           form:
             title: Informació general
+          update:
+            success: La iniciativa popular ha estat correctament actualitzada
+            error: Ha ocorregut un error
         committee_requests:
           index:
             title: Membres del comité

@@ -129,6 +129,9 @@ es:
             reject: Rechazar iniciativa
           form:
             title: Información general
+          update:
+            success: La iniciativa popular ha sido actualizada correctamente
+            error: A ocurrido un error
         committee_requests:
           index:
             title: Miembros del comité

@@ -129,6 +129,9 @@ en:
             reject: Reject initiative
           form:
             title: General information
+          update:
+            success: The citizen initiative has been successfully updated
+            error: An error has occurred
         committee_requests:
           index:
             title: Committee members

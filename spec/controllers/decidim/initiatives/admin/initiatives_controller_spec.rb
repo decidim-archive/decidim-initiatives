@@ -235,7 +235,7 @@ module Decidim
                     initiative: valid_attributes
                   }
               expect(flash[:alert]).to be_nil
-              expect(response).to have_http_status(200)
+              expect(response).to have_http_status(302)
             end
           end
 
@@ -270,7 +270,7 @@ module Decidim
                       initiative: valid_attributes
                     }
                 expect(flash[:alert]).to be_nil
-                expect(response).to have_http_status(200)
+                expect(response).to have_http_status(302)
               end
             end
           end
@@ -306,7 +306,7 @@ module Decidim
                       initiative: valid_attributes
                     }
                 expect(flash[:alert]).to be_nil
-                expect(response).to have_http_status(200)
+                expect(response).to have_http_status(302)
               end
             end
           end
