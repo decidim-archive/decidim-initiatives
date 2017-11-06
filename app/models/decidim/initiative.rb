@@ -73,6 +73,15 @@ module Decidim
     scope :published, -> { where.not(published_at: nil) }
     scope :with_state, ->(state) { where(state: state) unless state.blank? }
 
+    scope :order_by_most_recent, -> { order(created_at: :desc) }
+    scope :order_by_supports, -> { order('initiative_votes_count + coalesce(offline_votes, 0) desc') }
+    scope :order_by_most_commented, -> {
+      select('decidim_initiatives.*')
+        .joins(%q(LEFT OUTER JOIN "decidim_comments_comments" ON "decidim_comments_comments"."decidim_commentable_id" = "decidim_initiatives"."id" AND "decidim_comments_comments"."decidim_commentable_type" = 'Decidim::Initiative'))
+        .group('decidim_initiatives.id')
+        .order('count(decidim_comments_comments.id) desc')
+    }
+
     after_save :notify_state_change
 
     def self.order_randomly(seed)
@@ -205,10 +214,14 @@ module Decidim
       attributes['hashtag'].to_s.delete('#')
     end
 
+    def supports_count
+      face_to_face_votes = offline_votes.nil? || online? ? 0 : offline_votes
+      initiative_votes_count + face_to_face_votes
+    end
+
     # Public: Returns the percentage of required supports reached
     def percentage
-      face_to_face_votes = offline_votes.nil? || online? ? 0 : offline_votes
-      percentage = (initiative_votes_count + face_to_face_votes) * 100 / scoped_type.supports_required
+      percentage = supports_count * 100 / scoped_type.supports_required
       percentage = 100 if percentage > 100
       percentage
     end

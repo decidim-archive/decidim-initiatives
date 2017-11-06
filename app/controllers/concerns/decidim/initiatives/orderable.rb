@@ -35,16 +35,16 @@ module Decidim
           'random'
         end
 
-        def reorder(proposals)
+        def reorder(initiatives)
           case order
           when 'most_voted'
-            proposals.order(created_at: :desc)
+            initiatives.order_by_supports
           when 'most_commented'
-            proposals.order(created_at: :desc)
+            initiatives.order_by_most_commented
           when 'recent'
-            proposals.order(created_at: :desc)
+            initiatives.order_by_most_recent
           else
-            proposals.order_randomly(random_seed)
+            initiatives.order_randomly(random_seed)
           end
         end
 

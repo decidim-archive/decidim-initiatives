@@ -21,6 +21,36 @@ module Decidim
           expect(subject.helpers.initiatives).to include(initiative)
           expect(subject.helpers.initiatives).not_to include(created_initiative)
         end
+
+        context 'order by most_voted' do
+          let(:voted_initiative) { create(:initiative, organization: organization) }
+          let!(:vote) { create(:initiative_user_vote, initiative: voted_initiative) }
+
+          it 'most voted appears first' do
+            get :index, params: { order: 'most_voted' }
+
+            expect(subject.helpers.initiatives.first).to eq(voted_initiative)
+          end
+        end
+
+        context 'order by most recent' do
+          let!(:old_initiative) { create(:initiative, organization: organization, created_at: initiative.created_at - 12.months) }
+
+          it 'most recent appears first' do
+            get :index, params: { order: 'recent' }
+            expect(subject.helpers.initiatives.first).to eq(initiative)
+          end
+        end
+
+        context 'order by most commented' do
+          let(:commented_initiative) { create(:initiative, organization: organization) }
+          let!(:comment) { create(:comment, commentable: commented_initiative) }
+
+          it 'most commented appears fisrt' do
+            get :index, params: { order: 'most_commented' }
+            expect(subject.helpers.initiatives.first).to eq(commented_initiative)
+          end
+        end
       end
 
       describe 'GET show' do

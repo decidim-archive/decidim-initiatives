@@ -53,8 +53,8 @@ module Decidim
 
       def initiatives
         @initiatives = search.results.includes(:author, :scoped_type)
-        @initiatives = paginate(@initiatives)
         @initiatives = reorder(@initiatives)
+        @initiatives = paginate(@initiatives)
       end
 
       alias collection initiatives
