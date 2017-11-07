@@ -7,7 +7,6 @@ module Decidim
       include CurrentLocale
 
       # Public: Initializes the service.
-      # feature     - nil
       # page        - The page number to paginate the results.
       # per_page    - The number of proposals to return per page.
       def initialize(options = {})
@@ -66,8 +65,7 @@ module Decidim
         query
           .joins(:scoped_type)
           .where(
-            'decidim_initiatives_type_scopes.decidim_scopes_id = ?',
-            scope_id
+            'decidim_initiatives_type_scopes.decidim_scopes_id': scope_id
           )
       end
     end
