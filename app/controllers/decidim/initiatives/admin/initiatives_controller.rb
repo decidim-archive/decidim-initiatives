@@ -55,6 +55,7 @@ module Decidim
         def update
           authorize! :update, current_initiative
 
+          params[:id] = params[:slug]
           @form = form(Decidim::Initiatives::Admin::InitiativeForm)
                   .from_params(params, initiative: current_initiative)
 

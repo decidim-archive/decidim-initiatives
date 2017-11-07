@@ -216,7 +216,8 @@ module Decidim
 
     def supports_count
       face_to_face_votes = offline_votes.nil? || online? ? 0 : offline_votes
-      initiative_votes_count + face_to_face_votes
+      digital_votes = offline? ? 0 : initiative_votes_count
+      digital_votes + face_to_face_votes
     end
 
     # Public: Returns the percentage of required supports reached

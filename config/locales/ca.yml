@@ -204,6 +204,8 @@ ca:
         show:
           start_time: Data d'inici
           end_time: Data de fi
+          any_vote_method: La recollida de signatures d'aquesta iniciativa ciutadana es realitza de manera digital i també de manera presencial.
+          offline_method: La recollida de signatures d'aquesta iniciativa ciutadana es realitza únicament de manera presencial.
         promoter_committee:
           committee_section_title: Comisió promotora
         committee_members:

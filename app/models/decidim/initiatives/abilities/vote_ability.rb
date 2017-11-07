@@ -35,14 +35,18 @@ module Decidim
           initiative.votes_enabled? &&
             initiative.organization&.id == user.organization&.id &&
             initiative.votes.where(decidim_author_id: user.id, decidim_user_group_id: decidim_user_group_id).empty? &&
-            (user.authorizations.any? || user.user_groups.verified.any?)
+            (can_user_support?(initiative) || user.user_groups.verified.any?)
         end
 
         def can_unvote?(initiative)
           initiative.votes_enabled? &&
             initiative.organization&.id == user.organization&.id &&
             initiative.votes.where(decidim_author_id: user.id, decidim_user_group_id: decidim_user_group_id).any? &&
-            (user.authorizations.any? || user.user_groups.verified.any?)
+            (can_user_support?(initiative) || user.user_groups.verified.any?)
+        end
+
+        def can_user_support?(initiative)
+          !initiative.offline? && user.authorizations.any?
         end
       end
     end

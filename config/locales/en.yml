@@ -204,6 +204,8 @@ en:
         show:
           start_time: Start time
           end_time: End time
+          any_vote_method: This citizen initiative collects online support as well as face to face.
+          offline_method: This citizen initiative only collects face to face supports.
         promoter_committee:
           committee_section_title: Promoter committee
         committee_members:

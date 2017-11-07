@@ -38,7 +38,7 @@ module Decidim
                   numericality: {
                     only_integer: true,
                     greater_than: 0
-                  }, allow_nil: true
+                  }, allow_blank: true
 
         def map_model(model)
           self.type_id = model.type.id

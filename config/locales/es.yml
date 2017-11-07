@@ -204,6 +204,8 @@ es:
         show:
           start_time: Fecha de inicio
           end_time: Fecha de fin
+          any_vote_method: La recogida de firmas de esta iniciativa ciudadana se realiza de manera digital y tambien de manera presencial.
+          offline_method: La recogida de firmas de esta iniciativa ciudadana se realiza unicamente de manera presencial.
         promoter_committee:
           committee_section_title: Comisión promotora
         committee_members:

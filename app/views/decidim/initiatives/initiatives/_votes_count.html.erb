@@ -1,10 +1,12 @@
-<div id="initiative-<%= initiative.id %>-votes-count" class="card__support__data">
-  <span class="extra__suport-number">
-      <%= initiative.initiative_votes_count %>
-  </span>
-  <span class="extra__suport-text">
-    <%= t('.count', count: initiative.initiative_votes_count) %>
-  </span>
+<% unless initiative.offline? %>
+  <div id="initiative-<%= initiative.id %>-votes-count" class="card__support__data">
+    <span class="extra__suport-number">
+        <%= initiative.supports_count %>
+    </span>
+    <span class="extra__suport-text">
+      <%= t('.count', count: initiative.supports_count) %>
+    </span>
 
-  <%= popularity_tag initiative %>
-</div>
+    <%= popularity_tag initiative %>
+  </div>
+<% end %>
