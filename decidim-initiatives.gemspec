@@ -6,14 +6,14 @@ Gem::Specification.new do |s|
   s.name        = 'decidim-initiatives'
   s.summary     = 'Citizen initiatives plugin for decidim'
   s.description = s.summary
-  s.version     = '0.0.48'
+  s.version     = '0.0.49'
   s.authors     = ['Juan Salvador Pérez García']
   s.email       = ['jsperezg@gmail.com']
   s.license     = 'AGPLv3'
   s.homepage    = 'https://github.com/AjuntamentdeBarcelona/decidim'
   s.required_ruby_version = '>= 2.3.1'
 
-  s.files = Dir['{app,config,db,lib,vendor}/**/*', 'Rakefile', 'README.md']
+  s.files = Dir['{app,config,db,lib,vendor}/**/*', 'Rakefile', 'README.md', 'LICENSE-AGPLv3.txt']
 
   s.add_dependency 'decidim-core', '>= 0.7.0', '<= 0.8.0'
   s.add_dependency 'decidim-comments'
