@@ -42,7 +42,7 @@ CREATE EXTENSION pg_trgm;
 
 ## Rake tasks
 
-This engine comes with two rake tasks:
+This engine comes with three rake tasks:
 
 ### decidim_initiatives:check_validating
 
