@@ -14,7 +14,7 @@ module Decidim
         Rails.cache.fetch(
           "initiative/#{initiative.id}/comments_count",
           expires_in: Decidim::Initiatives.stats_cache_expiration_time) do
-          Decidim::Comments::Comment.where(commentable: initiative).count
+          Decidim::Comments::Comment.where(root_commentable: initiative).count
         end
       end
 
