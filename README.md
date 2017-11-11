@@ -66,6 +66,26 @@ __Decidim::Initiatives.first_notification_percentage__ and __Decidim::Initiative
 
 Author, members of the promoter committee and followers will receive it.
 
+## Exporting online votes.
+
+When the supporting method is set to any or face to face it may be necessary to implement
+a mechanism to validate that do not exist duplicated supports. To do so the engine provides
+a functionality that allows exporting the online votes to validate them against physical
+votes.
+
+The votes are exported as a hash string in order to preserve the identity of the voter. 
+Each hash is composed with the following criteria:
+
+* Algorithm used: SHA1
+* Format of the string hashed: "#{unique_id}#{title}#{description}"
+
+There are some considerations that you must keep in mind:
+
+* Title and description will be hashed using the same format included in the database, this is including html tags.
+* Title and description will be hashed using the same locale used by the initiative author. In case there is more
+  than one locale available be sure that you change your locale settings to be inline with
+  the locale used to generate the hashes outside Decidim.
+
 ## Seeding example data
 
 In order to populate the database with example data proceed as usual in rails:
