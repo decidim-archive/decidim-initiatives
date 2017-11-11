@@ -238,7 +238,8 @@ en:
         fill_data:
           continue: Continue
           back: Back
-          select_scope: Selecct a scope
+          select_scope: Select a scope
+          initiative_type: Initiative type
         validate:
           help: Fill in the following fields in order to validate the citizen initiative
           continue: Continue

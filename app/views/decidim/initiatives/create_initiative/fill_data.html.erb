@@ -21,6 +21,13 @@
           <%= f.hidden_field :type_id %>
           <div class=section>
             <div class="field">
+              <label for="type_description">
+                <%=t '.initiative_type' %>
+                <%= text_field_tag :type_description, strip_tags(translated_attribute(initiative_type.description)), readonly: true %>
+              </label>
+            </div>
+
+            <div class="field">
               <%= f.text_field :title, autofocus: true, required: true %>
             </div>
 

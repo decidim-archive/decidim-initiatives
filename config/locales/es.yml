@@ -239,6 +239,7 @@ es:
           continue: Continuar
           back: Volver
           select_scope: Selecciona un ámbito
+          initiative_type: Tipo de iniciativa
         validate:
           help: Rellena los siguientes campos para validar la iniciativa ciduadana
           continue: Continuar

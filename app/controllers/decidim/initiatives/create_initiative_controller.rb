@@ -20,6 +20,7 @@ module Decidim
       helper_method :scopes
       helper_method :current_initiative
       helper_method :organization_form
+      helper_method :initiative_type
 
       steps :select_initiative_type,
             :previous_form,
@@ -174,6 +175,10 @@ module Decidim
                                  initiative: current_initiative,
                                  data_type: 'organization'
                                )
+      end
+
+      def initiative_type
+        @initiative_type ||= InitiativesType.find(@form&.type_id)
       end
     end
   end

@@ -68,7 +68,7 @@ module Decidim
         end
       end
 
-      initializer 'decidim_assemblies.menu' do
+      initializer 'decidim_initiatives.menu' do
         Decidim.menu :menu do |menu|
           menu.item I18n.t('menu.initiatives', scope: 'decidim'),
                     decidim_initiatives.initiatives_path,
