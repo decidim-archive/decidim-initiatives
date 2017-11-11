@@ -228,13 +228,16 @@ en:
           select_initiative_type_help: Citizen initiatives are a means by which the citizenship can intervene so that the City Council can undertake actions in defence of the general interest that are within fields of municipal jurisdiction. Which initiative do you want to launch?
           select: Choose
           back: Back
+          more_information: (More information)
         previous_form:
-          help: What does the initiative consist of? Write down the title and description. We recommend a short and concise title and a description focused on the proposed solution.
           continue: Continue
           back: Back
+          help: What does the initiative consist of? Write down the title and description. We recommend a short and concise title and a description focused on the proposed solution.
+          more_information: (More information)
         show_similar_initiatives:
           continue: My initiative is different
           back: Back
+          more_information: (More information)
         fill_data:
           continue: Continue
           back: Back
@@ -243,11 +246,13 @@ en:
         validate:
           help: Fill in the following fields in order to validate the citizen initiative
           continue: Continue
+          more_information: (More information)
         promotal_committee:
           back: Back
           continue: Continue
           individual_help_text: Citizen initiatives require a Promoting Commission consisting of at least three people (attestors). You must share the following link with the other people that are part of this initiative. When your contacts receive this link they will have to follow the indicated steps.
           organization_help_text: Fill the following data about your organization to complete the information of the promotal committee.
+          more_information: (More information)
         share_committee_link:
           invite_to_committee_help: Link to invite people that will be part of the promotal committee
           continue: Continue
@@ -258,6 +263,7 @@ en:
           callout_text: Congratulations! Your citizen initiative has been created successfully.
           go_to_my_initiatives: Go to my initiatives
           back_to_initiatives: Back to initiatives
+          more_information: (More information)
       committee_requests:
         new:
           continue: Continue

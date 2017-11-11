@@ -10,6 +10,7 @@
     <div class="callout secondary">
       <%=t '.individual_help_text' if current_initiative.created_by_individual? %>
       <%=t '.organization_help_text' unless current_initiative.created_by_individual? %>
+      <%= link_to t('.more_information'), decidim.page_path('initiatives'), target: '_blank' %>.
     </div>
   </div>
 </div>

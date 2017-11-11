@@ -228,13 +228,16 @@ es:
           select_initiative_type_help: Las iniciativas ciudadanas son un medio con el que la ciudadanía interviene a fin de que el Ayuntamiento lleve a cabo una determinada actuación de interés general y competencia municipal. ¿Qué iniciativa quieres impulsar?
           select: Escoje
           back: Volver
+          more_information: (Mas información)
         previous_form:
           continue: Continuar
           back: Volver
           help: En qué consiste la iniciativa? Escribe el título y la descripción. Te recomendamos que el título sea corto y conciso, y la descripción esté centrada en la solución que se propone.
+          more_information: (Mas información)
         show_similar_initiatives:
           continue: Mi iniciativa es diferente
           back: Volver
+          more_information: (Mas información)
         fill_data:
           continue: Continuar
           back: Volver
@@ -243,11 +246,13 @@ es:
         validate:
           help: Rellena los siguientes campos para validar la iniciativa ciduadana
           continue: Continuar
+          more_information: (Mas información)
         promotal_committee:
           back: Volver
           continue: Continuar
           individual_help_text: Las iniciativas ciudadanas requieren una Comisión promotora formada por, al menos, tres personas (fedatarias). Es necesario que compartas el siguiente enlace con el resto de personas que promuevan esta iniciativa. Cuando tus contactos reciban el enlace, deberán seguir los pasos indicados.
           organization_help_text: Rellena los siguientes campos de tu organización para complementar la información del comité promotor.
+          more_information: (Mas información)
         share_committee_link:
           invite_to_committee_help: Enlace para invitar a las personas que formarán parte de la comisión promotora
           continue: Continuar
@@ -258,6 +263,7 @@ es:
           callout_text: ¡Enhorabuena! Tu iniciativa ciudadana se ha creado con éxito.
           go_to_my_initiatives: Ir a mis iniciativas
           back_to_initiatives: Volver a iniciativas
+          more_information: (Mas información)
       committee_requests:
         new:
           continue: Continuar

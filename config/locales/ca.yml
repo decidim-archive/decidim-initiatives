@@ -228,13 +228,16 @@ ca:
           select_initiative_type_help: Les iniciatives ciutadanes són un mitjà amb el qual la ciutadania intervé a fi que l’Ajuntament dugui a terme una determinada actuació d’interès general i competència municipal. Quina iniciativa vols impulsar?
           select: Tria
           back: Torna enrere
+          more_information: (Mes informació)
         previous_form:
           continue: Continuar
           back: Torna enrere
           help:  En què consisteix la iniciativa? Escriu el títol i la descripció. Et recomanem que el títol sigui curt i concís, i la descripció estigui centrada en la solució que es proposa.
+          more_information: (Mes informació)
         show_similar_initiatives:
           continue: La meua iniciativa es diferent
           back: Torna enrere
+          more_information: (Mes informació)
         fill_data:
           continue: Continuar
           back: Torna enrere
@@ -243,11 +246,13 @@ ca:
         validate:
           help: Omple els següents camps per validar la iniciativa ciutadana
           continue: Continuar
+          more_information: (Mes informació)
         promotal_committee:
           back: Torna enrere
           continue: Continuar
           individual_help_text: Les iniciatives ciutadanes requereixen una Comissió promotora formada per, com a mínim, tres persones (fedatàries). Cal que comparteixis el següent enllaç amb la resta de persones que promoguin aquesta iniciativa. Quan els teus contactes rebin l’enllaç, hauran de seguir els passos indicats.
           organization_help_text: Ompli els següents camps de la teua organització per completar la informació del comité promotor.
+          more_information: (Mes informació)
         share_committee_link:
           invite_to_committee_help: Enllaç per invitar a les persones que formaran part de la comisió promotora
           continue: Continuar
@@ -258,6 +263,7 @@ ca:
           callout_text: Enhorabona! La teva iniciativa ciutadana s’ha creat amb èxit.
           go_to_my_initiatives: Ves a les meues iniciatives
           back_to_initiatives: Tornar a iniciatives
+          more_information: (Mes informació)
       committee_requests:
         new:
           help_text: Vas a sol·licitar formar part de la comisió promotora per aquesta iniciativa
