@@ -6,6 +6,23 @@ module Decidim
     class InitiativesMailer < Decidim::ApplicationMailer
       include Decidim::PartialTranslationsHelper
 
+      add_template_helper(Decidim::PartialTranslationsHelper)
+
+      # Notifies initiative creation
+      def notify_creation(initiative)
+        @initiative = initiative
+        @organization = initiative.organization
+
+        with_user(initiative.author) do
+          @subject = I18n.t(
+            'decidim.initiatives.initiatives_mailer.creation_subject',
+            title: partially_translated_attribute(initiative.title)
+          )
+
+          mail(to: "#{initiative.author.name} <#{initiative.author.email}>", subject: @subject)
+        end
+      end
+
       # Notify changes in state
       def notify_state_change(initiative, user)
         @organization = initiative.organization

@@ -11,6 +11,8 @@ module Decidim
     # PUBLIC
     # Notifies when an initiative has changed its status.
     #
+    # * created: Notifies the author that his initiative has been created.
+    #
     # * validating: Administrators will be notified about the initiative that
     #   requests technical validation.
     #
@@ -20,6 +22,7 @@ module Decidim
     # * rejected, accepted: Initiative's followers and authors will be
     #   notified about the result of the initiative.
     def notify
+      notify_initiative_creation if initiative.created?
       notify_validating_initiative if initiative.validating?
 
       if initiative.published? || initiative.discarded?
@@ -32,6 +35,12 @@ module Decidim
     end
 
     private
+
+    def notify_initiative_creation
+      Decidim::Initiatives::InitiativesMailer
+        .notify_creation(initiative)
+        .deliver_later
+    end
 
     def notify_validating_initiative
       initiative.organization.admins.each do |user|

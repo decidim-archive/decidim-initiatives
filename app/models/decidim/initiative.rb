@@ -83,6 +83,7 @@ module Decidim
     }
 
     after_save :notify_state_change
+    after_create :notify_creation
 
     def self.order_randomly(seed)
       transaction do
@@ -259,16 +260,23 @@ module Decidim
     end
 
     def accepts_offline_votes?
-      (offline? || any?) && published?
+      Decidim::Initiatives.face_to_face_voting_allowed &&
+        (offline? || any?) &&
+        published?
     end
 
     private
 
     def notify_state_change
-      if self.saved_change_to_state? && !self.created? && !state_before_last_save.nil?
+      if self.saved_change_to_state?
         notifier = InitiativeStatusChangeNotifier.new(initiative: self)
         notifier.notify
       end
+    end
+
+    def notify_creation
+      notifier = InitiativeStatusChangeNotifier.new(initiative: self)
+      notifier.notify
     end
   end
 end

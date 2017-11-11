@@ -277,6 +277,9 @@ es:
         technical_validation_body_for: "La iniciativa %{title} ha solicitado validación técnica."
         status_change_for: "La iniciativa %{title} ha cambiado su estado"
         status_change_body_for: "La iniciativa %{title} ha cambiado su estado a: %{state}"
+        creation_subject: "La iniciativa popular '%{title}' ha sido creada"
+        more_information: Aquí tienes mas información sobre el proceso de creación de iniciativas.
+        promotal_committee_help: "Recuerda que al menos debes invitar a %{member_count} personas a la comisión promotora. Reenvía el siguiente enlace para invitar personas a la comisión promotora:"
         initiative_link:
           check_initiative_details: Puedes consultar la iniciativa
           here: aquí

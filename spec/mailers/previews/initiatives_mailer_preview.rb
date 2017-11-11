@@ -3,6 +3,11 @@
 module Decidim
   module Initiatives
     class InitiativesMailerPreview < ActionMailer::Preview
+      def notify_creation
+        initiative = Decidim::Initiative.first
+        Decidim::Initiatives::InitiativesMailer.notify_creation(initiative)
+      end
+
       def notify_progress
         initiative = Decidim::Initiative.first
         Decidim::Initiatives::InitiativesMailer.notify_progress(initiative, initiative.author)
