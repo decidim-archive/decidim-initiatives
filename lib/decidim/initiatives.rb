@@ -80,5 +80,12 @@ module Decidim
     config_accessor :print_enabled do
       true
     end
+
+    # This flag says when mixed and face-to-face voting methods
+    # are allowed. If set to false, only online voting will be
+    # allowed
+    config_accessor :face_to_face_voting_allowed do
+      true
+    end
   end
 end
