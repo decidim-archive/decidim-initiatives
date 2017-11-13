@@ -23,7 +23,7 @@
             <div class="field">
               <label for="type_description">
                 <%=t '.initiative_type' %>
-                <%= text_field_tag :type_description, strip_tags(translated_attribute(initiative_type.description)), readonly: true %>
+                <%= text_field_tag :type_description, strip_tags(translated_attribute(initiative_type.title)), readonly: true %>
               </label>
             </div>
 
