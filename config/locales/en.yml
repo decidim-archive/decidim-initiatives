@@ -52,6 +52,7 @@ en:
             title: Initiatives
             state: State
             created_at: Created at
+            supports_count: Supports
         initiatives_type_scope:
           name: Initiative type scope
           fields:

@@ -52,6 +52,7 @@ es:
             title: Iniciativas
             state:  Estado
             created_at: Fecha de creación
+            supports_count: Soportes
         initiatives_type_scope:
           name: Ámbito para tipo de iniciativa
           fields:

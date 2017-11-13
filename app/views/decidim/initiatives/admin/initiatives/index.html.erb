@@ -52,6 +52,7 @@
           <tr>
             <th><%= t('models.initiatives.fields.title', scope: 'decidim.admin') %></th>
             <th><%= t('models.initiatives.fields.state', scope: 'decidim.admin') %></th>
+            <th><%= t('models.initiatives.fields.supports_count', scope: 'decidim.admin') %></th>
             <th><%= t('models.initiatives.fields.created_at', scope: 'decidim.admin') %></th>
             <th class="actions"><%=t '.actions_title' %></th>
           </tr>
@@ -68,6 +69,7 @@
               <% end %>
             </td>
             <td><%= humanize_admin_state initiative.state %></td>
+            <td><%= initiative.supports_count %>/<%= initiative.scoped_type.supports_required %></td>
             <td><%=l initiative.created_at, format: :short %></td>
             <td class="table-list__actions">
               <% if can? :preview, initiative %>

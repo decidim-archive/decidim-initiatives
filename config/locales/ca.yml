@@ -52,6 +52,7 @@ ca:
             title: Iniciatives
             state:  Estat
             created_at: Data de creació
+            supports_count: Suports
         initiatives_type_scope:
           name: Àmbit per al tipus d'iniciativa
           fields:
