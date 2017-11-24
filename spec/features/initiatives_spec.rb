@@ -12,7 +12,7 @@ describe 'Initiatives', type: :feature do
     switch_to_host(organization.host)
   end
 
-  context 'when there are some published assemblies' do
+  context 'when there are some published initiatives' do
     let!(:initiative) { base_initiative }
     let!(:unpublished_initiative) { create(:initiative, :created, organization: organization) }
 
@@ -33,7 +33,7 @@ describe 'Initiatives', type: :feature do
       end
     end
 
-    it 'lists all the assemblies' do
+    it 'lists all the initiatives' do
       within '#initiatives-count' do
         expect(page).to have_content('1')
       end
