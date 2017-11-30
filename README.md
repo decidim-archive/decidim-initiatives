@@ -100,7 +100,7 @@ This engine makes use of cookies to store large form data. You should change the
 default session store or you might experience problems.
 
 Check the [Rails configuration guide](http://guides.rubyonrails.org/configuring.html#rails-general-configuration) 
-in order to get instructions about changing the default session store:
+in order to get instructions about changing the default session store.
 
 ### Translations
 There are some legal texts that are adapted for Barcelona's city council. You should
