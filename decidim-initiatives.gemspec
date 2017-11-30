@@ -2,11 +2,14 @@
 
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 
+require 'decidim/initiatives/version'
+
+
 Gem::Specification.new do |s|
   s.name        = 'decidim-initiatives'
   s.summary     = 'Citizen initiatives plugin for decidim'
   s.description = s.summary
-  s.version     = '0.0.51'
+  s.version     = Decidim::Initiatives::VERSION
   s.authors     = ['Juan Salvador Pérez García']
   s.email       = ['jsperezg@gmail.com']
   s.license     = 'AGPLv3'

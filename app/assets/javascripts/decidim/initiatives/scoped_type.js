@@ -3,13 +3,11 @@ $(document).ready(function () {
 
   var typeSelector = $('[data-scope-selector]'),
       refresh,
-      typeId,
       targetElement,
       currentValue,
       searchUrl;
 
   if (typeSelector.length) {
-    typeId = typeSelector.val();
     targetElement = $('#' + typeSelector.data('scope-selector'));
     currentValue = typeSelector.data('scope-id');
     searchUrl = typeSelector.data('scope-search-url');
@@ -21,7 +19,7 @@ $(document).ready(function () {
           cache: false,
           dataType: 'html',
           data: {
-            type_id: typeId,
+            type_id: typeSelector.val(),
             selected: currentValue
           },
           success: function (data) {

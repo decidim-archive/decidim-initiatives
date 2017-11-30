@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-initiatives (0.0.50)
+    decidim-initiatives (0.1.52)
       decidim-admin
       decidim-comments
       decidim-core (>= 0.7.0, <= 0.8.0)
@@ -571,7 +571,7 @@ DEPENDENCIES
   rails (~> 5.1)
 
 RUBY VERSION
-   ruby 2.4.1p111
+   ruby 2.4.2p198
 
 BUNDLED WITH
-   1.16.0.pre.2
+   1.16.0
