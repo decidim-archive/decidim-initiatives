@@ -6,6 +6,7 @@ PATH
       decidim-comments
       decidim-core (>= 0.7.4, <= 0.8.0)
       kaminari (~> 1.0.1)
+      rails (~> 5.1.4)
       rectify
       social-share-button (~> 1.0.0)
       truncato
@@ -69,6 +70,8 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.11)
+    bootsnap (1.1.5)
+      msgpack (~> 1.0)
     builder (3.2.3)
     byebug (9.1.0)
     cancancan (2.0.0)
@@ -358,6 +361,7 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
+    msgpack (1.1.0)
     multi_json (1.12.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -569,8 +573,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootsnap
   byebug
-  decidim (>= 0.6.0, <= 0.8.0)
+  decidim (>= 0.7.0, <= 0.8.0)
   decidim-dev
   decidim-initiatives!
   faker
