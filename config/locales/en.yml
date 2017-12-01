@@ -192,7 +192,7 @@ en:
           most_voted: Most voted
           most_commented: Most commented
         vote_cabin:
-          vote: Vote
+          vote: Sign
           votes_blocked: Voting disabled
           already_voted: Already voted
           supports_required: "%{total_supports} votes required"
@@ -200,8 +200,8 @@ en:
           select_identity: Select user identity
         votes_count:
           count:
-            one: VOTE
-            other: VOTES
+            one: SIGNATURE
+            other: SIGNATURES
         show:
           start_time: Start time
           end_time: End time
