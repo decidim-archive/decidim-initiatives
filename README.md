@@ -42,7 +42,10 @@ CREATE EXTENSION pg_trgm;
 
 ## Rake tasks
 
-This engine comes with three rake tasks:
+This engine comes with three rake tasks that should be executed on daily basis. The best 
+way to execute these tasks is using cron jobs. You can manage this cron jobs in your
+Rails application using the [Whenever GEM](https://github.com/javan/whenever) or even
+creating them by hand.
 
 ### decidim_initiatives:check_validating
 
