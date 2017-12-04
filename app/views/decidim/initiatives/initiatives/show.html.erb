@@ -23,9 +23,13 @@
   <div class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9">
     <div class="card extra definition-data">
       <div class="definition-data__item vote-block">
-        <%= render partial: 'votes_count', locals: { initiative: current_initiative } %>
+        <div id="initiative-<%= current_initiative.id %>-votes-count">
+          <%= render partial: 'votes_count', locals: { initiative: current_initiative } %>
+        </div>
         <% if current_initiative.votes_enabled? %>
-          <%= render partial: 'vote_cabin', locals: { initiative: current_initiative } %>
+          <div id="initiative-<%= current_initiative.id %>-vote-cabin">
+            <%= render partial: 'vote_cabin', locals: { initiative: current_initiative } %>
+          </div>
         <% end %>
 
         <% if current_user %>
