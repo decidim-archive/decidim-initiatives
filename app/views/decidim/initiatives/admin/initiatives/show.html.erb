@@ -19,43 +19,43 @@
   <div class="print-table-row">
     <div class="print-table-cell">
       <div class="cell-header">DNI/NIE</div>
-      <div class="cell-content"><%= current_initiative.extra_data.author.first&.data.try(:[], 'id_document') %></div>
+      <div class="cell-content"></div>
     </div>
   </div>
 
   <div class="print-table-row">
     <div class="print-table-cell">
       <div class="cell-header">Nom i cognoms</div>
-      <div class="cell-content"><%= current_initiative.extra_data.author.first&.data.try(:[], 'name') %></div>
+      <div class="cell-content"></div>
     </div>
   </div>
 
   <div class="print-table-row">
     <div class="print-table-cell">
       <div class="cell-header">Domicili</div>
-      <div class="cell-content"><%= current_initiative.extra_data.author.first&.data.try(:[], 'address') %></div>
+      <div class="cell-content"></div>
     </div>
   </div>
 
   <div class="print-table-row">
     <div class="print-table-cell w33">
       <div class="cell-header">Població</div>
-      <div class="cell-content"><%= current_initiative.extra_data.author.first&.data.try(:[], 'city') %></div>
+      <div class="cell-content"></div>
     </div>
     <div class="print-table-cell w33">
       <div class="cell-header">Provincia</div>
-      <div class="cell-content"><%= current_initiative.extra_data.author.first&.data.try(:[], 'province') %></div>
+      <div class="cell-content"></div>
     </div>
     <div class="print-table-cell w33">
       <div class="cell-header">CP</div>
-      <div class="cell-content"><%= current_initiative.extra_data.author.first&.data.try(:[], 'post_code') %></div>
+      <div class="cell-content"></div>
     </div>
   </div>
 
   <div class="print-table-row">
     <div class="print-table-cell w33">
       <div class="cell-header">Tel</div>
-      <div class="cell-content"><%= current_initiative.extra_data.author.first&.data.try(:[], 'phone_number') %></div>
+      <div class="cell-content"></div>
     </div>
 
     <div class="print-table-cell">
@@ -88,21 +88,7 @@
     <div class="print-table-cell w33">Domicili</div>
   </div>
 
-  <% if current_initiative.extra_data.organization.any? %>
-    <div class="print-table-row">
-      <div class="print-table-cell w33">
-        <%= current_initiative.extra_data.organization.first&.data.try(:[], 'id_document') %>
-      </div>
-      <div class="print-table-cell w33">
-        <%= current_initiative.extra_data.organization.first&.data.try(:[], 'name') %>
-      </div>
-      <div class="print-table-cell w33">
-        <%= current_initiative.extra_data.organization.first&.data.try(:[], 'address') %>
-      </div>
-    </div>
-  <% end %>
-
-  <% 3.times do %>
+  <% 4.times do %>
     <div class="print-table-row">
       <div class="print-table-cell w33"></div>
       <div class="print-table-cell w33"></div>

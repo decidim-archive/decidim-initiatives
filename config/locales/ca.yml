@@ -18,7 +18,6 @@ ca:
         title: Titol
         description: Descripció
         banner_image: Imatge de bàner
-        requires_validation: Requirieix validació
       initiatives_committee_member:
         user: Membre del comité
       initiative_author:
@@ -244,20 +243,13 @@ ca:
           back: Torna enrere
           select_scope: Sel·lecciona un àmbit
           initiative_type: Tipus d'iniciativa
-        validate:
-          help: Omple els següents camps per validar la iniciativa ciutadana
-          continue: Continuar
-          more_information: (Mes informació)
         promotal_committee:
           back: Torna enrere
           continue: Continuar
           individual_help_text: Les iniciatives ciutadanes requereixen una Comissió promotora formada per, com a mínim, tres persones (fedatàries). Cal que comparteixis el següent enllaç amb la resta de persones que promoguin aquesta iniciativa. Quan els teus contactes rebin l’enllaç, hauran de seguir els passos indicats.
-          organization_help_text: Ompli els següents camps de la teua organització per completar la informació del comité promotor.
           more_information: (Mes informació)
         share_committee_link:
           invite_to_committee_help: Enllaç per invitar a les persones que formaran part de la comisió promotora
-          continue: Continuar
-        organization_data:
           continue: Continuar
         finish:
           back: Torna enrere
@@ -291,7 +283,6 @@ ca:
         previous_form: Inicia
         show_similar_initiatives: Compara
         fill_data: Crea
-        validate: Valida
         promotal_committee: Comisió promotora
         finish: Finalitza
       initiatives:

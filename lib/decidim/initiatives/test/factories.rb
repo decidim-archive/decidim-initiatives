@@ -9,7 +9,6 @@ FactoryGirl.define do
     description { Decidim::Faker::Localized.wrapped('<p>', '</p>') { Decidim::Faker::Localized.sentence(4) } }
     banner_image { Decidim::Dev.test_file('city2.jpeg', 'image/jpeg') }
     organization
-    requires_validation true
   end
 
   factory :initiatives_type_scope, class: Decidim::InitiativesTypeScope do
@@ -87,20 +86,6 @@ FactoryGirl.define do
       after(:build) do |initiative|
         initiative.initiative_votes_count = initiative.scoped_type.supports_required - 1
       end
-    end
-  end
-
-  factory :initiatives_extra_data, class: Decidim::InitiativesExtraData do
-    initiative { create(:initiative) }
-
-    trait :author do
-      data_type 'author'
-      data { { name: 'name', document_id: 'document id', address: 'Address' } }
-    end
-
-    trait :organization do
-      data_type 'organization'
-      data { { name: 'name', document_id: 'document id', address: 'Address' } }
     end
   end
 
