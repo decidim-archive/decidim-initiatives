@@ -15,10 +15,17 @@ module Decidim
 
           @context = context
 
+          can :create, Initiative if creation_enabled?
           can :vote, Initiative
           can :request_membership, Initiative do |initiative|
             !initiative.published?
           end
+        end
+
+        private
+
+        def creation_enabled?
+          Decidim::Initiatives.creation_enabled
         end
       end
     end

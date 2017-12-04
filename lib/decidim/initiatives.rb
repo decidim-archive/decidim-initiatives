@@ -87,5 +87,10 @@ module Decidim
     config_accessor :face_to_face_voting_allowed do
       true
     end
+
+    # This flag allows creating authorizations to unauthorized users.
+    config_accessor :do_not_require_authorization do
+      false
+    end
   end
 end
