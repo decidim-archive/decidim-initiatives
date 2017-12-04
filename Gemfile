@@ -23,3 +23,7 @@ group :test, :development do
   gem 'byebug'
   gem 'faker'
 end
+
+group :development do
+  gem 'letter_opener_web'
+end
