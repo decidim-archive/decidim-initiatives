@@ -296,8 +296,8 @@ ca:
         finish: Finalitza
       initiatives:
         initiative:
-          check_and_support: Vore i signar
-          check: Vore
+          check_and_support: Veure i signar
+          check: Veure
         no_initiatives_yet:
           no_initiatives_yet: Encara no hi ha cap iniciativa!
       initiative_header:
