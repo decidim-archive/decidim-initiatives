@@ -81,7 +81,7 @@ describe 'Initiative', type: :feature do
         before do
           find_button('Choose').click
           fill_in 'Title', with: translated(initiative.title, locale: :en)
-          find(:xpath, "//input[@id='initiative_description']", visible: false).set translated(initiative.description, locale: :en)
+          fill_in_editor "initiative_description", with: translated(initiative.description, locale: :en)
           find_button('Continue').click
         end
 
@@ -110,7 +110,7 @@ describe 'Initiative', type: :feature do
         before do
           find_button('Choose').click
           fill_in 'Title', with: translated(initiative.title, locale: :en)
-          find(:xpath, "//input[@id='initiative_description']", visible: false).set translated(initiative.description, locale: :en)
+          fill_in_editor "initiative_description", with:translated(initiative.description, locale: :en)
           find_button('Continue').click
         end
 
@@ -140,7 +140,7 @@ describe 'Initiative', type: :feature do
           find_button('Choose').click
 
           fill_in 'Title', with: translated(initiative.title, locale: :en)
-          find(:xpath, "//input[@id='initiative_description']", visible: false).set translated(initiative.description, locale: :en)
+          fill_in_editor "initiative_description", with: translated(initiative.description, locale: :en)
           find_button('Continue').click
 
           select('OnLine', from: 'Signature type')
@@ -174,7 +174,7 @@ describe 'Initiative', type: :feature do
           find_button('Choose').click
 
           fill_in 'Title', with: translated(initiative.title, locale: :en)
-          find(:xpath, "//input[@id='initiative_description']", visible: false).set translated(initiative.description, locale: :en)
+          fill_in_editor "initiative_description", with: translated(initiative.description, locale: :en)
           find_button('Continue').click
 
           select('OnLine', from: 'Signature type')
