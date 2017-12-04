@@ -1,15 +1,12 @@
 # frozen_string_literal: true
 
-require_dependency 'decidim/initiatives/admin/application_controller'
-
-
 module Decidim
   module Initiatives
     module Admin
       require 'csv'
 
       # Controller used to manage the initiatives
-      class InitiativesController < ApplicationController
+      class InitiativesController < Decidim::Initiatives::Admin::ApplicationController
         include Decidim::Initiatives::NeedsInitiative
         include Decidim::Initiatives::TypeSelectorOptions
 

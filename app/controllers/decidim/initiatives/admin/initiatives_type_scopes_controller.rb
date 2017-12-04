@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-require_dependency 'decidim/initiatives/admin/application_controller'
-
 module Decidim
   module Initiatives
     module Admin
       # Controller used to manage the available initiative type scopes
-      class InitiativesTypeScopesController < ApplicationController
+      class InitiativesTypeScopesController < Decidim::Initiatives::Admin::ApplicationController
         helper_method :current_initiative_type_scope
 
         # GET /admin/initiatives_types/:initiatives_type_id/initiatives_type_scopes/new
