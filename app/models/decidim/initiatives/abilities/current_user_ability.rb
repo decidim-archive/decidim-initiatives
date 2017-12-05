@@ -30,7 +30,9 @@ module Decidim
 
         def creation_enabled?
           Decidim::Initiatives.creation_enabled && (
-            user.authorizations.any? || user.user_groups.verified.any?
+            Decidim::Initiatives.do_not_require_authorization ||
+              user.authorizations.any? ||
+              user.user_groups.verified.any?
           )
         end
 
@@ -38,7 +40,11 @@ module Decidim
           can :request_membership, Initiative do |initiative|
             !initiative.published? &&
               !initiative.has_authorship?(user) &&
-              (user.authorizations.any? || user.user_groups.verified.any?)
+              (
+                Decidim::Initiatives.do_not_require_authorization ||
+                user.authorizations.any? ||
+                user.user_groups.verified.any?
+              )
           end
         end
 

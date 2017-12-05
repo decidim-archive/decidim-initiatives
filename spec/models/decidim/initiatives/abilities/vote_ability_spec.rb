@@ -6,16 +6,45 @@ require 'cancan/matchers'
 describe Decidim::Initiatives::Abilities::VoteAbility do
   subject { described_class.new(user, {}) }
 
-  context 'users non verified' do
-    let(:user) { build(:user) }
-    let(:initiative) { build(:initiative, organization: user.organization) }
-
-    it 'cannot vote' do
-      expect(subject).not_to be_able_to(:vote, initiative)
+  context 'Authorization required' do
+    before(:each) do
+      Decidim::Initiatives.do_not_require_authorization = false
     end
 
-    it 'cannot unvote' do
-      expect(subject).not_to be_able_to(:unvote, initiative)
+    context 'users non verified' do
+      let(:user) { build(:user) }
+      let(:initiative) { build(:initiative, organization: user.organization) }
+
+      it 'cannot vote' do
+        expect(subject).not_to be_able_to(:vote, initiative)
+      end
+
+      it 'cannot unvote' do
+        expect(subject).not_to be_able_to(:unvote, initiative)
+      end
+    end
+  end
+
+  context 'Authorization not required' do
+    before(:each) do
+      Decidim::Initiatives.do_not_require_authorization = true
+    end
+
+    context 'users non verified' do
+      let(:user) { build(:user) }
+      let(:initiative) { build(:initiative, organization: user.organization) }
+
+      it 'can vote' do
+        expect(subject).to be_able_to(:vote, initiative)
+        expect(subject).not_to be_able_to(:unvote, initiative)
+      end
+
+      it 'can unvote' do
+        create(:initiative_user_vote, initiative: initiative, author: user)
+
+        expect(subject).not_to be_able_to(:vote, initiative)
+        expect(subject).to be_able_to(:unvote, initiative)
+      end
     end
   end
 

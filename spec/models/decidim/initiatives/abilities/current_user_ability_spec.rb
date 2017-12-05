@@ -36,19 +36,47 @@ describe Decidim::Initiatives::Abilities::CurrentUserAbility do
   end
 
   context 'initiative creation' do
-    context 'authorized users' do
-      let(:user) { create(:authorization).user }
+    context 'Authorization required' do
+      before(:each) do
+        Decidim::Initiatives.do_not_require_authorization = false
+      end
 
-      it 'can create initiatives' do
-        expect(subject).to be_able_to(:create, Decidim::Initiative)
+      context 'authorized users' do
+        let(:user) { create(:authorization).user }
+
+        it 'can create initiatives' do
+          expect(subject).to be_able_to(:create, Decidim::Initiative)
+        end
+      end
+
+      context 'non authorized users' do
+        let(:user) { build(:user) }
+
+        it 'can not create initiatives' do
+          expect(subject).not_to be_able_to(:create, Decidim::Initiative)
+        end
       end
     end
 
-    context 'non authorized users' do
-      let(:user) { build(:user) }
+    context 'Authorization not required' do
+      before(:each) do
+        Decidim::Initiatives.do_not_require_authorization = true
+      end
 
-      it 'can not create initiatives' do
-        expect(subject).not_to be_able_to(:create, Decidim::Initiative)
+      context 'authorized users' do
+        let(:user) { create(:authorization).user }
+
+        it 'can create initiatives' do
+          expect(subject).to be_able_to(:create, Decidim::Initiative)
+        end
+      end
+
+      context 'non authorized users' do
+        let(:user) { build(:user) }
+
+        it 'can create initiatives' do
+          expect(subject).to be_able_to(:create, Decidim::Initiative)
+        end
       end
     end
   end
@@ -94,11 +122,31 @@ describe Decidim::Initiatives::Abilities::CurrentUserAbility do
     let(:initiative) { create(:initiative, :created, organization: organization) }
     let(:other_initiative) { create(:initiative, :created, organization: organization) }
 
-    context 'non authorized users' do
-      let(:user) { create(:user, organization: organization) }
+    context 'Authorization required' do
+      before(:each) do
+        Decidim::Initiatives.do_not_require_authorization = false
+      end
 
-      it 'can not request membership' do
-        expect(subject).not_to be_able_to(:request_membership, initiative)
+      context 'non authorized users' do
+        let(:user) { create(:user, organization: organization) }
+
+        it 'can not request membership' do
+          expect(subject).not_to be_able_to(:request_membership, initiative)
+        end
+      end
+    end
+
+    context 'Authorization not required' do
+      before(:each) do
+        Decidim::Initiatives.do_not_require_authorization = true
+      end
+
+      context 'non authorized users' do
+        let(:user) { create(:user, organization: organization) }
+
+        it 'can request membership' do
+          expect(subject).to be_able_to(:request_membership, initiative)
+        end
       end
     end
 
