@@ -47,7 +47,5 @@ namespace :decidim_initiatives do
         initiative.save
       end
     end
-
-
   end
 end
