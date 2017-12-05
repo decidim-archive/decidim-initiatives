@@ -6,6 +6,7 @@ PATH
       decidim-comments
       decidim-core (>= 0.7.4, <= 0.8.0)
       kaminari (~> 1.0.1)
+      rails (~> 5.1.4)
       rectify
       social-share-button (~> 1.0.0)
       truncato
@@ -570,7 +571,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  decidim (>= 0.6.0, <= 0.8.0)
+  decidim (>= 0.7.0, <= 0.8.0)
   decidim-dev
   decidim-initiatives!
   faker

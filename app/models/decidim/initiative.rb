@@ -268,14 +268,13 @@ module Decidim
     private
 
     def notify_state_change
-      if self.saved_change_to_state?
-        notifier = InitiativeStatusChangeNotifier.new(initiative: self)
-        notifier.notify
-      end
+      return unless self.saved_change_to_state?
+      notifier = Decidim::Initiatives::StatusChangeNotifier.new(initiative: self)
+      notifier.notify
     end
 
     def notify_creation
-      notifier = InitiativeStatusChangeNotifier.new(initiative: self)
+      notifier = Decidim::Initiatives::StatusChangeNotifier.new(initiative: self)
       notifier.notify
     end
   end
