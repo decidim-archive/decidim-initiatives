@@ -29,10 +29,10 @@ module Decidim
         end
 
         context 'Non authorized users' do
-          let(:user) { create(:user, organization: initiative.organization) }
+          let(:user) { create(:user, :confirmed, organization: initiative.organization) }
 
           before do
-            user.confirm
+            user.authorizations.delete_all
             sign_in user
           end
 

@@ -26,7 +26,7 @@ module Decidim
             can :preview, Initiative
 
             can :manage, Initiative
-            cannot :send_to_technical_validation, Initiative
+            can :send_to_technical_validation, Initiative
             cannot :show, Initiative
             can :show, Initiative if Decidim::Initiatives.print_enabled
 
