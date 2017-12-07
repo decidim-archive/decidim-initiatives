@@ -17,8 +17,8 @@ describe Decidim::Initiatives::Abilities::Admin::InitiativeAdminAbility do
     expect(subject).to be_able_to(:preview, Decidim::Initiative)
   end
 
-  it 'do not lets the user to send initiatives to technical validation' do
-    expect(subject).not_to be_able_to(:send_to_technical_validation, Decidim::Initiative)
+  it 'lets the user to send initiatives to technical validation' do
+    expect(subject).to be_able_to(:send_to_technical_validation, Decidim::Initiative)
   end
 
   it 'lets the user publish initiatives' do

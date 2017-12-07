@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-initiatives (0.1.52)
+    decidim-initiatives (0.1.53)
       decidim-admin
       decidim-comments
       decidim-core (>= 0.7.4, <= 0.8.0)
@@ -576,7 +576,6 @@ DEPENDENCIES
   decidim-initiatives!
   faker
   letter_opener_web
-  rails (~> 5.1)
 
 RUBY VERSION
    ruby 2.4.2p198
