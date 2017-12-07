@@ -47,6 +47,7 @@ module Decidim
           let(:user) { create(:user, :confirmed, organization: organization) }
 
           before do
+            user.authorizations.delete_all
             sign_in user
           end
 
