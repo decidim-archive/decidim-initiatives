@@ -7,10 +7,16 @@ module Decidim
     module Admin
       describe ManageableInitiatives do
         let!(:user) { create(:user, :confirmed, organization: organization) }
-        let!(:admin) { create(:user, :confirmed, :admin, organization: organization) }
+        let!(:admin) do
+          create(:user, :confirmed, :admin, organization: organization)
+        end
         let!(:organization) { create(:organization) }
-        let!(:user_initiatives) { create_list(:initiative, 3, organization: organization, author: user) }
-        let!(:admin_initiatives) { create_list(:initiative, 3, organization: organization, author: admin) }
+        let!(:user_initiatives) do
+          create_list(:initiative, 3, organization: organization, author: user)
+        end
+        let!(:admin_initiatives) do
+          create_list(:initiative, 3, organization: organization, author: admin)
+        end
 
         context 'Initiative authors' do
           subject { described_class.new(organization, user, nil, nil) }
@@ -32,7 +38,7 @@ module Decidim
           end
 
           it 'includes only promoter initiatives' do
-            expect(subject).to  include(*@promoter_initiatives)
+            expect(subject).to include(*@promoter_initiatives)
             expect(subject).not_to include(*user_initiatives)
             expect(subject).not_to include(*admin_initiatives)
           end

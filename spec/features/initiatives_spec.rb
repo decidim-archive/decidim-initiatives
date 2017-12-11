@@ -14,7 +14,9 @@ describe 'Initiatives', type: :feature do
 
   context 'when there are some published initiatives' do
     let!(:initiative) { base_initiative }
-    let!(:unpublished_initiative) { create(:initiative, :created, organization: organization) }
+    let!(:unpublished_initiative) do
+      create(:initiative, :created, organization: organization)
+    end
 
     before do
       visit decidim_initiatives.initiatives_path
