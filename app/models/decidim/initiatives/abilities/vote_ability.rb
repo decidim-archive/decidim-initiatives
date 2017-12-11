@@ -48,7 +48,7 @@ module Decidim
         def can_user_support?(initiative)
           !initiative.offline? && (
             Decidim::Initiatives.do_not_require_authorization ||
-            user.authorizations.any?
+            UserAuthorizations.for(user).any?
           )
         end
       end
