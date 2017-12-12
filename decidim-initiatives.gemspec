@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib,vendor}/**/*', 'Rakefile', 'README.md', 'LICENSE-AGPLv3.txt']
 
-  s.add_dependency 'decidim-core', '>= 0.7.4', '~> 0.8.0'
+  s.add_dependency 'decidim-core', '>= 0.7.4', '< 0.9.0'
   s.add_dependency 'decidim-comments'
   s.add_dependency 'decidim-admin'
   s.add_dependency 'rails', '~> 5.1.4'
