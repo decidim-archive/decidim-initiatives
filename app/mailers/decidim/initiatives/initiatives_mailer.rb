@@ -39,7 +39,7 @@ module Decidim
             state: I18n.t(initiative.state, scope: 'decidim.initiatives.admin_states')
           )
 
-          @link = initiative_url(initiative)
+          @link = initiative_url(initiative, host: @organization.host)
 
           mail(to: "#{user.name} <#{user.email}>", subject: @subject)
         end
@@ -48,7 +48,7 @@ module Decidim
       # Notify an initiative requesting technical validation
       def notify_validating_request(initiative, user)
         @organization = initiative.organization
-        @link = decidim_admin_initiatives.edit_initiative_url(initiative)
+        @link = decidim_admin_initiatives.edit_initiative_url(initiative, host: @organization.host)
 
         with_user(user) do
           @subject = I18n.t(
@@ -67,7 +67,7 @@ module Decidim
       # Notify progress to all initiative subscribers.
       def notify_progress(initiative, user)
         @organization = initiative.organization
-        @link = initiative_url(initiative)
+        @link = initiative_url(initiative, host: @organization.host)
 
         with_user(user) do
           @body = I18n.t(
