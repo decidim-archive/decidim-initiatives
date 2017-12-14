@@ -18,7 +18,6 @@ en:
         title: Title
         description: Description
         banner_image: Banner image
-        requires_validation: Requires validation
       initiatives_committee_member:
         user: Committee member
       initiative_author:
@@ -244,20 +243,13 @@ en:
           back: Back
           select_scope: Select a scope
           initiative_type: Initiative type
-        validate:
-          help: Fill in the following fields in order to validate the citizen initiative
-          continue: Continue
-          more_information: (More information)
         promotal_committee:
           back: Back
           continue: Continue
           individual_help_text: Citizen initiatives require a Promoting Commission consisting of at least three people (attestors). You must share the following link with the other people that are part of this initiative. When your contacts receive this link they will have to follow the indicated steps.
-          organization_help_text: Fill the following data about your organization to complete the information of the promotal committee.
           more_information: (More information)
         share_committee_link:
           invite_to_committee_help: Link to invite people that will be part of the promotal committee
-          continue: Continue
-        organization_data:
           continue: Continue
         finish:
           back: Back
@@ -291,7 +283,6 @@ en:
         previous_form: Start
         show_similar_initiatives: Compare
         fill_data: Create
-        validate: Validation
         promotal_committee: Promotal committee
         finish: Finish
       initiatives:

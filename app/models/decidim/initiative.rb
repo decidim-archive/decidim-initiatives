@@ -28,10 +28,6 @@ module Decidim
              foreign_key: 'decidim_initiative_id',
              class_name: 'Decidim::InitiativesVote', dependent: :destroy
 
-    has_many :extra_data,
-             foreign_key: 'decidim_initiative_id',
-             class_name: 'Decidim::InitiativesExtraData', dependent: :destroy
-
     has_many :committee_members,
              foreign_key: 'decidim_initiatives_id',
              class_name: 'Decidim::InitiativesCommitteeMember', dependent: :destroy

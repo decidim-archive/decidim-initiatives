@@ -26,7 +26,7 @@
           <div class="card__footer">
             <div class="card__support">
               <div class="card__support__data"></div>
-              <%= decidim_form_for(@form, url: next_wizard_path, method: :put, html: { class: 'form' }) do |f| %>
+              <%= decidim_form_for(@form, url: next_wizard_path, method: :put, html: { class: 'form select-initiative_type-form' }) do |f| %>
                 <%= f.hidden_field :type_id, value: type.id %>
                 <%= f.submit t('.select'), class: 'button small secondary card__button' %>
               <% end %>

@@ -39,8 +39,7 @@ module Decidim
         def attributes
           result = {
             title: form.title,
-            description: form.description,
-            requires_validation: form.requires_validation,
+            description: form.description
           }
 
           unless form.banner_image.nil?

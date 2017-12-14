@@ -18,7 +18,6 @@ es:
         title: Título
         description: Descripción
         banner_image: Imagen de banner
-        requires_validation: Requiere validación
       initiatives_committee_member:
         user: Miembro del comité
       initiative_author:
@@ -244,20 +243,13 @@ es:
           back: Volver
           select_scope: Selecciona un ámbito
           initiative_type: Tipo de iniciativa
-        validate:
-          help: Rellena los siguientes campos para validar la iniciativa ciduadana
-          continue: Continuar
-          more_information: (Mas información)
         promotal_committee:
           back: Volver
           continue: Continuar
           individual_help_text: Las iniciativas ciudadanas requieren una Comisión promotora formada por, al menos, tres personas (fedatarias). Es necesario que compartas el siguiente enlace con el resto de personas que promuevan esta iniciativa. Cuando tus contactos reciban el enlace, deberán seguir los pasos indicados.
-          organization_help_text: Rellena los siguientes campos de tu organización para complementar la información del comité promotor.
           more_information: (Mas información)
         share_committee_link:
           invite_to_committee_help: Enlace para invitar a las personas que formarán parte de la comisión promotora
-          continue: Continuar
-        organization_data:
           continue: Continuar
         finish:
           back: Volver
@@ -291,7 +283,6 @@ es:
         previous_form: Inicio
         show_similar_initiatives: Compara
         fill_data: Crea
-        validate: Valida
         promotal_committee: Comisión promotora
         finish: Finaliza
       initiatives:

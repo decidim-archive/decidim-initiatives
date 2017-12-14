@@ -155,7 +155,6 @@ module Decidim
               initiative_type.reload
               expect(initiative_type.title).to eq(valid_attributes[:title])
               expect(initiative_type.description).to eq(valid_attributes[:description])
-              expect(initiative_type.requires_validation).to eq(valid_attributes[:requires_validation])
             end
 
             it 'fails update' do

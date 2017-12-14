@@ -12,7 +12,6 @@ module Decidim
         translatable_attribute :title, String
         translatable_attribute :description, String
         attribute :banner_image, String
-        attribute :requires_validation, Boolean
 
         validates :title, :description, translatable_presence: true
         validates :banner_image, presence: true, if: lambda { |form|
