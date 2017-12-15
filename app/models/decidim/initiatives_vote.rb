@@ -7,10 +7,18 @@ module Decidim
   class InitiativesVote < ApplicationRecord
     include Decidim::PartialTranslationsHelper
 
-    belongs_to :author, foreign_key: 'decidim_author_id', class_name: 'Decidim::User'
-    belongs_to :user_group, foreign_key: 'decidim_user_group_id', class_name: 'Decidim::UserGroup', optional: true
+    belongs_to :author,
+               foreign_key: 'decidim_author_id',
+               class_name: 'Decidim::User'
 
-    belongs_to :initiative, foreign_key: 'decidim_initiative_id', class_name: 'Decidim::Initiative'
+    belongs_to :user_group,
+               foreign_key: 'decidim_user_group_id',
+               class_name: 'Decidim::UserGroup',
+               optional: true
+
+    belongs_to :initiative,
+               foreign_key: 'decidim_initiative_id',
+               class_name: 'Decidim::Initiative'
 
     validates :initiative, uniqueness: { scope: %i[author user_group] }
 
