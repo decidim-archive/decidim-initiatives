@@ -36,6 +36,14 @@ describe "Initiative", type: :feature do
       let!(:other_initiative_type) { create(:initiatives_type, organization: organization) }
       let!(:initiative_type_scope) { create(:initiatives_type_scope, type: initiative_type) }
 
+      before do
+        switch_to_host(organization.host)
+        create(:authorization, user: authorized_user)
+        login_as authorized_user, scope: :user
+
+        visit decidim_initiatives.create_initiative_path(id: :select_initiative_type)
+      end
+
       context "and select initiative type" do
         it "Offers contextual help" do
           within ".callout.secondary" do
