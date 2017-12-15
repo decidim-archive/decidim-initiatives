@@ -32,7 +32,7 @@ describe "Initiative", type: :feature do
     end
 
     context "without validation" do
-      let(:initiative_type) { create(:initiatives_type, organization: organization, requires_validation: false) }
+      let(:initiative_type) { create(:initiatives_type, organization: organization) }
       let!(:other_initiative_type) { create(:initiatives_type, organization: organization) }
       let!(:initiative_type_scope) { create(:initiatives_type_scope, type: initiative_type) }
 
