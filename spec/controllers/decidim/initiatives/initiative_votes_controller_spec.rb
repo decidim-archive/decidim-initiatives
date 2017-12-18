@@ -11,14 +11,14 @@ module Decidim
       let(:initiative) { create(:initiative, organization: organization) }
 
       before do
-        @request.env["decidim.current_organization"] = organization
+        request.env["decidim.current_organization"] = organization
       end
 
       context "when POST create" do
         context "and Authorized users" do
           before do
             initiative.author.confirm
-            sign_in initiative.author
+            sign_in initiative.author, scope: :user
           end
 
           it "Authorized users can vote" do
@@ -32,7 +32,7 @@ module Decidim
           let(:user) { create(:user, :confirmed, organization: initiative.organization) }
 
           before do
-            sign_in user
+            sign_in user, scope: :user
           end
 
           it "raise an exception" do
@@ -68,7 +68,7 @@ module Decidim
         context "and authorized users" do
           before do
             initiative.author.confirm
-            sign_in initiative.author
+            sign_in initiative.author, scope: :user
           end
 
           it "Authorized users can unvote" do

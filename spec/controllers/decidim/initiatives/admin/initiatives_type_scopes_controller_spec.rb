@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -35,28 +35,28 @@ module Decidim
         end
 
         before do
-          @request.env['decidim.current_organization'] = organization
+          request.env["decidim.current_organization"] = organization
         end
 
-        context 'new' do
-          context 'admin user' do
+        context "when new" do
+          context "and admin user" do
             before do
-              sign_in admin_user
+              sign_in admin_user, scope: :user
             end
 
-            it 'gets loaded' do
+            it "gets loaded" do
               get :new, params: { initiatives_type_id: initiative_type.id }
               expect(flash[:alert]).to be_nil
               expect(response).to have_http_status(200)
             end
           end
 
-          context 'regular user' do
+          context "and regular user" do
             before do
-              sign_in user
+              sign_in user, scope: :user
             end
 
-            it 'access denied' do
+            it "access denied" do
               get :new, params: { initiatives_type_id: initiative_type.id }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
@@ -64,13 +64,13 @@ module Decidim
           end
         end
 
-        context 'create' do
-          context 'admin user' do
+        context "when create" do
+          context "and admin user" do
             before do
-              sign_in admin_user
+              sign_in admin_user, scope: :user
             end
 
-            it 'gets created' do
+            it "gets created" do
               expect do
                 post :create,
                      params: {
@@ -80,7 +80,7 @@ module Decidim
               end.to change { InitiativesTypeScope.count }.by(1)
             end
 
-            it 'fails creation' do
+            it "fails creation" do
               expect do
                 post :create,
                      params: {
@@ -91,12 +91,12 @@ module Decidim
             end
           end
 
-          context 'regular user' do
+          context "and regular user" do
             before do
-              sign_in user
+              sign_in user, scope: :user
             end
 
-            it 'access denied' do
+            it "access denied" do
               post :create,
                    params: {
                      initiatives_type_id: initiative_type.id,
@@ -108,13 +108,13 @@ module Decidim
           end
         end
 
-        context 'edit' do
-          context 'admin user' do
+        context "when edit" do
+          context "and admin user" do
             before do
-              sign_in admin_user
+              sign_in admin_user, scope: :user
             end
 
-            it 'gets loaded' do
+            it "gets loaded" do
               get :edit,
                   params: {
                     initiatives_type_id: initiative_type.id,
@@ -125,12 +125,12 @@ module Decidim
             end
           end
 
-          context 'regular user' do
+          context "and regular user" do
             before do
-              sign_in user
+              sign_in user, scope: :user
             end
 
-            it 'access denied' do
+            it "access denied" do
               get :edit,
                   params: {
                     initiatives_type_id: initiative_type.id,
@@ -142,13 +142,13 @@ module Decidim
           end
         end
 
-        context 'update' do
-          context 'admin user' do
+        context "when update" do
+          context "and admin user" do
             before do
-              sign_in admin_user
+              sign_in admin_user, scope: :user
             end
 
-            it 'gets updated' do
+            it "gets updated" do
               patch :update,
                     params: {
                       initiatives_type_id: initiative_type.to_param,
@@ -161,7 +161,7 @@ module Decidim
               expect(initiative_type_scope.supports_required).to eq(valid_attributes[:supports_required])
             end
 
-            it 'fails update' do
+            it "fails update" do
               patch :update,
                     params: {
                       initiatives_type_id: initiative_type.to_param,
@@ -172,12 +172,12 @@ module Decidim
             end
           end
 
-          context 'regular user' do
+          context "and regular user" do
             before do
-              sign_in user
+              sign_in user, scope: :user
             end
 
-            it 'access denied' do
+            it "access denied" do
               patch :update,
                     params: {
                       initiatives_type_id: initiative_type.to_param,
@@ -190,13 +190,13 @@ module Decidim
           end
         end
 
-        context 'destroy' do
-          context 'admin user' do
+        context "when destroy" do
+          context "and admin user" do
             before do
               sign_in admin_user
             end
 
-            it 'removes the initiative type if not used' do
+            it "removes the initiative type if not used" do
               delete :destroy,
                      params: {
                        initiatives_type_id: initiative_type.id,
@@ -207,7 +207,7 @@ module Decidim
               expect(scope).to be_nil
             end
 
-            it 'fails if the initiative type scope is being used' do
+            it "fails if the initiative type scope is being used" do
               create(:initiative, organization: organization, scoped_type: initiative_type_scope)
 
               expect do
@@ -220,12 +220,12 @@ module Decidim
             end
           end
 
-          context 'regular user' do
+          context "and regular user" do
             before do
-              sign_in user
+              sign_in user, scope: :user
             end
 
-            it 'access denied' do
+            it "access denied" do
               delete :destroy,
                      params: {
                        initiatives_type_id: initiative_type.id,
@@ -240,6 +240,3 @@ module Decidim
     end
   end
 end
-
-
-

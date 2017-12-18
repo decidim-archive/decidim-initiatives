@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -36,8 +36,8 @@ module Decidim
         type
       end
 
-      describe 'GET search' do
-        it 'Returns only scoped types for the given type' do
+      describe "GET search" do
+        it "Returns only scoped types for the given type" do
           expect(other_initiative_type.scopes).not_to be_empty
 
           get :search, params: { type_id: initiative_type.id }

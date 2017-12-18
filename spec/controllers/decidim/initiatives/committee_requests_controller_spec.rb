@@ -11,13 +11,13 @@ module Decidim
       let!(:initiative) { create(:initiative, :created, organization: organization) }
 
       before do
-        @request.env["decidim.current_organization"] = organization
+        request.env["decidim.current_organization"] = organization
       end
 
       context "when GET new" do
         context "with owner requests membership" do
           before do
-            sign_in initiative.author
+            sign_in initiative.author, scope: :user
           end
 
           it "Owner is not allowed to request membership" do
@@ -32,7 +32,7 @@ module Decidim
 
           before do
             create(:authorization, user: user)
-            sign_in user
+            sign_in user, scope: :user
           end
 
           it "are allowed to request membership" do
@@ -46,7 +46,7 @@ module Decidim
           let(:user) { create(:user, :confirmed, organization: organization) }
 
           before do
-            sign_in user
+            sign_in user, scope: :user
           end
 
           it "are not allowed to request membership" do
@@ -62,7 +62,7 @@ module Decidim
 
         before do
           create(:authorization, user: user)
-          sign_in user
+          sign_in user, scope: :user
         end
 
         context "and created initiative" do

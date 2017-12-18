@@ -4,11 +4,11 @@ require "spec_helper"
 require "decidim/admin/test/manage_attachments_examples"
 
 describe "initiative attachments", type: :feature do
-  include_context "initiative administration"
-
-  let(:attached_to) { initiative }
-
   context "when managed by admin" do
+    include_context "when admins initiative"
+
+    let(:attached_to) { initiative }
+
     before do
       switch_to_host(organization.host)
       login_as user, scope: :user
@@ -20,6 +20,10 @@ describe "initiative attachments", type: :feature do
   end
 
   context "when managed by author" do
+    include_context "when admins initiative"
+
+    let(:attached_to) { initiative }
+
     before do
       switch_to_host(organization.host)
       login_as initiative.author, scope: :user

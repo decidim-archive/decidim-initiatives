@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe "User previews initiative", type: :feature do
-  include_context "initiative administration"
+  include_context "when admins initiative"
 
   context "when initiative preview" do
     before do

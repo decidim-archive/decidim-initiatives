@@ -3,9 +3,9 @@
 require "spec_helper"
 
 describe "User prints the initiative", type: :feature do
-  include_context "initiative administration"
-
   context "when initiative print" do
+    include_context "when admins initiative"
+
     before do
       switch_to_host(organization.host)
       login_as user, scope: :user

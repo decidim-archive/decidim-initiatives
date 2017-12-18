@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_context "initiative administration" do
+shared_context "when admins initiative" do
   let(:organization) { create(:organization) }
   let(:user) { create(:user, :admin, :confirmed, organization: organization) }
 

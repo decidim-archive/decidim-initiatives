@@ -88,7 +88,7 @@ describe "Initiative", type: :feature do
         end
       end
 
-      context "Show similar initiatives" do
+      context "when Show similar initiatives" do
         let!(:initiative) { create(:initiative, organization: organization) }
 
         before do
@@ -117,7 +117,7 @@ describe "Initiative", type: :feature do
         end
       end
 
-      context "Create initiative" do
+      context "when Create initiative" do
         let(:initiative) { build(:initiative) }
 
         before do
@@ -146,7 +146,7 @@ describe "Initiative", type: :feature do
         end
       end
 
-      context "Promotal committee" do
+      context "when Promotal committee" do
         let(:initiative) { build(:initiative) }
 
         before do
@@ -180,7 +180,7 @@ describe "Initiative", type: :feature do
         end
       end
 
-      context "Finish" do
+      context "when Finish" do
         let(:initiative) { build(:initiative) }
 
         before do

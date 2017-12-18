@@ -8,7 +8,7 @@ describe "Admin manages initiative features", type: :feature do
 
   let!(:initiative) { create(:initiative, organization: organization) }
 
-  describe "add a feature" do
+  context "when adds a feature" do
     before do
       switch_to_host(organization.host)
       login_as user, scope: :user
@@ -76,7 +76,7 @@ describe "Admin manages initiative features", type: :feature do
     end
   end
 
-  describe "edit a feature" do
+  context "when edit a feature" do
     let(:feature_name) do
       {
         en: "My feature",
@@ -140,7 +140,7 @@ describe "Admin manages initiative features", type: :feature do
     end
   end
 
-  describe "remove a feature" do
+  context "when remove a feature" do
     let(:feature_name) do
       {
         en: "My feature",
@@ -168,7 +168,7 @@ describe "Admin manages initiative features", type: :feature do
     end
   end
 
-  describe "publish and unpublish a feature" do
+  context "when publish and unpublish a feature" do
     let!(:feature) do
       create(:feature, participatory_space: initiative, published_at: published_at)
     end
