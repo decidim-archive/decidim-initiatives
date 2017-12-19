@@ -4,7 +4,7 @@ PATH
     decidim-initiatives (0.1.53)
       decidim-admin
       decidim-comments
-      decidim-core (>= 0.7.4, <= 0.8.0)
+      decidim-core (>= 0.7.4, < 0.9.0)
       kaminari (~> 1.0.1)
       rails (~> 5.1.4)
       rectify

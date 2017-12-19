@@ -88,6 +88,13 @@ module Decidim
       true
     end
 
+    # This flag says when mixed and online voting methods
+    # are allowed. If set to false, only offline voting will be
+    # allowed
+    config_accessor :online_voting_allowed do
+      true
+    end
+
     # This flag allows creating authorizations to unauthorized users.
     config_accessor :do_not_require_authorization do
       false
