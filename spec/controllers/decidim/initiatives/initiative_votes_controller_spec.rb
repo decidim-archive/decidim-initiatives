@@ -24,7 +24,7 @@ module Decidim
           it "Authorized users can vote" do
             expect do
               post :create, params: { initiative_slug: initiative.slug, format: :js }
-            end.to change { InitiativesVote.count }.by(1)
+            end.to change { InitiativesVote.where(initiative: initiative).count }.by(1)
           end
         end
 
@@ -44,7 +44,7 @@ module Decidim
           it "do not register the vote" do
             expect do
               post :create, params: { initiative_slug: initiative.slug, format: :js }
-            end.not_to change { InitiativesVote.count }
+            end.not_to(change { InitiativesVote.where(initiative: initiative).count })
           end
         end
 
@@ -57,7 +57,7 @@ module Decidim
           it "do not register the vote" do
             expect do
               post :create, params: { initiative_slug: initiative.slug, format: :js }
-            end.not_to change { InitiativesVote.count }
+            end.not_to(change { InitiativesVote.where(initiative: initiative).count })
           end
         end
       end
@@ -76,7 +76,7 @@ module Decidim
 
             expect do
               delete :destroy, params: { initiative_slug: initiative.slug, format: :js }
-            end.to change { InitiativesVote.count }.by(-1)
+            end.to change { InitiativesVote.where(initiative: initiative).count }.by(-1)
           end
         end
       end

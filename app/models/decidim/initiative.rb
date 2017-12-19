@@ -30,7 +30,8 @@ module Decidim
 
     has_many :committee_members,
              foreign_key: 'decidim_initiatives_id',
-             class_name: 'Decidim::InitiativesCommitteeMember', dependent: :destroy
+             class_name: 'Decidim::InitiativesCommitteeMember',
+             dependent: :destroy
 
     has_many :features, as: :participatory_space
 

@@ -215,7 +215,7 @@ ca:
         statistics:
           supports_count_title: Adhesions
           comments_count_title: Comentaris
-          meetings_count_title: Encontres
+          meetings_count_title: Trobades
           assistants_count_title: Assistents
         result:
           initiative_accepted_reason: Aquesta iniciativa ha estat acceptada perquè
@@ -235,7 +235,7 @@ ca:
           help:  En què consisteix la iniciativa? Escriu el títol i la descripció. Et recomanem que el títol sigui curt i concís, i la descripció estigui centrada en la solució que es proposa.
           more_information: (Mes informació)
         show_similar_initiatives:
-          continue: La meua iniciativa es diferent
+          continue: La meva iniciativa es diferent
           back: Torna enrere
           more_information: (Mes informació)
         fill_data:
@@ -254,7 +254,7 @@ ca:
         finish:
           back: Torna enrere
           callout_text: Enhorabona! La teva iniciativa ciutadana s’ha creat amb èxit.
-          go_to_my_initiatives: Ves a les meues iniciatives
+          go_to_my_initiatives: Ves a les meves iniciatives
           back_to_initiatives: Tornar a iniciatives
           more_information: (Mes informació)
       committee_requests:
