@@ -33,14 +33,21 @@ module Decidim
     def sha1
       return unless decidim_user_group_id.nil?
 
-      unique_id = author.authorizations.first&.unique_id || author.email
       title = partially_translated_attribute(initiative.title)
       description = partially_translated_attribute(initiative.description)
 
-      Digest::SHA1.hexdigest "#{unique_id}#{title}#{description}"
+      Digest::SHA1.hexdigest "#{authorization_unique_id}#{title}#{description}"
     end
 
     private
+
+    def authorization_unique_id
+      first_authorization = Decidim::Initiatives::UserAuthorizations
+                            .for(author)
+                            .first
+
+      first_authorization&.unique_id || author.email
+    end
 
     def update_counter_cache
       initiative.initiative_votes_count = Decidim::InitiativesVote

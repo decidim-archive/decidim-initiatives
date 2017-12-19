@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
     describe InitiativeTypesController, type: :controller do
       routes { Decidim::Initiatives::Engine.routes }
+
+      subject { results["results"] }
 
       let(:organization) { create(:organization) }
       let!(:initiative_types) do
@@ -18,37 +20,35 @@ module Decidim
       end
 
       let(:user) { create(:user, :admin, :confirmed, organization: organization) }
-      let(:query) { '' }
+      let(:query) { "" }
       let(:params) { { term: query } }
       let(:results) { JSON.parse(response.body) }
 
-      subject { results['results'] }
-
       before do
-        @request.env['decidim.current_organization'] = organization
+        request.env["decidim.current_organization"] = organization
         sign_in user, scope: :user
         get :search, format: :json, params: params
       end
 
       matcher :have_initiative_types do |expected|
         match do |results|
-          result_texts = results.map { |r| r['text'] }
+          result_texts = results.map { |r| r["text"] }
 
           RSpec::Matchers::BuiltIn::ContainExactly.new(result_texts).matches?(expected)
         end
       end
 
-      context 'basic search works' do
-        it 'request returns OK' do
+      context "when basic search works" do
+        it "request returns OK" do
           expect(response).to be_success
         end
 
-        it 'result has id' do
-          expect(subject.first).to have_key('id')
+        it "result has id" do
+          expect(subject.first).to have_key("id")
         end
 
-        it 'result has text' do
-          expect(subject.first).to have_key('text')
+        it "result has text" do
+          expect(subject.first).to have_key("text")
         end
 
         it "doesn't store the location for user" do
@@ -56,18 +56,21 @@ module Decidim
         end
       end
 
-      context 'find one result' do
-        let(:query) { 'Bb' }
+      context "when find one result" do
+        let(:query) { "Bb" }
+
         it { is_expected.to have_initiative_types %w(Bbbb) }
       end
 
-      context 'find several results' do
-        let(:query) { 'Aa' }
+      context "when find several results" do
+        let(:query) { "Aa" }
+
         it { is_expected.to have_initiative_types %w(Aaaa Aabb) }
       end
 
-      context "don't find results" do
-        let(:query) { 'Dd' }
+      context "when don't find results" do
+        let(:query) { "Dd" }
+
         it { is_expected.to be_empty }
       end
     end

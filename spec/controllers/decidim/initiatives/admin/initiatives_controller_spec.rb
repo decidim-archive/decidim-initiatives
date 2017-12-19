@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -15,176 +15,176 @@ module Decidim
         let!(:created_initiative) { create(:initiative, :created, organization: organization) }
 
         before do
-          @request.env['decidim.current_organization'] = organization
+          request.env["decidim.current_organization"] = organization
         end
 
-        context 'index' do
-          describe 'Users without initiatives' do
+        context "when index" do
+          context "and Users without initiatives" do
             before do
-              sign_in user
+              sign_in user, scope: :user
             end
 
-            it 'initiative list is not allowed' do
+            it "initiative list is not allowed" do
               get :index
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          describe 'anonymous users do' do
-            it 'initiative list is not allowed' do
+          context "and anonymous users do" do
+            it "initiative list is not allowed" do
               get :index
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          describe 'admin users' do
+          context "and admin users" do
             before do
-              sign_in admin_user
+              sign_in admin_user, scope: :user
             end
 
-            it 'initiative list is allowed' do
+            it "initiative list is allowed" do
               get :index
               expect(flash[:alert]).to be_nil
               expect(response).to have_http_status(200)
             end
           end
 
-          describe 'initiative author' do
+          context "and initiative author" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'initiative list is allowed' do
+            it "initiative list is allowed" do
               get :index
               expect(flash[:alert]).to be_nil
               expect(response).to have_http_status(200)
             end
           end
 
-          describe 'promotal committee members' do
+          describe "and promotal committee members" do
             before do
-              sign_in initiative.committee_members.approved.first.user
+              sign_in initiative.committee_members.approved.first.user, scope: :user
             end
 
-            it 'initiative list is allowed' do
+            it "initiative list is allowed" do
               get :index
-              expect(flash[:alert]).to be_nil
-              expect(response).to have_http_status(200)
-            end
-          end
-        end
-
-        context 'show' do
-          describe 'Users without initiatives' do
-            before do
-              sign_in user
-            end
-
-            it 'are not not allowed' do
-              get :show, params: { slug: initiative.to_param }
-              expect(flash[:alert]).not_to be_empty
-              expect(response).to have_http_status(302)
-            end
-          end
-
-          describe 'anonymous users do' do
-            it 'are not allowed' do
-              get :show, params: { slug: initiative.to_param }
-              expect(flash[:alert]).not_to be_empty
-              expect(response).to have_http_status(302)
-            end
-          end
-
-          describe 'admin users' do
-            before do
-              sign_in admin_user
-            end
-
-            it 'are allowed' do
-              get :show, params: { slug: initiative.to_param }
-              expect(flash[:alert]).to be_nil
-              expect(response).to have_http_status(200)
-            end
-          end
-
-          describe 'initiative author' do
-            before do
-              sign_in initiative.author
-            end
-
-            it 'are allowed' do
-              get :show, params: { slug: initiative.to_param }
-              expect(flash[:alert]).to be_nil
-              expect(response).to have_http_status(200)
-            end
-          end
-
-          describe 'promotal committee members' do
-            before do
-              sign_in initiative.committee_members.approved.first.user
-            end
-
-            it 'initiative list is allowed' do
-              get :show, params: { slug: initiative.to_param }
               expect(flash[:alert]).to be_nil
               expect(response).to have_http_status(200)
             end
           end
         end
 
-        context 'edit' do
-          describe 'Users without initiatives' do
+        context "when show" do
+          context "and Users without initiatives" do
             before do
-              sign_in user
+              sign_in user, scope: :user
             end
 
-            it 'are not allowed' do
+            it "are not not allowed" do
+              get :show, params: { slug: initiative.to_param }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          context "and anonymous users" do
+            it "are not allowed" do
+              get :show, params: { slug: initiative.to_param }
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to have_http_status(302)
+            end
+          end
+
+          context "and admin users" do
+            before do
+              sign_in admin_user, scope: :user
+            end
+
+            it "are allowed" do
+              get :show, params: { slug: initiative.to_param }
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+
+          context "and initiative author" do
+            before do
+              sign_in initiative.author, scope: :user
+            end
+
+            it "are allowed" do
+              get :show, params: { slug: initiative.to_param }
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+
+          context "and promotal committee members" do
+            before do
+              sign_in initiative.committee_members.approved.first.user, scope: :user
+            end
+
+            it "initiative list is allowed" do
+              get :show, params: { slug: initiative.to_param }
+              expect(flash[:alert]).to be_nil
+              expect(response).to have_http_status(200)
+            end
+          end
+        end
+
+        context "when edit" do
+          context "and Users without initiatives" do
+            before do
+              sign_in user, scope: :user
+            end
+
+            it "are not allowed" do
               get :edit, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          describe 'anonymous users do' do
-            it 'are not allowed' do
+          context "and anonymous users" do
+            it "are not allowed" do
               get :edit, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          describe 'admin users' do
+          context "and admin users" do
             before do
-              sign_in admin_user
+              sign_in admin_user, scope: :user
             end
 
-            it 'are allowed' do
+            it "are allowed" do
               get :edit, params: { slug: initiative.to_param }
               expect(flash[:alert]).to be_nil
               expect(response).to have_http_status(200)
             end
           end
 
-          describe 'initiative author' do
+          context "and initiative author" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'are allowed' do
+            it "are allowed" do
               get :edit, params: { slug: initiative.to_param }
               expect(flash[:alert]).to be_nil
               expect(response).to have_http_status(200)
             end
           end
 
-          describe 'promotal committee members' do
+          context "and promotal committee members" do
             before do
-              sign_in initiative.committee_members.approved.first.user
+              sign_in initiative.committee_members.approved.first.user, scope: :user
             end
 
-            it 'are allowed' do
+            it "are allowed" do
               get :edit, params: { slug: initiative.to_param }
               expect(flash[:alert]).to be_nil
               expect(response).to have_http_status(200)
@@ -192,15 +192,15 @@ module Decidim
           end
         end
 
-        context 'update' do
+        context "when update" do
           let(:valid_attributes) { attributes_for(:initiative, organization: organization) }
 
-          describe 'Users without initiatives' do
+          context "and Users without initiatives" do
             before do
-              sign_in user
+              sign_in user, scope: :user
             end
 
-            it 'are not allowed' do
+            it "are not allowed" do
               put :update,
                   params: {
                     slug: initiative.to_param,
@@ -211,8 +211,8 @@ module Decidim
             end
           end
 
-          describe 'anonymous users do' do
-            it 'are not allowed' do
+          context "and anonymous users do" do
+            it "are not allowed" do
               put :update,
                   params: {
                     slug: initiative.to_param,
@@ -223,12 +223,12 @@ module Decidim
             end
           end
 
-          describe 'admin users' do
+          context "and admin users" do
             before do
-              sign_in admin_user
+              sign_in admin_user, scope: :user
             end
 
-            it 'are allowed' do
+            it "are allowed" do
               put :update,
                   params: {
                     slug: initiative.to_param,
@@ -239,13 +239,13 @@ module Decidim
             end
           end
 
-          context 'initiative author' do
-            context 'initiative published' do
+          context "and initiative author" do
+            context "and initiative published" do
               before do
-                sign_in initiative.author
+                sign_in initiative.author, scope: :user
               end
 
-              it 'are not allowed' do
+              it "are not allowed" do
                 put :update,
                     params: {
                       slug: initiative.to_param,
@@ -256,14 +256,14 @@ module Decidim
               end
             end
 
-            context 'initiative created' do
+            context "and initiative created" do
               let(:initiative) { create(:initiative, :created) }
 
               before do
-                sign_in initiative.author
+                sign_in initiative.author, scope: :user
               end
 
-              it 'are allowed' do
+              it "are allowed" do
                 put :update,
                     params: {
                       slug: initiative.to_param,
@@ -275,13 +275,13 @@ module Decidim
             end
           end
 
-          context 'promotal committee members' do
-            context 'initiative published' do
+          context "and promotal committee members" do
+            context "and initiative published" do
               before do
-                sign_in initiative.committee_members.approved.first.user
+                sign_in initiative.committee_members.approved.first.user, scope: :user
               end
 
-              it 'are not allowed' do
+              it "are not allowed" do
                 put :update,
                     params: {
                       slug: initiative.to_param,
@@ -292,14 +292,14 @@ module Decidim
               end
             end
 
-            context 'initiative created' do
+            context "and initiative created" do
               let(:initiative) { create(:initiative, :created) }
 
               before do
-                sign_in initiative.committee_members.approved.first.user
+                sign_in initiative.committee_members.approved.first.user, scope: :user
               end
 
-              it 'are allowed' do
+              it "are allowed" do
                 put :update,
                     params: {
                       slug: initiative.to_param,
@@ -312,40 +312,40 @@ module Decidim
           end
         end
 
-        context 'GET send_to_technical_validation' do
-          context 'Initiative not in created state' do
+        context "when GET send_to_technical_validation" do
+          context "and Initiative not in created state" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'Raises an error' do
+            it "Raises an error" do
               get :send_to_technical_validation, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'User is not the owner of the initiative' do
-            let(:other_user) { create(:user, organization: organization ) }
+          context "and User is not the owner of the initiative" do
+            let(:other_user) { create(:user, organization: organization) }
 
             before do
-              sign_in other_user
+              sign_in other_user, scope: :user
             end
 
-            it 'Raises an error' do
+            it "Raises an error" do
               get :send_to_technical_validation, params: { slug: created_initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'User is the owner of the initiative. It is in created state' do
+          context "and User is the owner of the initiative. It is in created state" do
             before do
               created_initiative.author.confirm
-              sign_in created_initiative.author
+              sign_in created_initiative.author, scope: :user
             end
 
-            it 'Passes to technical validation phase' do
+            it "Passes to technical validation phase" do
               get :send_to_technical_validation, params: { slug: created_initiative.to_param }
 
               created_initiative.reload
@@ -354,34 +354,34 @@ module Decidim
           end
         end
 
-        context 'POST publish' do
+        context "when POST publish" do
           let!(:initiative) { create(:initiative, :validating, organization: organization) }
 
-          context 'Initiative owner' do
+          context "and Initiative owner" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'Raises an error' do
+            it "Raises an error" do
               post :publish, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'Administrator' do
+          context "and Administrator" do
             let!(:admin) { create(:user, :confirmed, :admin) }
 
             before do
-              sign_in admin
+              sign_in admin, scope: :user
             end
 
-            it 'initiative gets published' do
+            it "initiative gets published" do
               post :publish, params: { slug: initiative.to_param }
               expect(response).to have_http_status(302)
 
               initiative.reload
-              expect(initiative.published?).to be_truthy
+              expect(initiative).to be_published
               expect(initiative.published_at).not_to be_nil
               expect(initiative.signature_start_time).not_to be_nil
               expect(initiative.signature_end_time).not_to be_nil
@@ -389,171 +389,171 @@ module Decidim
           end
         end
 
-        context 'DELETE unpublish' do
-          context 'Initiative owner' do
+        context "when DELETE unpublish" do
+          context "and Initiative owner" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'Raises an error' do
+            it "Raises an error" do
               delete :unpublish, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'Administrator' do
-            let!(:admin) { create(:user, :confirmed, :admin) }
+          context "and Administrator" do
+            let(:admin) { create(:user, :confirmed, :admin) }
 
             before do
-              sign_in admin
+              sign_in admin, scope: :user
             end
 
-            it 'initiative gets unpublished' do
+            it "initiative gets unpublished" do
               delete :unpublish, params: { slug: initiative.to_param }
               expect(response).to have_http_status(302)
 
               initiative.reload
-              expect(initiative.published?).to be_falsey
-              expect(initiative.discarded?).to be_truthy
+              expect(initiative).not_to be_published
+              expect(initiative).to be_discarded
               expect(initiative.published_at).to be_nil
             end
           end
         end
 
-        context 'DELETE discard' do
-          let!(:initiative) { create(:initiative, :validating, organization: organization) }
+        context "when DELETE discard" do
+          let(:initiative) { create(:initiative, :validating, organization: organization) }
 
-          context 'Initiative owner' do
+          context "and Initiative owner" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'Raises an error' do
+            it "Raises an error" do
               delete :discard, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'Administrator' do
-            let!(:admin) { create(:user, :confirmed, :admin) }
+          context "and Administrator" do
+            let(:admin) { create(:user, :confirmed, :admin) }
 
             before do
-              sign_in admin
+              sign_in admin, scope: :user
             end
 
-            it 'initiative gets discarded' do
+            it "initiative gets discarded" do
               delete :discard, params: { slug: initiative.to_param }
               expect(response).to have_http_status(302)
 
               initiative.reload
-              expect(initiative.discarded?).to be_truthy
+              expect(initiative).to be_discarded
               expect(initiative.published_at).to be_nil
             end
           end
         end
 
-        context 'POST accept' do
-          let!(:initiative) { create(:initiative, :acceptable, signature_type: 'any', organization: organization) }
+        context "when POST accept" do
+          let!(:initiative) { create(:initiative, :acceptable, signature_type: "any", organization: organization) }
 
-          context 'Initiative owner' do
+          context "and Initiative owner" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'Raises an error' do
+            it "Raises an error" do
               post :accept, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'Administrator' do
+          context "when Administrator" do
             let!(:admin) { create(:user, :confirmed, :admin) }
 
             before do
-              sign_in admin
+              sign_in admin, scope: :user
             end
 
-            it 'initiative gets published' do
+            it "initiative gets published" do
               post :accept, params: { slug: initiative.to_param }
               expect(response).to have_http_status(302)
 
               initiative.reload
-              expect(initiative.accepted?).to be_truthy
+              expect(initiative).to be_accepted
             end
           end
         end
 
-        context 'DELETE reject' do
-          let!(:initiative) { create(:initiative, :rejectable, signature_type: 'any', organization: organization) }
+        context "when DELETE reject" do
+          let!(:initiative) { create(:initiative, :rejectable, signature_type: "any", organization: organization) }
 
-          context 'Initiative owner' do
+          context "and Initiative owner" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'Raises an error' do
+            it "Raises an error" do
               delete :reject, params: { slug: initiative.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'Administrator' do
+          context "when Administrator" do
             let!(:admin) { create(:user, :confirmed, :admin) }
 
             before do
-              sign_in admin
+              sign_in admin, scope: :user
             end
 
-            it 'initiative gets rejected' do
+            it "initiative gets rejected" do
               delete :reject, params: { slug: initiative.to_param }
               expect(response).to have_http_status(302)
               expect(flash[:alert]).to be_nil
 
               initiative.reload
-              expect(initiative.rejected?).to be_truthy
+              expect(initiative).to be_rejected
             end
           end
         end
 
-        context 'GET export_votes' do
-          let(:initiative) { create(:initiative, organization: organization, signature_type: 'any') }
+        context "when GET export_votes" do
+          let(:initiative) { create(:initiative, organization: organization, signature_type: "any") }
 
-          context 'author' do
+          context "and author" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'is not allowed' do
+            it "is not allowed" do
               get :export_votes, params: { slug: initiative.to_param, format: :csv }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'promotal committee' do
+          context "and promotal committee" do
             before do
-              sign_in initiative.committee_members.approved.first.user
+              sign_in initiative.committee_members.approved.first.user, scope: :user
             end
 
-            it 'is not allowed' do
+            it "is not allowed" do
               get :export_votes, params: { slug: initiative.to_param, format: :csv }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'admin user' do
+          context "and admin user" do
             let!(:vote) { create(:initiative_user_vote, initiative: initiative) }
 
             before do
-              sign_in admin_user
+              sign_in admin_user, scope: :user
             end
 
-            it 'is allowed' do
+            it "is allowed" do
               get :export_votes, params: { slug: initiative.to_param, format: :csv }
               expect(flash[:alert]).to be_nil
               expect(response).to have_http_status(200)
@@ -564,6 +564,3 @@ module Decidim
     end
   end
 end
-
-
-

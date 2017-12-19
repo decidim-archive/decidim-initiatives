@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -14,52 +14,52 @@ module Decidim
         let(:user) { create(:user, :confirmed, organization: organization) }
 
         before do
-          @request.env['decidim.current_organization'] = organization
+          request.env["decidim.current_organization"] = organization
         end
 
-        context 'GET index' do
-          context 'administrators' do
+        context "when GET index" do
+          context "and administrators" do
             before do
-              sign_in admin_user
+              sign_in admin_user, scope: :user
             end
 
-            it 'action is allowed' do
+            it "action is allowed" do
               get :index, params: { initiative_slug: initiative.to_param }
               expect(flash[:alert]).to be_nil
               expect(response).to have_http_status(200)
             end
           end
 
-          context 'other users' do
+          context "and other users" do
             before do
-              sign_in user
+              sign_in user, scope: :user
             end
 
-            it 'action is not allowed' do
+            it "action is not allowed" do
               get :index, params: { initiative_slug: initiative.to_param }
               expect(flash[:alert]).not_to be_nil
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'author' do
+          context "and author" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'action is allowed' do
+            it "action is allowed" do
               get :index, params: { initiative_slug: initiative.to_param }
               expect(flash[:alert]).to be_nil
               expect(response).to have_http_status(200)
             end
           end
 
-          context 'committee members' do
+          context "and committee members" do
             before do
-              sign_in initiative.committee_members.approved.first.user
+              sign_in initiative.committee_members.approved.first.user, scope: :user
             end
 
-            it 'action is allowed' do
+            it "action is allowed" do
               get :index, params: { initiative_slug: initiative.to_param }
               expect(flash[:alert]).to be_nil
               expect(response).to have_http_status(200)
@@ -67,42 +67,42 @@ module Decidim
           end
         end
 
-        context 'GET approve' do
-          let(:membership_request) { create(:initiatives_committee_member, initiative: initiative, state: 'requested')}
+        context "when GET approve" do
+          let(:membership_request) { create(:initiatives_committee_member, initiative: initiative, state: "requested") }
 
-          context 'Owner' do
+          context "and Owner" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'request gets approved' do
+            it "request gets approved" do
               get :approve, params: { initiative_slug: membership_request.initiative.to_param, id: membership_request.to_param }
               membership_request.reload
               expect(membership_request).to be_accepted
             end
           end
 
-          context 'Other users' do
+          context "and other users" do
             let(:user) { create(:user, :confirmed, organization: organization) }
 
             before do
               create(:authorization, user: user)
-              sign_in user
+              sign_in user, scope: :user
             end
 
-            it 'Action is denied' do
+            it "Action is denied" do
               get :approve, params: { initiative_slug: membership_request.initiative.to_param, id: membership_request.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'Admin' do
+          context "and Admin" do
             before do
-              sign_in admin_user
+              sign_in admin_user, scope: :user
             end
 
-            it 'request gets approved' do
+            it "request gets approved" do
               get :approve, params: { initiative_slug: membership_request.initiative.to_param, id: membership_request.to_param }
               membership_request.reload
               expect(membership_request).to be_accepted
@@ -110,42 +110,42 @@ module Decidim
           end
         end
 
-        context 'DELETE revoke' do
-          let(:membership_request) { create(:initiatives_committee_member, initiative: initiative, state: 'requested')}
+        context "when DELETE revoke" do
+          let(:membership_request) { create(:initiatives_committee_member, initiative: initiative, state: "requested") }
 
-          context 'Owner' do
+          context "and Owner" do
             before do
-              sign_in initiative.author
+              sign_in initiative.author, scope: :user
             end
 
-            it 'request gets approved' do
+            it "request gets approved" do
               delete :revoke, params: { initiative_slug: membership_request.initiative.to_param, id: membership_request.to_param }
               membership_request.reload
               expect(membership_request).to be_rejected
             end
           end
 
-          context 'Other users' do
+          context "and Other users" do
             let(:user) { create(:user, :confirmed, organization: organization) }
 
             before do
               create(:authorization, user: user)
-              sign_in user
+              sign_in user, scope: :user
             end
 
-            it 'Action is denied' do
+            it "Action is denied" do
               delete :revoke, params: { initiative_slug: membership_request.initiative.to_param, id: membership_request.to_param }
               expect(flash[:alert]).not_to be_empty
               expect(response).to have_http_status(302)
             end
           end
 
-          context 'Admin' do
+          context "and Admin" do
             before do
-              sign_in admin_user
+              sign_in admin_user, scope: :user
             end
 
-            it 'request gets approved' do
+            it "request gets approved" do
               delete :revoke, params: { initiative_slug: membership_request.initiative.to_param, id: membership_request.to_param }
               membership_request.reload
               expect(membership_request).to be_rejected

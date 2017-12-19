@@ -46,3 +46,7 @@ bower.json
 .idea
 .rbenv-gemsets
 **/spec/*_dummy_app
+
+.bash_history
+.pki
+.local

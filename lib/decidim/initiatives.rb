@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'decidim/initiatives/admin'
-require 'decidim/initiatives/engine'
-require 'decidim/initiatives/admin_engine'
-require 'decidim/initiatives/participatory_space'
-require 'decidim/initiatives/current_locale'
-require 'decidim/initiatives/initiatives_filter_form_builder'
-require 'decidim/initiatives/initiative_slug'
-require 'decidim/partial_translations_helper'
+require "decidim/initiatives/admin"
+require "decidim/initiatives/engine"
+require "decidim/initiatives/admin_engine"
+require "decidim/initiatives/participatory_space"
+require "decidim/initiatives/current_locale"
+require "decidim/initiatives/initiatives_filter_form_builder"
+require "decidim/initiatives/initiative_slug"
+require "decidim/partial_translations_helper"
 
 module Decidim
   # Base module for the initiatives engine.

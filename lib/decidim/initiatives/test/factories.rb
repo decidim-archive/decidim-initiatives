@@ -3,7 +3,7 @@
 require 'decidim/faker/localized'
 require 'decidim/dev'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :initiatives_type, class: Decidim::InitiativesType do
     title { Decidim::Faker::Localized.sentence(3) }
     description { Decidim::Faker::Localized.wrapped('<p>', '</p>') { Decidim::Faker::Localized.sentence(4) } }
@@ -26,15 +26,16 @@ FactoryGirl.define do
     state 'published'
     signature_type 'online'
     signature_start_time { Time.current }
-    signature_end_time { Time.current + 120.days}
+    signature_end_time { Time.current + 120.days }
 
     scoped_type do
-      create(:initiatives_type_scope, type: create(:initiatives_type, organization: organization))
+      create(:initiatives_type_scope,
+             type: create(:initiatives_type, organization: organization))
     end
 
     after(:create) do |initiative|
-      unless initiative.author.authorizations.any?
-        create(:authorization, user: initiative.author)
+      unless Decidim::Authorization.where(user: initiative.author).where.not(granted_at: nil).any?
+        create(:authorization, user: initiative.author, granted_at: Time.now)
       end
 
       3.times do
@@ -69,8 +70,8 @@ FactoryGirl.define do
     end
 
     trait :acceptable do
-      signature_start_time { DateTime.now - 3.months }
-      signature_end_time { DateTime.now - 2.months }
+      signature_start_time { Time.now - 3.months }
+      signature_end_time { Time.now - 2.months }
       signature_type 'online'
 
       after(:build) do |initiative|
@@ -79,8 +80,8 @@ FactoryGirl.define do
     end
 
     trait :rejectable do
-      signature_start_time { DateTime.now - 3.months }
-      signature_end_time { DateTime.now - 2.months }
+      signature_start_time { Time.now - 3.months }
+      signature_end_time { Time.now - 2.months }
       signature_type 'online'
 
       after(:build) do |initiative|
