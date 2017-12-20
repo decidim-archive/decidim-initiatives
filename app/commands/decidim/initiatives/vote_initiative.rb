@@ -26,6 +26,8 @@ module Decidim
         return broadcast(:invalid) unless vote.valid?
 
         vote.save!
+        send_notification
+
         broadcast(:ok, vote)
       end
 
@@ -37,6 +39,17 @@ module Decidim
         @vote = @initiative.votes.build(
           author: @current_user,
           decidim_user_group_id: @decidim_user_group_id
+        )
+      end
+
+      def send_notification
+        return if vote.user_group.present?
+
+        Decidim::EventsManager.publish(
+          event: "decidim.events.initiatives.initiative_endorsed",
+          event_class: Decidim::Initiatives::EndorseInitiativeEvent,
+          resource: @initiative,
+          recipient_ids: @initiative.author.followers.pluck(:id)
         )
       end
     end

@@ -161,10 +161,10 @@ en:
         endorse_initiative_event:
           email_intro: |-
             Hi,
-            %{author_name} @%{author_nickname}, who you are following, has endorsed the following initiative, maybe you want to contribute to the conversation:
+            %{author_name} %{author_nickname}, who you are following, has endorsed the following initiative, maybe you want to contribute to the conversation:
           email_outro: You have received this notification because you are following %{author_nickname}. You can stop receiving notifications following the previous link.
           email_subject: Initiative endorsed by %{author_nickname}
-          notification_title: The <a href="%{resource_path}">%{resource_title}</a> initiative was endorsed by <a href="%{author_path}">%{author_name} @%{author_nickname}</a>.
+          notification_title: The <a href="%{resource_path}">%{resource_title}</a> initiative was endorsed by <a href="%{author_path}">%{author_name} %{author_nickname}</a>.
       index:
         title: Initiatives
       initiatives:
