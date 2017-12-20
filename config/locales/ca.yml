@@ -271,7 +271,7 @@ ca:
         status_change_for: "La iniciativa %{title} ha canviat de estat"
         status_change_body_for: "La iniciativa %{title} ha canviat de estat a: %{state}"
         creation_subject: "La iniciativa popular '%{title}' ha estat creada"
-        more_information: Aci pots trobar mes informació sobre el process de creació d'iniciatives
+        more_information: Aqui pots trobar mes informació sobre el process de creació d'iniciatives
         promotal_committee_help: "Recorda que al menys deus invitar a %{member_count} persones a la comisió promotora. Reenvía el sigüent enllaç per invitar persones a la comisió promotora:"
         initiative_link:
           check_initiative_details: Pots consultar la iniciativa
