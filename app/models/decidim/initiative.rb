@@ -14,23 +14,23 @@ module Decidim
     include Decidim::Initiatives::InitiativeSlug
 
     belongs_to :organization,
-               foreign_key: 'decidim_organization_id',
-               class_name: 'Decidim::Organization'
+               foreign_key: "decidim_organization_id",
+               class_name: "Decidim::Organization"
 
     belongs_to :scoped_type,
-               foreign_key: 'scoped_type_id',
-               class_name: 'Decidim::InitiativesTypeScope'
+               foreign_key: "scoped_type_id",
+               class_name: "Decidim::InitiativesTypeScope"
 
     delegate :type, to: :scoped_type, allow_nil: true
     delegate :scope, to: :scoped_type, allow_nil: true
 
     has_many :votes,
-             foreign_key: 'decidim_initiative_id',
-             class_name: 'Decidim::InitiativesVote', dependent: :destroy
+             foreign_key: "decidim_initiative_id",
+             class_name: "Decidim::InitiativesVote", dependent: :destroy
 
     has_many :committee_members,
-             foreign_key: 'decidim_initiatives_id',
-             class_name: 'Decidim::InitiativesCommitteeMember',
+             foreign_key: "decidim_initiatives_id",
+             class_name: "Decidim::InitiativesCommitteeMember",
              dependent: :destroy
 
     has_many :features, as: :participatory_space
@@ -38,15 +38,13 @@ module Decidim
     # This relationship exists only by compatibility reasons.
     # Initiatives are not intended to have categories.
     has_many :categories,
-             foreign_key: 'decidim_participatory_space_id',
-             foreign_type: 'decidim_participatory_space_type',
+             foreign_key: "decidim_participatory_space_id",
+             foreign_type: "decidim_participatory_space_type",
              dependent: :destroy,
              as: :participatory_space
 
-    enum signature_type: %i[online offline any]
-    enum state: %i[
-      created validating discarded published rejected accepted
-    ]
+    enum signature_type: [:online, :offline, :any]
+    enum state: [:created, :validating, :discarded, :published, :rejected, :accepted]
 
     validates :title, :description, :state, presence: true
     validates :signature_type, presence: true
@@ -57,26 +55,26 @@ module Decidim
 
     scope :open, -> {
       published
-        .where.not(state: %i[discarded rejected accepted])
-        .where('signature_start_time <= ?', DateTime.now)
-        .where('signature_end_time >= ?', DateTime.now)
+        .where.not(state: [:discarded, :rejected, :accepted])
+        .where("signature_start_time <= ?", Time.now.utc)
+        .where("signature_end_time >= ?", Time.now.utc)
     }
     scope :closed, -> {
       published
-        .where(state: %i[discarded rejected accepted])
-        .or(where('signature_start_time > ?', DateTime.now))
-        .or(where('signature_end_time < ?', DateTime.now))
+        .where(state: [:discarded, :rejected, :accepted])
+        .or(where("signature_start_time > ?", Time.now.utc))
+        .or(where("signature_end_time < ?", Time.now.utc))
     }
     scope :published, -> { where.not(published_at: nil) }
-    scope :with_state, ->(state) { where(state: state) unless state.blank? }
+    scope :with_state, ->(state) { where(state: state) if state.present? }
 
     scope :order_by_most_recent, -> { order(created_at: :desc) }
-    scope :order_by_supports, -> { order('initiative_votes_count + coalesce(offline_votes, 0) desc') }
+    scope :order_by_supports, -> { order("initiative_votes_count + coalesce(offline_votes, 0) desc") }
     scope :order_by_most_commented, -> {
-      select('decidim_initiatives.*')
+      select("decidim_initiatives.*")
         .joins(%q(LEFT OUTER JOIN "decidim_comments_comments" ON "decidim_comments_comments"."decidim_commentable_id" = "decidim_initiatives"."id" AND "decidim_comments_comments"."decidim_commentable_type" = 'Decidim::Initiative'))
-        .group('decidim_initiatives.id')
-        .order('count(decidim_comments_comments.id) desc')
+        .group("decidim_initiatives.id")
+        .order("count(decidim_comments_comments.id) desc")
     }
 
     after_save :notify_state_change
@@ -85,7 +83,7 @@ module Decidim
     def self.order_randomly(seed)
       transaction do
         connection.execute("SELECT setseed(#{connection.quote(seed)})")
-        select('"decidim_initiatives".*, RANDOM()').order('RANDOM()').load
+        select('"decidim_initiatives".*, RANDOM()').order("RANDOM()").load
       end
     end
 
@@ -140,7 +138,7 @@ module Decidim
     # RETURNS STRING
     def author_avatar_url
       author.avatar&.url ||
-        ActionController::Base.helpers.asset_path('decidim/default-avatar.svg')
+        ActionController::Base.helpers.asset_path("decidim/default-avatar.svg")
     end
 
     # PUBLIC banner image
@@ -187,7 +185,7 @@ module Decidim
       return false if published?
       update_attributes(
         published_at: Time.current,
-        state: 'published',
+        state: "published",
         signature_start_time: DateTime.now,
         signature_end_time: DateTime.now + Decidim::Initiatives.default_signature_time_period_length
       )
@@ -199,7 +197,7 @@ module Decidim
     # Returns true if the record was properly saved, false otherwise.
     def unpublish!
       return false unless published?
-      update_attributes(published_at: nil, state: 'discarded')
+      update_attributes(published_at: nil, state: "discarded")
     end
 
     # Public: Returns wether the signature interval is already defined or not.
@@ -209,7 +207,7 @@ module Decidim
 
     # Public: Returns the hashtag for the initiative.
     def hashtag
-      attributes['hashtag'].to_s.delete('#')
+      attributes["hashtag"].to_s.delete("#")
     end
 
     def supports_count

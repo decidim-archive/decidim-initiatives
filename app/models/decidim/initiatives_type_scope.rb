@@ -3,16 +3,16 @@
 module Decidim
   class InitiativesTypeScope < ApplicationRecord
     belongs_to :type,
-               foreign_key: 'decidim_initiatives_types_id',
-               class_name: 'Decidim::InitiativesType'
+               foreign_key: "decidim_initiatives_types_id",
+               class_name: "Decidim::InitiativesType"
 
     belongs_to :scope,
-               foreign_key: 'decidim_scopes_id',
-               class_name: 'Decidim::Scope'
+               foreign_key: "decidim_scopes_id",
+               class_name: "Decidim::Scope"
 
     has_many :initiatives,
-             foreign_key: 'scoped_type_id',
-             class_name: 'Decidim::Initiative',
+             foreign_key: "scoped_type_id",
+             class_name: "Decidim::Initiative",
              dependent: :restrict_with_error
 
     validates :scope, uniqueness: { scope: :type }

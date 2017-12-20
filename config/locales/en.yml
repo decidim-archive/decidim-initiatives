@@ -276,6 +276,11 @@ en:
         initiative_link:
           check_initiative_details: You can see the initiative details
           here: here
+      pages:
+        home:
+          highlighted_initiatives:
+            active_initiatives: Active initiatives
+            see_all_initiatives: See all initiatives
   layouts:
     decidim:
       initiative_creation_header:

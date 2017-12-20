@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'digest/sha1'
+require "digest/sha1"
 
 module Decidim
   # Initiatives can be voted by users and supported by organizations.
@@ -8,21 +8,21 @@ module Decidim
     include Decidim::PartialTranslationsHelper
 
     belongs_to :author,
-               foreign_key: 'decidim_author_id',
-               class_name: 'Decidim::User'
+               foreign_key: "decidim_author_id",
+               class_name: "Decidim::User"
 
     belongs_to :user_group,
-               foreign_key: 'decidim_user_group_id',
-               class_name: 'Decidim::UserGroup',
+               foreign_key: "decidim_user_group_id",
+               class_name: "Decidim::UserGroup",
                optional: true
 
     belongs_to :initiative,
-               foreign_key: 'decidim_initiative_id',
-               class_name: 'Decidim::Initiative'
+               foreign_key: "decidim_initiative_id",
+               class_name: "Decidim::Initiative"
 
-    validates :initiative, uniqueness: { scope: %i[author user_group] }
+    validates :initiative, uniqueness: { scope: [:author, :user_group] }
 
-    after_commit :update_counter_cache, on: %i[create destroy]
+    after_commit :update_counter_cache, on: [:create, :destroy]
 
     scope :supports, -> { where.not(decidim_user_group_id: nil) }
     scope :votes, -> { where(decidim_user_group_id: nil) }

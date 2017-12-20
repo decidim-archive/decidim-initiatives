@@ -28,7 +28,7 @@ module Decidim
         private
 
         def decidim_user_group_id
-          context[:params]&.try(:[], 'group_id')
+          context[:params]&.try(:[], "group_id")
         end
 
         def can_vote?(initiative)

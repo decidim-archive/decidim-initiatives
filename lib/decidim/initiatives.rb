@@ -47,7 +47,7 @@ module Decidim
 
     # Features enabled for a new initiative
     config_accessor :default_features do
-      %i[pages meetings]
+      [:pages, :meetings]
     end
 
     # Notifies when the given percentage of supports is reached for an

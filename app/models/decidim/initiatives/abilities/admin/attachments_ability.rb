@@ -43,8 +43,6 @@ module Decidim
             end
           end
 
-          private
-
           def has_initiatives?(user)
             initiatives = InitiativesCreated.by(user) | InitiativesPromoted.by(user)
             initiatives.any?
