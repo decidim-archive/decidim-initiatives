@@ -6,7 +6,6 @@ module Decidim
     class InitiativeWidgetsController < Decidim::WidgetsController
       helper InitiativesHelper
       helper PaginateHelper
-      helper InitiativeHelper
       helper Decidim::Comments::CommentsHelper
       helper Decidim::Admin::IconLinkHelper
 

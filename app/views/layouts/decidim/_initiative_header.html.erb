@@ -5,7 +5,7 @@
       <div class="columns mediumlarge-9 process-header__info">
         <div>
           <h1 class="text-highlight heading2">
-            <%= partially_translated_attribute(current_initiative.title) %>
+            <%= Decidim::Initiatives::PartialTranslationsHelper.partially_translated_attribute(current_initiative.title) %>
           </h1>
         </div>
         <div>
@@ -15,7 +15,7 @@
                 <%= link_to "##{current_initiative.hashtag}", "https://twitter.com/hashtag/#{current_initiative.hashtag}" %>
               </span>
             <% end %>
-            <%=strip_tags partially_translated_attribute(current_initiative.type.title) %>
+            <%=strip_tags Decidim::Initiatives::PartialTranslationsHelper.partially_translated_attribute(current_initiative.type.title) %>
           </h2>
         </div>
       </div>

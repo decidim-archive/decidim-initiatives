@@ -23,6 +23,7 @@ module Decidim
 
         ""
       end
+      module_function :partially_translated_attribute
     end
   end
 end
