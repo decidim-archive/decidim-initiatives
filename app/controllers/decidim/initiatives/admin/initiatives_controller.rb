@@ -12,7 +12,7 @@ module Decidim
 
         helper Decidim::Initiatives::InitiativeHelper
         helper Decidim::Initiatives::CreateInitiativeHelper
-        helper Decidim::PartialTranslationsHelper
+        helper Decidim::Initiatives::PartialTranslationsHelper
 
         # GET /admin/initiatives
         def index

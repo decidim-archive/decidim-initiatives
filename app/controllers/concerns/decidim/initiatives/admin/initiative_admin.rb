@@ -15,7 +15,7 @@ module Decidim
           include NeedsInitiative
 
           layout 'decidim/admin/initiative'
-          helper Decidim::PartialTranslationsHelper
+          helper Decidim::Initiatives::PartialTranslationsHelper
 
           alias_method :current_participatory_space, :current_initiative
         end

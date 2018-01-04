@@ -11,7 +11,7 @@ module Decidim
       helper Decidim::FiltersHelper
       helper Decidim::OrdersHelper
       helper Decidim::ActionAuthorizationHelper
-      helper Decidim::PartialTranslationsHelper
+      helper Decidim::Initiatives::PartialTranslationsHelper
       helper Decidim::ResourceHelper
       helper Decidim::IconHelper
       helper Decidim::Comments::CommentsHelper

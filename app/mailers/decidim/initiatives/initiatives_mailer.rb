@@ -4,9 +4,7 @@ module Decidim
   module Initiatives
     # Mailer for initiatives engine.
     class InitiativesMailer < Decidim::ApplicationMailer
-      include Decidim::PartialTranslationsHelper
-
-      add_template_helper(Decidim::PartialTranslationsHelper)
+      extend Decidim::Initiatives::PartialTranslationsHelper
 
       # Notifies initiative creation
       def notify_creation(initiative)
