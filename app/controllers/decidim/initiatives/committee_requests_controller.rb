@@ -7,7 +7,7 @@ module Decidim
       include Decidim::Initiatives::NeedsInitiative
 
       helper Decidim::ActionAuthorizationHelper
-      helper Decidim::PartialTranslationsHelper
+      helper Decidim::Initiatives::PartialTranslationsHelper
       helper InitiativeHelper
 
       include Decidim::Initiatives::ActionAuthorization

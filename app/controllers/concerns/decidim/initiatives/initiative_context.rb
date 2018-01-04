@@ -11,7 +11,7 @@ module Decidim
 
           layout 'layouts/decidim/initiative'
 
-          helper Decidim::PartialTranslationsHelper
+          helper Decidim::Initiatives::PartialTranslationsHelper
 
           before_action do
             authorize! :read, current_initiative

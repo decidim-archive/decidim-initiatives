@@ -5,7 +5,7 @@ require "digest/sha1"
 module Decidim
   # Initiatives can be voted by users and supported by organizations.
   class InitiativesVote < ApplicationRecord
-    include Decidim::PartialTranslationsHelper
+    include Decidim::Initiatives::PartialTranslationsHelper
 
     belongs_to :author,
                foreign_key: "decidim_author_id",

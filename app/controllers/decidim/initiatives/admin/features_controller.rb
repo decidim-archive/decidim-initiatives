@@ -8,7 +8,7 @@ module Decidim
       class FeaturesController < Decidim::Admin::FeaturesController
         layout 'decidim/admin/initiative'
 
-        helper Decidim::PartialTranslationsHelper
+        helper Decidim::Initiatives::PartialTranslationsHelper
         include NeedsInitiative
       end
     end

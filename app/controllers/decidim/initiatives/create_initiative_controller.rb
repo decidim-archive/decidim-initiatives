@@ -13,7 +13,7 @@ module Decidim
       include InitiativeHelper
       include TypeSelectorOptions
 
-      helper Decidim::PartialTranslationsHelper
+      helper Decidim::Initiatives::PartialTranslationsHelper
       helper Decidim::Admin::IconLinkHelper
       helper InitiativeHelper
       helper_method :similar_initiatives
