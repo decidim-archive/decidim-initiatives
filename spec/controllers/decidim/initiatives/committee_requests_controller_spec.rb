@@ -45,11 +45,8 @@ module Decidim
         context "with unauthorized users do" do
           let(:user) { create(:user, :confirmed, organization: organization) }
 
-          before do
-            sign_in user, scope: :user
-          end
-
           it "are not allowed to request membership" do
+            sign_in user, scope: :user
             get :new, params: { initiative_slug: initiative.slug }
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(302)
