@@ -8,7 +8,8 @@
 <div class="row column">
   <div class="column large-6 medium-centered">
     <div class="callout secondary">
-      <%= render partial: 'fill_data_help' %>
+      <%==t ".fill_data_help" %>
+      <%= link_to t(".more_information"), decidim.page_path('initiatives'), target: '_blank' %>.
     </div>
   </div>
 </div>
@@ -42,19 +43,19 @@
             <div class="field">
               <%= f.select :scope_id,
                            scopes.map { |scoped_type| [translated_attribute(scoped_type.scope.name), scoped_type.scope.id]},
-                           prompt: t('.select_scope') %>
+                           prompt: t(".select_scope") %>
             </div>
 
             <% if current_user.user_groups.verified.any? %>
               <div class="field">
                 <%= f.select :decidim_user_group_id,
-                             current_user.user_groups.verified.map{|g| [g.name, g.id]},
+                             current_user.user_groups.verified.map{ |g| [g.name, g.id] },
                              prompt: current_user.name %>
               </div>
             <% end %>
           </div>
           <div class="actions">
-            <%= f.submit t('.continue'), class: 'button expanded' %>
+            <%= f.submit t(".continue"), class: "button expanded", data: { disable_with: true } %>
           </div>
         <% end %>
       </div>
