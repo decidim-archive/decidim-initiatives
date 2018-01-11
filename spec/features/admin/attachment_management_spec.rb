@@ -4,7 +4,7 @@ require "spec_helper"
 require "decidim/admin/test/manage_attachments_examples"
 
 describe "initiative attachments", type: :feature do
-  context "when managed by admin" do
+  describe "when managed by admin" do
     include_context "when admins initiative"
 
     let(:attached_to) { initiative }
@@ -19,7 +19,7 @@ describe "initiative attachments", type: :feature do
     it_behaves_like "manage attachments examples"
   end
 
-  context "when managed by author" do
+  describe "when managed by author" do
     include_context "when admins initiative"
 
     let(:attached_to) { initiative }

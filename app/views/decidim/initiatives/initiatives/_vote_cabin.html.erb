@@ -9,12 +9,12 @@
        data-reveal data-refresh-url="<%= signature_identities_initiative_url(slug: initiative.slug) %>">
   </div>
 <% else %>
-    <%= render partial: 'decidim/initiatives/initiatives/vote_button',
+    <%= render partial: "decidim/initiatives/initiatives/vote_button",
                locals: {
                    initiative: initiative,
-                   vote_label: t('.vote'),
-                   unvote_label: t('.already_voted')
-               } %>
+                   vote_label: t(".vote"),
+                   unvote_label: t(".already_voted")
+               } if Decidim::Initiatives.online_voting_allowed %>
 <% end %>
 
 <% if cannot?(:vote, initiative) && cannot?(:unvote, initiative) %>
