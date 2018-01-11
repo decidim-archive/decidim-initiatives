@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_examples 'create an initiative type' do
+shared_examples "create an initiative type" do
   let(:organization) { create(:organization) }
 
   let(:form) do
@@ -12,25 +12,23 @@ shared_examples 'create an initiative type' do
     )
   end
 
-  describe 'call' do
+  describe "call" do
     let(:form_params) do
       {
         title: Decidim::Faker::Localized.sentence(5),
         description: Decidim::Faker::Localized.sentence(25),
-        banner_image: Decidim::Dev.test_file('city2.jpeg', 'image/jpeg')
+        banner_image: Decidim::Dev.test_file("city2.jpeg", "image/jpeg")
       }
     end
 
-    let(:command) do
-      described_class.new(form)
-    end
+    let(:command) { described_class.new(form) }
 
-    describe 'when the form is not valid' do
+    describe "when the form is not valid" do
       before do
         expect(form).to receive(:invalid?).and_return(true)
       end
 
-      it 'broadcasts invalid' do
+      it "broadcasts invalid" do
         expect { command.call }.to broadcast(:invalid)
       end
 
@@ -41,12 +39,12 @@ shared_examples 'create an initiative type' do
       end
     end
 
-    describe 'when the form is valid' do
-      it 'broadcasts ok' do
+    describe "when the form is valid" do
+      it "broadcasts ok" do
         expect { command.call }.to broadcast(:ok)
       end
 
-      it 'creates a new initiative type' do
+      it "creates a new initiative type" do
         expect do
           command.call
         end.to change { Decidim::InitiativesType.count }.by(1)

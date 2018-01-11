@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_examples 'update an initiative type scope' do
+shared_examples "update an initiative type scope" do
   let(:initiatives_type_scope) { create(:initiatives_type_scope) }
   let(:scope) { create(:scope, organization: initiatives_type_scope.type.organization) }
 
@@ -22,12 +22,12 @@ shared_examples 'update an initiative type scope' do
       described_class.new(initiatives_type_scope, form)
     end
 
-    describe 'when the form is not valid' do
+    describe "when the form is not valid" do
       before do
         expect(form).to receive(:invalid?).and_return(true)
       end
 
-      it 'broadcasts invalid' do
+      it "broadcasts invalid" do
         expect { command.call }.to broadcast(:invalid)
       end
 
@@ -38,12 +38,12 @@ shared_examples 'update an initiative type scope' do
       end
     end
 
-    describe 'when the form is valid' do
-      it 'broadcasts ok' do
+    describe "when the form is valid" do
+      it "broadcasts ok" do
         expect { command.call }.to broadcast(:ok)
       end
 
-      it 'updates the initiative type scope' do
+      it "updates the initiative type scope" do
         command.call
 
         expect(initiatives_type_scope.supports_required).to eq(form_params[:supports_required])

@@ -8,10 +8,13 @@ describe "Admin manages initiative features", type: :feature do
 
   let!(:initiative) { create(:initiative, organization: organization) }
 
+  before do
+    switch_to_host(organization.host)
+    login_as user, scope: :user
+  end
+
   context "when adds a feature" do
     before do
-      switch_to_host(organization.host)
-      login_as user, scope: :user
       visit decidim_admin_initiatives.features_path(initiative)
 
       find("button[data-toggle=add-feature-dropdown]").click
@@ -90,8 +93,6 @@ describe "Admin manages initiative features", type: :feature do
     end
 
     before do
-      switch_to_host(organization.host)
-      login_as user, scope: :user
       visit decidim_admin_initiatives.features_path(initiative)
     end
 
@@ -154,8 +155,6 @@ describe "Admin manages initiative features", type: :feature do
     end
 
     before do
-      switch_to_host(organization.host)
-      login_as user, scope: :user
       visit decidim_admin_initiatives.features_path(initiative)
     end
 

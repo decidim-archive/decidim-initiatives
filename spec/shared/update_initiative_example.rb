@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_examples 'update an initiative' do
+shared_examples "update an initiative" do
   let(:organization) { create(:organization) }
   let(:initiative) { create(:initiative, organization: organization) }
 
@@ -14,33 +14,31 @@ shared_examples 'update an initiative' do
     )
   end
 
-  describe 'call' do
+  describe "call" do
     let(:form_params) do
       {
-        title: { en: 'A reasonable initiative title' },
-        description: { en: 'A reasonable initiative description' },
-        signature_start_time: Date.today + 10.days,
-        signature_end_time: Date.today + 130.days,
-        signature_type: 'any',
+        title: { en: "A reasonable initiative title" },
+        description: { en: "A reasonable initiative description" },
+        signature_start_time: Time.zone.today + 10.days,
+        signature_end_time: Time.zone.today + 130.days,
+        signature_type: "any",
         type_id: initiative.type.id,
         decidim_scope_id: initiative.scope.id,
-        answer: { en: 'Measured answer' },
-        answer_url: 'http://decidim.org',
-        hashtag: 'update_initiative_example',
+        answer: { en: "Measured answer" },
+        answer_url: "http://decidim.org",
+        hashtag: "update_initiative_example",
         offline_votes: 1
       }
     end
 
-    let(:command) do
-      described_class.new(initiative, form, initiative.author)
-    end
+    let(:command) { described_class.new(initiative, form, initiative.author) }
 
-    describe 'when the form is not valid' do
+    describe "when the form is not valid" do
       before do
         expect(form).to receive(:invalid?).and_return(true)
       end
 
-      it 'broadcasts invalid' do
+      it "broadcasts invalid" do
         expect { command.call }.to broadcast(:invalid)
       end
 
@@ -53,25 +51,25 @@ shared_examples 'update an initiative' do
       end
     end
 
-    describe 'when the form is valid' do
-      it 'broadcasts ok' do
+    describe "when the form is valid" do
+      it "broadcasts ok" do
         expect { command.call }.to broadcast(:ok)
       end
 
-      it 'updates the initiative' do
+      it "updates the initiative" do
         command.call
         initiative.reload
 
-        expect(initiative.title['en']).to eq(form_params[:title][:en])
-        expect(initiative.description['en']).to eq(form_params[:description][:en])
-        expect(initiative.answer['en']).to eq(form_params[:answer][:en])
+        expect(initiative.title["en"]).to eq(form_params[:title][:en])
+        expect(initiative.description["en"]).to eq(form_params[:description][:en])
+        expect(initiative.answer["en"]).to eq(form_params[:answer][:en])
         expect(initiative.type.id).to eq(form_params[:type_id])
         expect(initiative.signature_type).to eq(form_params[:signature_type])
         expect(initiative.answer_url).to eq(form_params[:answer_url])
         expect(initiative.hashtag).to eq(form_params[:hashtag])
       end
 
-      it 'voting interval remains unchanged' do
+      it "voting interval remains unchanged" do
         command.call
         initiative.reload
 
@@ -80,20 +78,20 @@ shared_examples 'update an initiative' do
         end
       end
 
-      it 'offline votes remain unchanged' do
+      it "offline votes remain unchanged" do
         command.call
         initiative.reload
         expect(initiative.offline_votes).not_to eq(form_params[:offline_votes])
       end
 
-      context 'Administrator user' do
-        let(:administrator) { create(:user, :admin, organization: organization)}
+      context "Administrator user" do
+        let(:administrator) { create(:user, :admin, organization: organization) }
 
         let(:command) do
           described_class.new(initiative, form, administrator)
         end
 
-        it 'voting interval gets updated' do
+        it "voting interval gets updated" do
           command.call
           initiative.reload
 
@@ -102,7 +100,7 @@ shared_examples 'update an initiative' do
           end
         end
 
-        it 'offline votes gets updated' do
+        it "offline votes gets updated" do
           command.call
           initiative.reload
           expect(initiative.offline_votes).to eq(form_params[:offline_votes])

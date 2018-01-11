@@ -16,13 +16,9 @@ module Decidim
 
       context "when POST create" do
         context "and Authorized users" do
-          before do
-            initiative.author.confirm
-            sign_in initiative.author, scope: :user
-          end
-
           it "Authorized users can vote" do
             expect do
+              sign_in initiative.author, scope: :user
               post :create, params: { initiative_slug: initiative.slug, format: :js }
             end.to change { InitiativesVote.where(initiative: initiative).count }.by(1)
           end
@@ -31,11 +27,8 @@ module Decidim
         context "and Non authorized users" do
           let(:user) { create(:user, :confirmed, organization: initiative.organization) }
 
-          before do
-            sign_in user, scope: :user
-          end
-
           it "raise an exception" do
+            sign_in user, scope: :user
             post :create, params: { initiative_slug: initiative.slug, format: :js }
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(302)
@@ -43,6 +36,7 @@ module Decidim
 
           it "do not register the vote" do
             expect do
+              sign_in user, scope: :user
               post :create, params: { initiative_slug: initiative.slug, format: :js }
             end.not_to(change { InitiativesVote.where(initiative: initiative).count })
           end
@@ -66,15 +60,11 @@ module Decidim
         let!(:vote) { create(:initiative_user_vote, initiative: initiative, author: initiative.author) }
 
         context "and authorized users" do
-          before do
-            initiative.author.confirm
-            sign_in initiative.author, scope: :user
-          end
-
           it "Authorized users can unvote" do
             expect(vote).not_to be_nil
 
             expect do
+              sign_in initiative.author, scope: :user
               delete :destroy, params: { initiative_slug: initiative.slug, format: :js }
             end.to change { InitiativesVote.where(initiative: initiative).count }.by(-1)
           end
