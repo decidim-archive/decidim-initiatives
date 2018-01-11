@@ -1,8 +1,16 @@
 # frozen_string_literal: true
 
 Decidim.register_participatory_space(:initiatives) do |participatory_space|
-  participatory_space.engine = Decidim::Initiatives::Engine
-  participatory_space.admin_engine = Decidim::Initiatives::AdminEngine
+  participatory_space.context(:public) do |context|
+    context.engine = Decidim::Initiatives::Engine
+    context.layout = "layouts/decidim/initiative"
+    context.helper = "Decidim::Initiatives::PartialTranslationsHelper"
+  end
+
+  participatory_space.context(:admin) do |context|
+    context.engine = Decidim::Initiatives::AdminEngine
+  end
+
   participatory_space.model_class_name = 'Decidim::Initiative'
 
   participatory_space.seeds do

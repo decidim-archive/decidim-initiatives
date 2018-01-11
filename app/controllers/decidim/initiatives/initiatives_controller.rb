@@ -4,20 +4,22 @@ module Decidim
   module Initiatives
     # This controller contains the logic regarding citizen initiatives
     class InitiativesController < Decidim::ApplicationController
-      layout 'layouts/decidim/initiative', only: [:show]
+      include ParticipatorySpaceContext
+      participatory_space_layout only: [:show]
 
+      helper Decidim::Initiatives::PartialTranslationsHelper
       helper Decidim::WidgetUrlsHelper
       helper Decidim::AttachmentsHelper
       helper Decidim::FiltersHelper
       helper Decidim::OrdersHelper
       helper Decidim::ActionAuthorizationHelper
-      helper Decidim::Initiatives::PartialTranslationsHelper
       helper Decidim::ResourceHelper
       helper Decidim::IconHelper
       helper Decidim::Comments::CommentsHelper
       helper Decidim::Admin::IconLinkHelper
       helper PaginateHelper
       helper InitiativeHelper
+      include InitiativeSlug
 
       include Decidim::Initiatives::ActionAuthorization
       include FilterResource
@@ -51,6 +53,12 @@ module Decidim
 
       private
 
+      alias current_initiative current_participatory_space
+
+      def current_participatory_space
+        @current_participatory_space ||= Initiative.find_by(id: id_from_slug(params[:slug]))
+      end
+
       def initiatives
         @initiatives = search.results.includes(:author, :scoped_type)
         @initiatives = reorder(@initiatives)
@@ -65,10 +73,10 @@ module Decidim
 
       def default_filter_params
         {
-          search_text: '',
-          state: 'open',
-          type: 'all',
-          author: 'any',
+          search_text: "",
+          state: "open",
+          type: "all",
+          author: "any",
           scope_id: nil
         }
       end
