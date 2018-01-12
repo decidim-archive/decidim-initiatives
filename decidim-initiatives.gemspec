@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.summary = "Citizen initiatives plugin for decidim"
   s.description = s.summary
   s.version = Decidim::Initiatives::VERSION
-  s.authors = ["Juan Salvador Pérez García"]
+  s.authors = ["Juan Salvador Perez Garcia"]
   s.email = ["jsperezg@gmail.com"]
   s.license = "AGPLv3"
   s.homepage = "https://github.com/AjuntamentdeBarcelona/decidim"
