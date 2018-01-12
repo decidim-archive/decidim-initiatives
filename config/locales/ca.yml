@@ -243,6 +243,13 @@ ca:
           back: Torna enrere
           select_scope: Sel·lecciona un àmbit
           initiative_type: Tipus d'iniciativa
+          fill_data_help:
+            <ul>
+              <li>Revisa el contingut de la teva iniciativa. És entenedor el títol? Queda clar l’objectiu de la iniciativa?</li>
+              <li>Cal seleccionar el tipus de signatura. Presencial, digital o mixta</li>
+              <li>En quin àmbit geogràfic es desenvolupa la iniciativa? Ciutat, districte?</li>
+            </ul>
+          more_information: (Mes informació)
         promotal_committee:
           back: Torna enrere
           continue: Continuar

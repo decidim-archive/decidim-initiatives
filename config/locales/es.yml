@@ -243,6 +243,13 @@ es:
           back: Volver
           select_scope: Selecciona un ámbito
           initiative_type: Tipo de iniciativa
+          fill_data_help:
+            <ul>
+              <li>Revisa el contenido de tu iniciativa. ¿Es comprensible el título? ¿Queda claro el objetivo de la iniciativa?</li>
+              <li>Hay que seleccionar el tipo de firma. Presencial, digital o mixta</li>
+              <li>¿En qué ámbito geográfico se desarrolla la iniciativa? ¿Ciudad, distrito?</li>
+            </ul>
+          more_information: (Mas información)
         promotal_committee:
           back: Volver
           continue: Continuar
