@@ -9,6 +9,7 @@ Decidim.register_participatory_space(:initiatives) do |participatory_space|
 
   participatory_space.context(:admin) do |context|
     context.engine = Decidim::Initiatives::AdminEngine
+    context.layout = "layouts/decidim/admin/initiatives"
   end
 
   participatory_space.model_class_name = 'Decidim::Initiative'
