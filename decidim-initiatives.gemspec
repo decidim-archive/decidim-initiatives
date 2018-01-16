@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "decidim-admin"
   s.add_dependency "decidim-comments"
-  s.add_dependency "decidim-core", ">= 0.8.3", "< 0.10.0"
+  s.add_dependency "decidim-core", ">= 0.8.4", "< 0.10.0"
   s.add_dependency "decidim-verifications"
   s.add_dependency "kaminari", "~> 1.0.1"
   s.add_dependency "rails", "~> 5.1.4"
@@ -28,5 +28,5 @@ Gem::Specification.new do |s|
   s.add_dependency "truncato"
   s.add_dependency "wicked"
 
-  s.add_development_dependency "decidim-dev", ">= 0.8.3", "< 0.10.0"
+  s.add_development_dependency "decidim-dev", ">= 0.8.4", "< 0.10.0"
 end
