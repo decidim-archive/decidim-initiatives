@@ -35,7 +35,7 @@ module Decidim
               initiative.has_authorship? user
             end
 
-            can :read, Initiative do |initiative|
+            can :show, Initiative do |initiative|
               initiative.has_authorship?(user) &&
                 Decidim::Initiatives.print_enabled
             end

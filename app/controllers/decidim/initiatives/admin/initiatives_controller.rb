@@ -33,7 +33,7 @@ module Decidim
 
         # GET /admin/initiatives/:id
         def show
-          authorize! :read, current_initiative
+          authorize! :show, current_initiative
         end
 
         # GET /admin/initiatives/:id/edit

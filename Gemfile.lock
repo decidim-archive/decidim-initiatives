@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/decidim/decidim
-  revision: 86f1b1624365584c5026b8eef5d7c56da47c2be4
-  branch: dont_dynamically_extend
+  revision: df385def6c1b325e6e3c5339aa719fa0fb7c94f9
+  branch: 0.8-stable
   specs:
     decidim (0.8.3)
       decidim-accountability (= 0.8.3)
@@ -266,8 +266,7 @@ GEM
       devise (>= 4.0.0)
     diff-lcs (1.3)
     docile (1.1.5)
-    easy_translate (0.5.0)
-      json
+    easy_translate (0.5.1)
       thread
       thread_safe
     equalizer (0.0.11)

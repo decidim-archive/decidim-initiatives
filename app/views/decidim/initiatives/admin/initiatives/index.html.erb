@@ -87,7 +87,7 @@
                                  class: 'action-icon--edit' %>
               <% end %>
 
-              <% if can? :read, initiative %>
+              <% if can? :show, initiative %>
                 <%= icon_link_to 'print',
                                  decidim_admin_initiatives.initiative_path(initiative.to_param),
                                  t('.print',),
