@@ -10,6 +10,7 @@ module Decidim
       # the sidebar, preload the assembly, etc.
       module InitiativeAdmin
         extend ActiveSupport::Concern
+        include InitiativeSlug
 
         included do
           include NeedsInitiative
@@ -23,7 +24,7 @@ module Decidim
         end
 
         def current_participatory_space
-          @current_participatory_space ||= Decidim::Initiative.find_by(slug: params[:initiative_slug])
+          @current_participatory_space ||= Decidim::Initiative.find_by(id: id_from_slug(params[:initiative_slug]))
         end
       end
     end
