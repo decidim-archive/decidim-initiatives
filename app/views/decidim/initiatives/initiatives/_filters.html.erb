@@ -38,12 +38,7 @@
     </fieldset>
   </div>
 
-  <%= form.scopes_select :scope_id,
-                         legend_title: t('.scopes'),
-                         label: false,
-                         prompt: t('.scope_prompt'),
-                         remote_path: decidim.scopes_search_path(term: '%'),
-                         multiple: true %>
+  <%= scopes_picker_field form, :scope_id %>
 
   <%= hidden_field_tag :order, order, id: nil, class: 'order_filter' %>
 <% end %>
