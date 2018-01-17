@@ -17,10 +17,10 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib,vendor}/**/*", "Rakefile", "README.md", "LICENSE-AGPLv3.txt"]
 
-  s.add_dependency "decidim-admin"
-  s.add_dependency "decidim-comments"
-  s.add_dependency "decidim-core", ">= 0.8.4", "< 0.10.0"
-  s.add_dependency "decidim-verifications"
+  s.add_dependency "decidim-admin", "0.9.0.pre"
+  s.add_dependency "decidim-comments", "0.9.0.pre"
+  s.add_dependency "decidim-core", "0.9.0.pre"
+  s.add_dependency "decidim-verifications", "0.9.0.pre"
   s.add_dependency "kaminari", "~> 1.0.1"
   s.add_dependency "rails", "~> 5.1.4"
   s.add_dependency "rectify"
@@ -28,5 +28,5 @@ Gem::Specification.new do |s|
   s.add_dependency "truncato"
   s.add_dependency "wicked"
 
-  s.add_development_dependency "decidim-dev", ">= 0.8.4", "< 0.10.0"
+  s.add_development_dependency "decidim-dev", "0.9.0.pre"
 end
