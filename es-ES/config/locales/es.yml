@@ -2,308 +2,308 @@ es:
   activemodel:
     attributes:
       initiative:
-        title: Title
-        description: Description
-        signature_start_time: Start of signature collection period
-        signature_end_time: End of signature collection period
-        offline_votes: Face-to-face supports
-        signature_type: Signature type
+        title: Título
+        description: Descripción
+        signature_start_time: Inicio del periodo de recogida de firmas
+        signature_end_time: Fin del periodo de recogida de firmas
+        offline_votes: Firmas presenciales
+        signature_type: Tipo de firma
         signature_type_values:
-          online: OnLine
-          offline: Face to face
-          any: Mixed
-        scope_id: Scope
-        decidim_user_group_id: Author
+          online: Digital
+          offline: Presencial
+          any: Mixta
+        scope_id: Ámbito
+        decidim_user_group_id: Autor
       initiatives_type:
-        title: Title
-        description: Description
-        banner_image: Banner image
+        title: Título
+        description: Descripción
+        banner_image: Imagen de banner
       initiatives_committee_member:
-        user: Committee member
+        user: Miembro del comité
       initiative_author:
-        name: Name and Surname
+        name: Nombre y Apellidos
         id_document: DNI/NIE
-        address: Address
-        city: City
-        province: Province
-        post_code: Post code
-        phone_number: Phone number
+        address: Domicilio (Calle, Nº, Piso, Puerta)
+        city: Población
+        province: Provincia
+        post_code: Código postal
+        phone_number: Teléfono
       organization_data:
-        name: Complete name
+        name: Nombre completo de la organización
         id_document: CIF
-        address: Address
+        address: Dirección
   decidim:
     admin:
       titles:
-        initiatives_types: Initiative types
-        initiatives: Initiatives
+        initiatives_types: Tipos de iniciativa
+        initiatives: Iniciativas
       menu:
-        initiatives_types: Initiative types
-        initiatives: Initiatives
+        initiatives_types: Tipos de iniciativa
+        initiatives: Iniciativas
       models:
         initiatives_types:
-          name: Initiative type
+          name: Tipo de iniciativa
           fields:
-            title: Initiative types
-            created_at: Created at
+            title: Típos de iniciativa
+            created_at: Fecha de creación
         initiatives:
           fields:
-            title: Initiatives
-            state: State
-            created_at: Created at
-            supports_count: Supports
+            title: Iniciativas
+            state: Estado
+            created_at: Fecha de creación
+            supports_count: Soportes
         initiatives_type_scope:
-          name: Initiative type scope
+          name: Ámbito para tipo de iniciativa
           fields:
-            scope: Scope
-            supports_required: Supports required
+            scope: Ámbito
+            supports_required: Soportes requeridos
     menu:
-      initiatives: Initiatives
+      initiatives: Iniciativas
     initiatives:
       admin:
         initiatives_types:
           new:
-            title: New initiative type
-            create: Create
+            title: Nuevo tipo de iniciativa
+            create: Crear
           form:
-            title: General information
+            title: Información general
           edit:
-            update: Update
-            destroy: Destroy
-            confirm_destroy: Are you sure?
+            update: Actualizar
+            destroy: Eliminar
+            confirm_destroy: '¿Estas seguro?'
           create:
-            success: A new initiative type has been successfully created
-            error: An error has occurred
+            success: Se ha creado un nuevo tipo de iniciativa
+            error: Se ha producido un error
           update:
-            success: The given initiative has been successfully updated
-            error: An error has occurred
+            success: Tipo de iniciativa actualizado con éxito
+            error: Se ha producido un error
           destroy:
-            success: The initiative type has been successfully removed
+            success: Se ha borrado el tipo de iniciativa
           initiative_type_scopes:
-            title: Scopes for the initiative type
+            title: Ámbitos para el tipo de iniciativa
         initiatives_type_scopes:
           destroy:
-            success: The scope has been successfully removed
+            success: Se ha borrado el ámbito.
           create:
-            success: A new scope for the given initiative type has been created
-            error: An error has occurred
+            success: Se ha creado el ámbito para el tipo de iniciativa
+            error: Se ha producido un error
           update:
-            success: The scope has been successfully updated
-            error: An error has occurred
+            success: El ámbito para el tipo de iniciativa se ha actualizado con éxito
+            error: Se ha producido un error
           edit:
-            title: Edit initiative type scope
-            update: Update
-            back: Back
-            destroy: Destroy
-            confirm_destroy: Are you sure?
+            title: Editar ámbito de tipo de iniciativa
+            update: Actualizar
+            back: Volver
+            destroy: Borrar
+            confirm_destroy: '¿Estas seguro?'
           new:
-            title: Create initiative type scope
-            create: Create
-            back: Back
+            title: Nuevo ámbito de tipo de iniciativa
+            create: Crear
+            back: Volver
         initiatives:
           index:
-            actions_title: Action
-            preview: Preview
+            actions_title: Acción
+            preview: Previsualizar
             search: Busca
-            filter_by: Filter by
-            print: Print
+            filter_by: Filtrar por
+            print: Imprimir
             filter:
-              all: All
-              created: Created
-              validating: Technical validation
-              discarded: Discarded
-              published: Published
-              rejected: Rejected
-              accepted: Accepted
+              all: Todos
+              created: Creada
+              validating: Validación técnica
+              discarded: Descartada
+              published: Publicada
+              rejected: Rechazada
+              accepted: Aceptada
           show:
-            print: Print
+            print: Imprimir
           edit:
-            update: Update
-            validate: Validate the initiative
-            discard: Discard the initiative
-            confirm: Are you sure?
-            send_to_technical_validation: Send to technical validation
-            success: The initiative has been sent to technical validation
-            export_votes: Export supports
-            accept: Accept initiative
-            reject: Reject initiative
+            update: Actualizar
+            validate: Validar la iniciativa
+            discard: Descartar la iniciativa
+            confirm: '¿Estas seguro?'
+            send_to_technical_validation: Enviar a validación técnica
+            success: La iniciativa ha sido enviada a validación técnica
+            export_votes: Exportar soportes
+            accept: Aceptar iniciativa
+            reject: Rechazar iniciativa
           form:
-            title: General information
+            title: Información general
           update:
-            success: The citizen initiative has been successfully updated
-            error: An error has occurred
+            success: La iniciativa popular ha sido actualizada correctamente
+            error: A ocurrido un error
         committee_requests:
           index:
-            title: Committee members
-            invite_to_committee_help: Share this link to invite other users to the promotion committee
-            approve: Approve
-            revoke: Revoke
-            confirm_revoke: Are you sure?
-            no_members_yet: There are no members in the promoter committee
+            title: Miembros del comité
+            invite_to_committee_help: Comparte este enlace para invitar a otros usuarios a la comisión promotora
+            approve: Aprobar
+            revoke: Rechazar
+            confirm_revoke: '¿Estás seguro?'
+            no_members_yet: No hay miembros en el comité promotor de la iniciativa
       states:
-        accepted: Accepted
-        expired: Expired
+        accepted: Aceptada
+        expired: Expirada
       admin_states:
-        created: Created
-        validating: Technical validation
-        discarded: Discarded
-        published: Published
-        rejected: Rejected
-        accepted: Accepted
+        created: Creada
+        validating: En validación técnica
+        discarded: Descartada
+        published: Publicada
+        rejected: Rechazada
+        accepted: Aceptada
       index:
-        title: Initiatives
+        title: Iniciativas
       initiatives:
         count:
           title:
-            one: "%{count} initiative"
-            other: "%{count} initiatives"
+            one: "%{count} iniciativa"
+            other: "%{count} iniciativas"
         index_header:
-          new_initiative: New initiative
+          new_initiative: Nueva iniciativa
         filters_small_view:
-          filter: Filter
-          unfold: Unfold
-          filter_by: Filter by
-          close_modal: Close window
+          filter: Filtrar
+          unfold: Desplegar
+          filter_by: Filtrar por
+          close_modal: Cerrar ventana
         filters:
-          search: Search
-          open: Open
-          closed: Closed
-          state: State
-          type: Type
-          all: All
-          any: Any
-          myself: My initiatives
-          author: Author
-          scopes: Scopes
-          scope_prompt: Select a scope
-          type_prompt: Select a type
+          search: Buscar
+          open: Abiertas
+          closed: Cerradas
+          state: Estado
+          type: Tipo
+          all: Todos
+          any: Cualquiera
+          myself: Mis iniciativas
+          author: Autor
+          scopes: Ámbitos
+          scope_prompt: Seleccione un ámbito
+          type_prompt: Seleccione un tipo
         initiatives:
           index:
-            loading: Loading results...
+            loading: Cargando resultados...
         supports_count:
           count:
-            one: " support"
-            other: " supports"
+            one: " firma"
+            other: " firmas"
         orders:
-          label: 'Sort initiatives by:'
-          random: Random
-          recent: Most recent
-          most_voted: Most voted
-          most_commented: Most commented
+          label: 'Ordenar iniciativas por:'
+          random: Aleatorio
+          recent: Mas reciente
+          most_voted: Mas votado
+          most_commented: Mas comentado
         vote_cabin:
-          vote: Sign
-          votes_blocked: Voting disabled
-          already_voted: Already voted
-          supports_required: "%{total_supports} votes required"
+          vote: Firmar
+          votes_blocked: Recogida de firmas desactivada
+          already_voted: Ya firmado
+          supports_required: "%{total_supports} firmas requeridas"
         signature_identities:
-          select_identity: Select user identity
+          select_identity: Selecciona identidad
         votes_count:
           count:
-            one: SIGNATURE
-            other: SIGNATURES
+            one: FIRMA
+            other: FIRMAS
         show:
-          start_time: Start time
-          end_time: End time
-          any_vote_method: This citizen initiative collects online support as well as face to face.
-          offline_method: This citizen initiative only collects face to face supports.
+          start_time: Fecha de inicio
+          end_time: Fecha de fin
+          any_vote_method: La recogida de firmas de esta iniciativa ciudadana se realiza de manera digital y tambien de manera presencial.
+          offline_method: La recogida de firmas de esta iniciativa ciudadana se realiza unicamente de manera presencial.
         promoter_committee:
-          committee_section_title: Promoter committee
+          committee_section_title: Comisión promotora
         committee_members:
-          title: Committee members
+          title: Miembros del comité
         supports:
-          title: Listing of adhesions
+          title: Listado de adhesiones
         statistics:
-          supports_count_title: Adhesions
-          comments_count_title: Comments
-          meetings_count_title: Meetings
-          assistants_count_title: Assistants
+          supports_count_title: Adhesiones
+          comments_count_title: Comentarios
+          meetings_count_title: Encuentros
+          assistants_count_title: Asistentes
         result:
-          initiative_accepted_reason: This initiative has been accepted because
-          initiative_rejected_reason: This initiative has been rejected due to its lack of supports.
+          initiative_accepted_reason: Esta iniciativa ha sido aceptada porque
+          initiative_rejected_reason: Esta iniciativa ha sido rechazada por no contar con los apoyos necesarios
       initiative_votes:
         create:
-          error: There's been errors when voting the initiative.
+          error: Ha habido errores al votar la iniciativa.
       create_initiative:
         select_initiative_type:
-          select_initiative_type_help: Citizen initiatives are a means by which the citizenship can intervene so that the City Council can undertake actions in defence of the general interest that are within fields of municipal jurisdiction. Which initiative do you want to launch?
-          select: Choose
-          back: Back
-          more_information: (More information)
+          select_initiative_type_help: Las iniciativas ciudadanas son un medio con el que la ciudadanía interviene a fin de que el Ayuntamiento lleve a cabo una determinada actuación de interés general y competencia municipal. ¿Qué iniciativa quieres impulsar?
+          select: Escoje
+          back: Volver
+          more_information: (Mas información)
         previous_form:
-          continue: Continue
-          back: Back
-          help: What does the initiative consist of? Write down the title and description. We recommend a short and concise title and a description focused on the proposed solution.
-          more_information: (More information)
+          continue: Continuar
+          back: Volver
+          help: En qué consiste la iniciativa? Escribe el título y la descripción. Te recomendamos que el título sea corto y conciso, y la descripción esté centrada en la solución que se propone.
+          more_information: (Mas información)
         show_similar_initiatives:
-          continue: My initiative is different
-          back: Back
-          more_information: (More information)
+          continue: Mi iniciativa es diferente
+          back: Volver
+          more_information: (Mas información)
         fill_data:
-          continue: Continue
-          back: Back
-          select_scope: Select a scope
-          initiative_type: Initiative type
-          fill_data_help: <ul> <li>Revise the content of your initiative. Is your title easy to understand? Is the objective of your initiative clear?</li> <li>You have to choose the type of signature. In-person, online or a combination of both</li> <li>Which is the geographic scope of the initiative? City, district?</li> </ul>
-          more_information: (More information)
+          continue: Continuar
+          back: Volver
+          select_scope: Selecciona un ámbito
+          initiative_type: Tipo de iniciativa
+          fill_data_help: <ul> <li>Revisa el contenido de tu iniciativa. ¿Es comprensible el título? ¿Queda claro el objetivo de la iniciativa?</li> <li>Hay que seleccionar el tipo de firma. Presencial, digital o mixta</li> <li>¿En qué ámbito geográfico se desarrolla la iniciativa? ¿Ciudad, distrito?</li> </ul>
+          more_information: (Mas información)
         promotal_committee:
-          back: Back
-          continue: Continue
-          individual_help_text: Citizen initiatives require a Promoting Commission consisting of at least three people (attestors). You must share the following link with the other people that are part of this initiative. When your contacts receive this link they will have to follow the indicated steps.
-          more_information: (More information)
+          back: Volver
+          continue: Continuar
+          individual_help_text: Las iniciativas ciudadanas requieren una Comisión promotora formada por, al menos, tres personas (fedatarias). Es necesario que compartas el siguiente enlace con el resto de personas que promuevan esta iniciativa. Cuando tus contactos reciban el enlace, deberán seguir los pasos indicados.
+          more_information: (Mas información)
         share_committee_link:
-          invite_to_committee_help: Link to invite people that will be part of the promotal committee
-          continue: Continue
+          invite_to_committee_help: Enlace para invitar a las personas que formarán parte de la comisión promotora
+          continue: Continuar
         finish:
-          back: Back
-          callout_text: Congratulations! Your citizen initiative has been created successfully.
-          go_to_my_initiatives: Go to my initiatives
-          back_to_initiatives: Back to initiatives
-          more_information: (More information)
+          back: Volver
+          callout_text: '¡Enhorabuena! Tu iniciativa ciudadana se ha creado con éxito.'
+          go_to_my_initiatives: Ir a mis iniciativas
+          back_to_initiatives: Volver a iniciativas
+          more_information: (Mas información)
       committee_requests:
         new:
-          continue: Continue
-          help_text: You are about to request being membership of the promoter committee of this initiative
+          continue: Continuar
+          help_text: Vas a solicitar formar parte de la comisión promotora para esta iniciativa
         spawn:
-          success: Your request has been sent to the initiative author.
+          success: Tu petición ha sido enviada al autor de la iniciativa.
       initiatives_mailer:
-        progress_report_for: 'Resume about the initiative: %{title}'
-        progress_report_body_for: "The initiative %{title} has reached the %{percentage}% of required supports."
-        technical_validation_for: "The initiative %{title} has requested its technical validation."
-        technical_validation_body_for: "The initiative %{title} has requested its technical validation."
-        status_change_for: "The initiative %{title} has changed its state"
-        status_change_body_for: 'The initiative %{title} has changed its state to: %{state}'
-        creation_subject: "Your citizen initiative '%{title}' has been created"
-        more_information: Here you have more information about the initiative creation process.
-        promotal_committee_help: "Remember that you must invite at least %{member_count} people to promotal committee. Forward the following link to invite people to the promotal committee"
+        progress_report_for: 'Actualización de estado para la iniciativa: %{title}'
+        progress_report_body_for: "La iniciativa %{title} ha alcanzado el %{percentage}% de soportes."
+        technical_validation_for: "La iniciativa %{title} ha solicitado validación técnica."
+        technical_validation_body_for: "La iniciativa %{title} ha solicitado validación técnica."
+        status_change_for: "La iniciativa %{title} ha cambiado su estado"
+        status_change_body_for: 'La iniciativa %{title} ha cambiado su estado a: %{state}'
+        creation_subject: "La iniciativa popular '%{title}' ha sido creada"
+        more_information: Aquí tienes mas información sobre el proceso de creación de iniciativas.
+        promotal_committee_help: "Recuerda que al menos debes invitar a %{member_count} personas a la comisión promotora. Reenvía el siguiente enlace para invitar personas a la comisión promotora:"
         initiative_link:
-          check_initiative_details: You can see the initiative details
-          here: here
+          check_initiative_details: Puedes consultar la iniciativa
+          here: aquí
       pages:
         home:
           highlighted_initiatives:
-            active_initiatives: Active initiatives
-            see_all_initiatives: See all initiatives
+            active_initiatives: Iniciativas activas
+            see_all_initiatives: Ver todas las iniciativas
   layouts:
     decidim:
       initiative_creation_header:
-        select_initiative_type: Choose
-        previous_form: Start
-        show_similar_initiatives: Compare
-        fill_data: Create
-        promotal_committee: Promotal committee
-        finish: Finish
+        select_initiative_type: Escoge
+        previous_form: Inicio
+        show_similar_initiatives: Compara
+        fill_data: Crea
+        promotal_committee: Comisión promotora
+        finish: Finaliza
       initiatives:
         initiative:
-          check_and_support: Check it out and sign
-          check: Check it out
+          check_and_support: Ver y firmar
+          check: Ver
         no_initiatives_yet:
-          no_initiatives_yet: No initiatives yet!
+          no_initiatives_yet: '¡Todavía no hay iniciativas!'
       initiative_header:
-        initiative_menu_item: Initiative
-        unfold: Unfold
+        initiative_menu_item: Iniciativa
+        unfold: Desplegar
       admin:
         initiative:
-          information: Information
-          features: Features
-          attachments: Attachments
-          committee_members: Committee members
+          information: Información
+          features: Funcionalidades
+          attachments: Archivos adjuntos
+          committee_members: Miembros del comité
