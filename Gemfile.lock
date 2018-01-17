@@ -136,10 +136,10 @@ PATH
   remote: .
   specs:
     decidim-initiatives (0.3.0)
-      decidim-admin (= 0.9.0.pre)
-      decidim-comments (= 0.9.0.pre)
-      decidim-core (= 0.9.0.pre)
-      decidim-verifications (= 0.9.0.pre)
+      decidim-admin (>= 0.8.4, = 0.9.0.pre)
+      decidim-comments (>= 0.8.4, = 0.9.0.pre)
+      decidim-core (>= 0.8.4, = 0.9.0.pre)
+      decidim-verifications (>= 0.8.4, = 0.9.0.pre)
       kaminari (~> 1.0.1)
       rails (~> 5.1.4)
       rectify
@@ -596,7 +596,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   decidim!
-  decidim-dev (= 0.9.0.pre)
+  decidim-dev (>= 0.8.4, = 0.9.0.pre)
   decidim-initiatives!
   faker
   letter_opener_web
