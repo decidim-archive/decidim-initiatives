@@ -16,7 +16,7 @@ module Decidim
 
         # GET /admin/initiatives
         def index
-          authorize! :index, Decidim::Initiative
+          authorize! :list, Decidim::Initiative
 
           @query = params[:q]
           @state = params[:state]
@@ -33,7 +33,7 @@ module Decidim
 
         # GET /admin/initiatives/:id
         def show
-          authorize! :show, current_initiative
+          authorize! :read, current_initiative
         end
 
         # GET /admin/initiatives/:id/edit

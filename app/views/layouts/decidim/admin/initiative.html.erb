@@ -47,7 +47,7 @@
 <%= render 'layouts/decidim/admin/application' do %>
   <div class="process-title">
     <div class="process-title-content">
-      <%= partially_translated_attribute(current_initiative.title) %>
+      <%= current_initiative.title.try(:[], I18n.locale.to_s) || current_initiative.title.values.compact.first %>
     </div>
   </div>
   <%= yield %>

@@ -39,7 +39,7 @@ module Decidim
         private
 
         def ability_context
-          super.merge(current_initiative: current_initiative)
+          super.merge(current_participatory_space: current_initiative)
         end
 
         def detect_initiative
