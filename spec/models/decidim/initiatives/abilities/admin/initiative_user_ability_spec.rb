@@ -23,7 +23,7 @@ describe Decidim::Initiatives::Abilities::Admin::InitiativeUserAbility do
     end
 
     it 'do not lets user access to initiative list' do
-      expect(subject).not_to be_able_to(:index, Decidim::Initiative)
+      expect(subject).not_to be_able_to(:list, Decidim::Initiative)
     end
 
     it 'can not send initiative to technical  validation' do
