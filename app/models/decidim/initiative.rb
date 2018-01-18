@@ -68,6 +68,8 @@ module Decidim
     scope :published, -> { where.not(published_at: nil) }
     scope :with_state, ->(state) { where(state: state) if state.present? }
 
+    scope :public_spaces, -> { published }
+
     scope :order_by_most_recent, -> { order(created_at: :desc) }
     scope :order_by_supports, -> { order("initiative_votes_count + coalesce(offline_votes, 0) desc") }
     scope :order_by_most_commented, -> {

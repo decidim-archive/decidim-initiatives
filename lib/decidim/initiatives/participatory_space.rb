@@ -12,6 +12,10 @@ Decidim.register_participatory_space(:initiatives) do |participatory_space|
     context.layout = "layouts/decidim/admin/initiatives"
   end
 
+  participatory_space.participatory_spaces do |organization|
+    Decidim::Initiative.where(organization: organization)
+  end
+
   participatory_space.model_class_name = 'Decidim::Initiative'
 
   participatory_space.seeds do
