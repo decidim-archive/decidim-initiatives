@@ -257,7 +257,7 @@ module Decidim
             end
 
             context "and initiative created" do
-              let(:initiative) { create(:initiative, :created) }
+              let(:initiative) { create(:initiative, :created, organization: organization) }
 
               before do
                 sign_in initiative.author, scope: :user
@@ -293,7 +293,7 @@ module Decidim
             end
 
             context "and initiative created" do
-              let(:initiative) { create(:initiative, :created) }
+              let(:initiative) { create(:initiative, :created, organization: organization) }
 
               before do
                 sign_in initiative.committee_members.approved.first.user, scope: :user

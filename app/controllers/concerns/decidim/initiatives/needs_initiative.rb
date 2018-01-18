@@ -44,8 +44,10 @@ module Decidim
 
         def detect_initiative
           request.env["current_initiative"] ||
-            Initiative.find_by(id: (id_from_slug(params[:slug]) || id_from_slug(params[:initiative_slug]) || params[:initiative_id] || params[:id]),
-                               organization: current_organization)
+            Initiative.find_by(
+              id: (id_from_slug(params[:slug]) || id_from_slug(params[:initiative_slug]) || params[:initiative_id] || params[:id]),
+              organization: current_organization
+            )
         end
       end
     end
