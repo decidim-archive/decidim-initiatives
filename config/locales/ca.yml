@@ -150,6 +150,17 @@ ca:
         published: Publicada
         rejected: Rebutjada
         accepted: Acceptada
+      events:
+        create_initiative_event:
+          email_intro: "%{author_name} %{author_nickname}, a qui estàs seguint, ha creat una nova iniciativa, fes-hi un cop d’ull i contribueix:"
+          email_outro: "Has rebut aquesta notificació perquè estàs seguint a %{author_nickname}. Pots deixar de rebre’n seguint l’enllaç anterior."
+          email_subject: "%{author_nickname} ha creat una nova iniciativa"
+          notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> ha creat la iniciativa <a href="%{resource_path}">%{resource_title}</a>.
+        endorse_initiative_event:
+          email_intro: "%{author_name} %{author_nickname}, a qui estàs seguint, s'ha adherit a una iniciativa, fes-hi un cop d’ull i contribueix a la conversa:"
+          email_outro: "Has rebut aquesta notificació perquè estàs seguint a %{author_nickname}. Pots deixar de rebre’n seguint l’enllaç anterior."
+          email_subject: "%{author_nickname} s'ha adherit a una iniciativa"
+          notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> s'ha adherit a la iniciativa <a href="%{resource_path}">%{resource_title}</a>.
       index:
         title: Iniciatives
       initiatives:

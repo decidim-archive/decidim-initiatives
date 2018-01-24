@@ -34,7 +34,7 @@ describe Decidim::Initiatives::EndorseInitiativeEvent do
 
   describe "email_intro" do
     it "is generated correctly" do
-      expect(subject.email_intro).to eq("Hi,\n#{initiative_author.name} @#{initiative_author.nickname}, who you are following, has endorsed the following initiative, maybe you want to contribute to the conversation:")
+      expect(subject.email_intro).to eq("#{initiative_author.name} @#{initiative_author.nickname}, who you are following, has endorsed the following initiative, maybe you want to contribute to the conversation:")
     end
   end
 

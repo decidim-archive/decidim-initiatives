@@ -34,7 +34,7 @@ describe Decidim::Initiatives::CreateInitiativeEvent do
 
   describe "email_intro" do
     it "is generated correctly" do
-      expect(subject.email_intro).to eq("Hi,\n#{initiative_author.name} @#{initiative_author.nickname}, who you are following, has created a new initiative, check it out and contribute:")
+      expect(subject.email_intro).to eq("#{initiative_author.name} @#{initiative_author.nickname}, who you are following, has created a new initiative, check it out and contribute:")
     end
   end
 
