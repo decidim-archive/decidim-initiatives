@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/decidim/decidim
-  revision: 0379070a9c1ca067fcab8c49e9b9918acc20f2b7
+  revision: eea6eac299aceb79f6d648f1c073bf833323affa
   branch: import_settings_in_editor
   specs:
     decidim (0.9.0.pre)
