@@ -3,6 +3,6 @@
 module Decidim
   # This holds the decidim-initiatives version.
   module Initiatives
-    VERSION = "0.3.0"
+    VERSION = "0.9.0.pre"
   end
 end
