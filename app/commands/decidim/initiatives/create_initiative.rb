@@ -44,6 +44,7 @@ module Decidim
         initiative.transaction do
           initiative.save!
           create_features_for(initiative)
+          send_notification(initiative)
         end
 
         initiative
@@ -88,6 +89,15 @@ module Decidim
         Decidim::Pages::CreatePage.call(feature) do
           on(:invalid) { raise "Can't create page" }
         end
+      end
+
+      def send_notification(initiative)
+        Decidim::EventsManager.publish(
+          event: "decidim.events.initiatives.initiative_created",
+          event_class: Decidim::Initiatives::CreateInitiativeEvent,
+          resource: initiative,
+          recipient_ids: initiative.author.followers.pluck(:id)
+        )
       end
     end
   end
