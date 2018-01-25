@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Initiatives", type: :feature do
+describe "Initiatives", type: :system do
   let(:organization) { create(:organization) }
   let(:base_initiative) do
     create(:initiative, organization: organization)

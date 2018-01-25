@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Initiative embeds", type: :feature do
+describe "Initiative embeds", type: :system do
   let!(:initiative) { create(:initiative) }
 
   context "when visiting the embed page for an initiative" do

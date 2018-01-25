@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Highlighted Initiatives", type: :feature do
+describe "Highlighted Initiatives", type: :system do
   let(:organization) { create(:organization) }
   let!(:initiative) { create(:initiative, organization: organization) }
   let!(:closed_initiative) { create(:initiative, :rejected, organization: organization) }
