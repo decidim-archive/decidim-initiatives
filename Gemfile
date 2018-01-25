@@ -2,14 +2,14 @@
 
 source "https://rubygems.org"
 
-ruby "2.4.2"
+ruby "2.5.0"
 
 # Declare your gem's dependencies in decidim-initiatives.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec
 
-gem "decidim", git: "https://github.com/decidim/decidim"
+gem "decidim", git: "https://github.com/decidim/decidim", branch: "import_settings_in_editor"
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or

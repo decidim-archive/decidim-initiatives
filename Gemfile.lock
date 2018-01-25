@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/decidim/decidim
-  revision: 17e99d6b65a47800087d69cbb900ac7689b2531d
+  revision: 0379070a9c1ca067fcab8c49e9b9918acc20f2b7
+  branch: import_settings_in_editor
   specs:
     decidim (0.9.0.pre)
       decidim-accountability (= 0.9.0.pre)
@@ -607,7 +608,7 @@ DEPENDENCIES
   letter_opener_web
 
 RUBY VERSION
-   ruby 2.4.2p198
+   ruby 2.5.0p0
 
 BUNDLED WITH
    1.16.1
