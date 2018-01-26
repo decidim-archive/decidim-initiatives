@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: decidim/decidim@sha256:18471a71b44d34ac01ed9c90dd9f0973d6ee1c78dd2bf6ca55cd4b19549e1f31
+      - image: decidim/decidim:0.9-dev
         environment:
           BUNDLE_GEMFILE: /app/Gemfile
       - image: circleci/postgres:9.6.5-alpine
