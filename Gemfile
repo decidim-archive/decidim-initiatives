@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "2.4.2"
+ruby "2.5.0"
 
 # Declare your gem's dependencies in decidim-initiatives.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and

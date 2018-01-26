@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "User previews initiative", type: :feature do
+describe "User previews initiative", type: :system do
   include_context "when admins initiative"
 
   context "when initiative preview" do

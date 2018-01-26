@@ -3,7 +3,7 @@
 require "spec_helper"
 require "decidim/admin/test/manage_attachments_examples"
 
-describe "initiative attachments", type: :feature do
+describe "initiative attachments", type: :system do
   describe "when managed by admin" do
     include_context "when admins initiative"
 

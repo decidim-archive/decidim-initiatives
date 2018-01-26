@@ -25,7 +25,7 @@ module Decidim
         end
 
         context "and Non authorized users" do
-          let(:user) { create(:user, :confirmed, organization: initiative.organization) }
+          let(:user) { create(:user, :confirmed) }
 
           it "raise an exception" do
             sign_in user, scope: :user

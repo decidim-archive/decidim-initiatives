@@ -43,7 +43,7 @@ module Decidim
         end
 
         context "with unauthorized users do" do
-          let(:user) { create(:user, :confirmed, organization: organization) }
+          let(:user) { create(:user, :confirmed) }
 
           it "are not allowed to request membership" do
             sign_in user, scope: :user
