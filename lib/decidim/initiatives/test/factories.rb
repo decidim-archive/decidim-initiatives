@@ -97,7 +97,7 @@ FactoryBot.define do
 
   factory :organization_user_vote, class: Decidim::InitiativesVote do
     initiative { create(:initiative) }
-    author { create(:user, organization: initiative.organization) }
+    author { create(:user, :confirmed, organization: initiative.organization) }
     decidim_user_group_id { create(:user_group).id }
     after(:create) do |support|
       create(:user_group_membership, user: support.author, user_group: Decidim::UserGroup.find(support.decidim_user_group_id))
