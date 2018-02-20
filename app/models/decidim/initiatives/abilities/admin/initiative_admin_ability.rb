@@ -42,14 +42,14 @@ module Decidim
             cannot :accept, Initiative
             can :accept, Initiative do |initiative|
               initiative.published? &&
-                initiative.signature_end_time < Date.today &&
+                initiative.signature_end_time < Time.zone.today &&
                 initiative.percentage >= 100
             end
 
             cannot :reject, Initiative
             can :reject, Initiative do |initiative|
               initiative.published? &&
-                initiative.signature_end_time < Date.today &&
+                initiative.signature_end_time < Time.zone.today &&
                 initiative.percentage < 100
             end
 

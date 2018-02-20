@@ -18,7 +18,8 @@ module Decidim
 
     belongs_to :initiative,
                foreign_key: "decidim_initiative_id",
-               class_name: "Decidim::Initiative"
+               class_name: "Decidim::Initiative",
+               inverse_of: :votes
 
     validates :initiative, uniqueness: { scope: [:author, :user_group] }
 

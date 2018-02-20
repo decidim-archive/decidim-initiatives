@@ -15,11 +15,18 @@ module Decidim
       # Returns a String.
       def initiative_types_select(name, options = {})
         selected = object.send(name)
+
         if selected.present?
-          selected = selected.values if selected.is_a?(Hash)
-          selected = [selected] unless selected.is_a?(Array)
-          types = Decidim::InitiativesType.where(id: selected.map(&:to_i)).map do |type|
-            [type.title[I18n.locale.to_s], type.id]
+          if selected == "all"
+            types = Decidim::InitiativesType.all.map do |type|
+              [type.title[I18n.locale.to_s], type.id]
+            end
+          else
+            selected = selected.values if selected.is_a?(Hash)
+            selected = [selected] unless selected.is_a?(Array)
+            types = Decidim::InitiativesType.where(id: selected.map(&:to_i)).map do |type|
+              [type.title[I18n.locale.to_s], type.id]
+            end
           end
         else
           types = []
@@ -30,9 +37,9 @@ module Decidim
         multiple = options.delete(:multiple) || false
         html_options = {
           multiple: multiple,
-          class: 'select2',
-          'data-remote-path' => remote_path,
-          'data-placeholder' => prompt
+          class: "select2",
+          "data-remote-path" => remote_path,
+          "data-placeholder" => prompt
         }
 
         select(name, @template.options_for_select(types, selected: selected), options, html_options)

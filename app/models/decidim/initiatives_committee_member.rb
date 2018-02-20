@@ -5,7 +5,8 @@ module Decidim
   class InitiativesCommitteeMember < ApplicationRecord
     belongs_to :initiative,
                foreign_key: "decidim_initiatives_id",
-               class_name: "Decidim::Initiative"
+               class_name: "Decidim::Initiative",
+               inverse_of: :committee_members
 
     belongs_to :user,
                foreign_key: "decidim_users_id",

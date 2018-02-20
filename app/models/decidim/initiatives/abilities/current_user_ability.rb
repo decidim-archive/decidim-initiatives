@@ -12,7 +12,7 @@ module Decidim
 
         def initialize(user, context)
           return unless user
-          
+
           @user = user
           @context = context
 
