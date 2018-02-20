@@ -9,7 +9,7 @@ ruby "2.5.0"
 # development dependencies will be added by default to the :development group.
 gemspec
 
-gem "decidim", "~> 0.9.0" 
+gem "decidim", git: "https://github.com/decidim/decidim"
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
