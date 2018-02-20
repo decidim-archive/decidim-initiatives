@@ -14,6 +14,7 @@ module Decidim
     has_many :scopes,
              foreign_key: "decidim_initiatives_types_id",
              class_name: "Decidim::InitiativesTypeScope",
-             dependent: :destroy
+             dependent: :destroy,
+             inverse_of: :type
   end
 end

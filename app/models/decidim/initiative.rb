@@ -19,19 +19,22 @@ module Decidim
 
     belongs_to :scoped_type,
                foreign_key: "scoped_type_id",
-               class_name: "Decidim::InitiativesTypeScope"
+               class_name: "Decidim::InitiativesTypeScope",
+               inverse_of: :initiatives
 
     delegate :type, to: :scoped_type, allow_nil: true
     delegate :scope, to: :scoped_type, allow_nil: true
 
     has_many :votes,
              foreign_key: "decidim_initiative_id",
-             class_name: "Decidim::InitiativesVote", dependent: :destroy
+             class_name: "Decidim::InitiativesVote", dependent: :destroy,
+             inverse_of: :initiative
 
     has_many :committee_members,
              foreign_key: "decidim_initiatives_id",
              class_name: "Decidim::InitiativesCommitteeMember",
-             dependent: :destroy
+             dependent: :destroy,
+             inverse_of: :initiative
 
     has_many :features, as: :participatory_space
 
@@ -53,13 +56,13 @@ module Decidim
               allow_blank: true,
               case_sensitive: false
 
-    scope :open, -> {
+    scope :open, lambda {
       published
         .where.not(state: [:discarded, :rejected, :accepted])
         .where("signature_start_time <= ?", Time.now.utc)
         .where("signature_end_time >= ?", Time.now.utc)
     }
-    scope :closed, -> {
+    scope :closed, lambda {
       published
         .where(state: [:discarded, :rejected, :accepted])
         .or(where("signature_start_time > ?", Time.now.utc))
@@ -72,7 +75,7 @@ module Decidim
 
     scope :order_by_most_recent, -> { order(created_at: :desc) }
     scope :order_by_supports, -> { order("initiative_votes_count + coalesce(offline_votes, 0) desc") }
-    scope :order_by_most_commented, -> {
+    scope :order_by_most_commented, lambda {
       select("decidim_initiatives.*")
         .joins(%q(LEFT OUTER JOIN "decidim_comments_comments" ON "decidim_comments_comments"."decidim_commentable_id" = "decidim_initiatives"."id" AND "decidim_comments_comments"."decidim_commentable_type" = 'Decidim::Initiative'))
         .group("decidim_initiatives.id")
@@ -149,14 +152,12 @@ module Decidim
     # for the initiative type.
     #
     # RETURNS string
-    def banner_image
-      type.banner_image
-    end
+    delegate :banner_image, to: :type
 
     def votes_enabled?
       published? &&
-        signature_start_time <= Date.today &&
-        signature_end_time >= Date.today
+        signature_start_time <= Time.zone.today &&
+        signature_end_time >= Time.zone.today
     end
 
     # Public: Checks if the organization has given an answer for the initiative.
@@ -188,8 +189,8 @@ module Decidim
       update_attributes(
         published_at: Time.current,
         state: "published",
-        signature_start_time: DateTime.now,
-        signature_end_time: DateTime.now + Decidim::Initiatives.default_signature_time_period_length
+        signature_start_time: DateTime.now.utc,
+        signature_end_time: DateTime.now.utc + Decidim::Initiatives.default_signature_time_period_length
       )
     end
 
@@ -265,7 +266,7 @@ module Decidim
     private
 
     def notify_state_change
-      return unless self.saved_change_to_state?
+      return unless saved_change_to_state?
       notifier = Decidim::Initiatives::StatusChangeNotifier.new(initiative: self)
       notifier.notify
     end
