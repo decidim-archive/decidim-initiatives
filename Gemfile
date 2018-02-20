@@ -17,6 +17,7 @@ gem "decidim", git: "https://github.com/decidim/decidim"
 # your gem to rubygems.org.
 
 group :test, :development do
+  gem "listen"
   gem "byebug"
   gem "faker"
 end
