@@ -45,6 +45,7 @@ module Decidim
           initiative.save!
           create_features_for(initiative)
           send_notification(initiative)
+          add_author_as_follower(initiative)
         end
 
         initiative
@@ -59,7 +60,7 @@ module Decidim
           decidim_user_group_id: form.decidim_user_group_id,
           scoped_type: scoped_type,
           signature_type: form.signature_type,
-          state: 'created'
+          state: "created"
         )
       end
 
@@ -73,9 +74,7 @@ module Decidim
       def create_features_for(initiative)
         Decidim::Initiatives.default_features.each do |feature_name|
           feature = Decidim::Feature.create!(
-            name: Decidim::Features::Namer.new(
-              initiative.organization.available_locales,
-              feature_name).i18n_name,
+            name: Decidim::Features::Namer.new(initiative.organization.available_locales, feature_name).i18n_name,
             manifest_name: feature_name,
             published_at: Time.current,
             participatory_space: initiative
@@ -98,6 +97,17 @@ module Decidim
           resource: initiative,
           recipient_ids: initiative.author.followers.pluck(:id)
         )
+      end
+
+      def add_author_as_follower(initiative)
+        form = Decidim::FollowForm
+               .from_params(followable_gid: initiative.to_signed_global_id.to_s)
+               .with_context(
+                 current_organization: initiative.organization,
+                 current_user: current_user
+               )
+
+        Decidim::CreateFollow.new(form, current_user).call
       end
     end
   end

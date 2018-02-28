@@ -74,6 +74,14 @@ shared_examples "create an initiative" do
 
         expect(initiative).not_to have_signature_interval_defined
       end
+
+      it "adds the author as follower" do
+        command.call do
+          on(:ok) do |assembly|
+            expect(author.follows?(assembly)).to be_true
+          end
+        end
+      end
     end
   end
 end
