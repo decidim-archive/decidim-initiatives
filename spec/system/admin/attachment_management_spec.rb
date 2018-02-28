@@ -8,6 +8,7 @@ describe "initiative attachments", type: :system do
     include_context "when admins initiative"
 
     let(:attached_to) { initiative }
+    let(:attachment_collection) { create(:attachment_collection, collection_for: initiative) }
 
     before do
       switch_to_host(organization.host)
@@ -23,6 +24,7 @@ describe "initiative attachments", type: :system do
     include_context "when admins initiative"
 
     let(:attached_to) { initiative }
+    let(:attachment_collection) { create(:attachment_collection, collection_for: initiative) }
 
     before do
       switch_to_host(organization.host)

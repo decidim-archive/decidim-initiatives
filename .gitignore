@@ -50,3 +50,4 @@ bower.json
 .bash_history
 .pki
 .local
+pkg/

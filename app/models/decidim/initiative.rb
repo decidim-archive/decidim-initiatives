@@ -11,6 +11,7 @@ module Decidim
     include Decidim::Comments::Commentable
     include Decidim::Followable
     include Decidim::HasAttachments
+    include Decidim::HasAttachmentCollections
     include Decidim::Initiatives::InitiativeSlug
 
     belongs_to :organization,
