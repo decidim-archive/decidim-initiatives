@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/decidim/decidim
-  revision: 08043eea7efc9ec9b3eb7c26d35eb50667900dd3
-  branch: 0.10-stable
+  revision: c67e3bbdc517df2197c7716190d8704778a32d14
+  branch: remove_authorable_coupling
   specs:
     decidim (0.10.0.pre)
       decidim-accountability (= 0.10.0.pre)
