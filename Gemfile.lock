@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/decidim/decidim
-  revision: c67e3bbdc517df2197c7716190d8704778a32d14
-  branch: remove_authorable_coupling
+  revision: e3a0904bb134470adbdb730d1753d2216f6acb09
+  branch: 0.10-stable
   specs:
     decidim (0.10.0.pre)
       decidim-accountability (= 0.10.0.pre)
@@ -310,7 +310,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
-    i18n-tasks (0.9.20)
+    i18n-tasks (0.9.21)
       activesupport (>= 4.0.2)
       ast (>= 2.1.0)
       easy_translate (>= 0.5.1)
@@ -318,7 +318,7 @@ GEM
       highline (>= 1.7.3)
       i18n
       parser (>= 2.2.3.0)
-      rainbow (~> 2.2)
+      rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
     icalendar (2.4.1)
     ice_nine (0.11.2)
@@ -454,8 +454,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rainbow (2.2.2)
-      rake
+    rainbow (3.0.0)
     rake (12.3.0)
     ransack (1.8.7)
       actionpack (>= 3.0)
