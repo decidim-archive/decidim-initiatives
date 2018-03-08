@@ -145,7 +145,7 @@ PATH
       decidim-comments
       decidim-core (~> 0.10.0.pre)
       decidim-verifications
-      kaminari (~> 1.0.1)
+      kaminari (~> 1.0)
       rails (~> 5.1.4)
       rectify
       social-share-button (~> 1.0.0)
