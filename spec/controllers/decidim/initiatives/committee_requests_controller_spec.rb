@@ -14,46 +14,6 @@ module Decidim
         request.env["decidim.current_organization"] = organization
       end
 
-      context "when GET new" do
-        context "with owner requests membership" do
-          before do
-            sign_in initiative.author, scope: :user
-          end
-
-          it "Owner is not allowed to request membership" do
-            get :new, params: { initiative_slug: initiative.slug }
-            expect(flash[:alert]).not_to be_empty
-            expect(response).to have_http_status(302)
-          end
-        end
-
-        context "with authorized user" do
-          let(:user) { create(:user, :confirmed, organization: organization) }
-
-          before do
-            create(:authorization, user: user)
-            sign_in user, scope: :user
-          end
-
-          it "are allowed to request membership" do
-            get :new, params: { initiative_slug: initiative.slug }
-            expect(flash[:alert]).to be_blank
-            expect(response).to have_http_status(200)
-          end
-        end
-
-        context "with unauthorized users do" do
-          let(:user) { create(:user, :confirmed) }
-
-          it "are not allowed to request membership" do
-            sign_in user, scope: :user
-            get :new, params: { initiative_slug: initiative.slug }
-            expect(flash[:alert]).not_to be_empty
-            expect(response).to have_http_status(302)
-          end
-        end
-      end
-
       context "when GET spawn" do
         let(:user) { create(:user, :confirmed, organization: organization) }
 
