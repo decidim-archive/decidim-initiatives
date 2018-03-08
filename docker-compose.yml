@@ -9,11 +9,10 @@ services:
       - "3000:3000"
     volumes:
       - .:/code
-      - gems:/gems
+      - bundle:/usr/local/bundle
     environment:
       - DATABASE_HOST=pg
       - DATABASE_USERNAME=postgres
-      - GEM_HOME=/gems
     links:
       - pg
       - redis
@@ -27,6 +26,6 @@ services:
       - redis-data:/data
 volumes:
   dummy_app: {}
-  gems: {}
+  bundle: {}
   pg-data: {}
   redis-data: {}
