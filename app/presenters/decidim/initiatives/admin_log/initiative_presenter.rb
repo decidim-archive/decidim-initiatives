@@ -17,7 +17,7 @@ module Decidim
 
         def action_string
           case action
-          when "update"
+          when "publish", "update"
             "decidim.initiatives.admin_log.initiative.#{action}"
           else
             super
@@ -26,6 +26,7 @@ module Decidim
 
         def diff_fields_mapping
           {
+            published_at: :date,
             signature_start_time: :date,
             signature_end_time: :date,
             description: :i18n,

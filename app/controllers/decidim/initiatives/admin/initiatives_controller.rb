@@ -71,8 +71,12 @@ module Decidim
         # POST /admin/initiatives/:id/publish
         def publish
           authorize! :publish, current_initiative
-          current_initiative.publish!
-          redirect_to decidim_admin_initiatives.initiatives_path
+
+          PublishInitiative.call(current_initiative, current_user) do
+            on(:ok) do
+              redirect_to decidim_admin_initiatives.initiatives_path
+            end
+          end
         end
 
         # DELETE /admin/initiatives/:id/unpublish

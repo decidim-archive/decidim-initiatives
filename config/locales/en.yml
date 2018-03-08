@@ -142,6 +142,7 @@ en:
             no_members_yet: There are no members in the promoter committee
       admin_log:
         initiative:
+          publish: "%{user_name} published the %{resource_name} initiative"
           update: "%{user_name} updated the %{resource_name} initiative"
       states:
         accepted: Accepted
