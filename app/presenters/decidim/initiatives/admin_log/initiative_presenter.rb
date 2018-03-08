@@ -17,7 +17,7 @@ module Decidim
 
         def action_string
           case action
-          when "publish", "update"
+          when "publish", "unpublish", "update"
             "decidim.initiatives.admin_log.initiative.#{action}"
           else
             super
@@ -26,6 +26,7 @@ module Decidim
 
         def diff_fields_mapping
           {
+            state: :string,
             published_at: :date,
             signature_start_time: :date,
             signature_end_time: :date,
@@ -37,6 +38,10 @@ module Decidim
 
         def i18n_labels_scope
           "activemodel.attributes.initiatives"
+        end
+
+        def has_diff?
+          %w(publish unpublish).include?(action) || super
         end
       end
     end

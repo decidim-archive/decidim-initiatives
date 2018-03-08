@@ -143,6 +143,7 @@ en:
       admin_log:
         initiative:
           publish: "%{user_name} published the %{resource_name} initiative"
+          unpublish: "%{user_name} discarded the %{resource_name} initiative"
           update: "%{user_name} updated the %{resource_name} initiative"
       states:
         accepted: Accepted

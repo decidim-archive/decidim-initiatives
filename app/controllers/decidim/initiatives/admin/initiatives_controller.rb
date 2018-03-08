@@ -82,8 +82,12 @@ module Decidim
         # DELETE /admin/initiatives/:id/unpublish
         def unpublish
           authorize! :unpublish, current_initiative
-          current_initiative.unpublish!
-          redirect_to decidim_admin_initiatives.initiatives_path
+
+          UnpublishInitiative.call(current_initiative, current_user) do
+            on(:ok) do
+              redirect_to decidim_admin_initiatives.initiatives_path
+            end
+          end
         end
 
         # DELETE /admin/initiatives/:id/discard
