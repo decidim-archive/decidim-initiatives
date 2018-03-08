@@ -5,7 +5,7 @@ require "digest/sha1"
 module Decidim
   # Initiatives can be voted by users and supported by organizations.
   class InitiativesVote < ApplicationRecord
-    include Decidim::Initiatives::PartialTranslationsHelper
+    include Decidim::TranslatableAttributes
 
     belongs_to :author,
                foreign_key: "decidim_author_id",
@@ -34,8 +34,8 @@ module Decidim
     def sha1
       return unless decidim_user_group_id.nil?
 
-      title = partially_translated_attribute(initiative.title)
-      description = partially_translated_attribute(initiative.description)
+      title = translated_attribute(initiative.title)
+      description = translated_attribute(initiative.description)
 
       Digest::SHA1.hexdigest "#{authorization_unique_id}#{title}#{description}"
     end

@@ -62,10 +62,10 @@
           <tr>
             <td>
               <% if can? :edit, initiative %>
-                <%= link_to partially_translated_attribute(initiative.title),
+                <%= link_to translated_attribute(initiative.title),
                             decidim_admin_initiatives.edit_initiative_path(initiative.to_param) %>
               <% else %>
-                <%= partially_translated_attribute(initiative.title) %>
+                <%= translated_attribute(initiative.title) %>
               <% end %>
             </td>
             <td><%= humanize_admin_state initiative.state %></td>

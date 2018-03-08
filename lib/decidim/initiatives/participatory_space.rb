@@ -4,7 +4,6 @@ Decidim.register_participatory_space(:initiatives) do |participatory_space|
   participatory_space.context(:public) do |context|
     context.engine = Decidim::Initiatives::Engine
     context.layout = "layouts/decidim/initiative"
-    context.helper = "Decidim::Initiatives::PartialTranslationsHelper"
   end
 
   participatory_space.context(:admin) do |context|

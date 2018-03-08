@@ -18,8 +18,6 @@ module Decidim
           include Decidim::Admin::ParticipatorySpaceAdminContext
           participatory_space_admin_layout
 
-          helper Decidim::Initiatives::PartialTranslationsHelper
-
           alias_method :current_participatory_space, :current_initiative
         end
 
