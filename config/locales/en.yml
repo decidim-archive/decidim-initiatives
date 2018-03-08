@@ -145,6 +145,7 @@ en:
           publish: "%{user_name} published the %{resource_name} initiative"
           unpublish: "%{user_name} discarded the %{resource_name} initiative"
           update: "%{user_name} updated the %{resource_name} initiative"
+          send_to_technical_validation: "%{user_name} sent the %{resource_name} initiative to technical validation"
       states:
         accepted: Accepted
         expired: Expired

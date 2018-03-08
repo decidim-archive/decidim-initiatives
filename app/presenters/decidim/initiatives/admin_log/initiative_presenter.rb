@@ -17,7 +17,7 @@ module Decidim
 
         def action_string
           case action
-          when "publish", "unpublish", "update"
+          when "publish", "unpublish", "update", "send_to_technical_validation"
             "decidim.initiatives.admin_log.initiative.#{action}"
           else
             super
@@ -41,7 +41,7 @@ module Decidim
         end
 
         def has_diff?
-          %w(publish unpublish).include?(action) || super
+          %w(publish unpublish send_to_technical_validation).include?(action) || super
         end
       end
     end
