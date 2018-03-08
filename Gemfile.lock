@@ -148,7 +148,7 @@ PATH
       kaminari (~> 1.0)
       rails (~> 5.1.4)
       rectify
-      social-share-button (~> 1.0.0)
+      social-share-button (~> 1.0)
       truncato
       wicked
 

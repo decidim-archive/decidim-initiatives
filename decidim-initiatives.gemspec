@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "kaminari", "~> 1.0"
   s.add_dependency "rails", "~> 5.1.4"
   s.add_dependency "rectify"
-  s.add_dependency "social-share-button", "~> 1.0.0"
+  s.add_dependency "social-share-button", "~> 1.0"
   s.add_dependency "truncato"
   s.add_dependency "wicked"
 
