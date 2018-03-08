@@ -1,0 +1,43 @@
+# frozen_string_literal: true
+
+module Decidim
+  module Initiatives
+    module AdminLog
+      # This class holds the logic to present a `Decidim::Initiative`
+      # for the `AdminLog` log.
+      #
+      # Usage should be automatic and you shouldn't need to call this class
+      # directly, but here's an example:
+      #
+      #    action_log = Decidim::ActionLog.last
+      #    view_helpers # => this comes from the views
+      #    InitiativePresenter.new(action_log, view_helpers).present
+      class InitiativePresenter < Decidim::Log::BasePresenter
+        private
+
+        def action_string
+          case action
+          when "update"
+            "decidim.initiatives.admin_log.initiative.#{action}"
+          else
+            super
+          end
+        end
+
+        def diff_fields_mapping
+          {
+            signature_start_time: :date,
+            signature_end_time: :date,
+            description: :i18n,
+            title: :i18n,
+            hashtag: :string
+          }
+        end
+
+        def i18n_labels_scope
+          "activemodel.attributes.initiatives"
+        end
+      end
+    end
+  end
+end

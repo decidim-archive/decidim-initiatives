@@ -12,6 +12,8 @@ module Decidim
     include Decidim::Followable
     include Decidim::HasAttachments
     include Decidim::HasAttachmentCollections
+    include Decidim::Traceable
+    include Decidim::Loggable
     include Decidim::Initiatives::InitiativeSlug
 
     belongs_to :organization,
@@ -91,6 +93,10 @@ module Decidim
         connection.execute("SELECT setseed(#{connection.quote(seed)})")
         select('"decidim_initiatives".*, RANDOM()').order("RANDOM()").load
       end
+    end
+
+    def self.log_presenter_class_for(_log)
+      Decidim::Initiatives::AdminLog::InitiativePresenter
     end
 
     # PUBLIC

@@ -8,6 +8,10 @@ module Decidim
       let(:initiative) { create(:initiative, :created) }
       let(:administrator) {create(:user, :admin, organization: initiative.organization)}
 
+      it "is versioned" do
+        expect(initiative).to be_versioned
+      end
+
       before(:each) do
         @message_delivery = instance_double(ActionMailer::MessageDelivery)
         allow(@message_delivery).to receive(:deliver_later)

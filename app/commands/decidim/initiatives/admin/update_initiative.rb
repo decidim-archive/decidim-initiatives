@@ -24,13 +24,16 @@ module Decidim
         # Returns nothing.
         def call
           return broadcast(:invalid) if form.invalid?
-          initiative.update(attributes)
 
-          if initiative.valid?
-            broadcast(:ok, initiative)
-          else
-            broadcast(:invalid, initiative)
-          end
+          @initiative = Decidim.traceability.update!(
+            initiative,
+            current_user,
+            attributes
+          )
+          broadcast(:ok, initiative)
+
+        rescue ActiveRecord::RecordInvalid
+          broadcast(:invalid, initiative)
         end
 
         private
