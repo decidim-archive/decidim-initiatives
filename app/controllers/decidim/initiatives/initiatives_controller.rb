@@ -7,7 +7,6 @@ module Decidim
       include ParticipatorySpaceContext
       participatory_space_layout only: [:show]
 
-      helper Decidim::Initiatives::PartialTranslationsHelper
       helper Decidim::WidgetUrlsHelper
       helper Decidim::AttachmentsHelper
       helper Decidim::FiltersHelper

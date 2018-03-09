@@ -3,7 +3,7 @@
 module Decidim
   module Initiatives
     module Admin
-      require 'csv'
+      require "csv"
 
       # Controller used to manage the initiatives
       class InitiativesController < Decidim::Initiatives::Admin::ApplicationController
@@ -12,7 +12,6 @@ module Decidim
 
         helper Decidim::Initiatives::InitiativeHelper
         helper Decidim::Initiatives::CreateInitiativeHelper
-        helper Decidim::Initiatives::PartialTranslationsHelper
 
         # GET /admin/initiatives
         def index
@@ -45,7 +44,7 @@ module Decidim
                     initiative: current_initiative
                   )
 
-          render layout: 'decidim/admin/initiative'
+          render layout: "decidim/admin/initiative"
         end
 
         # PUT /admin/initiatives/:id
@@ -58,13 +57,13 @@ module Decidim
 
           UpdateInitiative.call(current_initiative, @form, current_user) do
             on(:ok) do |initiative|
-              flash[:notice] = I18n.t('initiatives.update.success', scope: 'decidim.initiatives.admin')
+              flash[:notice] = I18n.t("initiatives.update.success", scope: "decidim.initiatives.admin")
               redirect_to edit_initiative_path(initiative)
             end
 
             on(:invalid) do
-              flash.now[:alert] = I18n.t('initiatives.update.error',  scope: 'decidim.initiatives.admin')
-              render :edit, layout: 'decidim/admin/initiative'
+              flash.now[:alert] = I18n.t("initiatives.update.error", scope: "decidim.initiatives.admin")
+              render :edit, layout: "decidim/admin/initiative"
             end
           end
         end
@@ -110,8 +109,8 @@ module Decidim
           current_initiative.validating!
           redirect_to edit_initiative_path(current_initiative), flash: {
             notice: I18n.t(
-              '.success',
-              scope: %w[decidim initiatives admin initiatives edit]
+              ".success",
+              scope: %w(decidim initiatives admin initiatives edit)
             )
           }
         end
@@ -128,7 +127,7 @@ module Decidim
           end
 
           respond_to do |format|
-            format.csv { send_data csv_data, file_name: 'votes.csv' }
+            format.csv { send_data csv_data, file_name: "votes.csv" }
           end
         end
       end

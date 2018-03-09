@@ -5,7 +5,7 @@
       <div class="columns mediumlarge-9 process-header__info">
         <div>
           <h1 class="text-highlight heading2">
-            <%= participatory_space_helpers.partially_translated_attribute(current_participatory_space.title) %>
+            <%= participatory_space_helpers.translated_attribute(current_participatory_space.title) %>
           </h1>
         </div>
         <div>
@@ -15,7 +15,7 @@
                 <%= link_to "##{current_participatory_space.hashtag}", "https://twitter.com/hashtag/#{current_participatory_space.hashtag}" %>
               </span>
             <% end %>
-            <%=strip_tags participatory_space_helpers.partially_translated_attribute(current_participatory_space.type.title) %>
+            <%=strip_tags participatory_space_helpers.translated_attribute(current_participatory_space.type.title) %>
           </h2>
         </div>
       </div>

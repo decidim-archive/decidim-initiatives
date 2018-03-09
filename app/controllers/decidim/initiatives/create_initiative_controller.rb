@@ -2,18 +2,17 @@
 
 module Decidim
   module Initiatives
-    require 'wicked'
+    require "wicked"
 
     # Controller in charge of managing the create initiative wizard.
     class CreateInitiativeController < Decidim::ApplicationController
-      layout 'layouts/decidim/initiative_creation'
+      layout "layouts/decidim/initiative_creation"
 
       include Wicked::Wizard
       include Decidim::FormFactory
       include InitiativeHelper
       include TypeSelectorOptions
 
-      helper Decidim::Initiatives::PartialTranslationsHelper
       helper Decidim::Admin::IconLinkHelper
       helper InitiativeHelper
       helper_method :similar_initiatives
@@ -72,7 +71,7 @@ module Decidim
       end
 
       def promotal_committee_step(parameters)
-        if session[:initiative].key?(:id)
+        if session[:initiative].has_key?(:id)
           render_wizard
           return
         end
@@ -90,10 +89,7 @@ module Decidim
           end
 
           on(:invalid) do |initiative|
-            if initiative
-              logger.fatal "Failed creating initiative: #{initiative.errors.full_messages.join(', ')}"
-            end
-
+            logger.fatal "Failed creating initiative: #{initiative.errors.full_messages.join(', ')}" if initiative
             redirect_to previous_wizard_path(validate_form: true)
           end
         end
@@ -124,7 +120,7 @@ module Decidim
 
       def current_initiative
         initiative = session[:initiative].with_indifferent_access
-        Initiative.find(initiative[:id]) if initiative.key?(:id)
+        Initiative.find(initiative[:id]) if initiative.has_key?(:id)
       end
 
       def initiative_type

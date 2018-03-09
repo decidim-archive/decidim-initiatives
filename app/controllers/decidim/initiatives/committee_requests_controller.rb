@@ -7,7 +7,6 @@ module Decidim
       include Decidim::Initiatives::NeedsInitiative
 
       helper Decidim::ActionAuthorizationHelper
-      helper Decidim::Initiatives::PartialTranslationsHelper
       helper InitiativeHelper
 
       include Decidim::Initiatives::ActionAuthorization
@@ -26,7 +25,7 @@ module Decidim
             redirect_to initiatives_path, flash: {
               notice: I18n.t(
                 ".success",
-                scope: %w[decidim initiatives committee_requests spawn]
+                scope: %w(decidim initiatives committee_requests spawn)
               )
             }
           end
