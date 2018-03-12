@@ -1,7 +1,5 @@
 <div class="row column">
-  <%= form.scopes_select :decidim_scopes_id,
-                         prompt: t('decidim.scopes.global'),
-                         remote_path: decidim.scopes_search_path(term: '%') %>
+  <%= scopes_picker_field form, :decidim_scopes_id, root: nil %>
 </div>
 
 <div class="row column">
