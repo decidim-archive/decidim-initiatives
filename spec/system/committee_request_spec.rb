@@ -8,14 +8,12 @@ describe "Decidim::Initiatives::CommitteeRequestController", type: :system do
 
   context "when GET new" do
     context "and owner requests membership" do
-      before do
+      it "Owner is not allowed to request membership" do
         switch_to_host(organization.host)
 
         create(:authorization, user: initiative.author)
         login_as initiative.author, scope: :user
-      end
 
-      it "Owner is not allowed to request membership" do
         visit decidim_initiatives.new_initiative_committee_request_path(initiative.to_param)
         expect(page).to have_content("You are not authorized to perform this action")
       end
@@ -24,13 +22,11 @@ describe "Decidim::Initiatives::CommitteeRequestController", type: :system do
     context "and authorized user" do
       let(:user) { create(:user, :confirmed, organization: organization) }
 
-      before do
+      it "are allowed to request membership" do
         switch_to_host(organization.host)
         create(:authorization, user: user)
         login_as user, scope: :user
-      end
 
-      it "are allowed to request membership" do
         visit decidim_initiatives.new_initiative_committee_request_path(initiative.to_param)
         expect(page).to have_content("You are about to request being membership of the promoter committee of this initiative")
       end
@@ -39,12 +35,10 @@ describe "Decidim::Initiatives::CommitteeRequestController", type: :system do
     context "and unauthorized users do" do
       let(:user) { create(:user, :confirmed, organization: organization) }
 
-      before do
+      it "are not allowed to request membership" do
         switch_to_host(organization.host)
         login_as user, scope: :user
-      end
 
-      it "are not allowed to request membership" do
         visit decidim_initiatives.new_initiative_committee_request_path(initiative.to_param)
         expect(page).to have_content("You are not authorized to perform this action")
       end
