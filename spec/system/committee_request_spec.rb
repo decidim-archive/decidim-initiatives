@@ -35,10 +35,12 @@ describe "Decidim::Initiatives::CommitteeRequestController", type: :system do
     context "and unauthorized users do" do
       let(:user) { create(:user, :confirmed, organization: organization) }
 
-      it "are not allowed to request membership" do
+      before do
         switch_to_host(organization.host)
         login_as user, scope: :user
+      end
 
+      it "are not allowed to request membership" do
         visit decidim_initiatives.new_initiative_committee_request_path(initiative.to_param)
         expect(page).to have_content("You are not authorized to perform this action")
       end
