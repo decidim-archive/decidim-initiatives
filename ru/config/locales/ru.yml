@@ -140,6 +140,12 @@ ru:
             revoke: Revoke
             confirm_revoke: Are you sure?
             no_members_yet: There are no members in the promoter committee
+      admin_log:
+        initiative:
+          publish: "%{user_name} published the %{resource_name} initiative"
+          unpublish: "%{user_name} discarded the %{resource_name} initiative"
+          update: "%{user_name} updated the %{resource_name} initiative"
+          send_to_technical_validation: "%{user_name} sent the %{resource_name} initiative to technical validation"
       states:
         accepted: Accepted
         expired: Expired
@@ -170,6 +176,7 @@ ru:
           title:
             one: "%{count} initiative"
             few: "%{count} initiatives"
+            many: "%{count} initiatives"
             other: "%{count} initiatives"
         index_header:
           new_initiative: New initiative
@@ -198,6 +205,7 @@ ru:
           count:
             one: " support"
             few: " supports"
+            many: " supports"
             other: " supports"
         orders:
           label: 'Sort initiatives by:'
@@ -216,6 +224,7 @@ ru:
           count:
             one: SIGNATURE
             few: SIGNATURES
+            many: SIGNATURES
             other: SIGNATURES
         show:
           start_time: Start time
@@ -282,12 +291,12 @@ ru:
         spawn:
           success: Your request has been sent to the initiative author.
       initiatives_mailer:
-        progress_report_for: 'Resume about the initiative: %{title}'
+        progress_report_for: "Resume about the initiative: %{title}"
         progress_report_body_for: "The initiative %{title} has reached the %{percentage}% of required supports."
         technical_validation_for: "The initiative %{title} has requested its technical validation."
         technical_validation_body_for: "The initiative %{title} has requested its technical validation."
         status_change_for: "The initiative %{title} has changed its state"
-        status_change_body_for: 'The initiative %{title} has changed its state to: %{state}'
+        status_change_body_for: "The initiative %{title} has changed its state to: %{state}"
         creation_subject: "Your citizen initiative '%{title}' has been created"
         more_information: Here you have more information about the initiative creation process.
         promotal_committee_help: "Remember that you must invite at least %{member_count} people to promotal committee. Forward the following link to invite people to the promotal committee"
