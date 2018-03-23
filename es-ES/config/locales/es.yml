@@ -140,6 +140,12 @@ es:
             revoke: Rechazar
             confirm_revoke: '¿Estás seguro?'
             no_members_yet: No hay miembros en el comité promotor de la iniciativa
+      admin_log:
+        initiative:
+          publish: "%{user_name} published the %{resource_name} initiative"
+          unpublish: "%{user_name} discarded the %{resource_name} initiative"
+          update: "%{user_name} updated the %{resource_name} initiative"
+          send_to_technical_validation: "%{user_name} sent the %{resource_name} initiative to technical validation"
       states:
         accepted: Aceptada
         expired: Expirada
@@ -279,12 +285,12 @@ es:
         spawn:
           success: Tu petición ha sido enviada al autor de la iniciativa.
       initiatives_mailer:
-        progress_report_for: 'Actualización de estado para la iniciativa: %{title}'
+        progress_report_for: "Actualización de estado para la iniciativa: %{title}"
         progress_report_body_for: "La iniciativa %{title} ha alcanzado el %{percentage}% de soportes."
         technical_validation_for: "La iniciativa %{title} ha solicitado validación técnica."
         technical_validation_body_for: "La iniciativa %{title} ha solicitado validación técnica."
         status_change_for: "La iniciativa %{title} ha cambiado su estado"
-        status_change_body_for: 'La iniciativa %{title} ha cambiado su estado a: %{state}'
+        status_change_body_for: "La iniciativa %{title} ha cambiado su estado a: %{state}"
         creation_subject: "La iniciativa popular '%{title}' ha sido creada"
         more_information: Aquí tienes mas información sobre el proceso de creación de iniciativas.
         promotal_committee_help: "Recuerda que al menos debes invitar a %{member_count} personas a la comisión promotora. Reenvía el siguiente enlace para invitar personas a la comisión promotora:"
