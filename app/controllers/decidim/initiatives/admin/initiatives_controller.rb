@@ -71,15 +71,23 @@ module Decidim
         # POST /admin/initiatives/:id/publish
         def publish
           authorize! :publish, current_initiative
-          current_initiative.publish!
-          redirect_to decidim_admin_initiatives.initiatives_path
+
+          PublishInitiative.call(current_initiative, current_user) do
+            on(:ok) do
+              redirect_to decidim_admin_initiatives.initiatives_path
+            end
+          end
         end
 
         # DELETE /admin/initiatives/:id/unpublish
         def unpublish
           authorize! :unpublish, current_initiative
-          current_initiative.unpublish!
-          redirect_to decidim_admin_initiatives.initiatives_path
+
+          UnpublishInitiative.call(current_initiative, current_user) do
+            on(:ok) do
+              redirect_to decidim_admin_initiatives.initiatives_path
+            end
+          end
         end
 
         # DELETE /admin/initiatives/:id/discard
@@ -106,13 +114,17 @@ module Decidim
         # GET /admin/initiatives/:id/send_to_technical_validation
         def send_to_technical_validation
           authorize! :send_to_technical_validation, current_initiative
-          current_initiative.validating!
-          redirect_to edit_initiative_path(current_initiative), flash: {
-            notice: I18n.t(
-              ".success",
-              scope: %w(decidim initiatives admin initiatives edit)
-            )
-          }
+
+          SendInitiativeToTechnicalValidation.call(current_initiative, current_user) do
+            on(:ok) do
+              redirect_to edit_initiative_path(current_initiative), flash: {
+                notice: I18n.t(
+                  '.success',
+                  scope: %w[decidim initiatives admin initiatives edit]
+                )
+              }
+            end
+          end
         end
 
         # GET /admin/initiatives/:id/export_votes

@@ -69,6 +69,17 @@ shared_examples "update an initiative" do
         expect(initiative.hashtag).to eq(form_params[:hashtag])
       end
 
+      it "traces the action", versioning: true do
+        expect(Decidim.traceability)
+          .to receive(:update!)
+          .with(initiative, initiative.author, kind_of(Hash))
+          .and_call_original
+
+        expect { command.call }.to change(Decidim::ActionLog, :count)
+        action_log = Decidim::ActionLog.last
+        expect(action_log.version).to be_present
+      end
+
       it "voting interval remains unchanged" do
         command.call
         initiative.reload
