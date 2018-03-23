@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -8,11 +8,11 @@ module Decidim
       describe CreateInitiativeTypeScope do
         let(:form_klass) { InitiativeTypeScopeForm }
 
-        describe 'Successfull creation' do
-          it_behaves_like 'create an initiative type scope'
+        describe "Successfull creation" do
+          it_behaves_like "create an initiative type scope"
         end
 
-        describe 'Attempt of creating duplicated typed scopes' do
+        describe "Attempt of creating duplicated typed scopes" do
           let(:organization) { create(:organization) }
           let(:initiative_type) { create(:initiatives_type, organization: organization) }
           let!(:initiative_type_scope) do
@@ -25,8 +25,8 @@ module Decidim
           end
           let(:command) { described_class.new(form) }
 
-          it 'broadcasts invalid' do
-            expect {command.call}.to broadcast :invalid
+          it "broadcasts invalid" do
+            expect { command.call }.to broadcast :invalid
           end
         end
       end

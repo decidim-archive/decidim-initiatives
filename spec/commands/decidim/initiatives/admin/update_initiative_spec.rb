@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -8,11 +8,11 @@ module Decidim
       describe UpdateInitiative do
         let(:form_klass) { Decidim::Initiatives::Admin::InitiativeForm }
 
-        context 'valid data' do
-          it_behaves_like 'update an initiative'
+        context "when valid data" do
+          it_behaves_like "update an initiative"
         end
 
-        context 'validation failure' do
+        context "when validation failure" do
           let(:organization) { create(:organization) }
           let!(:initiative) { create(:initiative, organization: organization) }
           let!(:form) do
@@ -23,11 +23,11 @@ module Decidim
 
           let(:command) { described_class.new(initiative, form, initiative.author) }
 
-          it 'broadcasts invalid' do
+          it "broadcasts invalid" do
             expect_any_instance_of(Initiative).to receive(:valid?)
                                                     .at_least(:once)
                                                     .and_return(false)
-            expect {command.call}.to broadcast :invalid
+            expect { command.call }.to broadcast :invalid
           end
         end
       end
