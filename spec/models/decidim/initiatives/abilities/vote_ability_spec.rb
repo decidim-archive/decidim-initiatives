@@ -6,40 +6,44 @@ require 'cancan/matchers'
 describe Decidim::Initiatives::Abilities::VoteAbility do
   subject { described_class.new(user, {}) }
 
-  context 'Authorization required' do
-    before(:each) do
+  context "when Authorization required" do
+    before do
       Decidim::Initiatives.do_not_require_authorization = false
     end
 
-    context 'users non verified' do
+    context "and users non verified" do
       let(:user) { build(:user) }
       let(:initiative) { build(:initiative, organization: user.organization) }
 
-      it 'cannot vote' do
+      it "cannot vote" do
         expect(subject).not_to be_able_to(:vote, initiative)
       end
 
-      it 'cannot unvote' do
+      it "cannot unvote" do
         expect(subject).not_to be_able_to(:unvote, initiative)
       end
     end
   end
 
-  context 'Authorization not required' do
-    before(:each) do
+  context "when authorization not required" do
+    before do
       Decidim::Initiatives.do_not_require_authorization = true
     end
 
-    context 'users non verified' do
+    after do
+      Decidim::Initiatives.do_not_require_authorization = false
+    end
+
+    context "and users non verified" do
       let(:user) { build(:user) }
       let(:initiative) { build(:initiative, organization: user.organization) }
 
-      it 'can vote' do
+      it "can vote" do
         expect(subject).to be_able_to(:vote, initiative)
         expect(subject).not_to be_able_to(:unvote, initiative)
       end
 
-      it 'can unvote' do
+      it "can unvote" do
         create(:initiative_user_vote, initiative: initiative, author: user)
 
         expect(subject).not_to be_able_to(:vote, initiative)
@@ -48,30 +52,30 @@ describe Decidim::Initiatives::Abilities::VoteAbility do
     end
   end
 
-  context 'users from a different organization' do
+  context "when users from a different organization" do
     let(:user) { create(:authorization).user }
     let(:initiative) { build(:initiative) }
 
-    it 'cannot vote' do
+    it "cannot vote" do
       expect(subject).not_to be_able_to(:vote, initiative)
     end
 
-    it 'cannot unvote' do
+    it "cannot unvote" do
       expect(subject).not_to be_able_to(:unvote, initiative)
     end
   end
 
-  context 'users verified within the same organziation' do
+  context "when users verified within the same organziation" do
     let(:organization) { create(:organization) }
     let(:user) { create(:authorization, user: create(:user, organization: organization)).user }
     let(:initiative) { create(:initiative, organization: organization) }
 
-    it 'can vote' do
+    it "can vote" do
       expect(subject).to be_able_to(:vote, initiative)
       expect(subject).not_to be_able_to(:unvote, initiative)
     end
 
-    it 'can unvote' do
+    it "can unvote" do
       create(:initiative_user_vote, initiative: initiative, author: user)
 
       expect(subject).not_to be_able_to(:vote, initiative)
