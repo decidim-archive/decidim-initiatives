@@ -6,7 +6,7 @@ require "cancan/matchers"
 describe Decidim::Initiatives::Abilities::Admin::InitiativeUserAbility do
   subject { described_class.new(user, {}) }
 
-  et(:organization) { create(:organization) }
+  let(:organization) { create(:organization) }
   let(:initiative) { create(:initiative, :created, organization: organization) }
 
   context "when regular user" do
