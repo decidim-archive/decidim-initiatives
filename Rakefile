@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require 'decidim/dev/common_rake'
+require "decidim/dev/common_rake"

@@ -18,14 +18,14 @@ module Decidim
         it "creates a vote" do
           expect do
             command.call
-          end.to change { InitiativesVote.count }.by(1)
+          end.to change(InitiativesVote, :count).by(1)
         end
 
         it "increases the vote counter by one" do
           expect do
             command.call
             initiative.reload
-          end.to change { initiative.initiative_votes_count }.by(1)
+          end.to change(initiative, :initiative_votes_count).by(1)
         end
 
         it "notifies the creation" do
@@ -35,11 +35,11 @@ module Decidim
           expect(Decidim::EventsManager)
             .to receive(:publish)
             .with(
-            event: "decidim.events.initiatives.initiative_endorsed",
-            event_class: Decidim::Initiatives::EndorseInitiativeEvent,
-            resource: initiative,
-            recipient_ids: [follower.id]
-          )
+              event: "decidim.events.initiatives.initiative_endorsed",
+              event_class: Decidim::Initiatives::EndorseInitiativeEvent,
+              resource: initiative,
+              recipient_ids: [follower.id]
+            )
 
           command.call
         end
@@ -57,7 +57,7 @@ module Decidim
         it "creates a vote" do
           expect do
             command.call
-          end.to change { InitiativesVote.count }.by(1)
+          end.to change(InitiativesVote, :count).by(1)
         end
 
         it "does not increases the vote counter by one" do

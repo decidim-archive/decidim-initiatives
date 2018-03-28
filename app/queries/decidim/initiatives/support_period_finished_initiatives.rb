@@ -10,9 +10,9 @@ module Decidim
       def query
         Decidim::Initiative
           .includes(:scoped_type)
-          .where(state: 'published')
-          .where(signature_type: 'online')
-          .where('signature_end_time < ?', DateTime.now)
+          .where(state: "published")
+          .where(signature_type: "online")
+          .where("signature_end_time < ?", DateTime.now)
       end
     end
   end

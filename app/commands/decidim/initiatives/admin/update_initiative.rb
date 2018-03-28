@@ -31,7 +31,6 @@ module Decidim
             attributes
           )
           broadcast(:ok, initiative)
-
         rescue ActiveRecord::RecordInvalid
           broadcast(:invalid, initiative)
         end

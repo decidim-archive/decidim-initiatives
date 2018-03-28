@@ -119,8 +119,8 @@ module Decidim
             on(:ok) do
               redirect_to edit_initiative_path(current_initiative), flash: {
                 notice: I18n.t(
-                  '.success',
-                  scope: %w[decidim initiatives admin initiatives edit]
+                  ".success",
+                  scope: %w(decidim initiatives admin initiatives edit)
                 )
               }
             end

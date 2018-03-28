@@ -16,13 +16,12 @@
                 <% unless future_step? wizard_step %>
                   <li class="phase-item--past">
                     <span></span>
-                    <div class="caption"><%=t ".#{wizard_step}" %></div>
+                    <div class="caption"><%= t ".#{wizard_step}" %></div>
                   </li>
-
                 <% else %>
                   <li>
                     <span></span>
-                    <div class="caption"><%=t ".#{wizard_step}" %></div>
+                    <div class="caption"><%= t ".#{wizard_step}" %></div>
                   </li>
                 <% end %>
               <% end %>

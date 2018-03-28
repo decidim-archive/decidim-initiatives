@@ -31,7 +31,7 @@ shared_examples "create an initiative" do
       it "doesn't create an initiative" do
         expect do
           command.call
-        end.not_to change { Decidim::Initiative.count }
+        end.not_to change(Decidim::Initiative, :count)
       end
     end
 

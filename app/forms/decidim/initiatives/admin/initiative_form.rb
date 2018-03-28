@@ -27,7 +27,7 @@ module Decidim
         validates :signature_type, presence: true
         validates :signature_start_time, presence: true, if: ->(form) { form.context.initiative.published? }
         validates :signature_end_time, presence: true, if: ->(form) { form.context.initiative.published? }
-        validates :signature_end_time, date: { after: :signature_start_time }, if: ->(form) {
+        validates :signature_end_time, date: { after: :signature_start_time }, if: lambda { |form|
           form.signature_start_time.present? && form.signature_end_time.present?
         }
 

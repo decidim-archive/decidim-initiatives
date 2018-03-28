@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -18,36 +18,37 @@ module Decidim
           create_list(:initiative, 3, organization: organization, author: admin)
         end
 
-        context 'Initiative authors' do
+        context "when initiative authors" do
           subject { described_class.new(organization, user, nil, nil) }
 
-          it 'includes only user initiatives' do
+          it "includes only user initiatives" do
             expect(subject).not_to include(*admin_initiatives)
           end
         end
 
-        context 'Initiative promoters' do
-          let(:promoter) { create(:user, organization:  organization) }
+        context "when initiative promoters" do
           subject { described_class.new(organization, promoter, nil, nil) }
 
-          before(:each) do
-            @promoter_initiatives = create_list(:initiative, 3, organization: organization)
-            @promoter_initiatives.each do |initiative|
+          let(:promoter) { create(:user, organization: organization) }
+          let(:promoter_initiatives) { create_list(:initiative, 3, organization: organization) }
+
+          before do
+            promoter_initiatives.each do |initiative|
               create(:initiatives_committee_member, initiative: initiative, user: promoter)
             end
           end
 
-          it 'includes only promoter initiatives' do
-            expect(subject).to include(*@promoter_initiatives)
+          it "includes only promoter initiatives" do
+            expect(subject).to include(*promoter_initiatives)
             expect(subject).not_to include(*user_initiatives)
             expect(subject).not_to include(*admin_initiatives)
           end
         end
 
-        context 'Administrator users' do
+        context "when administrator users" do
           subject { described_class.new(organization, admin, nil, nil) }
 
-          it 'includes all initiatives' do
+          it "includes all initiatives" do
             expect(subject).to include(*user_initiatives)
             expect(subject).to include(*admin_initiatives)
           end

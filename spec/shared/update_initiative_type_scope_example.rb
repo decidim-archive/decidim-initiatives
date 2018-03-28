@@ -10,7 +10,7 @@ shared_examples "update an initiative type scope" do
     )
   end
 
-  describe 'call' do
+  describe "call" do
     let(:form_params) do
       {
         supports_required: 2000,

@@ -80,7 +80,7 @@ module Decidim
     scope :order_by_supports, -> { order("initiative_votes_count + coalesce(offline_votes, 0) desc") }
     scope :order_by_most_commented, lambda {
       select("decidim_initiatives.*")
-        .joins(%q(LEFT OUTER JOIN "decidim_comments_comments" ON "decidim_comments_comments"."decidim_commentable_id" = "decidim_initiatives"."id" AND "decidim_comments_comments"."decidim_commentable_type" = 'Decidim::Initiative'))
+        .left_joins(:comments)
         .group("decidim_initiatives.id")
         .order("count(decidim_comments_comments.id) desc")
     }

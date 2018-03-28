@@ -1,27 +1,27 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
     describe UnvoteInitiative do
-      describe 'User unvotes initiative' do
+      describe "User unvotes initiative" do
         let(:vote) { create(:initiative_user_vote) }
         let(:command) { described_class.new(vote.initiative, vote.author, nil) }
 
-        it 'broadcasts ok' do
+        it "broadcasts ok" do
           expect(vote).to be_valid
           expect { command.call }.to broadcast :ok
         end
 
-        it 'Removes the vote' do
+        it "Removes the vote" do
           expect(vote).to be_valid
           expect do
             command.call
-          end.to change { InitiativesVote.count }.by(-1)
+          end.to change(InitiativesVote, :count).by(-1)
         end
 
-        it 'Decreases the vote counter by one' do
+        it "Decreases the vote counter by one" do
           initiative = vote.initiative
           expect(InitiativesVote.count).to eq(1)
           expect do
@@ -31,23 +31,23 @@ module Decidim
         end
       end
 
-      describe 'Organization supports initiative' do
+      describe "Organization supports initiative" do
         let(:vote) { create(:organization_user_vote) }
         let(:command) { described_class.new(vote.initiative, vote.author, vote.decidim_user_group_id) }
 
-        it 'broadcasts ok' do
+        it "broadcasts ok" do
           expect(vote).to be_valid
           expect { command.call }.to broadcast :ok
         end
 
-        it 'Removes the vote' do
+        it "Removes the vote" do
           expect(vote).to be_valid
           expect do
             command.call
-          end.to change { InitiativesVote.count }.by(-1)
+          end.to change(InitiativesVote, :count).by(-1)
         end
 
-        it 'Do not decreases the vote counter by one' do
+        it "Do not decreases the vote counter by one" do
           expect(vote).to be_valid
           command.call
 

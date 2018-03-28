@@ -34,9 +34,7 @@ FactoryBot.define do
     end
 
     after(:create) do |initiative|
-      unless Decidim::Authorization.where(user: initiative.author).where.not(granted_at: nil).any?
-        create(:authorization, user: initiative.author, granted_at: Time.now.utc)
-      end
+      create(:authorization, user: initiative.author, granted_at: Time.now.utc) unless Decidim::Authorization.where(user: initiative.author).where.not(granted_at: nil).any?
 
       3.times do
         create(:initiatives_committee_member, initiative: initiative)

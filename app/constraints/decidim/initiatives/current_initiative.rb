@@ -18,7 +18,7 @@ module Decidim
       def matches?(request)
         env = request.env
 
-        @organization = env['decidim.current_organization']
+        @organization = env["decidim.current_organization"]
         return false unless @organization
 
         current_initiative(env, request.params) ? true : false
@@ -27,7 +27,7 @@ module Decidim
       private
 
       def current_initiative(env, params)
-        env['decidim.current_participatory_space'] ||= Initiative.find_by(id: id_from_slug(params[:initiative_slug]))
+        env["decidim.current_participatory_space"] ||= Initiative.find_by(id: id_from_slug(params[:initiative_slug]))
       end
     end
   end

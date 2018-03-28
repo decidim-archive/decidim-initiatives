@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_dependency 'decidim/initiatives/admin/application_controller'
+require_dependency "decidim/initiatives/admin/application_controller"
 
 module Decidim
   module Initiatives
@@ -30,12 +30,12 @@ module Decidim
 
           CreateInitiativeType.call(@form) do
             on(:ok) do |initiative_type|
-              flash[:notice] = I18n.t('decidim.initiatives.admin.initiatives_types.create.success')
+              flash[:notice] = I18n.t("decidim.initiatives.admin.initiatives_types.create.success")
               redirect_to edit_initiatives_type_path(initiative_type)
             end
 
             on(:invalid) do
-              flash.now[:alert] = I18n.t('decidim.initiatives.admin.initiatives_types.create.error')
+              flash.now[:alert] = I18n.t("decidim.initiatives.admin.initiatives_types.create.error")
               render :new
             end
           end
@@ -58,12 +58,12 @@ module Decidim
 
           UpdateInitiativeType.call(current_initiative_type, @form) do
             on(:ok) do
-              flash[:notice] = I18n.t('decidim.initiatives.admin.initiatives_types.update.success')
+              flash[:notice] = I18n.t("decidim.initiatives.admin.initiatives_types.update.success")
               redirect_to edit_initiatives_type_path(current_initiative_type)
             end
 
             on(:invalid) do
-              flash.now[:alert] = I18n.t('decidim.initiatives.admin.initiatives_types.update.error')
+              flash.now[:alert] = I18n.t("decidim.initiatives.admin.initiatives_types.update.error")
               render :edit
             end
           end
@@ -75,14 +75,14 @@ module Decidim
           current_initiative_type.destroy!
 
           redirect_to initiatives_types_path, flash: {
-            notice: I18n.t('decidim.initiatives.admin.initiatives_types.destroy.success')
+            notice: I18n.t("decidim.initiatives.admin.initiatives_types.destroy.success")
           }
         end
 
         private
 
         def current_initiative_type
-          @initiatives_type ||= InitiativesType.find(params[:id])
+          @current_initiative_type ||= InitiativesType.find(params[:id])
         end
 
         def initiative_type_form

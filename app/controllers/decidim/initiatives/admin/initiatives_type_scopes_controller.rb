@@ -21,12 +21,12 @@ module Decidim
 
           CreateInitiativeTypeScope.call(@form) do
             on(:ok) do |initiative_type_scope|
-              flash[:notice] = I18n.t('decidim.initiatives.admin.initiatives_type_scopes.create.success')
+              flash[:notice] = I18n.t("decidim.initiatives.admin.initiatives_type_scopes.create.success")
               redirect_to edit_initiatives_type_path(initiative_type_scope.type)
             end
 
             on(:invalid) do
-              flash.now[:alert] = I18n.t('decidim.initiatives.admin.initiatives_type_scopes.create.error')
+              flash.now[:alert] = I18n.t("decidim.initiatives.admin.initiatives_type_scopes.create.error")
               render :new
             end
           end
@@ -45,12 +45,12 @@ module Decidim
 
           UpdateInitiativeTypeScope.call(current_initiative_type_scope, @form) do
             on(:ok) do
-              flash[:notice] = I18n.t('decidim.initiatives.admin.initiatives_type_scopes.update.success')
+              flash[:notice] = I18n.t("decidim.initiatives.admin.initiatives_type_scopes.update.success")
               redirect_to edit_initiatives_type_path(initiative_type_scope.type)
             end
 
             on(:invalid) do
-              flash.now[:alert] = I18n.t('decidim.initiatives.admin.initiatives_type_scopes.update.error')
+              flash.now[:alert] = I18n.t("decidim.initiatives.admin.initiatives_type_scopes.update.error")
               render :edit
             end
           end
@@ -62,14 +62,14 @@ module Decidim
           current_initiative_type_scope.destroy!
 
           redirect_to edit_initiatives_type_path(current_initiative_type_scope.type), flash: {
-            notice: I18n.t('decidim.initiatives.admin.initiatives_type_scopes.destroy.success')
+            notice: I18n.t("decidim.initiatives.admin.initiatives_type_scopes.destroy.success")
           }
         end
 
         private
 
         def current_initiative_type_scope
-          @initiatives_type_scope ||= InitiativesTypeScope.find(params[:id])
+          @current_initiative_type_scope ||= InitiativesTypeScope.find(params[:id])
         end
 
         def initiative_type_scope_form

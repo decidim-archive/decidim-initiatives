@@ -12,7 +12,7 @@
 <br><br>
 <div class="row column">
   <h2 class="heading2"><%= translated_attribute(current_initiative.title) %></h2>
-  <%= render partial: 'decidim/initiatives/initiatives/author', locals: { initiative: current_initiative } %>
+  <%= render partial: "decidim/initiatives/initiatives/author", locals: { initiative: current_initiative } %>
 </div>
 
 <div class="row">
@@ -22,16 +22,16 @@
     </div>
 
     <div class="section">
-      <p><%=t '.help_text' %></p>
-      <%= link_to t('.continue'),
+      <p><%= t ".help_text" %></p>
+      <%= link_to t(".continue"),
                   spawn_initiative_committee_requests_path(current_initiative),
-                  class: 'title-action__action button small hollow' if current_user %>
+                  class: "title-action__action button small hollow" if current_user %>
 
       <%= action_authorized_link_to :spawn,
-                                    t('.continue'),
+                                    t(".continue"),
                                     spawn_initiative_committee_requests_path(current_initiative),
-                                    class: 'title-action__action button small hollow' unless current_user %>
+                                    class: "title-action__action button small hollow" unless current_user %>
     </div>
   </div>
 </div>
-<%= stylesheet_link_tag 'decidim/initiatives/application' %>
+<%= stylesheet_link_tag "decidim/initiatives/application" %>

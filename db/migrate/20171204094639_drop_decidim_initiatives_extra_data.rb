@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DropDecidimInitiativesExtraData < ActiveRecord::Migration[5.1]
   def up
     drop_table :decidim_initiatives_extra_data

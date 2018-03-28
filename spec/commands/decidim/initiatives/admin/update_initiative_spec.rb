@@ -24,9 +24,9 @@ module Decidim
           let(:command) { described_class.new(initiative, form, initiative.author) }
 
           it "broadcasts invalid" do
-            expect_any_instance_of(Initiative).to receive(:valid?)
-                                                    .at_least(:once)
-                                                    .and_return(false)
+            expect(initiative).to receive(:valid?)
+              .at_least(:once)
+              .and_return(false)
             expect { command.call }.to broadcast :invalid
           end
         end

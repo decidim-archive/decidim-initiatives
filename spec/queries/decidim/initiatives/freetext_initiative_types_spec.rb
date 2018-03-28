@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -15,26 +15,26 @@ module Decidim
         end
       end
 
-      context 'find one result' do
-        subject { described_class.new(organization, 'en', 'Bb') }
+      context "when find one result" do
+        subject { described_class.new(organization, "en", "Bb") }
 
-        it 'Returns one result' do
+        it "Returns one result" do
           expect(subject.query.count).to eq(1)
         end
       end
 
-      context 'find several results' do
-        subject { described_class.new(organization, 'en', 'Aa') }
+      context "when find several results" do
+        subject { described_class.new(organization, "en", "Aa") }
 
-        it 'Returs several results' do
+        it "Returs several results" do
           expect(subject.query.count).to eq(2)
         end
       end
 
-      context "don't find results" do
-        subject { described_class.new(organization, 'en', 'Dd') }
+      context "when don't find results" do
+        subject { described_class.new(organization, "en", "Dd") }
 
-        it 'is empty' do
+        it "is empty" do
           expect(subject.query).to be_empty
         end
       end

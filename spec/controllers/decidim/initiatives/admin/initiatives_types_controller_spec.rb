@@ -88,13 +88,13 @@ module Decidim
             it "gets created" do
               expect do
                 post :create, params: { initiatives_type: valid_attributes }
-              end.to change { InitiativesType.count }.by(1)
+              end.to change(InitiativesType, :count).by(1)
             end
 
             it "fails creation" do
               expect do
                 post :create, params: { initiatives_type: invalid_attributes }
-              end.to change { InitiativesType.count }.by(0)
+              end.to change(InitiativesType, :count).by(0)
             end
           end
 
@@ -201,7 +201,7 @@ module Decidim
 
               expect do
                 delete :destroy, params: { id: initiative_type.id }
-              end.to change { InitiativesType.count }.by(0)
+              end.to change(InitiativesType, :count).by(0)
             end
           end
 

@@ -12,7 +12,6 @@ module Decidim
 
         slug[2..-1] unless slug.blank?
       end
-
     end
   end
 end

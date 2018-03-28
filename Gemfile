@@ -17,10 +17,10 @@ gem "decidim", git: "https://github.com/decidim/decidim", branch: "0.10-stable"
 # your gem to rubygems.org.
 
 group :test, :development do
-  gem "puma"
-  gem "listen"
   gem "byebug"
   gem "faker"
+  gem "listen"
+  gem "puma"
 end
 
 group :development do

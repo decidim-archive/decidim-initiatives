@@ -84,7 +84,7 @@ shared_examples "update an initiative" do
         command.call
         initiative.reload
 
-        %i[signature_start_time signature_end_time].each do |key|
+        [:signature_start_time, :signature_end_time].each do |key|
           expect(initiative[key]).not_to eq(form_params[key])
         end
       end
@@ -95,7 +95,7 @@ shared_examples "update an initiative" do
         expect(initiative.offline_votes).not_to eq(form_params[:offline_votes])
       end
 
-      context "Administrator user" do
+      context "when administrator user" do
         let(:administrator) { create(:user, :admin, organization: organization) }
 
         let(:command) do
@@ -106,7 +106,7 @@ shared_examples "update an initiative" do
           command.call
           initiative.reload
 
-          %i[signature_start_time signature_end_time].each do |key|
+          [:signature_start_time, :signature_end_time].each do |key|
             expect(initiative[key]).to eq(form_params[key])
           end
         end

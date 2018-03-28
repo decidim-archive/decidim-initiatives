@@ -34,7 +34,7 @@ module Decidim
       # Handle the state filter
       def search_state
         case state
-        when 'closed'
+        when "closed"
           query.closed
         else # Assume open
           query.open
@@ -42,18 +42,18 @@ module Decidim
       end
 
       def search_type
-        return query if type == 'all'
+        return query if type == "all"
 
         query
           .joins(:scoped_type)
           .where(
-            'decidim_initiatives_type_scopes.decidim_initiatives_types_id = ?',
+            "decidim_initiatives_type_scopes.decidim_initiatives_types_id = ?",
             type
           )
       end
 
       def search_author
-        if author == 'myself' && options[:current_user]
+        if author == "myself" && options[:current_user]
           query.where(decidim_author_id: options[:current_user].id)
         else
           query
@@ -65,7 +65,7 @@ module Decidim
         query
           .joins(:scoped_type)
           .where(
-            'decidim_initiatives_type_scopes.decidim_scopes_id': scope_id
+            "decidim_initiatives_type_scopes.decidim_scopes_id": scope_id
           )
       end
     end

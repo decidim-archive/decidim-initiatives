@@ -32,7 +32,7 @@ module Decidim
 
         InitiativesType
           .where(organization: @organization)
-          .where('title->>? ilike ?', @lang, "#{@text}%")
+          .where("title->>? ilike ?", @lang, "#{@text}%")
       end
     end
   end

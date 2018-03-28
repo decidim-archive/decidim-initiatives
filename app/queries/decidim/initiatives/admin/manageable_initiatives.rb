@@ -47,14 +47,14 @@ module Decidim
           return base if q.blank?
 
           organization.available_locales.each_with_index do |loc, index|
-            if index.zero?
-              base = base.where('title->>? ilike ?', loc, "#{q}%")
-                         .or(Initiative.where('description->>? ilike ?', loc, "#{q}%"))
-            else
-              base = base
-                     .or(Initiative.where('title->>? ilike ?', loc, "#{q}%"))
-                     .or(Initiative.where('description->>? ilike ?', loc, "#{q}%"))
-            end
+            base = if index.zero?
+                     base.where("title->>? ilike ?", loc, "#{q}%")
+                         .or(Initiative.where("description->>? ilike ?", loc, "#{q}%"))
+                   else
+                     base
+                       .or(Initiative.where("title->>? ilike ?", loc, "#{q}%"))
+                       .or(Initiative.where("description->>? ilike ?", loc, "#{q}%"))
+                   end
           end
 
           base
