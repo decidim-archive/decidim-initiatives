@@ -1,13 +1,13 @@
 <% content_for :back_link do %>
-  <%= link_to :back, class: 'muted-link' do %>
-    <%= icon 'chevron-left', class: 'icon--small' %>
-    <%= t('.back') %>
+  <%= link_to :back, class: "muted-link" do %>
+    <%= icon "chevron-left", class: "icon--small" %>
+    <%= t(".back") %>
   <% end %>
 <% end %>
 <div class="row column">
   <div class="callout secondary">
-    <%= render partial: 'compare_help' %>
-    <%= link_to t('.more_information'), decidim.page_path('initiatives'), target: '_blank' %>.
+    <%= render partial: "compare_help" %>
+    <%= link_to t(".more_information"), decidim.page_path("initiatives"), target: "_blank" %>.
   </div>
 </div>
 <br>
@@ -18,6 +18,6 @@
 
 <div class="row">
   <div class="columns mediumlarge-4 small-12 mediumlarge-push-4">
-    <%= link_to t('.continue'), next_wizard_path, class: 'button expanded' %>
+    <%= link_to t(".continue"), next_wizard_path, class: "button expanded" %>
   </div>
 </div>

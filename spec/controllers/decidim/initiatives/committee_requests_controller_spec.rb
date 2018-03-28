@@ -26,17 +26,17 @@ module Decidim
           it "Membership request is created" do
             expect do
               get :spawn, params: { initiative_slug: initiative.slug }
-            end.to change { InitiativesCommitteeMember.count }.by(1)
+            end.to change(InitiativesCommitteeMember, :count).by(1)
           end
 
           it "Duplicated requests finish with an error" do
             expect do
               get :spawn, params: { initiative_slug: initiative.slug }
-            end.to change { InitiativesCommitteeMember.count }.by(1)
+            end.to change(InitiativesCommitteeMember, :count).by(1)
 
             expect do
               get :spawn, params: { initiative_slug: initiative.slug }
-            end.to change { InitiativesCommitteeMember.count }.by(0)
+            end.to change(InitiativesCommitteeMember, :count).by(0)
           end
         end
 
@@ -46,7 +46,7 @@ module Decidim
           it "Membership request is not created" do
             expect do
               get :spawn, params: { initiative_slug: published_initiative.slug }
-            end.to change { InitiativesCommitteeMember.count }.by(0)
+            end.to change(InitiativesCommitteeMember, :count).by(0)
           end
         end
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :decidim_initiatives do
   desc "Check validating initiatives and moves all without changes for a configured time to discarded state"
   task check_validating: :environment do

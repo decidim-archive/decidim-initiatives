@@ -25,10 +25,7 @@ module Decidim
           if initiative_type.persisted?
             broadcast(:ok, initiative_type)
           else
-            if initiative_type.errors.include? :banner_image
-              form.errors.add(:banner_image, initiative_type.errors[:banner_image])
-            end
-
+            form.errors.add(:banner_image, initiative_type.errors[:banner_image]) if initiative_type.errors.include? :banner_image
             broadcast(:invalid)
           end
         end

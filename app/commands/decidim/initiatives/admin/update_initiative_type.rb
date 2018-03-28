@@ -42,10 +42,7 @@ module Decidim
             description: form.description
           }
 
-          unless form.banner_image.nil?
-            result[:banner_image] = form.banner_image
-          end
-
+          result[:banner_image] = form.banner_image unless form.banner_image.nil?
           result
         end
       end

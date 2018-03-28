@@ -1,7 +1,7 @@
 <% if current_user && current_user.user_groups.verified.any? %>
   <button id="select-identity-button"
           class="card__button button expanded button--sc">
-    <%= t('.vote') %>
+    <%= t(".vote") %>
   </button>
 
   <div class="reveal"
@@ -19,8 +19,8 @@
 
 <% if cannot?(:vote, initiative) && cannot?(:unvote, initiative) %>
   <button class='card__button button expanded button--sc disabled' disabled>
-    <%= t('.votes_blocked') %>
+    <%= t(".votes_blocked") %>
   </button>
 <% end %>
 
-<%= javascript_include_tag 'decidim/initiatives/identity_selector_dialog' %>
+<%= javascript_include_tag "decidim/initiatives/identity_selector_dialog" %>

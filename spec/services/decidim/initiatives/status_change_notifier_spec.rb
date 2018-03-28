@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -18,7 +18,7 @@ module Decidim
       let(:followers) { [] }
       let(:initiative) do
         double(
-          'initiative',
+          "initiative",
           organization: organization,
           author: author,
           created?: created,
@@ -27,10 +27,7 @@ module Decidim
           discarded?: discarded,
           rejected?: rejected,
           accepted?: accepted,
-          committee_members: double(
-            'committee_members',
-            approved: committee_members
-          ),
+          committee_members: double("committee_members", approved: committee_members),
           followers: followers
         )
       end
@@ -41,84 +38,84 @@ module Decidim
         allow(message_delivery).to receive(:deliver_later)
       end
 
-      context 'created' do
+      context "when created" do
         let(:created) { true }
 
-        it 'Creation is notified' do
+        it "Creation is notified" do
           expect(Decidim::Initiatives::InitiativesMailer).to receive(:notify_creation)
-                                                               .with(initiative)
-                                                               .once
-                                                               .and_return(message_delivery)
+            .with(initiative)
+            .once
+            .and_return(message_delivery)
           subject.notify
         end
       end
 
-      context 'validating' do
+      context "when validating" do
         let(:validating) { true }
         let!(:administrators) do
           create_list(:user, 10, :admin, organization: organization)
         end
 
-        it 'Validating is notified' do
+        it "Validating is notified" do
           expect(Decidim::Initiatives::InitiativesMailer).to receive(:notify_validating_request)
-                                                               .with(any_args)
-                                                               .exactly(10).times
-                                                               .and_return(message_delivery)
+            .with(any_args)
+            .exactly(10).times
+            .and_return(message_delivery)
           subject.notify
         end
       end
 
-      context 'published' do
+      context "when published" do
         let(:published) { true }
         let(:committee_members) do
           members = []
           2.times do
             members << double(
-              'committe_member',
+              "committe_member",
               user: create(:user, organization: organization)
             )
           end
           members
         end
 
-        it 'Publication is notified to author and committee members' do
+        it "Publication is notified to author and committee members" do
           expect(Decidim::Initiatives::InitiativesMailer).to receive(:notify_state_change)
-                                                               .with(any_args)
-                                                               .exactly(3).times
-                                                               .and_return(message_delivery)
+            .with(any_args)
+            .exactly(3).times
+            .and_return(message_delivery)
           subject.notify
         end
       end
 
-      context 'discarded' do
+      context "when discarded" do
         let(:discarded) { true }
         let(:committee_members) do
           members = []
           2.times do
             members << double(
-              'committe_member',
+              "committe_member",
               user: create(:user, organization: organization)
             )
           end
           members
         end
 
-        it 'Publication is notified to author and committee members' do
+        it "Publication is notified to author and committee members" do
           expect(Decidim::Initiatives::InitiativesMailer).to receive(:notify_state_change)
-                                                               .with(any_args)
-                                                               .exactly(3).times
-                                                               .and_return(message_delivery)
+            .with(any_args)
+            .exactly(3).times
+            .and_return(message_delivery)
           subject.notify
         end
       end
 
-      context 'rejected' do
+      context "when rejected" do
         let(:rejected) { true }
         let(:committee_members) do
           members = []
           2.times do
             members << double(
-              'committe_member',
+              "committe_member",
               user: create(:user, organization: organization)
             )
           end
@@ -128,22 +125,22 @@ module Decidim
           create_list(:user, 10, organization: organization)
         end
 
-        it 'Result is notified to author and committee members' do
+        it "Result is notified to author and committee members" do
           expect(Decidim::Initiatives::InitiativesMailer).to receive(:notify_state_change)
-                                                               .with(any_args)
-                                                               .exactly(13).times
-                                                               .and_return(message_delivery)
+            .with(any_args)
+            .exactly(13).times
+            .and_return(message_delivery)
           subject.notify
         end
       end
 
-      context 'accepted' do
+      context "when accepted" do
         let(:accepted) { true }
         let(:committee_members) do
           members = []
           2.times do
             members << double(
-              'committe_member',
+              "committe_member",
               user: create(:user, organization: organization)
             )
           end
@@ -153,11 +150,11 @@ module Decidim
           create_list(:user, 10, organization: organization)
         end
 
-        it 'Result is notified to author and committee members' do
+        it "Result is notified to author and committee members" do
           expect(Decidim::Initiatives::InitiativesMailer).to receive(:notify_state_change)
-                                                               .with(any_args)
-                                                               .exactly(13).times
-                                                               .and_return(message_delivery)
+            .with(any_args)
+            .exactly(13).times
+            .and_return(message_delivery)
           subject.notify
         end
       end

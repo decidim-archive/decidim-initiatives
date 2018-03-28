@@ -31,7 +31,7 @@ describe "Initiatives", type: :system do
           click_link "Initiatives"
         end
 
-        expect(current_path).to eq decidim_initiatives.initiatives_path
+        expect(page).to have_current_path(decidim_initiatives.initiatives_path)
       end
     end
 
@@ -48,7 +48,7 @@ describe "Initiatives", type: :system do
 
     it "links to the individual initiative page" do
       click_link(translated(initiative.title, locale: :en))
-      expect(current_path).to eq decidim_initiatives.initiative_path(initiative)
+      expect(page).to have_current_path(decidim_initiatives.initiative_path(initiative))
     end
   end
 end

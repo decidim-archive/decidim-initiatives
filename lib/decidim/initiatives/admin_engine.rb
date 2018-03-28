@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'rails'
-require 'active_support/all'
-require 'decidim/core'
+require "rails"
+require "active_support/all"
+require "decidim/core"
 
 module Decidim
   module Initiatives
@@ -10,14 +10,14 @@ module Decidim
     class AdminEngine < ::Rails::Engine
       isolate_namespace Decidim::Initiatives::Admin
 
-      paths['db/migrate'] = nil
+      paths["db/migrate"] = nil
 
       routes do
         resources :initiatives_types, except: :show do
-          resources :initiatives_type_scopes, except: %i[index show]
+          resources :initiatives_type_scopes, except: [:index, :show]
         end
 
-        resources :initiatives, only: %i[index show edit update], param: :slug do
+        resources :initiatives, only: [:index, :show, :edit, :update], param: :slug do
           member do
             get :send_to_technical_validation
             post :publish
@@ -28,9 +28,9 @@ module Decidim
             delete :reject
           end
 
-          resources :attachments, controller: 'initiative_attachments'
+          resources :attachments, controller: "initiative_attachments"
 
-          resources :committee_requests, only: %i[index] do
+          resources :committee_requests, only: [:index] do
             member do
               get :approve
               delete :revoke
@@ -38,9 +38,9 @@ module Decidim
           end
         end
 
-        scope '/initiatives/:initiative_slug' do
+        scope "/initiatives/:initiative_slug" do
           resources :features do
-            resource :permissions, controller: 'feature_permissions'
+            resource :permissions, controller: "feature_permissions"
             member do
               put :publish
               put :unpublish
@@ -49,26 +49,26 @@ module Decidim
           end
         end
 
-        scope '/initiatives/:initiative_slug/features/:feature_id/manage' do
+        scope "/initiatives/:initiative_slug/features/:feature_id/manage" do
           Decidim.feature_manifests.each do |manifest|
             next unless manifest.admin_engine
 
             constraints CurrentFeature.new(manifest) do
-              mount manifest.admin_engine, at: '/', as: "decidim_admin_initiative_#{manifest.name}"
+              mount manifest.admin_engine, at: "/", as: "decidim_admin_initiative_#{manifest.name}"
             end
           end
         end
       end
 
-      initializer 'admin_decidim_initiatives.assets' do |app|
-        app.config.assets.precompile += %w[
-            admin_decidim_initiatives_manifest.js
-          ]
+      initializer "admin_decidim_initiatives.assets" do |app|
+        app.config.assets.precompile += %w(
+          admin_decidim_initiatives_manifest.js
+        )
       end
 
-      initializer 'decidim_assemblies.inject_abilities_to_user' do |_app|
+      initializer "decidim_assemblies.inject_abilities_to_user" do |_app|
         Decidim.configure do |config|
-          config.admin_abilities += %w[
+          config.admin_abilities += %w(
             Decidim::Initiatives::Abilities::Admin::CommitteeUserAbility
             Decidim::Initiatives::Abilities::Admin::InitiativeUserAbility
             Decidim::Initiatives::Abilities::Admin::CommitteeAdminAbility
@@ -76,15 +76,15 @@ module Decidim
             Decidim::Initiatives::Abilities::Admin::InitiativeTypeAbility
             Decidim::Initiatives::Abilities::Admin::AttachmentsAbility
             Decidim::Initiatives::Abilities::Admin::FeaturesAbility
-          ]
+          )
         end
       end
 
-      initializer 'decidim_assemblies.admin_menu' do
+      initializer "decidim_assemblies.admin_menu" do
         Decidim.menu :admin_menu do |menu|
-          menu.item I18n.t('menu.initiatives', scope: 'decidim.admin'),
+          menu.item I18n.t("menu.initiatives", scope: "decidim.admin"),
                     decidim_admin_initiatives.initiatives_path,
-                    icon_name: 'chat',
+                    icon_name: "chat",
                     position: 3.7,
                     active: :inclusive,
                     if: can?(:index, Decidim::Initiative)

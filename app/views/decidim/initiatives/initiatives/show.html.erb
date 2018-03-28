@@ -13,8 +13,8 @@
     <div class="column">
       <div class="callout secondary">
         <p>
-          <%=t '.any_vote_method' if current_initiative.any? %>
-          <%=t '.offline_method' if current_initiative.offline? %>
+          <%= t ".any_vote_method" if current_initiative.any? %>
+          <%= t ".offline_method" if current_initiative.offline? %>
         </p>
       </div>
     </div>
@@ -24,24 +24,24 @@
     <div class="card extra definition-data">
       <div class="definition-data__item vote-block">
         <div id="initiative-<%= current_initiative.id %>-votes-count">
-          <%= render partial: 'votes_count', locals: { initiative: current_initiative } %>
+          <%= render partial: "votes_count", locals: { initiative: current_initiative } %>
         </div>
         <% if current_initiative.votes_enabled? %>
           <div id="initiative-<%= current_initiative.id %>-vote-cabin">
-            <%= render partial: 'vote_cabin', locals: { initiative: current_initiative } %>
+            <%= render partial: "vote_cabin", locals: { initiative: current_initiative } %>
           </div>
         <% end %>
 
         <% if current_user %>
-          <%= render partial: 'decidim/shared/follow_button', locals: { followable: current_initiative } %>
+          <%= render partial: "decidim/shared/follow_button", locals: { followable: current_initiative } %>
         <% end %>
       </div>
     </div>
 
-    <%= render partial: 'decidim/shared/share_modal' %>
+    <%= render partial: "decidim/shared/share_modal" %>
     <%= embed_modal_for initiative_initiative_widget_url(current_initiative, format: :js) %>
 
-    <%= render partial: 'statistics' %>
+    <%= render partial: "statistics" %>
   </div>
 
   <div class="columns mediumlarge-8 mediumlarge-pull-4">
@@ -50,25 +50,25 @@
         <h2 class="heading2">
           <%= translated_attribute(current_initiative.title) %>
         </h2>
-        <%= render partial: 'author', locals: { initiative: current_initiative } %>
+        <%= render partial: "author", locals: { initiative: current_initiative } %>
       </div>
       <br>
       <div class="row column">
-        <%= render partial: 'initiative_badge', locals: { initiative: current_initiative } %>
+        <%= render partial: "initiative_badge", locals: { initiative: current_initiative } %>
         <%= sanitize translated_attribute(current_initiative.description) %>
-        <%= render partial: 'tags', locals: { resource: current_initiative } %>
+        <%= render partial: "tags", locals: { resource: current_initiative } %>
       </div>
 
-      <%= render partial: 'result', locals: { initiative: current_initiative } %>
+      <%= render partial: "result", locals: { initiative: current_initiative } %>
     </div>
 
     <%= attachments_for current_initiative %>
 
-    <%= render partial: 'supports', locals: { initiative: current_initiative } %>
+    <%= render partial: "supports", locals: { initiative: current_initiative } %>
   </div>
 </div>
 
 <%= comments_for current_initiative if current_initiative.published? %>
-<%= javascript_include_tag 'decidim/initiatives/social_share' %>
-<%= stylesheet_link_tag 'decidim/initiatives/application' %>
-<%= stylesheet_link_tag 'decidim/initiatives/social_share' %>
+<%= javascript_include_tag "decidim/initiatives/social_share" %>
+<%= stylesheet_link_tag "decidim/initiatives/application" %>
+<%= stylesheet_link_tag "decidim/initiatives/social_share" %>

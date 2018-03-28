@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -12,12 +12,10 @@ module Decidim
       let(:approved_committee_members) { [] }
       let(:initiative) do
         double(
-          'initiative',
+          "initiative",
           author: author,
           followers: followers,
-          committee_members: double('committee_members',
-            approved: approved_committee_members
-          )
+          committee_members: double("committee_members", approved: approved_committee_members)
         )
       end
       let!(:subject) { described_class.new(initiative: initiative) }
@@ -26,48 +24,48 @@ module Decidim
         allow(message_delivery).to receive(:deliver_later)
       end
 
-      it 'Author is notified' do
+      it "Author is notified" do
         expect(Decidim::Initiatives::InitiativesMailer).to receive(:notify_progress)
-                                                             .with(initiative, author)
-                                                             .once
-                                                             .and_return(message_delivery)
+          .with(initiative, author)
+          .once
+          .and_return(message_delivery)
         subject.notify
       end
 
-      context 'Committee members are notified' do
+      context "and committee members are notified" do
         let(:committee_members_count) { 2 }
         let(:approved_committee_members) do
           members = []
           committee_members_count.times do
             members << double(
-              'committe_member',
+              "committe_member",
               user: create(:user, organization: organization)
             )
           end
           members
         end
 
-        it 'one message per committee member is sent' do
+        it "one message per committee member is sent" do
           expect(Decidim::Initiatives::InitiativesMailer).to receive(:notify_progress)
-                                                               .with(any_args)
-                                                               .exactly(committee_members_count + 1).times
-                                                               .and_return(message_delivery)
+            .with(any_args)
+            .exactly(committee_members_count + 1).times
+            .and_return(message_delivery)
 
           subject.notify
         end
       end
 
-      context 'Followers are notified' do
+      context "and followers are notified" do
         let(:followers_count) { 10 }
         let(:followers) do
           create_list(:user, followers_count, organization: organization)
         end
 
-        it 'one message per follower is sent' do
+        it "one message per follower is sent" do
           expect(Decidim::Initiatives::InitiativesMailer).to receive(:notify_progress)
-                                                               .with(any_args)
-                                                               .exactly(followers_count + 1).times
-                                                               .and_return(message_delivery)
+            .with(any_args)
+            .exactly(followers_count + 1).times
+            .and_return(message_delivery)
 
           subject.notify
         end

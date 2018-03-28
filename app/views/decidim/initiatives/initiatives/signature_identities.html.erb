@@ -1,8 +1,8 @@
 <div class="reveal__header">
-  <h1 class="reveal__title"><%=t '.select_identity' %></h1>
+  <h1 class="reveal__title"><%= t ".select_identity" %></h1>
 </div>
 
-<%= render partial: 'decidim/initiatives/initiatives/vote_button',
+<%= render partial: "decidim/initiatives/initiatives/vote_button",
            locals: {
                initiative: current_initiative,
                vote_label: current_user.name,
@@ -18,13 +18,13 @@
                                       method: :delete,
                                       remote: true,
                                       data: { disable: true },
-                                      class: 'card__button button expanded button--sc success' %>
+                                      class: "card__button button expanded button--sc success" %>
   <% else %>
     <%= action_authorized_button_to :vote,
                                     g.name,
                                     initiative_initiative_vote_path(initiative_slug: current_initiative.slug, group_id: g.id),
                                     remote: true,
                                     data: { disable: true },
-                                    class: 'card__button button expanded button--sc' %>
+                                    class: "card__button button expanded button--sc" %>
   <% end %>
 <% end %>

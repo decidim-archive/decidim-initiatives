@@ -38,7 +38,7 @@ module Decidim
         request = InitiativesCommitteeMember.new(
           decidim_initiatives_id: initiative&.id,
           decidim_users_id: current_user&.id,
-          state: 'requested'
+          state: "requested"
         )
         return request unless request.valid?
 

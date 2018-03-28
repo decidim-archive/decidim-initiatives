@@ -5,7 +5,7 @@ module Decidim
     # Helper functions for initiatives views
     module InitiativesHelper
       def initiatives_filter_form_for(filter)
-        content_tag :div, class: 'filters' do
+        content_tag :div, class: "filters" do
           form_for filter,
                    builder: Decidim::Initiatives::InitiativesFilterFormBuilder,
                    url: url_for,

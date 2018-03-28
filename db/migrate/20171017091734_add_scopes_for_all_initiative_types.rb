@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddScopesForAllInitiativeTypes < ActiveRecord::Migration[5.1]
   def up
     # This migrantion intent is simply to keep seed data at staging

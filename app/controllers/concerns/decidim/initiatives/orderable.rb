@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'active_support/concern'
+require "active_support/concern"
 
 module Decidim
   module Initiatives
@@ -26,22 +26,22 @@ module Decidim
         # Available orders based on enabled settings
         def available_orders
           @available_orders ||= begin
-            available_orders = %w[random recent most_voted most_commented]
+            available_orders = %w(random recent most_voted most_commented)
             available_orders
           end
         end
 
         def default_order
-          'random'
+          "random"
         end
 
         def reorder(initiatives)
           case order
-          when 'most_voted'
+          when "most_voted"
             initiatives.order_by_supports
-          when 'most_commented'
+          when "most_commented"
             initiatives.order_by_most_commented
-          when 'recent'
+          when "recent"
             initiatives.order_by_most_recent
           else
             initiatives.order_randomly(random_seed)

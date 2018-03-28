@@ -22,8 +22,8 @@ module Decidim
       # Retrieves the available initiative types for the given organization.
       def query
         Decidim::Initiative
-          .where(state: 'validating')
-          .where('updated_at < ?', @period_length)
+          .where(state: "validating")
+          .where("updated_at < ?", @period_length)
       end
     end
   end

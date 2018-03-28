@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateInitiativeScopedType < ActiveRecord::Migration[5.1]
   def up
     Decidim::Initiative.find_each do |initiative|
@@ -11,5 +13,6 @@ class UpdateInitiativeScopedType < ActiveRecord::Migration[5.1]
   end
 
   def down
+    raise ActiveRecord::IrreversibleMigration, "Can't undo initialization of mandatory attribute"
   end
 end

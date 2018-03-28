@@ -26,14 +26,8 @@ module Decidim
       def notify
         notify_initiative_creation if initiative.created?
         notify_validating_initiative if initiative.validating?
-
-        if initiative.published? || initiative.discarded?
-          notify_validating_result
-        end
-
-        if initiative.rejected? || initiative.accepted?
-          notify_support_result
-        end
+        notify_validating_result if initiative.published? || initiative.discarded?
+        notify_support_result if initiative.rejected? || initiative.accepted?
       end
 
       private

@@ -10,12 +10,12 @@ class CreateDecidimInitiatives < ActiveRecord::Migration[5.1]
       t.integer :decidim_organization_id,
                 foreign_key: true,
                 index: {
-                  name: 'index_decidim_initiatives_on_decidim_organization_id'
+                  name: "index_decidim_initiatives_on_decidim_organization_id"
                 }
 
       # Text search indexes for initiatives.
-      t.index :title, name: 'decidim_initiatives_title_search'
-      t.index :description, name: 'decidim_initiatives_description_search'
+      t.index :title, name: "decidim_initiatives_title_search"
+      t.index :description, name: "decidim_initiatives_description_search"
 
       t.references :decidim_author, index: true
       t.string :banner_image

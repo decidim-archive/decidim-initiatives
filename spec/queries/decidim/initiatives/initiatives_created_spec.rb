@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -11,10 +11,10 @@ module Decidim
       let!(:user_initiatives) { create_list(:initiative, 3, organization: organization, author: user) }
       let!(:admin_initiatives) { create_list(:initiative, 3, organization: organization, author: admin) }
 
-      context 'Initiative authors' do
+      context "when initiative authors" do
         subject { described_class.new(user) }
 
-        it 'includes only user initiatives' do
+        it "includes only user initiatives" do
           expect(subject).to include(*user_initiatives)
           expect(subject).not_to include(*admin_initiatives)
         end

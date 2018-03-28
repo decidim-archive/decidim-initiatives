@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class CreateStaticPages < ActiveRecord::Migration[5.1]
   def change
     Decidim::Organization.find_each do |organization|
-      Decidim::StaticPage.find_or_create_by!(slug: 'initiatives') do |page|
+      Decidim::StaticPage.find_or_create_by!(slug: "initiatives") do |page|
         page.organization = organization
-        page.title = localized_attribute(organization,'initiatives', :title)
-        page.content = localized_attribute(organization,'initiatives', :content)
+        page.title = localized_attribute(organization, "initiatives", :title)
+        page.content = localized_attribute(organization, "initiatives", :content)
       end
     end
   end
@@ -20,5 +22,4 @@ class CreateStaticPages < ActiveRecord::Migration[5.1]
       result.update(locale => text)
     end
   end
-
 end

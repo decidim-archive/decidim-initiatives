@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-require 'cancan/matchers'
+require "spec_helper"
+require "cancan/matchers"
 
 describe Decidim::Initiatives::Abilities::VoteAbility do
   subject { described_class.new(user, {}) }

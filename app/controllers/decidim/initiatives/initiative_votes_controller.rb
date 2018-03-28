@@ -23,7 +23,7 @@ module Decidim
 
           on(:invalid) do
             render json: {
-              error: I18n.t('initiative_votes.create.error', scope: 'decidim.initiatives')
+              error: I18n.t("initiative_votes.create.error", scope: "decidim.initiatives")
             }, status: 422
           end
         end

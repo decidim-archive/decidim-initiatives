@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Initiatives
@@ -15,7 +15,7 @@ module Decidim
         describe "Validation failure" do
           let(:organization) { create(:organization) }
           let!(:initiative_type) do
-            create(:initiatives_type, organization: organization)
+            build(:initiatives_type, organization: organization)
           end
           let(:form) do
             form_klass
@@ -25,14 +25,15 @@ module Decidim
 
           let(:errors) do
             ActiveModel::Errors.new(initiative_type)
-              .tap { |e| e.add(:banner_image, "upload error") }
+                               .tap { |e| e.add(:banner_image, "upload error") }
           end
           let(:command) { described_class.new(form) }
 
           it "broadcasts invalid" do
-            expect_any_instance_of(InitiativesType).to receive(:persisted?)
-                                                         .at_least(:once)
-                                                         .and_return(false)
+            expect(InitiativesType).to receive(:new).and_return(initiative_type)
+            expect(initiative_type).to receive(:persisted?)
+              .at_least(:once)
+              .and_return(false)
 
             expect { command.call }.to broadcast :invalid
           end

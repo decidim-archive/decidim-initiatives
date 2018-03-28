@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-divider">
-    <h2 class="card-title"><%= t '.title' %></h2>
+    <h2 class="card-title"><%= t ".title" %></h2>
   </div>
 
   <div class="card-section">
@@ -19,9 +19,9 @@
                         {},
                         {
                           disabled: true,
-                          'data-scope-selector': 'initiative_decidim_scope_id',
-                          'data-scope-id': current_initiative.scope.id,
-                          'data-scope-search-url': decidim_initiatives.initiative_type_scopes_search_url
+                          "data-scope-selector": "initiative_decidim_scope_id",
+                          "data-scope-id": current_initiative.scope.id,
+                          "data-scope-search-url": decidim_initiatives.initiative_type_scopes_search_url
                         } %>
       </div>
 
@@ -73,4 +73,4 @@
   </div>
 </div>
 
-<%= javascript_include_tag 'decidim/initiatives/scoped_type' %>
+<%= javascript_include_tag "decidim/initiatives/scoped_type" %>

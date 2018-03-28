@@ -35,7 +35,7 @@ shared_examples "create an initiative type scope" do
       it "doesn't create an initiative type scope" do
         expect do
           command.call
-        end.not_to change { Decidim::InitiativesTypeScope.count }
+        end.not_to change(Decidim::InitiativesTypeScope, :count)
       end
     end
 
