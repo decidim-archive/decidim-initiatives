@@ -249,6 +249,9 @@ ca:
           continue: La meva iniciativa es diferent
           back: Torna enrere
           more_information: (Mes informació)
+          compare_help:
+            Si alguna de les sigüents iniciatives coincideix amb la teva et recomanem que t'hi uneixes a ella.
+            La teua proposta te mes probabilitats de portarse a terme.
         fill_data:
           continue: Continuar
           back: Torna enrere
@@ -275,6 +278,18 @@ ca:
           go_to_my_initiatives: Ves a les meves iniciatives
           back_to_initiatives: Tornar a iniciatives
           more_information: (Mes informació)
+        finish_help:
+          help_text:
+            Recorda que per tramitar correctament la iniciativa cal que accedeixis al panell d’administració que
+            trobaràs al menú d’usuari, pujar la informació requerida i enviar-la a tràmit.
+          help_for_organizations:
+            Si ets una associació, hauràs de pujar l’acta signada dels òrgans de direcció de les organitzacions membres
+            de la Comissió Promotora.
+          help_in_person_signatures:
+            Si has seleccionat l’opció de recollida de firmes presencial o mixta, hauràs de pujar la informació requerida.
+          page: pàgina
+          initiatives_page_link: Pots consultar tota aquesta informació a la %{link} d’informació d’iniciatives.
+          access_reminder: Recorda que sempre podràs accedir a les teves iniciatives des del menú d’usuari.
       committee_requests:
         new:
           help_text: Vas a sol·licitar formar part de la comisió promotora per aquesta iniciativa
