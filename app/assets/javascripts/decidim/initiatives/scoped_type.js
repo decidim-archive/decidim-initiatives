@@ -1,23 +1,19 @@
-$(document).ready(function () {
-  'use strict';
+/* eslint-disable camelcase */
 
-  var typeSelector = $('[data-scope-selector]'),
-      refresh,
-      targetElement,
-      currentValue,
-      searchUrl;
+$(document).ready(function () {
+  let typeSelector = $("[data-scope-selector]");
 
   if (typeSelector.length) {
-    targetElement = $('#' + typeSelector.data('scope-selector'));
-    currentValue = typeSelector.data('scope-id');
-    searchUrl = typeSelector.data('scope-search-url');
+    let currentValue = typeSelector.data("scope-id"),
+        searchUrl = typeSelector.data("scope-search-url"),
+        targetElement = $(`#${typeSelector.data("scope-selector")}`);
 
     if (targetElement.length) {
-      refresh = function () {
+      let refresh = function () {
         $.ajax({
           url: searchUrl,
           cache: false,
-          dataType: 'html',
+          dataType: "html",
           data: {
             type_id: typeSelector.val(),
             selected: currentValue
