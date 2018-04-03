@@ -1,11 +1,11 @@
-(function () {
-  'use strict';
+/* eslint-disable no-empty */
 
-  var inviteUsersButton = document.querySelector('.invite-users-link');
+(function () {
+  let inviteUsersButton = document.querySelector(".invite-users-link");
 
   if (inviteUsersButton !== null) {
-    inviteUsersButton.addEventListener('click', function (event) {
-      var link = document.querySelector('#committee_link'),
+    inviteUsersButton.addEventListener("click", function (event) {
+      let link = document.querySelector("#committee_link"),
           range = document.createRange();
 
       event.preventDefault();
@@ -14,9 +14,8 @@
       window.getSelection().addRange(range);
 
       try {
-        document.execCommand('copy');
-      } catch (err) {
-      }
+        document.execCommand("copy");
+      } catch (err) { }
 
       window.getSelection().removeAllRanges();
     });

@@ -257,6 +257,9 @@ en:
           continue: My initiative is different
           back: Back
           more_information: (More information)
+          compare_help:
+            If any of the following initiatives is similar to yours we encourage you to support it.
+            Your proposal will have more possibilities to get done.
         fill_data:
           continue: Continue
           back: Back
@@ -283,6 +286,19 @@ en:
           go_to_my_initiatives: Go to my initiatives
           back_to_initiatives: Back to initiatives
           more_information: (More information)
+        finish_help:
+          help_text:
+            Remember that in order to properly process the initiative you must access the administration panel where you
+            will find the user menu, upload the information required and send it to procedure.
+          help_for_organizations:
+            If you are an association you will have to upload the minutes of the management board of all the
+            organisations that conform the Promoting Commission
+          help_in_person_signatures:
+            If you have chosen to collect the signatures in-person or combined with online, you will have to upload the
+            required information.
+          page: page
+          initiatives_page_link: You can look up all this information on the %{link} dedicated to inform about initiatives.
+          access_reminder: Remember that you will always be able to access your initiatives through the user menu.
       committee_requests:
         new:
           continue: Continue

@@ -249,6 +249,9 @@ es:
           continue: Mi iniciativa es diferente
           back: Volver
           more_information: (Mas información)
+          compare_help:
+            Si alguna de las siguientes iniciativas coincide con la tuya te recomendamos que te unas a ella.
+            Tu propuesta tiene mas posibilidades de llevarse a cabo.
         fill_data:
           continue: Continuar
           back: Volver
@@ -275,6 +278,19 @@ es:
           go_to_my_initiatives: Ir a mis iniciativas
           back_to_initiatives: Volver a iniciativas
           more_information: (Mas información)
+        finish_help:
+          help_text:
+            Recuerda que para tramitar correctamente la iniciativa tienes que acceder al panel de administración que en
+            el menú de usuario, subir la información requerida y enviarla a trámite.
+          help_for_organizations:
+            Si eres una asociación, deberás subir el acta firmada de los órganos de dirección de las organizaciones
+            miembros de la Comisión Promotora.
+          help_in_person_signatures:
+            Si has seleccionado la opción de recogida de firmas presencial o mixta, deberás subir la información
+            requerida.
+          page: página
+          initiatives_page_link: Puedes consultar toda esta información en la %{link} de información de iniciativas.
+          access_reminder: Recuerda que siempre podrás acceder a tus iniciativas desde el menú de usuario.
       committee_requests:
         new:
           continue: Continuar
